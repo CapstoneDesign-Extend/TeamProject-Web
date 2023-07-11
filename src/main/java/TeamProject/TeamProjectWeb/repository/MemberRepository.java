@@ -8,7 +8,7 @@ import java.util.*;
 
 @Slf4j
 @Repository
-public class MemberRepository {
+public class MemberRepository { // repository 패키지는 DB에 접근하는 모든 코드가 모여있음
 
     private static Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L; //static 사용했음

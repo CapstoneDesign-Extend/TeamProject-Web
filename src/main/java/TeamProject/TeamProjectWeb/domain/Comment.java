@@ -1,19 +1,16 @@
 package TeamProject.TeamProjectWeb.domain;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
-//@Entity
+@Entity
 @Table(name = "comment")
-@Getter
-@Setter
+@Getter @Setter
 public class Comment { // 댓글 클래스
-//    @Id
+    @Id
     @GeneratedValue // 자동 생성 => 시퀀스
     @Column(name = "comment_id")
     private Long id;
@@ -25,7 +22,7 @@ public class Comment { // 댓글 클래스
     @Column(name = "click_count")
     private int count; // 좋아요 갯수
     @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL) // 한 회원은 여러 댓글을 달 수 있음
-    @JoinColumn(name = "member_id") // 외래키 => 조인할 속성 이름
+    @JoinColumn(name = "memberId") // 외래키 => 조인할 속성 이름
     private Member member; // 해당 멤버의 학번을 사용할 거임
 
     //== 연관관계 메소드 ==//
@@ -33,12 +30,4 @@ public class Comment { // 댓글 클래스
         this.board = board;
         board.getComments().add(this);
     }
-
-
-    /*//@NotNull
-    private Long id;
-    private String content;
-    private LocalDateTime finalDate;
-    private int count;
-    private Member member;*/
 }
