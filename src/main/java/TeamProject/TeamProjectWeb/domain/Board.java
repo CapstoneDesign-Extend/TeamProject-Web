@@ -1,20 +1,21 @@
 package TeamProject.TeamProjectWeb.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.ALL;
+import static jakarta.persistence.CascadeType.ALL;
 
 @Entity
 @Getter @Setter
 @Table(name = "border")
 public class Board { // 게시판 클래스
-    @Id @GeneratedValue // 자동 생성 => 시퀀스
+    @Id
+    @GeneratedValue // 자동 생성 => 시퀀스
     @Column(name = "border_id")
     private Long id;
     private String title; // 제목

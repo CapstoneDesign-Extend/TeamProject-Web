@@ -1,9 +1,9 @@
 package TeamProject.TeamProjectWeb.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,8 +26,8 @@ public class Comment { // 댓글 클래스
     private Member member; // 해당 멤버의 학번을 사용할 거임
 
     //== 연관관계 메소드 ==//
-    public void setBoard(Board board){
+    public void setBoard(Board board){ //-- 게시글에 댓글 저장 메소드 --//
         this.board = board;
-        board.getComments().add(this);
+        board.getComments().add(this); // 해당 게시물에 댓글을 저장함
     }
 }

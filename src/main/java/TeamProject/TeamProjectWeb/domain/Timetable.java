@@ -1,9 +1,9 @@
 package TeamProject.TeamProjectWeb.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 
 @Entity
 @Getter @Setter
@@ -19,6 +19,9 @@ public class Timetable { // 시간표
     private int semester; // 학기 => 1학기 or 2학기
     private String schedule; // 일정 => 저장할 스케쥴
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // fetch=FetchType.LAZY : 지연 로딩으로 실시간 업로딩 되는 것을 막음, cascade : 한 번의 조인
-    @JoinColumn(name = "memberId") // 외래키 설정
+    @JoinColumn(name = "member_id") // 외래키 설정
     private Member member; // 한 명의 사용자는 여러 시간표를 가질 수 있음
+
+    //-- 연관관계 편의 메소드 --//
+
 }
