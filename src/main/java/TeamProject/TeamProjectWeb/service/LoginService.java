@@ -23,7 +23,7 @@ public class LoginService {
             return null;
         }*/
         return memberRepository.findByLoginId(loginId)
-                .filter(m -> m.getPassword().equals(password))
+                .filter(m -> m.getLoginPwd().equals(password))
                 .orElse(null);
     }
 }

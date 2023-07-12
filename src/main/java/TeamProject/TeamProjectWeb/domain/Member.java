@@ -1,12 +1,14 @@
 package TeamProject.TeamProjectWeb.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @Getter @Setter
 @Table(name = "member")
@@ -21,8 +23,8 @@ public class Member { // 회원 클래스
     private String schoolName; // 회원 학교
     @Enumerated(EnumType.STRING) // 데이터값을 int가 아닌 String으로 나오게 함
     private Access access; // 주어질 권한
-    private String longId; // 로그인 시 아이디
-    private String longPwd; // 로그인 시 비밀번호
+    private String loginId; // 로그인 시 아이디
+    private String loginPwd; // 로그인 시 비밀번호
     @OneToMany(mappedBy = "member") // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
     private List<Board> board = new ArrayList<>();
     @OneToMany(mappedBy = "member") // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
@@ -40,4 +42,24 @@ public class Member { // 회원 클래스
     public void addComment(Comment comment){ //-- 작성된 댓글 저장 --//
         this.comments.add(comment);
     }
+
+    /*
+    //@NotNull
+    private Long id;    // 관리자 관리용 db저장 아이디
+    @NotEmpty
+    private String LoginId;     // 사용자가 로그인하는 아이디
+    @NotEmpty
+    private String password;  // 비밀번호
+    @NotEmpty
+    private String name;    // 유저지정이름 ( 또는 진짜 이름 )
+
+    *//*@Email
+    private String email;*//*
+
+
+    private List<Board> board;      // 작성한 게시물 ?
+    private List<Comment> comments; // 작성한 댓글 ?
+    private List<TimeSchedule> timetable; // 본인의 시간표 ( null 이어도 작동이 되어야 함 )
+    private List<Notification> notifications;   // 알림
+    */
 }

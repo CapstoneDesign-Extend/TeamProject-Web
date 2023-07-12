@@ -4,7 +4,6 @@ import TeamProject.TeamProjectWeb.domain.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -41,7 +40,7 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
     public Optional<Member> findByLoginId(String loginId) { //-- logId 필드로 찾고 해당 결과 반환 --//
 
         return findAll().stream()
-                .filter(m -> m.getLongId().equals(loginId))
+                .filter(m -> m.getLoginId().equals(loginId))
                 .findFirst();
     }
 
