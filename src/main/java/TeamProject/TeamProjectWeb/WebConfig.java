@@ -2,14 +2,18 @@ package TeamProject.TeamProjectWeb;
 
 import TeamProject.TeamProjectWeb.controller.filter.LogFilter;
 import TeamProject.TeamProjectWeb.controller.filter.LoginCheckFilter;
+import TeamProject.TeamProjectWeb.controller.intercepter.LogInterceptor;
+import TeamProject.TeamProjectWeb.controller.intercepter.LoginCheckInterceptor;
 import jakarta.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebConfig {
-    @Bean
+public class WebConfig implements WebMvcConfigurer {
+    //@Bean
     public FilterRegistrationBean logFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
 
@@ -20,7 +24,7 @@ public class WebConfig {
         return filterRegistrationBean;
     }
 
-    @Bean
+    //@Bean
     public FilterRegistrationBean loginCheckFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
 
@@ -30,4 +34,21 @@ public class WebConfig {
 
         return filterRegistrationBean;
     }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LogInterceptor())   // 인터셉터 등록
+                .order(1)                               // 호출 우선순위 지정, 숫자가 낮을수록 우선호출
+                .addPathPatterns("/**")                 // 인터셉터 적용할 URL 패턴 지정
+                .excludePathPatterns("/css/**", "/*.ico", "/error"); // 인터셉터에서 제외할 패턴을 지정
+
+        registry.addInterceptor(new LoginCheckInterceptor())
+                .order(2)
+                .addPathPatterns("/**")
+                .excludePathPatterns(
+                        "/", "/members/signup", "/login", "/logout",
+                        "/css/**", "/*.ico", "/error"
+                );
+    }
+
 }
