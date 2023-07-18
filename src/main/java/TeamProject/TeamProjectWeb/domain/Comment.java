@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter @Setter
 public class Comment { // 댓글 클래스
     @Id
-    @GeneratedValue // 자동 생성 => 시퀀스
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 생성 => 시퀀스
     @Column(name = "comment_id")
     private Long id;
     @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL) // cascade = CascadeType.ALL : Comment 테이블을 persist 할 때 Border 테이블도 같이 해줌

@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "member")
 public class Member { // 회원 클래스
     @Id
-    @GeneratedValue // @GeneratedValue : 자동 생성 => 시퀀스 값 같은
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // @GeneratedValue : 자동 생성 => 시퀀스 값 같은
     @Column(name = "member_id")
     private Long id; // 임의로 사용할 키값
     @Column(name = "student_id")
@@ -24,7 +24,7 @@ public class Member { // 회원 클래스
     @Enumerated(EnumType.STRING) // 데이터값을 int가 아닌 String으로 나오게 함
     private Access access; // 주어질 권한
     private String loginId; // 로그인 시 아이디
-    private String loginPwd; // 로그인 시 비밀번호
+    private String password; // 로그인 시 비밀번호
     @OneToMany(mappedBy = "member") // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
     private List<Board> board = new ArrayList<>();
     @OneToMany(mappedBy = "member") // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
@@ -42,6 +42,11 @@ public class Member { // 회원 클래스
     public void addComment(Comment comment){ //-- 작성된 댓글 저장 --//
         this.comments.add(comment);
     }
+
+    public Member(Long id) {
+        this.id = id;
+    }
+    public Member(){}
 
     /*
     //@NotNull

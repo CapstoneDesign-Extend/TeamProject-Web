@@ -25,11 +25,10 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    public String save(@Valid @ModelAttribute Member member, BindingResult bindingResult) {
+    public String save(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "members/signup";
-        }
-        else {
+        } else {
             memberRepository.save(member);
             return "redirect:/";
         }

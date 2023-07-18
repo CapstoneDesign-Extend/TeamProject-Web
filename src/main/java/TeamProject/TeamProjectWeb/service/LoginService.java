@@ -5,8 +5,6 @@ import TeamProject.TeamProjectWeb.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class LoginService {
@@ -23,7 +21,7 @@ public class LoginService {
             return null;
         }*/
         return memberRepository.findByLoginId(loginId)
-                .filter(m -> m.getLoginPwd().equals(password))
+                .filter(m -> m.getPassword().equals(password))
                 .orElse(null);
     }
 }

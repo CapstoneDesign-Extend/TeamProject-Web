@@ -3,6 +3,7 @@ package TeamProject.TeamProjectWeb.repository;
 import TeamProject.TeamProjectWeb.domain.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +17,7 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
     @PersistenceContext // EntityManager를 주입받기 위해 사용
     private final EntityManager em;
 
-
+    @Transactional
     public void save(Member member){ //-- 멤버 저장 --//
         em.persist(member);
     }
@@ -44,6 +45,8 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
                 .findFirst();
     }
 
+
+}
 
 
 
@@ -83,4 +86,4 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
 //    public void clearStore() {
 //        store.clear();
 //    }
-}
+
