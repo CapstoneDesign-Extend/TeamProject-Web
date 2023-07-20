@@ -3,6 +3,7 @@ package TeamProject.TeamProjectWeb.repository;
 
 import TeamProject.TeamProjectWeb.domain.Timetable;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -60,6 +61,23 @@ public class TimetableRepository {
     public List<Timetable> findAll() {
         return em.createQuery("SELECT t FROM Timetable t", Timetable.class)
                 .getResultList();
+    }
+
+    /**
+     * 연도(year)와 학기(semester)로 시간표 조회
+     * @param year 연도
+     * @param semester 학기
+     * @return 조회된 시간표 객체 (없을 경우 null 반환)
+     */
+    public Timetable findByYearAndSemester(int year, int semester) {
+        try {
+            return em.createQuery("SELECT t FROM Timetable t WHERE t.schedule_year = :year AND t.semester = :semester", Timetable.class)
+                    .setParameter("year", year)
+                    .setParameter("semester", semester)
+                    .getSingleResult(); // 조회 결과가 없거나, 여러 개의 결과가 있는 경우에는 예외 발생
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
 }

@@ -31,6 +31,10 @@ public class NotificationRepository {
                 .getResultList();
     }
 
+    public Notification findById(Long id) {
+        return em.find(Notification.class, id);
+    }
+
     /**
      * 알림 저장
      * @param notification 저장할 알림 객체
