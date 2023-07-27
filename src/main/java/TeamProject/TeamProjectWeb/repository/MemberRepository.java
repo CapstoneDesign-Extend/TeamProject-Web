@@ -1,8 +1,10 @@
 package TeamProject.TeamProjectWeb.repository;
 
+import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -17,7 +19,7 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
     @PersistenceContext // EntityManager를 주입받기 위해 사용
     private final EntityManager em;
 
-    @Transactional
+
     public void save(Member member){ //-- 멤버 저장 --//
         em.persist(member);
     }
@@ -44,7 +46,12 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
                 .filter(m -> m.getLoginId().equals(loginId))
                 .findFirst();
     }
-
+    public List<Comment> findCommentsByMemberId(Long memberId) { // 멤버 ID를 매개변수로 받아 해당 멤버와 연결된 댓글 목록을 조회
+        String jpql = "SELECT c FROM Member m JOIN m.comments c WHERE m.id = :memberId";
+        TypedQuery<Comment> query = em.createQuery(jpql, Comment.class);
+        query.setParameter("memberId", memberId);
+        return query.getResultList();
+    }
 
 }
 

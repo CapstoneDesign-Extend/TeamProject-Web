@@ -41,9 +41,9 @@ public class BoardRepository {
         }
     }
 
-    public List<Board> findByTitle(String title){ // 제목으로 게시글 검색
-        return em.createQuery("select b from Board b where b.title=:title", Board.class)
-                .setParameter("title", title)
+    public List<Board> findByTitle(String title) { // 검색한 조건과 비슷한 보든 게시물을 검색할 수 있음
+        return em.createQuery("select b from Board b where b.title like :title", Board.class)
+                .setParameter("title", "%" + title + "%")
                 .getResultList();
     }
 }

@@ -15,7 +15,7 @@ import static jakarta.persistence.CascadeType.ALL;
 @Table(name = "border")
 public class Board { // 게시판 클래스
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 생성 => 시퀀스
+    @GeneratedValue // 자동 생성 => 시퀀스
     @Column(name = "border_id")
     private Long id;
     private String title; // 제목
@@ -34,6 +34,15 @@ public class Board { // 게시판 클래스
 
     @OneToMany(mappedBy = "board")
     private List<File> files = new ArrayList<>();
+
+
+    //== 생성 메소드 --//
+    public static Board createBoard(Kind kind){ // 어떤 게시판의 게시글인지 알기 위해 사용
+        Board board = new Board();
+        board.setKind(kind);
+
+        return board;
+    }
 
 }
 
