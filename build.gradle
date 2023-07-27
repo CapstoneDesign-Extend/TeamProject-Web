@@ -25,7 +25,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-devtools'
+    //implementation 'org.springframework.boot:spring-boot-starter-devtools'  // 이걸 못찾겠다고 Gradle Sync issue 오류남.
+    implementation 'org.springframework.boot:spring-boot-devtools'
 	/*컴파일 오류 발생시 org.springframework.boot:spring-boot-starter-devtools 대신에
 	org.springframework.boot:spring-boot-devtools로 변경*/
 
