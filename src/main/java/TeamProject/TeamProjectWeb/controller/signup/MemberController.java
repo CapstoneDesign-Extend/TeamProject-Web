@@ -5,6 +5,7 @@ import TeamProject.TeamProjectWeb.repository.MemberRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class MemberController {
 
     // 회원 가입 처리를 위한 POST 요청 핸들러
     @PostMapping("/signup")
+    @Transactional // 오류 해결위해 추가됨::트랜잭션 적용
     public String save(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // 유효성 검사 오류가 있을 경우 다시 회원 가입 페이지로 돌아감
