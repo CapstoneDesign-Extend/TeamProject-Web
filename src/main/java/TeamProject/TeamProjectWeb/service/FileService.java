@@ -6,6 +6,7 @@ import TeamProject.TeamProjectWeb.repository.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -18,7 +19,46 @@ public class FileService {
     //    private final FileDTO fileDTO;
     private final FileRepository fileRepository;
 
-    public void saveFile1(java.io.File file) { // 파일 받아옴
+    public File findById(Long id) {
+        return fileRepository.findById(id);
+    }
+
+    // 파일 업로드를 수행하는 메소드
+    public void saveFile(MultipartFile multipartFile) {
+        String fileName = multipartFile.getOriginalFilename(); // 파일명
+        String fileType = fileName.substring(fileName.lastIndexOf(".") + 1); // 파일 확장자 ex) txt, pdf 등등
+
+        File fileDTO = new File();
+        fileDTO.setFileName(fileName); // 파일 이름 저장
+        fileDTO.setFileType(fileType); // 파일 확장자 저장
+
+        try {
+            // 파일 데이터를 읽어옵니다.
+            byte[] fileData = multipartFile.getBytes();
+            fileDTO.setFileData(fileData);
+
+            // FileEntity를 데이터베이스에 저장합니다.
+            fileRepository.save(fileDTO);
+        } catch (IOException e) {
+            // 파일 읽기 오류 처리
+            e.printStackTrace();
+            throw new RuntimeException("파일 업로드에 실패하였습니다.");
+        }
+    }
+
+    // 파일 다운로드를 수행하는 메소드
+    public File downloadFile(Long fileId) {
+        return fileRepository.findById(fileId);
+    }
+
+    // 파일 삭제를 수행하는 메소드
+    public void deleteFileById(Long fileId) {
+        fileRepository.deleteById(fileId);
+    }
+
+}
+
+    /*public void saveFile1(java.io.File file) { // 파일 받아옴
         String fileName = file.getName(); // 파일명
         String fileType = fileName.substring(fileName.lastIndexOf(".") + 1); // 파일 확장자 ex) txt, pdf 등등
 
@@ -49,7 +89,4 @@ public class FileService {
             // 파일 읽기 오류 처리
             e.printStackTrace();
         }
-    }
-
-}
-
+    }*/

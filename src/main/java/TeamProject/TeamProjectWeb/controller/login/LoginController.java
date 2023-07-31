@@ -1,9 +1,7 @@
 package TeamProject.TeamProjectWeb.controller.login;
 
-
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.service.LoginService;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -29,71 +29,59 @@ public class LoginController {
         return "login/loginForm";
     }
 
-    /*@PostMapping("/login")
-    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
-        if (bindingResult.hasErrors()) {
-            return "login/loginForm";
-        }
-        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
-        log.info("login? {}", loginMember);
-
-        if(loginMember == null) {
-            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
-            return "login/loginForm";
-        }
-
-        //로그인 성공 처리 세션쿠키로 처리함( 쿠키에 시간정보 X )
-        Cookie idCookie = new Cookie("memberId", String.valueOf(loginMember.getId())); // Long 타입이라 형변환
-        response.addCookie(idCookie);
-
-        return "redirect:/";
-    }*/
-
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute LoginForm form,
-                          BindingResult bindingResult,
-                          @RequestParam(defaultValue = "/") String redirectURL,
-                          HttpServletRequest request,
-                          HttpServletResponse response)
-    {
+                        BindingResult bindingResult,
+                        @RequestParam(defaultValue = "/") String redirectURL,
+                        HttpServletRequest request) {
+
+        // 폼 데이터의 유효성 검사 결과가 오류가 있는지 확인합니다.
         if (bindingResult.hasErrors()) {
+            // 오류가 있을 경우 다시 로그인 폼으로 이동합니다.
             return "login/loginForm";
         }
-        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
-        log.info("login? {}", loginMember);
 
-        if (loginMember == null) {
+        // 로그인 서비스를 이용해 로그인을 시도합니다.
+        Optional<Member> loginMemberOptional = loginService.login(form.getLoginId(), form.getPassword());
+
+        // 로그인 성공 여부를 확인합니다.
+        if (loginMemberOptional.isPresent()) {
+            // 로그인에 성공했다면 해당 회원 정보를 가져옵니다.
+            Member loginMember = loginMemberOptional.get();
+            // 로그인 성공을 로그로 기록합니다.
+            log.info("로그인 성공: memberId={}, loginId={}", loginMember.getId(), loginMember.getLoginId());
+
+            // 로그인 성공 처리: 회원 정보를 세션에 저장합니다.
+            HttpSession session = request.getSession();
+            session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+
+            // 로그인 후에 원래 페이지로 리다이렉트합니다.
+            return "redirect:" + redirectURL;
+        } else {
+            // 로그인 실패시 오류 메시지를 설정하고 다시 로그인 폼으로 이동합니다.
+            log.info("로그인 실패: loginId={}", form.getLoginId());
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "login/loginForm";
         }
-        //로그인 성공 처리
-        //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
-        HttpSession session = request.getSession();
-
-        //세션에 로그인 회원 정보 보관
-        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-
-        //redirectURL 적용
-        return "redirect:" + redirectURL;
     }
-
 
     @PostMapping("/logout")
     public String logout(@RequestParam("loginId") String loginId,
                          HttpServletRequest request,
                          HttpServletResponse response) {
-        log.info("Logout: {}", loginId);
-        /*expireCookie(response, "memberId");
-        return "redirect:/";*/
+
+        // 로그아웃한 회원의 아이디를 로그로 기록합니다.
+        log.info("로그아웃: {}", loginId);
+
+        // 현재 세션을 가져옵니다. (false로 설정하여 세션이 없으면 새로 생성하지 않습니다)
         HttpSession session = request.getSession(false);
+
+        // 세션이 존재하는 경우, 세션을 무효화하여 로그아웃 처리합니다.
         if (session != null) {
             session.invalidate();
         }
+
+        // 로그아웃 처리 후에는 메인 페이지로 리다이렉트합니다.
         return "redirect:/";
     }
-    /*private void expireCookie(HttpServletResponse response, String cookieName) {
-        Cookie cookie = new Cookie(cookieName, null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-    }*/
 }

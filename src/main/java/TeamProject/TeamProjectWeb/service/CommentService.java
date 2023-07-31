@@ -48,4 +48,10 @@ public class CommentService {
         // 댓글 삭제 -> 해당 회원이 작성한 댓글 모두 삭제
         commentRepository.deleteByMember(member);
     }
+
+    @Transactional(readOnly = true)
+    public Comment findById(Long commentId) {
+        // 댓글 ID로 댓글 조회
+        return commentRepository.findById(commentId);
+    }
 }
