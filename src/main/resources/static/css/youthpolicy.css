@@ -1,0 +1,96 @@
+/*기본 설정*/
+body{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color:#333;
+  }
+  
+  a{
+    text-decoration:none;
+  }
+  
+  a:link{
+    color:black;
+  }
+  
+  a:visited{
+    color:black;
+  }
+  
+  a:hover{
+    color:black;
+  }
+  
+  a:active{
+    color:black;
+  }
+  /**/
+  
+  
+  /*메인 css*/
+  .wrap_mainframe {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .wrap_mainframe .mainframe {
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    margin-top:40px;
+    width:1280px;
+  }
+  /**/
+
+  .wrap_mainframe .mainframe .content {
+    display:flex;
+    flex-direction:column;
+    width:780px;
+    padding:24px;
+    border:1px solid #ededed;
+    border-radius:15px;
+    box-sizing:border-box;
+  }
+
+  .wrap_mainframe .mainframe .content h1 {
+    font-size:22px;
+    font-weight:bolder;
+  }
+
+  .wrap_mainframe .mainframe .content h3 {
+    font-size:18px;
+    font-weight:bolder;
+    margin-top:48px;
+  }
+
+  .wrap_mainframe .mainframe .content h4 {
+    font-size:14px;
+    font-weight:bolder;
+    margin-top:8px;
+  }
+  .wrap_mainframe .mainframe .content p {
+    font-size:14px;
+    margin-top:8px;
+  }
+
+  .wrap_mainframe .mainframe .content ol {
+    font-size:14px;
+    margin-top:8px;
+  }
+
+  .wrap_mainframe .mainframe .content ol>li {
+    margin-top:8px;
+  }
+
+  .wrap_mainframe .mainframe .content ol>ol {
+    margin-top:0;
+  }
+
+  .wrap_mainframe .mainframe .content ol>ol>li {
+    margin-top:0;
+  }
+

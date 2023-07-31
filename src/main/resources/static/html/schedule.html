@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+        rel="stylesheet">       
+  <link rel="stylesheet" type="text/css" href="/css/schedule.css">
+  <link rel="stylesheet" type="text/css" href="/css/header.css">
+  <script defer src="/js/header.js"></script>
+  <script defer src="/js/schedule.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <body>
+  <header>
+        <div class="inner">
+            <ul class="main-menu">
+                <div class="blank"> <!--정렬때문에 넣은 빈공간-->
+                  <a href="./index.html" class="homebutton">홈버튼</a>
+                </div>
+                <ul class="wrap_category">
+                    <li class="main_category_mypage">
+                        <a href="./mypage_main.html" class="main_category_name">
+                            마이페이지
+                        </a>
+                        <div class="sub_category_mypage hide">
+                            <div class="wrap_sub_category_mypage">
+                                <a href="./personal_info_change.html" class="sub_menu_content">개인정보관리</a>
+                                <a href="./subject.html" class="sub_menu_content">수강과목</a>
+                                <a href="./schedule.html" class="sub_menu_content">시간표</a>
+                                <a href="./bookmark.html" class="sub_menu_content">즐겨찾기</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="main_category">
+                        <a href="./notice.html" class="main_category_name">
+                            공지사항
+                        </a>
+                    </li>
+                    <li class="main_category_community">
+                        <a href="./board_collection.html" class="main_category_name">
+                            커뮤니티
+                        </a>
+                        <div class="sub_category_community hide">
+                            <div class="wrap_sub_category_community">
+                                <a href="./free_board.html" class="sub_menu_content">자유게시판</a>
+                                <a href="./qna_board.html" class="sub_menu_content">질문, 답변게시판</a>
+                                <a href="./market_board.html" class="sub_menu_content">장터게시판</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="wrap_othermain">
+                    <div class="search">
+                        <input type="text" />
+                        <span class="material-icons">search</span>
+                    </div>
+                    <li class="main_category">
+                        <a href="javascript:void(0)" class="main_category_name">
+                        <div class="profile">
+                            <img src="" alt="사진">
+                            <div class="user_nickname">
+                                홍길동(임시이름)
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+  </header>
+  <div class="wrap_mainframe">
+    <div class="mainframe">
+      <div class="sidediv">
+        <div class="nowschedule">
+          <h2 class="title">시간표 1</h2>
+          <div class="lastupdate">
+            <span>06/25 14:12</span> 변경
+          </div>
+          <div class="wrapping_option">
+            <a class="option">
+              <span class="material-icons">settings</span>설정
+            </a>
+          </div>
+        </div>
+        <div class="addschedule">
+          <a href="javascript:void(0)" class="title_div act"> <!--새로운 시간표가 추가될때는 활성화는 act가 붙고 아니면 안붙음-->
+            시간표 1
+          </a>
+          <a class="adding">
+            <span class="material-icons">add</span>새 시간표
+          </a>
+        </div>
+      </div>
+      <div class="wrapping">
+        <div class="tablehead">
+          <table class="table_head">
+            <tbody>
+                <tr>
+                  <th><div class="blank_div"></div></th>
+                  <td><div class="date">월</div></td>
+                  <td><div class="date">화</div></td>
+                  <td><div class="date">수</div></td>
+                  <td><div class="date">목</div></td>
+                  <td><div class="date">금</div></td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablebody">
+          <table class="table_body">
+            <tbody>
+              <tr>
+                <th>
+                  <div class="times">
+                    <div class="time">
+                      오전 9시
+                    </div>
+                    <div class="time">
+                      오전 10시
+                    </div>
+                    <div class="time">
+                      오전 11시
+                    </div>
+                    <div class="time">
+                      오전 12시
+                    </div>
+                    <div class="time">
+                      오후 1시
+                    </div>
+                    <div class="time">
+                      오후 2시
+                    </div>
+                    <div class="time">
+                      오후 3시
+                    </div>
+                    <div class="time">
+                      오후 4시
+                    </div>
+                    <div class="time">
+                      오후 5시
+                    </div>
+                    <div class="time">
+                      오후 6시
+                    </div>
+                    <div class="time">
+                      오후 7시
+                    </div>
+                    <div class="time">
+                      오후 8시
+                    </div>
+                    <div class="time">
+                      오후 9시
+                    </div>
+                    <div class="time">
+                      오후 10시
+                    </div>
+                    <div class="time">
+                      오후 11시
+                    </div>
+                  </div>
+                </th>
+                <td>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                </td>
+                <td>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                </td>
+                <td>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                </td>
+                <td>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                </td>
+                <td>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                  <div class="grid"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="button" value="+ 새 수업 추가" class="custom_button" id="custom_button">
+  <form action="asdf.jsp" id="customsubjects" style="display:none;">
+    <input type="hidden" name="id" value>
+    <a title="닫기" class="close" id="xbutton">✖</a>
+    <div class="title">새 수업 추가</div>
+    <div class="content_inner">
+      <div class="content_div">
+        <h2>과목명 (필수)</h2>
+        <input type="text" name="subject_name" placeholder="예) 경제학입문" maxlength="40" class="text">
+      </div>
+      <div class="content_div">
+        <h2>교수명</h2>
+        <input type="text" name="professor" placeholder="예) 홍길동" maxlength="40" class="text">
+      </div>
+      <div class="content_div_timeplace">
+        <h2>시간/장소</h2>
+        <div class="timeplace">
+          <div class="timeplace_inner">
+            <ol class="weeks" id="weeks">
+              <li class="active" onclick="change()">월</li>
+              <li class="deact" onclick="change()">화</li>
+              <li class="deact" onclick="change()">수</li>
+              <li class="deact" onclick="change()">목</li>
+              <li class="deact" onclick="change()">금</li>
+            </ol>
+            <p>
+              <select class="starthour">
+                <option value="9">오전 9시</option>
+                <option value="10">오전 10시</option>
+                <option value="11">오전 11시</option>
+                <option value="12">오후 12시</option>
+                <option value="13">오후 1시</option>
+                <option value="14">오후 2시</option>
+                <option value="15">오후 3시</option>
+                <option value="16">오후 4시</option>
+                <option value="17">오후 5시</option>
+                <option value="18">오후 6시</option>
+                <option value="19">오후 7시</option>
+                <option value="20">오후 8시</option>
+                <option value="21">오후 9시</option>
+                <option value="22">오후 10시</option>
+                <option value="23">오후 11시</option>
+              </select>
+              <select class="startminute">
+                <option value="0">0분</option>
+                <option value="5">5분</option>
+                <option value="10">10분</option>
+                <option value="15">15분</option>
+                <option value="20">20분</option>
+                <option value="25">25분</option>
+                <option value="30">30분</option>
+                <option value="35">35분</option>
+                <option value="40">40분</option>
+                <option value="45">45분</option>
+                <option value="50">50분</option>
+                <option value="55">55분</option>
+              </select>
+              <span>~</span>
+              <select class="endhour">
+                <option value="9">오전 9시</option>
+                <option value="10">오전 10시</option>
+                <option value="11">오전 11시</option>
+                <option value="12">오후 12시</option>
+                <option value="13">오후 1시</option>
+                <option value="14">오후 2시</option>
+                <option value="15">오후 3시</option>
+                <option value="16">오후 4시</option>
+                <option value="17">오후 5시</option>
+                <option value="18">오후 6시</option>
+                <option value="19">오후 7시</option>
+                <option value="20">오후 8시</option>
+                <option value="21">오후 9시</option>
+                <option value="22">오후 10시</option>
+                <option value="23">오후 11시</option>
+              </select>
+              <select class="endminute">
+                <option value="0">0분</option>
+                <option value="5">5분</option>
+                <option value="10">10분</option>
+                <option value="15">15분</option>
+                <option value="20">20분</option>
+                <option value="25">25분</option>
+                <option value="30">30분</option>
+                <option value="35">35분</option>
+                <option value="40">40분</option>
+                <option value="45">45분</option>
+                <option value="50">50분</option>
+                <option value="55">55분</option>
+              </select>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="submit">
+        <input type="submit" value="저장" class="button">
+      </div>
+    </div>
+  </form>
+</body>
+</html>

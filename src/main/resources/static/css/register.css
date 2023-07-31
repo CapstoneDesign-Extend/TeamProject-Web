@@ -1,0 +1,119 @@
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+}
+a:link{
+  color:black;
+}
+
+a:visited{
+  color:black;
+}
+
+a:hover{
+  color:black;
+}
+
+a:active{
+  color:black;
+}
+
+.wrap_content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: white;
+  width : 345px;
+  height : auto;
+  border-style : solid;
+  border-color : lightgray;
+  border-width : 1px;
+  padding : 25px 25px 25px 25px;
+}
+
+.wrap_content .label {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.wrap_content .label p{
+  margin: 3px 0 3px 0;
+  font-size: small;
+}
+
+.wrap_content .input {
+  margin-bottom: 15px;
+  position:relative;
+  width:100%;
+}
+
+.wrap_content .input .wrap_search {
+  width:inherit;
+  padding:6px;
+  border-width:1px;
+  border-style:solid;
+  border-radius:6px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-sizing:border-box;
+  margin-bottom: 6px;
+}
+
+.wrap_content .input .search {
+  position:relative;
+  width: inherit;
+  border: none;
+  box-sizing:border-box;
+}
+
+.wrap_content .main {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.wrap_content .info {
+  margin-top: 0;
+}
+
+.wrap_content .wrap_yearlist {
+  width:inherit;
+  padding:6px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 6px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-sizing: border-box;
+}
+
+.wrap_content .yearlist {
+  border: none;
+  width: inherit;
+  box-sizing: border-box;
+}
+
+.wrap_content .yearlist::-ms-expand {
+  display: none;
+}
+
+
+.wrap_content .confirm {
+  position: relative;
+  width: inherit;
+  height: 30px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border-width: 0px;
+  background-color: blue;
+  color: white;
+}
+
+.wrap_content .text {
+  position: relative;
+}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/market_board.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <!--Google Api-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+          rel="stylesheet">          
+    <script defer src="/js/calendar.js"></script>
+    <script defer src="/js/header.js"></script>
+</head>
+<body>
+    <header>
+        <div class="inner">
+            <ul class="main-menu">
+                <div class="blank"> <!--정렬때문에 넣은 빈공간-->
+                  <a href="./index.html" class="homebutton">홈버튼</a>
+                </div>
+                <ul class="wrap_category">
+                    <li class="main_category_mypage">
+                        <a href="./mypage_main.html" class="main_category_name">
+                            마이페이지
+                        </a>
+                        <div class="sub_category_mypage hide">
+                            <div class="wrap_sub_category_mypage">
+                                <a href="./personal_info_change.html" class="sub_menu_content">개인정보관리</a>
+                                <a href="./subject.html" class="sub_menu_content">수강과목</a>
+                                <a href="./schedule.html" class="sub_menu_content">시간표</a>
+                                <a href="./bookmark.html" class="sub_menu_content">즐겨찾기</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="main_category">
+                        <a href="./notice.html" class="main_category_name">
+                            공지사항
+                        </a>
+                    </li>
+                    <li class="main_category_community">
+                        <a href="./board_collection.html" class="main_category_name">
+                            커뮤니티
+                        </a>
+                        <div class="sub_category_community hide">
+                            <div class="wrap_sub_category_community">
+                                <a href="./free_board.html" class="sub_menu_content">자유게시판</a>
+                                <a href="./qna_board.html" class="sub_menu_content">질문, 답변게시판</a>
+                                <a href="./market_board.html" class="sub_menu_content">장터게시판</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="wrap_othermain">
+                    <div class="search">
+                        <input type="text" />
+                        <span class="material-icons">search</span>
+                    </div>
+                    <li class="main_category">
+                        <a href="javascript:void(0)" class="main_category_name">
+                        <div class="profile">
+                            <img src="" alt="사진">
+                            <div class="user_nickname">
+                                홍길동(임시이름)
+                            </div>
+                        </div>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </header>
+    <div class="wrap_mainframe">
+        <div class="mainframe">
+            <div class="board_div">
+                <div class="board_name">
+                    <div class="board_name_text">
+                        <span class="board_name_text_inner">장터게시판</span>
+                    </div>
+                    <div class="write">
+                        <a href="writing_page.html" style="height:24px  "><span class="material-icons">edit</span></a>
+                    </div>
+                </div>
+                <div class="board_content_list">
+                    <a href="javascript:void(0)" class="board_content_div">
+                        <div class="wrapping">
+                            <img src="/kidnap.jpg" class="product_img"></img>
+                            <div class="inner_block">
+                                <div class="title">첫번째 임시글</div>
+                                <div class="content_inner">임시글 내용</div>
+                            </div>
+                        </div>
+                        <div class="info_block">
+                            <div class="time_name">
+                                <span class="writing_time">5분전</span>
+                                <span class="writer_name">익명</span>
+                            </div>
+                             <div class="recom_comment">
+                                <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
+                                <span class="recom_count">7</span>
+                                <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
+                                <span class="comment_count">10</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="javascript:void(0)" class="board_content_div">
+                        <div class="wrapping">
+                            <img src="/kidnap.jpg" class="product_img"></img>
+                            <div class="inner_block">
+                                <div class="title">첫번째 임시글</div>
+                                <div class="content_inner">임시글 내용</div>
+                            </div>
+                        </div>
+                        <div class="info_block">
+                            <div class="time_name">
+                                <span class="writing_time">5분전</span>
+                                <span class="writer_name">익명</span>
+                            </div>
+                             <div class="recom_comment">
+                                <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
+                                <span class="recom_count">7</span>
+                                <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
+                                <span class="comment_count">10</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="javascript:void(0)" class="board_content_div">
+                        <div class="wrapping">
+                            <img src="/kidnap.jpg" class="product_img"></img>
+                            <div class="inner_block">
+                                <div class="title">첫번째 임시글</div>
+                                <div class="content_inner">임시글 내용</div>
+                            </div>
+                        </div>
+                        <div class="info_block">
+                            <div class="time_name">
+                                <span class="writing_time">5분전</span>
+                                <span class="writer_name">익명</span>
+                            </div>
+                             <div class="recom_comment">
+                                <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
+                                <span class="recom_count">7</span>
+                                <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
+                                <span class="comment_count">10</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="rank_board_div">
+                <div class="viewrank">
+                    <div class="viewrank_text">
+                        <div class="viewrank_title">
+                            조회수 인기글
+                        </div>
+                        <div class="more">
+                            <a href="hot_board.html">더보기</a>
+                        </div>
+                    </div>
+                    <div class="viewrank_content">
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="viewrank">
+                    <div class="viewrank_text">
+                        <div class="viewrank_title">
+                            추천수 인기글
+                        </div>
+                        <div class="more">
+                            <a href="hot_board.html">더보기</a>
+                        </div>
+                    </div>
+                    <div class="viewrank_content">
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footinner">
+            <div class="footcategory">
+                <a href="./serviceagree.html">이용약관</a>
+                <a href="./privacy.html" style="font-weight:bolder">개인정보처리방침</a>
+                <a href="./youthpolicy.html">청소년보호정책</a>
+                <a href="./rules.html">커뮤니티이용규칙</a>
+                <a href="./inquire.html">문의사항</a>
+                <span class="copyright" style="font-weight:bolder">© Extend</span>
+            </div>
+            <div class="developer_div">
+                Web Developed by <span class="developer">정진호,최유리,최환규</span>
+                App Developed by <span class="developer">이재용</span>
+                Special thanks <span class="specialthanks">윤재민</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
