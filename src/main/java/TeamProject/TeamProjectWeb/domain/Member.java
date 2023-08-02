@@ -17,12 +17,13 @@ public class Member { // 회원 클래스
     @GeneratedValue(strategy = GenerationType.IDENTITY) // @GeneratedValue : 자동 생성 => 시퀀스 값 같은
     @Column(name = "member_id")
     private Long id; // 임의로 사용할 키값
-    @Column(name = "student_id")
+    @Column(unique=true, name = "student_id")
     private int studentId; // 학번
     private String name; // 회원 이름
     private String schoolName; // 회원 학교
     @Enumerated(EnumType.STRING) // 데이터값을 int가 아닌 String으로 나오게 함
     private Access access; // 주어질 권한
+    @Column(unique=true) //== 유니크 속성을 부여하여 중복으로 아이디를 만드는 것을 방지함 ==/
     private String loginId; // 로그인 시 아이디
     private String password; // 로그인 시 비밀번호
     @OneToMany(mappedBy = "member") // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
@@ -43,11 +44,13 @@ public class Member { // 회원 클래스
         this.comments.add(comment);
     }
 
-    //-- 생성자 종류 --//
     public Member(Long id) {
         this.id = id;
     }
     public Member(){}
+
+
+
 
     /*
     //@NotNull

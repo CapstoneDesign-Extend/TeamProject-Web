@@ -46,4 +46,6 @@ public class BoardRepository {
                 .setParameter("title", "%" + title + "%")
                 .getResultList();
     }
+
+
 }
