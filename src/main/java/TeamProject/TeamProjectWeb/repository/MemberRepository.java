@@ -59,11 +59,24 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
         return members.isEmpty() ? null : members.get(0);
     }
 
-    public Optional<Member> findByLoginId(String loginId) { //-- logId 필드로 찾고 해당 결과 반환 --//
+    /*public Optional<Member> findByLoginId(String loginId) { //-- logId 필드로 찾고 해당 결과 반환 --//
 
         return findAll().stream()
                 .filter(m -> m.getLoginId().equals(loginId))
                 .findFirst();
+    }*/
+
+    public Optional<Member> findByLoginId(String loginId) {
+        try {
+            // JPQL 쿼리를 사용하여 해당 loginId를 가진 Member 객체 조회
+            // 결과가 없을 경우 NoResultException 예외가 발생하므로 try-catch 블록으로 처리
+            return Optional.ofNullable(em.createQuery("SELECT m FROM Member m WHERE m.loginId = :loginId", Member.class)
+                    .setParameter("loginId", loginId)
+                    .getSingleResult());
+        } catch (NoResultException e) {
+            // 조회 결과가 없을 경우 Optional.empty() 반환
+            return Optional.empty();
+        }
     }
 
     public List<Comment> findCommentsByMemberId(Long memberId) { // 멤버 ID를 매개변수로 받아 해당 멤버와 연결된 댓글 목록을 조회

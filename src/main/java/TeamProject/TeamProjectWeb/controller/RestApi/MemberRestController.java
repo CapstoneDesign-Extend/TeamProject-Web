@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/members")
@@ -26,6 +27,33 @@ public class MemberRestController {
         }
         // 조회된 회원 정보를 200 응답과 함께 반환
         return ResponseEntity.ok(member);
+    }
+
+    // 학번으로 회원 정보를 조회하는 API 엔드포인트
+    @GetMapping("/byStudentId/{studentId}")
+    public ResponseEntity<Member> getMemberByStudentId(@PathVariable int studentId) {
+        // MemberRepository를 사용하여 해당 학번의 회원 정보를 조회
+        Member member = memberRepository.findByStudentId(studentId);
+        // 조회된 회원 정보가 없을 경우 404 응답 반환
+        if (member == null) {
+            return ResponseEntity.notFound().build();
+        }
+        // 조회된 회원 정보를 200 응답과 함께 반환
+        return ResponseEntity.ok(member);
+    }
+
+    // 로그인 아이디로 회원 정보를 조회하는 API 엔드포인트
+    // 로그인 아이디로 회원 정보를 조회하는 API 엔드포인트
+    @GetMapping("/byLoginId/{loginId}")
+    public ResponseEntity<Member> getMemberByLoginId(@PathVariable String loginId) {
+        // MemberRepository를 사용하여 해당 로그인 아이디의 회원 정보를 조회
+        Optional<Member> optionalMember = memberRepository.findByLoginId(loginId);
+        // 조회된 회원 정보가 없을 경우 404 응답 반환
+        if (optionalMember.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        // 조회된 회원 정보를 200 응답과 함께 반환
+        return ResponseEntity.ok(optionalMember.get());
     }
 
     // 모든 회원 정보를 조회하는 API 엔드포인트

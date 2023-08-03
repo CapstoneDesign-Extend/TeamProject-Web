@@ -41,7 +41,7 @@ public class MemberService {
 //
 //    }
 
-    @Transactional // 메소드가 트랜잭션 내에서 실행되도록 보장
+    /*@Transactional // 메소드가 트랜잭션 내에서 실행되도록 보장
     public Member join(Member member) {
         // 로그인 아이디가 이미 존재하는지 확인하여 중복 가입을 방지
         if (isLoginIdExists(member.getLoginId())) {
@@ -59,6 +59,26 @@ public class MemberService {
         // 로그인 아이디가 이미 존재하는지 확인하는 메소드를 리포지토리에 구현합니다.
         // 예를 들어, MemberRepository에 findByLoginId와 같은 메소드를 추가하여 로그인 아이디로 멤버를 찾습니다.
         return memberRepository.findByLoginId(loginId) != null;
+    }*/
+
+    @Transactional
+    public Member join(Member member) {
+        // 로그인 아이디가 이미 존재하는지 확인하여 중복 가입을 방지
+        if (isLoginIdExists(member.getLoginId())) {
+            throw new IllegalArgumentException("이미 사용 중인 로그인 아이디입니다. 다른 아이디를 선택해주세요.");
+        }
+
+        // 새로운 멤버의 권한을 기본값으로 설정
+        member.setAccess(member.getAccess());
+
+        // save 메소드를 사용하여 멤버 저장
+        return memberRepository.save(member);
+    }
+
+    private boolean isLoginIdExists(String loginId) {
+        // 로그인 아이디가 이미 존재하는지 확인하는 메소드를 리포지토리에 구현합니다.
+        // 예를 들어, MemberRepository에 findByLoginId와 같은 메소드를 추가하여 로그인 아이디로 멤버를 찾습니다.
+        return memberRepository.findByLoginId(loginId).isPresent();
     }
 
     /**
