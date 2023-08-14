@@ -1,6 +1,7 @@
 package TeamProject.TeamProjectWeb.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,9 @@ public class Member { // 회원 클래스
     @Column(unique=true) //== 유니크 속성을 부여하여 중복으로 아이디를 만드는 것을 방지함 ==/
     private String loginId; // 로그인 시 아이디
     private String password; // 로그인 시 비밀번호
+    @Column(name = "memberEmail")
+    @Email(message = "유효하지 않은 이메일 입니다")
+    private String email;
     @OneToMany(mappedBy = "member") // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
     private List<Board> board = new ArrayList<>();
     @OneToMany(mappedBy = "member") // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌

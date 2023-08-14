@@ -42,6 +42,41 @@ class MemberRepositoryTest {
 //        Assertions.assertThat(findMember).isEqualTo(saveMember);
 
     }
+    @Transactional
+    @Rollback(value = false)
+    @Test
+    void testFindMemberByEmailAndLoginId() {
+        // Given
+        Member member = new Member();
+        member.setName("member1");
+        member.setStudentId(1234);
+        member.setEmail("test@example.com");
+        member.setLoginId("test123");
+        member.setPassword("password");
+        // ... (다른 필수 정보들을 설정)
+
+        // When
+        // 멤버를 저장하고 나서 해당 멤버를 조회
+        Member saveMember = memberRepository.save(member);
+        String result = memberRepository.findPasswordByEmailAndLoginId(saveMember.getEmail(), saveMember.getLoginId());
+
+        // Then
+        assertEquals(result, saveMember.getPassword());
+    }
+
+    @Transactional
+    @Rollback(value = false)
+    @Test
+    void testFindMemberByEmailAndLoginId_NotFound() {
+        // When
+        // 존재하지 않는 멤버를 조회
+        String result = memberRepository.findPasswordByEmailAndLoginId("nonexistent@example.com", "nonexistent123");
+
+        // Then
+        assertNull(result);
+    }
+
+
     @Test
     @Transactional
     @Rollback(value = false)
