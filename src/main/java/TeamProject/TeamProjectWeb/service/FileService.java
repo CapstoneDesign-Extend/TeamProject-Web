@@ -1,8 +1,8 @@
 package TeamProject.TeamProjectWeb.service;
 
+
 import TeamProject.TeamProjectWeb.domain.File;
 import TeamProject.TeamProjectWeb.repository.FileRepository;
-import TeamProject.TeamProjectWeb.repository.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

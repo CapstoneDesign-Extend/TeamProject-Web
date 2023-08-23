@@ -1,5 +1,6 @@
 package TeamProject.TeamProjectWeb.service;
 
+
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;

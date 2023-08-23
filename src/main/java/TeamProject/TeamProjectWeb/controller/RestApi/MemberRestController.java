@@ -1,5 +1,6 @@
 package TeamProject.TeamProjectWeb.controller.RestApi;
 
+
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,25 +30,36 @@ public class MemberRestController {
         return ResponseEntity.ok(member);
     }
 
-    // 학번으로 회원 정보를 조회하는 API 엔드포인트
+    // 학번으로 해당 학번의 모든 회원 정보를 조회하는 API 엔드포인트
     @GetMapping("/byStudentId/{studentId}")
-    public ResponseEntity<Member> getMemberByStudentId(@PathVariable int studentId) {
-        // MemberRepository를 사용하여 해당 학번의 회원 정보를 조회
-        Member member = memberRepository.findByStudentId(studentId);
+    public ResponseEntity<List<Member>> getAllMembersByStudentId(@PathVariable int studentId) {
+        // MemberRepository를 사용하여 해당 학번의 모든 회원 정보를 조회
+        List<Member> members = memberRepository.findAllByStudentId(studentId);
         // 조회된 회원 정보가 없을 경우 404 응답 반환
-        if (member == null) {
+        if (members.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         // 조회된 회원 정보를 200 응답과 함께 반환
-        return ResponseEntity.ok(member);
+        return ResponseEntity.ok(members);
     }
 
-    // 로그인 아이디로 회원 정보를 조회하는 API 엔드포인트
     // 로그인 아이디로 회원 정보를 조회하는 API 엔드포인트
     @GetMapping("/byLoginId/{loginId}")
     public ResponseEntity<Member> getMemberByLoginId(@PathVariable String loginId) {
         // MemberRepository를 사용하여 해당 로그인 아이디의 회원 정보를 조회
         Optional<Member> optionalMember = memberRepository.findByLoginId(loginId);
+        // 조회된 회원 정보가 없을 경우 404 응답 반환
+        if (optionalMember.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        // 조회된 회원 정보를 200 응답과 함께 반환
+        return ResponseEntity.ok(optionalMember.get());
+    }
+    //  이메일로 회원 정보를 조회하는 API 엔드포인트
+    @GetMapping("/byEmail/{email}")
+    public ResponseEntity<Member> getMemberByEmail(@PathVariable String email) {
+        // MemberRepository를 사용하여 해당 이메일의 회원 정보를 조회
+        Optional<Member> optionalMember = memberRepository.findByEmail(email);
         // 조회된 회원 정보가 없을 경우 404 응답 반환
         if (optionalMember.isEmpty()) {
             return ResponseEntity.notFound().build();

@@ -47,7 +47,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns(   //화이트리스트 작성
                         "/", "/members/signup", "/login", "/logout",
-                        "/css/**", "/*.ico", "/error"
+                        "/css/**", "/*.ico", "/error", "/api"
                 );
     }
 }

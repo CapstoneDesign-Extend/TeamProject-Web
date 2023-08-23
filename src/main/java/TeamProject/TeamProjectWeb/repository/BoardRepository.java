@@ -1,8 +1,11 @@
 package TeamProject.TeamProjectWeb.repository;
 
 import TeamProject.TeamProjectWeb.domain.Board;
+import TeamProject.TeamProjectWeb.domain.BoardKind;
+import TeamProject.TeamProjectWeb.domain.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -19,17 +22,43 @@ public class BoardRepository {
     @PersistenceContext // EntityManager를 주입받기 위해 사용
     private final EntityManager em;
 
+    @Transactional
     public void save(Board board){ // 게시글 저장
+        // Board 엔티티를 생성할 떄, 영속 상태가 아닌 Member 엔티티를 사용중이라면 해당 Member 엔티티를 영속 상태로 만들기
+        if (board.getMember() != null && board.getMember().getId() != null){
+            board.setMember(em.getReference(Member.class, board.getMember().getId()));
+        }
         em.persist(board);
     }
+
+    // 해당 id를 가진 게시글 반환
     public Board findOne(Long id){
-        return em.find(Board.class, id); // 해당 id로 board(게시글)를 찾아줌
+        return em.find(Board.class, id);
     }
-    public List<Board> findAll(){ // 저장된 게시글을 리스트 형식으로 찾음
+    // 모든 게시글 리스트 반환
+    public List<Board> findAll(){
         // JPA는 객체를 대상으로 쿼리문을 작성 => 메소드 인자 중 두 번째 인자가 타입을 나타냄
         List<Board> result = em.createQuery("select b from Board b", Board.class)
                 .getResultList();
         return result;
+    }
+    // 해당 boardKind 의 게시글 리스트 반환
+    public List<Board> findByBoardKind(BoardKind boardKind) {
+        return em.createQuery("select b from Board b where b.boardKind = :boardKind", Board.class)
+                .setParameter("boardKind", boardKind)
+                .getResultList();
+    }
+    // 제목으로 검색해 게시글 리스트 반환
+    public List<Board> findByTitle(String title) {
+        return em.createQuery("select b from Board b where b.title like :title", Board.class)
+                .setParameter("title", "%" + title + "%")
+                .getResultList();
+    }
+    // 제목이나 본문에 해당 키워드를 포함하는 게시글들을 반환
+    public List<Board> findByKeyword(String keyword) {
+        return em.createQuery("select b from Board b where b.title like :keyword or b.content like :keyword", Board.class)
+                .setParameter("keyword", "%" + keyword + "%")
+                .getResultList();
     }
     public void delete(Board board) {
         em.remove(board);
@@ -39,12 +68,6 @@ public class BoardRepository {
         if (board != null) {
             em.remove(board);
         }
-    }
-
-    public List<Board> findByTitle(String title) { // 검색한 조건과 비슷한 보든 게시물을 검색할 수 있음
-        return em.createQuery("select b from Board b where b.title like :title", Board.class)
-                .setParameter("title", "%" + title + "%")
-                .getResultList();
     }
 
 

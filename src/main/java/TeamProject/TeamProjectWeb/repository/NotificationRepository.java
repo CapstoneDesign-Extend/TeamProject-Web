@@ -1,5 +1,6 @@
 package TeamProject.TeamProjectWeb.repository;
 
+
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.domain.Notification;
 import jakarta.persistence.EntityManager;

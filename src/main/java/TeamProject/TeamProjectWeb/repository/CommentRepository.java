@@ -1,14 +1,13 @@
 package TeamProject.TeamProjectWeb.repository;
 
 
+
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Member;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

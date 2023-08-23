@@ -1,5 +1,6 @@
 package TeamProject.TeamProjectWeb.service;
 
+
 import TeamProject.TeamProjectWeb.domain.Timetable;
 import TeamProject.TeamProjectWeb.repository.TimetableRepository;
 import lombok.RequiredArgsConstructor;

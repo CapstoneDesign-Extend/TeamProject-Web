@@ -1,9 +1,9 @@
 package TeamProject.TeamProjectWeb.controller.RestApi;
 
+
 import TeamProject.TeamProjectWeb.domain.Notification;
 import TeamProject.TeamProjectWeb.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
