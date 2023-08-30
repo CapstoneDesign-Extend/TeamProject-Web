@@ -1,36 +1,36 @@
 package TeamProject.TeamProjectWeb.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-@Getter @Setter
 @Table(name = "member")
 public class Member { // 회원 클래스
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // @GeneratedValue : 자동 생성 => 시퀀스 값 같은
     @Column(name = "member_id")
     private Long id; // 임의로 사용할 키값
-    @Column(unique=true, name = "student_id")
+    @Column(name = "student_id")
     private int studentId; // 학번
     private String name; // 회원 이름
     private String schoolName; // 회원 학교
     @Enumerated(EnumType.STRING) // 데이터값을 int가 아닌 String으로 나오게 함
+    //db에 저장할 때, 열거형의 순서(상수)가 아닌 열거형의 이름으로 저장
     private Access access; // 주어질 권한
     @Column(unique=true) //== 유니크 속성을 부여하여 중복으로 아이디를 만드는 것을 방지함 ==/
     private String loginId; // 로그인 시 아이디
     private String password; // 로그인 시 비밀번호
-    @Column(name = "memberEmail")
-    @Email(message = "유효하지 않은 이메일 입니다")
+    @Column(unique = true, name = "memberEmail")
+    @Email(message = "유효하지 않은 이메일입니다.")
     private String email;
     @OneToMany(mappedBy = "member") // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
+    @JsonManagedReference // Board엔티티를 직렬화할 때 연관된 엔티티 클래스의 정보는 직렬화하지 않도록 하여 순환 참조로 인한 무한루프 방지
     private List<Board> board = new ArrayList<>();
     @OneToMany(mappedBy = "member") // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
     private List<Comment> comments = new ArrayList<>();

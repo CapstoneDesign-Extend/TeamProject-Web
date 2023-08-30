@@ -37,12 +37,14 @@ public class HomeController {
 
 
 
-/*//@GetMapping("/")
+/*
+/@GetMapping("/")
     public String home() {
         return "home";
-    }*/
+    }
 
-/*@GetMapping("/")//쿠키가 없어도 익셉션을 발생시키지 않음 (로그인 안해도 홈에 올수있어야하니까)
+
+@GetMapping("/")//쿠키가 없어도 익셉션을 발생시키지 않음 (로그인 안해도 홈에 올수있어야하니까)
     public String homeLogin(@CookieValue(name="memberId", required = false) Long memberId, Model model) {
         if (memberId == null) {
             return "home";
@@ -54,10 +56,11 @@ public class HomeController {
         }
         model.addAttribute("member", loginMember);
         return "loginHome";
-    }*/
+    }
 
 
-/*if (memberId == null) {
+
+if (memberId == null) {
             return "home";
         }
         //로그인
@@ -66,4 +69,7 @@ public class HomeController {
             return "home";
         }
         model.addAttribute("member", loginMember);
-        return "loginHome";*/
+        return "loginHome";
+
+        }
+        */

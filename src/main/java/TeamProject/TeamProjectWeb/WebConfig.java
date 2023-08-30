@@ -42,12 +42,12 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")                 // 인터셉터 적용할 URL 패턴 지정
                 .excludePathPatterns("/css/**", "/*.ico", "/error"); // 인터셉터에서 제외할 패턴을 지정
 
-        registry.addInterceptor(new LoginCheckInterceptor())
+        /*registry.addInterceptor(new LoginCheckInterceptor())
                 .order(2)
                 .addPathPatterns("/**")
                 .excludePathPatterns(   //화이트리스트 작성
-                        "/", "/members/signup", "/login", "/logout",
+                        "/", "/members/signup", "/login", "/logout", "/api/**",
                         "/css/**", "/*.ico", "/error"
-                );
+                );*/
     }
 }
