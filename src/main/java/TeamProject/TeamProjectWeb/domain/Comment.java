@@ -16,7 +16,7 @@ public class Comment { // 댓글 클래스
     private Long id;
     @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL) // cascade = CascadeType.ALL : Comment 테이블을 persist 할 때 Border 테이블도 같이 해줌
     @JoinColumn(name = "border_id") // 게시판 테이블에 PK와 연결해줌
-    //@JsonBackReference  // 양방향 연관관계에서 역참조 엔티티의 정보를 직렬화하지 않도록 하기(순환 참조로 인한 무한루프 방지)
+    //@JsonBackReference // 양방향 연관관계에서 역참조 엔티티의 정보를 직렬화하지 않도록 하기(순환 참조로 인한 무한루프 방지)
     private Board board; // 게시판 id를 가져오기 위해
     private String content; // 본문
     private LocalDateTime finalDate; // 최종 등록된 날짜

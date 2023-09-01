@@ -60,6 +60,7 @@ public class BoardRepository {
                 .setParameter("keyword", "%" + keyword + "%")
                 .getResultList();
     }
+
     public void delete(Board board) {
         em.remove(board);
     }

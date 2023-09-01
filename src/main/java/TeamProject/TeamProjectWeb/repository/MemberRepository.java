@@ -1,8 +1,6 @@
 package TeamProject.TeamProjectWeb.repository;
 
 
-
-
 import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Member;
 import jakarta.persistence.EntityManager;
@@ -22,7 +20,9 @@ import java.util.Optional;
 public class MemberRepository { // repository 패키지는 DB에 접근하는 모든 코드가 모여있음
 
     @PersistenceContext // EntityManager 를 주입받기 위해 사용
-    private EntityManager em;  // EntityManager 는 인터페이스가 아니라 구체적인 클래스이므로 final 필드로 주입받는 것이 권장되지 않는다고 함
+    private EntityManager em;  // EntityManager 는 인터페이스가 아니라 구체적인 클래스이므로
+    // final 필드로 주입받는 것이 권장되지 않는다고 함-> 고로 final 제거
+
 
     @Transactional
     public Member save(Member member) { //== 멤버 객체를 반환하는 것으로 변경 ==//
@@ -70,14 +70,13 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
             return null; // 해당 조건으로 멤버를 찾을 수 없는 경우
         }
     }
-    @Transactional
+
     public List<Member> findAll(){ //-- 저장된 회원을 리스트 형식으로 찾음 --//
         // JPA는 객체를 대상으로 쿼리문을 작성 => 메소드 인자 중 두 번째 인자가 타입을 나타냄
         List<Member> result = em.createQuery("select m from Member m", Member.class)
                 .getResultList();
         return result;
     }
-    @Transactional
     public void delete(Member member) { //-- 해당 멤버 삭제 --//
         em.remove(member);
     }
@@ -126,32 +125,28 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
     }
 
 
-
- //   login 메소드에서 반환 타입: login 메소드에서 로그인 성공 여부를 반환하고 있습니다. 하지만 반환 타입은 boolean으로 설정되어 있습니다.
- //   이렇게 하면 트랜잭션과의 상호작용에서 문제가 발생할 수 있습니다.
- //   메소드가 boolean을 반환하는 경우, 스프링은 메소드 수행 후에 트랜잭션을 커밋하려고 시도합니다.
- //   따라서 해당 메소드에서 로그인 여부를 반환하는 것보다는 예외를 던져서 트랜잭션 롤백을 유발하는 방법을 고려해야 합니다.
- @Transactional
- public boolean login(String loginId, String password) { // login 메소드 추가
+    //   login 메소드에서 반환 타입: login 메소드에서 로그인 성공 여부를 반환하고 있습니다. 하지만 반환 타입은 boolean으로 설정되어 있습니다.
+    //   이렇게 하면 트랜잭션과의 상호작용에서 문제가 발생할 수 있습니다.
+    //   메소드가 boolean을 반환하는 경우, 스프링은 메소드 수행 후에 트랜잭션을 커밋하려고 시도합니다.
+    //   따라서 해당 메소드에서 로그인 여부를 반환하는 것보다는 예외를 던져서 트랜잭션 롤백을 유발하는 방법을 고려해야 합니다.
+    @Transactional
+    public boolean login(String loginId, String password) { // login 메소드 추가
 //        try {
-            // JPQL 쿼리를 사용하여 해당 loginId와 loginPwd를 가진 Member 객체 조회
-            Member member = em.createQuery("SELECT m FROM Member m WHERE m.loginId = :loginId AND m.password = :password", Member.class)
-                    .setParameter("loginId", loginId)
-                    .setParameter("password", password)
-                    .getSingleResult();
-
-            // 조회 결과가 있으면 로그인 성공
-            return member != null;
-            //로그인 성공: true를 반환
-            //로그인 실패: false를 반환
+        // JPQL 쿼리를 사용하여 해당 loginId와 loginPwd를 가진 Member 객체 조회
+        Member member = em.createQuery("SELECT m FROM Member m WHERE m.loginId = :loginId AND m.password = :password", Member.class)
+                .setParameter("loginId", loginId)
+                .setParameter("password", password)
+                .getSingleResult();
+        // 조회 결과가 있으면 로그인 성공
+        return member != null;
+        //로그인 성공: true를 반환
+        //로그인 실패: false를 반환
 //        } catch (NoResultException e) {
 //            // 조회 결과가 없으면 로그인 실패
 //            return false;
 //        }
+        }
     }
-
-
-}
 
 
 //

@@ -1,6 +1,5 @@
 package TeamProject.TeamProjectWeb.controller.RestApi;
 
-
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
@@ -102,5 +101,4 @@ public class BoardRestController {
         // 삭제 성공 시 204 No Content 상태 코드를 반환함
         return ResponseEntity.noContent().build();
     }
-
 }

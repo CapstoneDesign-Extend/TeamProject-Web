@@ -17,7 +17,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    //    @Autowired // 클래스 간의 의존관계를 스프링 컨테이너가 자동으로 연결해줌
+//    @Autowired // 클래스 간의 의존관계를 스프링 컨테이너가 자동으로 연결해줌
 //    public void setMemberRepository(MemberRepository memberRepository){
 //        this.memberRepository = memberRepository;
 //    }
@@ -74,7 +74,6 @@ public class MemberService {
 
         // save 메소드를 사용하여 멤버 저장
         return memberRepository.save(member);
-
     }
 
     private boolean isLoginIdExists(String loginId) {
