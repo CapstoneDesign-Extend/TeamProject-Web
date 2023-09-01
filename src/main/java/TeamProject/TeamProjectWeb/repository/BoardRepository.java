@@ -38,25 +38,25 @@ public class BoardRepository {
     // 모든 게시글 리스트 반환
     public List<Board> findAll(){
         // JPA는 객체를 대상으로 쿼리문을 작성 => 메소드 인자 중 두 번째 인자가 타입을 나타냄
-        List<Board> result = em.createQuery("select b from Board b", Board.class)
+        List<Board> result = em.createQuery("select b from Board b order by b.finalDate desc", Board.class)
                 .getResultList();
         return result;
     }
     // 해당 boardKind 의 게시글 리스트 반환
     public List<Board> findByBoardKind(BoardKind boardKind) {
-        return em.createQuery("select b from Board b where b.boardKind = :boardKind", Board.class)
+        return em.createQuery("select b from Board b where b.boardKind = :boardKind order by b.finalDate desc", Board.class)
                 .setParameter("boardKind", boardKind)
                 .getResultList();
     }
     // 제목으로 검색해 게시글 리스트 반환
     public List<Board> findByTitle(String title) {
-        return em.createQuery("select b from Board b where b.title like :title", Board.class)
+        return em.createQuery("select b from Board b where b.title like :title order by b.finalDate desc", Board.class)
                 .setParameter("title", "%" + title + "%")
                 .getResultList();
     }
     // 제목이나 본문에 해당 키워드를 포함하는 게시글들을 반환
     public List<Board> findByKeyword(String keyword) {
-        return em.createQuery("select b from Board b where b.title like :keyword or b.content like :keyword", Board.class)
+        return em.createQuery("select b from Board b where b.title like :keyword or b.content like :keyword order by b.finalDate desc", Board.class)
                 .setParameter("keyword", "%" + keyword + "%")
                 .getResultList();
     }
