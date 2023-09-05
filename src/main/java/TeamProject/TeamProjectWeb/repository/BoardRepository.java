@@ -48,6 +48,13 @@ public class BoardRepository {
                 .setParameter("boardKind", boardKind)
                 .getResultList();
     }
+    // 해당 boardKind 의 게시글을 필요한 만큼(amount)만 반환
+    public List<Board> findByBoardKindAmount(BoardKind boardKind, int amount) {
+        return em.createQuery("select b from Board b where b.boardKind = :boardKind order by b.finalDate desc", Board.class)
+                .setParameter("boardKind", boardKind)
+                .setMaxResults(amount)
+                .getResultList();
+    }
     // 제목으로 검색해 게시글 리스트 반환
     public List<Board> findByTitle(String title) {
         return em.createQuery("select b from Board b where b.title like :title order by b.finalDate desc", Board.class)

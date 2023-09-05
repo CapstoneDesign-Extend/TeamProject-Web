@@ -46,6 +46,12 @@ public class BoardRestController {
         // 조회된 게시글 목록을 반환함
         return boards;
     }
+    // 특정 BoardKind 의 최신 게시글 리스트를 필요한 만큼만 반환하는 API 엔드포인트
+    @GetMapping("/search/byBoardKindAmount")
+    public List<Board> getLatestBoardsByBoardKind(@RequestParam("boardKind") BoardKind boardKind, @RequestParam("amount") int amount) {
+        List<Board> boards = boardRepository.findByBoardKindAmount(boardKind, amount);
+        return boards;
+    }
 
     // 제목으로 검색하는 API 엔드포인트
     @GetMapping("/search/byTitle")
