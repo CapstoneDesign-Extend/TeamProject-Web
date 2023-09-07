@@ -67,6 +67,13 @@ public class BoardRepository {
                 .setParameter("keyword", "%" + keyword + "%")
                 .getResultList();
     }
+    // 특정 boardKind 의 게시글만 키워드로 검색
+    public List<Board> findByKeywordKind(String keyword, BoardKind boardKind) {
+        return em.createQuery("select b from Board b where (b.title like :keyword or b.content like :keyword) and b.boardKind = :boardKind order by b.finalDate desc", Board.class)
+                .setParameter("keyword", "%" + keyword + "%")
+                .setParameter("boardKind", boardKind)
+                .getResultList();
+    }
 
     public void delete(Board board) {
         em.remove(board);

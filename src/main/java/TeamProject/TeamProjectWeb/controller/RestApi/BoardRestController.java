@@ -65,6 +65,11 @@ public class BoardRestController {
     public List<Board> getBoardsByKeyword(@RequestParam("keyword") String keyword) {
         return boardRepository.findByKeyword(keyword);
     }
+    // 키워드로 특정 게시판 검색
+    @GetMapping("/search/byKeywordKind")
+    public List<Board> getBoardsByKeywordKind(@RequestParam("keyword") String keyword, @RequestParam("boardKind") BoardKind boardKind){
+        return boardRepository.findByKeywordKind(keyword, boardKind);
+    }
     // 모든 게시글 조회 API 엔드포인트
     @GetMapping
     public List<Board> getAllBoards() {
