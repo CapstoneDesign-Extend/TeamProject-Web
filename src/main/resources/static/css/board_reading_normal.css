@@ -1,0 +1,396 @@
+/*기본 설정*/
+body{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color:#333;
+  }
+  
+  a{
+    text-decoration:none;
+  }
+  
+  a:link{
+    color:black;
+  }
+  
+  a:visited{
+    color:black;
+  }
+  
+  a:hover{
+    color:black;
+  }
+  
+  a:active{
+    color:black;
+  }
+/**/
+
+  /*전체 디자인*/
+  .wrap_mainframe .mainframe {
+    display: flex;
+    justify-content:center;
+    align-items:flex-start;
+    margin-top:40px;
+  }
+
+  .wrap_mainframe .mainframe .main_content { 
+    width:896px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin-right:40px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .board_title {
+    width:896px;
+    border:1px solid #ededed;
+    height:45px;
+    padding:11px 12px;
+    box-sizing:border-box;
+    font-weight:bolder;
+    margin-bottom:10px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body {
+    width:896px;
+    border:1px solid #ededed;
+    padding:11px 12px;
+    box-sizing:border-box;
+    border-collapse:collapse;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top{
+    height:70px;
+    width:896px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:left;
+    align-items:center;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .profile_pic {
+    height:70px;
+    width:70px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time {
+    height:70px;
+    width:802px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .namespace{
+    width:800px;
+    display:flex;
+    justify-content:center;
+    align-items:start;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .namespace .writer_name{
+    width:400px;
+    display:flex;
+    justify-content:left;
+    box-sizing:border-box;
+    padding:0 5px;
+    font-weight:bolder;
+    font-size:14px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .namespace .report{
+    width:400px;
+    display:flex;
+    justify-content:right;
+    box-sizing:border-box;
+    padding:0 5px;
+    font-size:12px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .writing_time{
+    width:800px;
+    display:flex;
+    justify-content:left;
+    align-items:start;
+    padding:0 5px 5px 5px;
+    font-size:12px;
+  }
+  
+  .wrap_mainframe .mainframe .main_content .content_body .body_main {
+    display:flex;
+    flex-direction:column;
+    width:870px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_main .main_title{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:16px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_main .bonmoon{
+    font-size:14px;
+    margin-bottom:16px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_counting {
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    font-size:14px;
+    margin-bottom:14px;
+  }
+
+  .body_counting span{
+    font-size:14px;
+  }
+
+  .body_button {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:14px;
+    background-color: #ededed;
+    width:70px;
+    height:35px;
+    padding:5px;
+    box-sizing:border-box;
+    cursor:pointer;
+  }
+
+  .body_button span {
+    font-size:14px;
+  }
+  /**/
+
+
+  /*댓글 입력창*/
+  .comment_input {
+    border:1px solid #ededed;
+    border-collapse:collapse;
+    width:856px;
+    height:40px;
+    box-sizing:border-box;
+    padding:5px 10px;
+    display:flex;
+  }
+
+  .comment_input .comment_input_inner {
+    border:none;
+    width:740px;
+    height:28px;
+    box-sizing:border-box;
+    font-size:14px;
+  }
+
+  .comment_input .checkbox_wrap {
+    width:78px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:14px;
+    height:28px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .comment_wrapping {
+    display:flex;
+    align-items: center;
+    margin-bottom:5px;
+  }
+  
+  .wrap_mainframe .mainframe .main_content .editwrap .wrapsubmit{
+    width:40px;
+    height:40px;
+    border:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:0;
+    cursor: pointer;
+  }
+
+  .wrap_mainframe .mainframe .main_content .editwrap span{
+    width:40px;
+    height:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color:#0d339a;
+    color:white;
+  }
+  
+  .list_button {
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:896px;
+  }
+
+  .list_button_inner {
+    border:1px solid #0d339a;
+    background-color: white;
+    color:#0d339a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:85px;
+    height:30px;
+    cursor:pointer;
+  }
+  /**/
+
+
+  /*댓글창*/
+  .comment_div {
+    width:896px;
+    height:auto;
+    border:1px solid #ededed;
+    padding:11px 12px;
+    box-sizing:border-box;
+  }
+
+  .comment_div .comment_top{
+    display:flex;
+    width:870px;
+    height:30px;
+    align-items:center;
+    margin-bottom:10px;
+  }
+
+  .comment_div .comment_top .comment_profile_pic {
+    width:25px;
+    height:25px;
+    margin-right:5px;
+  }
+
+  .comment_div .comment_top .textspace {
+    display : flex;
+    font-size:14px;
+    justify-content:center;
+    align-items:center;
+    width:842px;
+  }
+
+  .textspace .name {
+    font-weight:bold;
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:421px;
+  }
+
+  .comment_div .comment_top .textspace .likey_report{
+    display : flex;
+    display:flex;
+    justify-content:right;
+    align-items:center;
+    width:421px;
+  }
+
+  .comment_div .comment_top .textspace .likey_report .likey{
+    padding-right:10px;
+  }
+
+  .comment_body {
+    font-size:14px;
+    margin-bottom:15px;
+  }
+
+  .comment_div .time {
+    font-size:12px;
+  }
+  /*댓글 끝*/
+
+
+  /*인기글 부분*/
+  .wrap_mainframe .mainframe .rank_board_div {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:344px;
+    font-size:12px;
+  }
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:344px;
+    background-color: whitesmoke;
+    margin-bottom:20px;
+  }
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_text{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:344px;
+    box-sizing:border-box;
+    padding:10px;
+    border:1px solid lightgray;
+  }
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_text .viewrank_title{
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:172px;
+    box-sizing:border-box;
+    font-weight:bolder;
+    color:#0d339a;
+  }
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_text .more{
+    display:flex;
+    justify-content:right;
+    align-items:end;
+    width:172px;
+    box-sizing: border-box;
+    font-size:10px;
+  } 
+  
+  
+  
+  
+  
+  
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_content{
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    width:344px;
+  }
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_content .contentbox{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:344px;
+    padding:10px 10px 10px 10px;
+    box-sizing:border-box;
+    border-right:1px solid lightgray;
+    border-bottom:1px solid lightgray;
+    border-left:1px solid lightgray;
+  } 
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_content .contentbox .content_title{
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:172px;
+    font-weight:bolder;
+  } 
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_content .contentbox .write_time{
+    display:flex;
+    justify-content:right;
+    align-items:center;
+    width:172px;
+    font-size:8px;
+  } 
+  /* 여기까지 인기글 */

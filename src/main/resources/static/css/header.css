@@ -225,7 +225,7 @@ header .sub_category_community .wrap_sub_category_community .sub_menu_content {
 footer {
   width:100%;
   height:100px;
-  background-color: whitesmoke;
+  background-color: #ededed;
   display:flex;
   align-items:center;
 }
