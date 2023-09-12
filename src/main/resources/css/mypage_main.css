@@ -1,0 +1,368 @@
+/*기본 설정*/
+body{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color:#333;
+  }
+  
+  a{
+    text-decoration:none;
+  }
+
+  a:link{
+    color:black;
+  }
+
+  a:visited{
+    color:black;
+  }
+
+  a:hover{
+    color:black;
+  }
+
+  a:active{
+    color:black;
+  }
+
+
+/*메인프레임 css*/
+.wrap_mainframe {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .wrap_mainframe .mainframe {
+    display:flex;
+    align-items:top;
+    justify-content:center;
+    margin-top:40px;
+    width:1280px;
+    height:860px;
+  }
+  /**/
+
+  /*첫번째 단락*/
+  .wrap_mainframe .mainframe .firstdivision {
+    display:flex;
+    justify-content:right;
+    align-items:flex-start;
+    width:250px;
+    height:860px;
+    margin-right:40px;
+  }
+  .wrap_mainframe .mainframe .firstdivision .profile_div {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:150px;
+    height:250px;
+    background-color: whitesmoke;
+    border: 1px solid lightgray;
+    border-radius: 5%;
+    box-sizing:border-box;
+    padding-top:3px;
+  }
+
+  .wrap_mainframe .mainframe .firstdivision .profile_div .profile_picture {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border : none;
+    border-radius: 50%;
+    background-color: white; 
+    width: 80px;
+    height: 80px;   
+    overflow:hidden;
+    background-size: cover;
+    background-image: url(/jspark.jpg);
+  }
+
+  .wrap_mainframe .mainframe .firstdivision .profile_div .text_area {
+    height:80px;
+    width:150px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    box-sizing:border-box;
+    padding-top:10px;
+  }
+
+  .wrap_mainframe .mainframe .firstdivision .profile_div .text_area .nickname{
+    font-size:16px;
+    padding-bottom:10px;
+  }
+
+  .wrap_mainframe .mainframe .firstdivision .profile_div .text_area .name{
+    font-size:14px;
+  }
+
+  .wrap_mainframe .mainframe .firstdivision .profile_div .button_area {
+    display:flex;
+    justify-content:center;
+    align-items:end;
+    height:80px;
+    width:150px;
+    box-sizing:border-box;
+    padding-bottom:15px;
+  }
+
+  .wrap_mainframe .mainframe .firstdivision .profile_div .button_area .info_change{
+    display:flex;
+    justify-content:center;
+    width:75px;
+    height:20px;
+  }
+
+  .wrap_mainframe .mainframe .firstdivision .profile_div .button_area .info_change .info_change_button{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:50px;
+    height:20px;
+    background-color: white;
+    font-size: 10px;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+  }
+
+  .wrap_mainframe .mainframe .firstdivision .profile_div .button_area .logout{
+    display:flex;
+    justify-content:center;
+    width:75px;
+    height:20px;
+  }
+
+  .wrap_mainframe .mainframe .firstdivision .profile_div .button_area .logout .logout_button{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:50px;
+    height:20px;
+    background-color: white;
+    font-size:10px;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+  }
+  /**/
+
+
+
+  /*두번째 단락*/
+  .wrap_mainframe .mainframe .seconddivision {
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    width:500px;
+    height:550px;
+    margin-right:40px;
+  }
+  /**/
+
+
+
+  /*세번째 단락*/
+  .wrap_mainframe .mainframe .thirddivision {
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    width:400px;
+    height:860px;
+  }
+
+  .wrap_mainframe .mainframe .thirddivision .text {
+    text-align:left;
+  }
+
+  .wrap_mainframe .mainframe .thirddivision .grade_div {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center; 
+    width:400px;
+    height:320px;
+    margin-bottom: 40px;
+    background-color: whitesmoke;
+    border: 1px solid lightgrey;
+    border-radius: 5%;
+  }
+
+  .wrap_mainframe .mainframe .thirddivision .grade_div .mygrade_div{
+    width:370px;
+    height:120px;
+    margin-bottom:10px;
+  }
+
+  .wrap_mainframe .mainframe .thirddivision .grade_div .mygrade_div .mygrade_text {
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:370px;
+    height:30px;
+  }
+
+  .wrap_mainframe .mainframe .thirddivision .grade_div .mygrade_div .mygrade_grade{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:370px;
+    height:80px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius:10px;
+    font-size:20px;
+  }
+
+  .wrap_mainframe .mainframe .thirddivision .grade_div .targetgrade_div{
+    width:370px;
+    height:120px;
+  }
+
+  .wrap_mainframe .mainframe .thirddivision .grade_div .targetgrade_div .targetgrade_text{
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:370px;
+    height:30px;
+  }
+
+  .wrap_mainframe .mainframe .thirddivision .grade_div .targetgrade_div .targetgrade_grade{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:370px;
+    height:80px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius:10px;
+    font-size:20px;
+  }
+
+  .wrap_mainframe .mainframe .thirddivision .calendar {
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:start;
+    width:400px;
+    height:364px; 
+  }
+  
+  .wrap_mainframe .mainframe .thirddivision .calendar .calendar_title {
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    margin-bottom: 36px;
+  }
+  
+  .wrap_mainframe .mainframe .thirddivision .calendar .calendar_title .title {
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:200px;
+    height:24px;
+    font-size:20px;
+    font-weight:bolder;
+  }
+  
+  .wrap_mainframe .mainframe .thirddivision .calendar .calendar_title .more {
+    display:flex;
+    justify-content:right;
+    align-items:flex-end;
+    width:200px;
+    font-size:10px;
+  }
+  
+  .wrap_mainframe .mainframe .thirddivision .calendar .calendartoday {
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    height:15px;
+    margin-bottom:14px;
+    font-size:12px;
+  }
+  
+  .wrap_mainframe .mainframe .thirddivision .calendar .day {
+    width:57px;
+    height:20px;
+    margin-right:2px;
+    font-size:12px;
+  } 
+  /*     */
+
+
+  .table_head {
+    background-color:#f2f2f2;
+    font-size:12px;
+  }
+
+.table_head .date {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:90px;
+    height:30px;
+    border-top:1px solid #e3e3e3;
+    border-right:1px solid #e3e3e3;
+    box-sizing:border-box;
+}
+
+.table_head th {
+    vertical-align:bottom;
+}
+
+.blank_div {
+    width:60px;
+    height:30px;
+    border-top:1px solid #e3e3e3;
+    border-left:1px solid #e3e3e3;
+    border-right:1px solid #e3e3e3;
+    box-sizing:border-box;
+}
+
+.table_head,.table_body {
+    color:#a6a6a6;
+}
+
+
+.table_body {
+    border-bottom:1px solid #e3e3e3;
+    font-size:11px;
+}
+
+.table_body th {
+    height:450px;
+    width:40px;
+    vertical-align: top;
+}
+
+.time {
+    width:60px;
+    height:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top:1px solid #e3e3e3;
+    border-left:1px solid #e3e3e3;
+    border-right:1px solid #e3e3e3;
+    box-sizing:border-box;
+}
+
+.times {
+    height:300px;
+    top:0;
+}
+
+.grid {
+    height:40px;
+    width:90px;
+    border-top:1px solid #e3e3e3;
+    border-right:1px solid #e3e3e3;
+    box-sizing:border-box;
+}

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extend</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/mainpage.css}" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer.css}" />
+    <!-- open graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Extend" />
+    <meta property="og:title" content="Extend" />
+    <meta property="og:description" content="대학교 커뮤니티 사이트입니다." />
+    <meta property="og:image" th:src="@{/images/for_seo.jpg}" />
+    <meta property="og:url" content="https://epic-darwin-271c77.netlify.app" />
+    <!-- twitter cards -->
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:site" content="Extend" />
+    <meta property="twitter:title" content="Extend" />
+    <meta property="twitter:description" content="대학교 커뮤니티 사이트입니다." />
+    <meta property="twitter:image" th:src="@{/images/for_seo.jpg}" />
+    <meta property="twitter:url" content="https://epic-darwin-271c77.netlify.app" />
+    <!-- Google Api -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <!-- Swiper.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@7/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"
+            integrity="sha512-f8mwTB+Bs8a5c46DEm7HQLcJuHMBaH/UFlcgyetMqqkvTcYg4g5VXsYR71b3qC82lZytjNYvBj2pf0VekA9/FQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"
+            integrity="sha512-tQFq+nb/TSS648SDzWbSj0A67t4I1PFzR0U6Oi/yEYFyUbAIwg74SOCbr7t2X1Rn+iln7sYwfh8y+z7p0gddOw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"
+            integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer th:src="@{/js/main.js}"></script>
+</head>
+<body>
+<header>
+    <div class="inner">
+        <ul class="main-menu">
+            <div class="blank"> <!-- 정렬 때문에 넣은 빈 공간 -->
+                <a href="./index.html" class="homebutton">홈버튼</a>
+            </div>
+            <ul class="wrap_category">
+                <li class="main_category_mypage">
+                    <a href="./mypage_main.html" class="main_category_name">
+                        마이페이지
+                    </a>
+                    <div class="sub_category_mypage hide">
+                        <div class="wrap_sub_category_mypage">
+                            <a href="./personal_info_change.html" class="sub_menu_content">개인정보관리</a>
+                            <a href="./subject.html" class="sub_menu_content">수강과목</a>
+                            <a href="./schedule.html" class="sub_menu_content">시간표</a>
+                            <a href="./bookmark.html" class="sub_menu_content">즐겨찾기</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="main_category">
+                    <a href="./notice.html" class="main_category_name">
+                        공지사항
+                    </a>
+                </li>
+                <li class="main_category_community">
+                    <a href="./board_collection.html" class="main_category_name">
+                        커뮤니티
+                    </a>
+                    <div class="sub_category_community hide">
+                        <div class="wrap_sub_category_community">
+                            <a href="./free_board.html" class="sub_menu_content">자유게시판</a>
+                            <a href="./qna_board.html" class="sub_menu_content">질문, 답변게시판</a>
+                            <a href="./market_board.html" class="sub_menu_content">장터게시판</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="wrap_othermain">
+                <div class="search">
+                    <input type="text" />
+                    <span class="material-icons">search</span>
+                </div>
+                <li class="main_category">
+                    <a href="javascript:void(0)" class="main_category_name">
+                        <div class="profile">
+                            <img src="" alt="사진">
+                            <div class="user_nickname">
+                                홍길동(임시이름)
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </div>
+</header>
+<div class="wrap_mainframe">
+    <div class="mainframe">
+        <div class="firstdivision">
+            <div class="calendar">
+                <div class="calendar_title">
+                    <div class="title">
+                        학과일정
+                    </div>
+                    <a href="javascript:void(0)" class="more">
+                        더보기
+                    </a>
+                </div>
+                <div class="calendartoday"></div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="day" style="color:red;">일</th>
+                        <th class="day">월</th>
+                        <th class="day">화</th>
+                        <th class="day">수</th>
+                        <th class="day">목</th>
+                        <th class="day">금</th>
+                        <th class="day" style="color:blue;">토</th>
+                    </tr>
+                    </thead>
+                    <tbody id="calendar-body">
+                    </tbody>
+                </table>
+            </div>
+            <div class="boardblock">
+                <div class="board_base">
+                    <div class="board_header" id="department_announcement">
+                        <div class="title">
+                            학과 공지사항
+                        </div>
+                        <a href="./department_board.html" class="more">
+                            더보기
+                        </a>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            아 오늘 시험 망했네
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            난 라면먹고 잔다
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            옆방 너무 시끄러움
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            우리 축제에 누구옴?
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="boardblock">
+                <div class="board_base">
+                    <div class="board_header">
+                        <div class="title" id="school_announcement">
+                            학교 통합 공지사항
+                        </div>
+                        <a href="./school_integ_board.html" class="more">
+                            더보기
+                        </a>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            아 오늘 시험 망했네
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            난 라면먹고 잔다
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            옆방 너무 시끄러움
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            우리 축제에 누구옴?
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="seconddivision">
+            <div class="boardblock">
+                <div class="board_base">
+                    <div class="board_header">
+                        <div class="title" id="school_announcement">
+                            자유게시판
+                        </div>
+                        <a href="./free_board.html" class="more">
+                            더보기
+                        </a>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            아 오늘 시험 망했네
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            난 라면먹고 잔다
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            옆방 너무 시끄러움
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            우리 축제에 누구옴?
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="boardblock">
+                <div class="board_base">
+                    <div class="board_header">
+                        <div class="title" id="school_announcement">
+                            질문, 답변게시판
+                        </div>
+                        <a href="./qna_board.html" class="more">
+                            더보기
+                        </a>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            아 오늘 시험 망했네
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            난 라면먹고 잔다
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            옆방 너무 시끄러움
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            우리 축제에 누구옴?
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="boardblock">
+                <div class="board_base">
+                    <div class="board_header">
+                        <div class="title" id="school_announcement">
+                            장터게시판
+                        </div>
+                        <a href="./market_board.html" class="more">
+                            더보기
+                        </a>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            아 오늘 시험 망했네
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            난 라면먹고 잔다
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            옆방 너무 시끄러움
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                    <div class="board_content">
+                        <div class="board_post">
+                            우리 축제에 누구옴?
+                        </div>
+                        <div class="post_time">
+                            03/24
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scheduledivision">
+            <div class="scheduletitle_div">
+                <div class="title">
+                    시간표
+                </div>
+                <a href="./schedule.html" class="more">
+                    더보기
+                </a>
+            </div>
+            <div class="wrapping">
+                <div class="tablehead">
+                    <table class="table_head">
+                        <tbody>
+                        <tr>
+                            <th>
+                                <div class="blank_div"></div>
+                            </th>
+                            <td>
+                                <div class="date">월</div>
+                            </td>
+                            <td>
+                                <div class="date">화</div>
+                            </td>
+                            <td>
+                                <div class="date">수</div>
+                            </td>
+                            <td>
+                                <div class="date">목</div>
+                            </td>
+                            <td>
+                                <div class="date">금</div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tablebody">
+                    <table class="table_body">
+                        <tbody>
+                        <tr>
+                            <th>
+                                <div class="times">
+                                    <div class="time">
+                                        오전 9시
+                                    </div>
+                                    <div class="time">
+                                        오전 10시
+                                    </div>
+                                    <div class="time">
+                                        오전 11시
+                                    </div>
+                                    <div class="time">
+                                        오전 12시
+                                    </div>
+                                    <div class="time">
+                                        오후 1시
+                                    </div>
+                                    <div class="time">
+                                        오후 2시
+                                    </div>
+                                    <div class="time">
+                                        오후 3시
+                                    </div>
+                                    <div class="time">
+                                        오후 4시
+                                    </div>
+                                    <div class="time">
+                                        오후 5시
+                                    </div>
+                                    <div class="time">
+                                        오후 6시
+                                    </div>
+                                    <div class="time">
+                                        오후 7시
+                                    </div>
+                                    <div class="time">
+                                        오후 8시
+                                    </div>
+                                    <div class="time">
+                                        오후 9시
+                                    </div>
+                                    <div class="time">
+                                        오후 10시
+                                    </div>
+                                    <div class="time">
+                                        오후 11시
+                                    </div>
+                                </div>
+                            </th>
+                            <td>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                            </td>
+                            <td>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                            </td>
+                            <td>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                            </td>
+                            <td>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                            </td>
+                            <td>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                            </td>
+                            <td>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                                <div class="grid"></div>
+                            </td>
+                            <td>
+                                <div class="blank_div"></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="submenu">
+        <div class="submenu_container">
+            <div class="submenu_item">
+                <div class="item_title">내 시간표</div>
+                <a href="javascript:void(0)" class="more">수강신청</a>
+            </div>
+            <div class="submenu_item">
+                <div class="item_title">자유게시판</div>
+                <a href="./free_board.html" class="more">더보기</a>
+            </div>
+            <div class="submenu_item">
+                <div class="item_title">질문, 답변게시판</div>
+                <a href="./qna_board.html" class="more">더보기</a>
+            </div>
+            <div class="submenu_item">
+                <div class="item_title">장터게시판</div>
+                <a href="./market_board.html" class="more">더보기</a>
+            </div>
+            <div class="submenu_item">
+                <div class="item_title">학과 공지사항</div>
+                <a href="./department_board.html" class="more">더보기</a>
+            </div>
+            <div class="submenu_item">
+                <div class="item_title">학교 통합 공지사항</div>
+                <a href="./school_integ_board.html" class="more">더보기</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<footer>
+    <div class="footer_contents">
+        <div class="footer_content">
+            <a href="javascript:void(0)" class="logo">Extend</a>
+            <div class="info">공동체 성장의 지원자료</div>
+        </div>
+        <div class="footer_content">
+            <div class="title">소개</div>
+            <a href="./introduce.html" class="item">소개</a>
+            <a href="javascript:void(0)" class="item">블로그</a>
+            <a href="javascript:void(0)" class="item">페이스북</a>
+            <a href="javascript:void(0)" class="item">인스타그램</a>
+        </div>
+        <div class="footer_content">
+            <div class="title">지원</div>
+            <a href="javascript:void(0)" class="item">도움말</a>
+            <a href="javascript:void(0)" class="item">문의하기</a>
+        </div>
+        <div class="footer_content">
+            <div class="title">프로젝트</div>
+            <a href="javascript:void(0)" class="item">기여하기</a>
+            <a href="javascript:void(0)" class="item">프로젝트</a>
+            <a href="javascript:void(0)" class="item">소식</a>
+        </div>
+    </div>
+    <div class="footer_disclaimer">
+        <div class="disclaimer_text">
+            COPYRIGHT © 2023 Extend. All RIGHTS RESERVED.
+        </div>
+    </div>
+</footer>
+</body>
+</html>

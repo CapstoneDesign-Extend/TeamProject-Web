@@ -1,0 +1,181 @@
+/*기본 설정*/
+body{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color:#333;
+  }
+  
+  a{
+    text-decoration:none;
+  }
+  
+  a:link{
+    color:black;
+  }
+  
+  a:visited{
+    color:black;
+  }
+  
+  a:hover{
+    color:black;
+  }
+  
+  a:active{
+    color:black;
+  }
+  /**/
+  
+  
+  /*메인 css*/
+  .wrap_mainframe {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .wrap_mainframe .mainframe {
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    margin-top:40px;
+    width:1280px;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:480px;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .profile_div{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:480px;
+    border:1px solid lightgray;
+    border-radius:10px;
+    margin-bottom:8px;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .profile_div .profile_title{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:480px;
+    padding-top:18px;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .profile_div .profile_title .title{
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:240px;
+    box-sizing:border-box;
+    font-size:22px;
+    font-weight:bolder;
+    padding-left:24px;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .profile_div .profile_title .wrapping_logout{
+    display:flex;
+    justify-content:right;
+    align-items:center;
+    width:240px;
+    box-sizing:border-box;
+    padding-right:24px;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .profile_div .profile_title .wrapping_logout .logout{
+    background-color: #0d339a;
+    color: white;
+    display:flex;
+    padding: 0 10px 0 10px;
+    border-radius:20px;
+    height:30px;
+    width:50px;
+    font-size:12px;
+    justify-content:center;
+    align-items:center;
+  }
+
+
+
+
+
+
+  .wrap_mainframe .mainframe .wrap_content .profile_content{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:480px;
+    box-sizing:border-box;
+    padding:18px 24px 18px 24px;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .profile_content .profile_pic{
+    width:56px;
+    height:56px;
+    border-radius:15px;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .profile_content .profile_inner{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:top;
+    box-sizing:border-box;
+    width:376px;
+    padding-left:16px;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .profile_content .profile_inner .id{
+    font-size:14px;
+    color:#292929;
+    font-weight:bolder;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .profile_content .profile_inner .name_nickname{
+    font-size:12px;
+    color:#a6a6a6;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .profile_content .profile_inner .school_info{
+    font-size:12px;
+    color:#a6a6a6;
+  }
+  /* 여기까지 profile블록*/
+
+
+  /*그 다음 블록부터 css 통일*/
+  .wrap_mainframe .mainframe .wrap_content .account {
+    width:480px;
+    box-sizing:border-box;
+    border:1px solid lightgray;
+    border-radius:10px;
+    padding:12px 18px 12px 18px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:top;
+    margin-bottom:8px;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .account .title {
+    font-size:18px;
+    font-weight:bolder;
+    color:#292929;
+    padding:12px 0 12px 0;
+  }
+
+  .wrap_mainframe .mainframe .wrap_content .account .account_content_div {
+    font-size:16px;
+    color:#292929;
+    padding:12px 0 12px 0;
+  }

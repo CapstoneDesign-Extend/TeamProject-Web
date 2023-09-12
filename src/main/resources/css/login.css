@@ -1,0 +1,93 @@
+a{
+    text-decoration:none;
+}
+
+a:link{
+    color:black;
+  }
+
+  a:visited{
+    color:black;
+  }
+
+  a:hover{
+    color:black;
+  }
+
+  a:active{
+    color:black;
+  }
+
+.logingrid{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.logingrid .input {
+    padding: 5px 10px 5px 10px;
+    border: 1px;
+    border-style: solid;
+    border-color:lightgray;
+    margin-top : 5px;
+    margin-bottom : 5px;
+}
+.logingrid .userid {
+    width:338px;
+    height:28px;
+    border:0;
+    padding:0 0 0 0;
+}
+
+.logingrid .loginfunction {
+    position:relative;
+    display:flex;
+    font-size:small;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.logingrid .confirm {
+    width:360px;
+    height:34px;
+    border:0;
+    padding:0 0 0 0;
+    margin-bottom: 5px;
+    background-color: blue;
+    color: white;
+}
+
+.logingrid .loginfunction .loginmaintain {
+    display:flex;
+    padding:0 0 0 0;
+    width:50%;
+    align-items:center;
+}
+.logingrid .loginfunction .idpw  {
+    display:flex;
+    justify-content:right;
+    align-items: center;
+    width:50%;
+}
+
+.logingrid .loginfunction .aidpw {
+    color:black;
+}
+
+.logingrid .register {
+    display:flex;
+    font-size:medium;
+    justify-content:center;
+    align-items:center;
+}
+
+.logingrid .aregister {
+    color:blue;
+    font-weight:bold;
+}
+
+footer {
+    position:absolute;
+    bottom: 0;
+}

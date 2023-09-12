@@ -1,0 +1,65 @@
+/*기본 설정*/
+body{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color:#333;
+  }
+  
+  a{
+    text-decoration:none;
+  }
+  
+  a:link{
+    color:black;
+  }
+  
+  a:visited{
+    color:black;
+  }
+  
+  a:hover{
+    color:black;
+  }
+  
+  a:active{
+    color:black;
+  }
+  /**/
+  
+  
+  /*메인 css*/
+  .wrap_mainframe {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .wrap_mainframe .mainframe {
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    margin-top:40px;
+    width:1280px;
+    height:860px;
+  }
+  /**/
+
+  .wrap_mainframe .mainframe .content{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .wrap_mainframe .mainframe .content span {
+    display:flex;
+    width:480px;
+    font-size:22px;
+    color:#a6a6a6;
+    padding:72px 0 72px 0;
+    border-radius:15px;
+    border:1px solid lightgray;
+    justify-content:center;
+  }
