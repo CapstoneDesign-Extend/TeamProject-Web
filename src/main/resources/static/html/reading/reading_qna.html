@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extend</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/board_reading_qna.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <!--Google Api-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+          rel="stylesheet">          
+    <script defer src="/js/calendar.js"></script>
+    <script defer src="/js/header.js"></script>
+    <script defer src="/js/reading.js"></script>
+    <script defer src="/js/write.js"></script>
+</head>
+<body>
+<!--여기에 헤더 삽입-->
+      <div class="wrap_mainframe">
+            <div class="mainframe">
+                  <div class="main_content">
+                        <div class="board_title">
+                            <span>질문,답변게시판</span>
+                        </div>
+                        <div class="qa_text">
+                            Q.
+                        </div>
+                        <div class="wrap_content_body">
+                            <div class="content_body">
+                                <div class="body_top">
+                                    <img src="/tmp.jpg" class="profile_pic">
+                                    <div class="name_time">
+                                        <div class="namespace">
+                                            <div class="writer_name">
+                                                익명
+                                            </div>
+                                            <div class="report">
+                                                신고
+                                            </div>
+                                        </div>
+                                        <div class="writing_time">
+                                            6분전
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="body_main">
+                                    <div class="main_title">
+                                        <p>진짜로 이제 뭐하냐</p>
+                                    </div>
+                                    <div class="bonmoon">
+                                        <p>그래서 이제 뭐함</p>
+                                        <p>진짜로 그래서 이제 뭐함</p>
+                                    </div>
+                                </div>
+                                <div class="body_counting">
+                                    <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
+                                    <span class="recom_count">7&nbsp;</span>
+                                    <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
+                                    <span class="comment_count">10</span>
+                                </div>
+                                <div class="body_button">
+                                    <span class="material-icons-outlined" style="color:black;">favorite_border</span>
+                                    <span>&nbsp;좋아요</span>
+                                </div>
+                            </div>
+                            <div class="qa_text">
+                                A.
+                            </div>
+                            <div class="content_body">
+                                <div class="body_top">
+                                    <img src="/tmp.jpg" class="profile_pic">
+                                    <div class="name_time">
+                                        <div class="namespace">
+                                            <div class="writer_name">
+                                                익명
+                                            </div>
+                                            <div class="report">
+                                                신고
+                                            </div>
+                                        </div>
+                                        <div class="writing_time">
+                                            6분전
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="body_main">
+                                    <div class="main_title">
+                                        <p>진짜로 이제 뭐하냐</p>
+                                    </div>
+                                    <div class="bonmoon">
+                                        <p>그래서 이제 뭐함</p>
+                                        <p>진짜로 그래서 이제 뭐함</p>
+                                    </div>
+                                </div>
+                                <div class="body_counting">
+                                    <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
+                                    <span class="recom_count">7&nbsp;</span>
+                                    <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
+                                    <span class="comment_count">10</span>
+                                </div>
+                                <div class="body_button">
+                                    <span class="material-icons-outlined" style="color:black;">favorite_border</span>
+                                    <span>&nbsp;좋아요</span>
+                                </div>
+                            </div>
+                        </div>
+                        <form enctype="multipart/form-data">
+                            <div class="writing_title">
+                                <textarea class="title" placeholder="제목을 입력해 주세요" name="title"></textarea>
+                            </div>
+                            <div id="price_contact" class="price_contact" style="display:none;">
+                                <div class="price">
+                                    <input type="number" name="price" class="inner_input" placeholder="가격 입력">
+                                </div>
+                                <div class="contact">
+                                    <input type="text" name="contact" class="inner_input" placeholder="연락수단 입력">
+                                </div>
+                            </div>
+                            <div id="writing_body" class="writing_body" contenteditable="true" placeholder="내용을 입력하세요" name="text_body" autofocus>
+                            <!--본문내용이 들어갈 공간-->
+                            </div>
+                            <div class="button_row">
+                                <div class="left_div">
+                                    <label class="file_upload" for="image">이미지 업로드</label>
+                                </div>
+                                <div class="right_div">
+                                    <input type="submit" class="writing_completion" value="글 작성">
+                                </div>
+                            </div>
+                            <input id="image" class="image" type="file" accept="image/*" name="image"/>
+                        </form>
+                        <div class="list_button"> 
+                            <button type="button" class="list_button_inner" onclick="location.href='../board/qna_board.html'"><span class="material-icons">list</span>글 목록</button>
+                        </div>
+                  </div>
+                  <div class="rank_board_div">
+                        <div class="viewrank">
+                            <div class="viewrank_text">
+                                <div class="viewrank_title">
+                                    조회수 인기글
+                                </div>
+                                <div class="more">
+                                    <a href="hot_board.html">더보기</a>
+                                </div>
+                            </div>
+                            <div class="viewrank_content">
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="viewrank">
+                            <div class="viewrank_text">
+                                <div class="viewrank_title">
+                                    추천수 인기글
+                                </div>
+                                <div class="more">
+                                    <a href="hot_board.html">더보기</a>
+                                </div>
+                            </div>
+                            <div class="viewrank_content">
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                            </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</body>
+</html>

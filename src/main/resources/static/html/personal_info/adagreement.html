@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/adagree.css">
+        <link rel="stylesheet" href="/css/header.css">
+        <!--Google Api-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+              rel="stylesheet">          
+        <script defer src="/js/header.js"></script>
+        <script defer src="/js/agree.js"></script>
+    </head>
+</head>
+<body>
+    <!--여기에 헤더 삽입-->
+    <div class="wrap_mainframe">
+        <div class="mainframe">
+            <form method="post" action="asdf.jsp" id="adagree"></form>
+                <div class="content">
+                    <div class="title">광고성 정보 수신 동의</div>
+                    <div class="agree_div">
+                        <input type="checkbox" id="check" onclick="is_checked()">
+                        <span>동의</span>
+                    </div>
+                    <div class="explain_div">
+                        <p>영화/전시 초대 이벤트, 대학생 특별 할인 혜택 등 다양한 이벤트 및 정보를 서비스에서 만나보실 수 있습니다.</p>
+                        <p>1. 항목 : 마케팅 수신 동의</p>
+                        <p>2. 목적 : 서비스 및 이벤트 정보 안내</p>
+                        <p>3. 기간 : 탈퇴 후 최대 1년</p>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+</html>
