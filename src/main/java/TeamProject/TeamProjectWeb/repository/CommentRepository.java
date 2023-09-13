@@ -31,7 +31,7 @@ public class CommentRepository {
     @PersistenceContext // EntityManager를 주입받기 위해 사용
     private final EntityManager em;
 
-    public void saveComment(Long boardId, Long memberId, String content) {
+    public void saveComment(Long boardId, Long memberId, String content, String author) {
         Member member = em.find(Member.class, memberId); // memberId에 해당하는 Member 객체를 데이터베이스에서 조회
         Board board = em.find(Board.class, boardId); // boardId에 해당하는 Board 객체를 데이터베이스에서 조회
 
@@ -46,6 +46,7 @@ public class CommentRepository {
         comment.setCount(0);
         comment.setMember(member);
         comment.setBoard(board);
+        comment.setAuthor(author);
 
         em.persist(comment);
     }

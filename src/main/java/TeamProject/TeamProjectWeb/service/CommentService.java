@@ -16,9 +16,9 @@ import java.util.List;
 public class CommentService {
     private final CommentRepository commentRepository;
 
-    public void createComment(Long boardId, Long memberId, String content) {
+    public void createComment(Long boardId, Long memberId, String content, String author) {
         // 댓글 작성
-        commentRepository.saveComment(boardId, memberId, content);
+        commentRepository.saveComment(boardId, memberId, content, author);
     }
 
     public void updateComment(Long commentId, String content) {

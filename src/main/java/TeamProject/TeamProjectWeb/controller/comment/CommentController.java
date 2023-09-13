@@ -36,12 +36,13 @@ public class CommentController {
     public String write(@RequestParam Long boardId,
                         @RequestParam Long memberId,
                         @Valid @ModelAttribute BoardForm form,
+                        @RequestParam String author,
                         BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "comment/writeForm";
         }
         // 댓글 작성
-        commentService.createComment(boardId, memberId, form.getContent());
+        commentService.createComment(boardId, memberId, form.getContent(), author);
         return "redirect:/board/" + boardId;
     }
 

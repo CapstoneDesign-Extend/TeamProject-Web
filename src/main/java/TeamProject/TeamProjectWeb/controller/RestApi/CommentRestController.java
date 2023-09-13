@@ -21,11 +21,12 @@ public class CommentRestController {
     @PostMapping
     public ResponseEntity<Comment> createComment(@RequestParam Long boardId,
                                                  @RequestParam Long memberId,
-                                                 @RequestParam String content) {
+                                                 @RequestParam String content,
+                                                 @RequestParam String author) {
         // 댓글 작성을 위해 boardId와 memberId, 댓글 내용(content)을 파라미터로 받음
         // commentRepository의 saveComment 메소드를 호출하여 댓글을 저장함
         // 해당 댓글은 주어진 boardId와 memberId에 해당하는 게시글과 회원에 연결됨
-        commentRepository.saveComment(boardId, memberId, content);
+        commentRepository.saveComment(boardId, memberId, content, author);
         // 댓글 작성이 성공적으로 완료되면 200 OK 상태 코드를 반환
         return ResponseEntity.ok().build();
     }

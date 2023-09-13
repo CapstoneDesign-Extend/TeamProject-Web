@@ -25,6 +25,8 @@ public class Comment { // 댓글 클래스
     @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL) // 한 회원은 여러 댓글을 달 수 있음
     @JoinColumn(name = "memberId") // 외래키 => 조인할 속성 이름
     private Member member; // 해당 멤버의 학번을 사용할 거임
+    private String author; // 익명 또는 사용자명을 저장, 댓글 표시할때 가져오기위함
+
 
     //== 연관관계 메소드 ==//
     public void setBoard(Board board){ //-- 게시글에 댓글 저장 메소드 --//
