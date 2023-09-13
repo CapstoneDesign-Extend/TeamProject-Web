@@ -1,0 +1,169 @@
+/*기본 설정*/
+body{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color:#333;
+  }
+  
+  a{
+    text-decoration:none;
+  }
+  
+  a:link{
+    color:black;
+  }
+  
+  a:visited{
+    color:black;
+  }
+  
+  a:hover{
+    color:black;
+  }
+  
+  a:active{
+    color:black;
+  }
+/**/
+
+
+/*전체화면 디자인*/
+body {
+  background-color: whitesmoke;
+}
+
+.mainframe {
+  min-height:860px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  background-color: whitesmoke;
+  margin-top:40px;
+}
+
+.today_alert {
+  margin-bottom:35px;
+}
+
+.alert_title {
+  font-size:19px;
+  font-weight:bold;
+  width:1080px;
+  height:30px;  
+}
+
+.alert_div {
+  width:1080px;
+  height:110px;
+  padding:16px 17px;
+  background-color: white;
+  box-sizing:border-box;
+  border-radius:15px;
+  margin:6px 0 12px 0;
+}
+
+.alert_div .alert_top {
+  display:flex;
+  align-items:center;
+  width:1046px;
+  height:26px;
+  margin-bottom:9px;
+}
+
+.alert_div .alert_top .alert_profile_pic {
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.alert_div .alert_top .alert_name {
+  font-size:15px;
+  font-weight:bold;
+  width:105px;
+  height:26px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.alert_div .alert_top .alert_time {
+  width:891px;
+  height:26px;
+  display:flex;
+  justify-content:left;
+  align-items:center;
+  font-size:13px;
+}
+
+.alert_div .alert_top .alert_time::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin: 0 5px;
+  background-color: #e0e0e0;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  vertical-align: 3px;
+}
+
+.delete_button {
+  width:24px;
+  height:24px;
+  padding:0;
+  margin:0;
+  border:none;
+  background-color: white;
+  cursor:pointer;
+}
+
+.delete_button span {
+  width:24px;
+  height:24px;
+}
+
+.layer_toast {
+  position: fixed;
+  right: 0;
+  left: 0;
+  padding: 20px;
+  bottom: env(safe-area-inset-bottom);
+  bottom: env(safe-area-inset-bottom);
+  z-index: 1100;
+  height:160px;
+  transition: height .4s;
+  transform:translate(0,50%);
+}
+
+.layer_toast_inner {
+  max-width: 512px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  background-color: #0d339a;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.layer_toast.hide {
+  height:0px;
+}
+
+.layer_toast_inner {
+  display:none;
+}
+
+.layer_toast .message {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: #fff;
+  letter-spacing: -.5px;
+}

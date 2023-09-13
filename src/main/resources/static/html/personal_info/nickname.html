@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extend</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nickname.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <!--Google Api-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+          rel="stylesheet">          
+    <script defer src="/js/calendar.js"></script>
+    <script defer src="/js/header.js"></script>
+</head>
+<body>
+<!--여기에 헤더 삽입-->
+    <div class="wrap_mainframe">
+        <div class="mainframe">
+            <form method="post" action="abc.jsp" id="nickname">
+                <div class="nickname_div">
+                    <div class="title">
+                        닉네임 설정
+                    </div>
+                    <div class="nickname_input">
+                        <span class="confirm_title">닉네임</span>
+                        <input type="text" maxlength="10" placeholder="닉네임" class="nickname_button" />
+                    </div>
+                    <div class="explain1">
+                        <p class="explain1_text">
+                            ※ 닉네임을 설정하면 <span class="caution">30일간 변경할 수 없습니다.</span>
+                        </p>
+                    </div>
+                    <div class="button">
+                        <input type="submit" class="nickname_confirm_button" value="닉네임 설정">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

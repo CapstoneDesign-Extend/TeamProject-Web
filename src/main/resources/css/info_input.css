@@ -1,0 +1,109 @@
+/*기본 설정*/
+body{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color:#333;
+  }
+  
+  a{
+    text-decoration:none;
+  }
+  
+  a:link{
+    color:black;
+  }
+  
+  a:visited{
+    color:black;
+  }
+  
+  a:hover{
+    color:black;
+  }
+  
+  a:active{
+    color:black;
+  }
+  /**/
+  
+  
+  /*메인 css*/
+  .wrap_mainframe {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .wrap_mainframe .mainframe {
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    margin-top:40px;
+    width:1280px;
+    height:860px;
+  }
+  /**/
+
+  .wrap_mainframe .mainframe .content_div {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:480px;
+    padding:24px;
+    box-sizing:border-box;
+    border:1px solid lightgray;
+    border-radius:15px;
+  }
+
+  .wrap_mainframe .mainframe .content_div .important_info{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:top;
+    width:432px;
+    margin-bottom:48px;
+  }
+
+  .wrap_mainframe .mainframe .content_div .other_info{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:top;
+    width:432px;
+    margin-bottom:48px;
+  }
+
+  .wrap_mainframe .mainframe .content_div .text{
+    font-size:12px;
+    font-weight:bolder;
+    margin-bottom:2px;
+    padding-left:4px;
+  }
+
+  .wrap_mainframe .mainframe .content_div .input{
+    width:432px;
+    border:1px solid #ededed;
+    background-color: whitesmoke;
+    height:30px;
+    margin-bottom:12px;
+    box-sizing:border-box;
+    padding:4px;
+  }
+
+  .wrap_mainframe .mainframe .content_div .register{
+    width:432px;
+    height:40px;
+    border:none;
+    border-radius:15px;
+    background-color: #0d339a;
+    font-size:16px;
+    color:white;
+  }
+
+  #not {
+    display:none;
+  }

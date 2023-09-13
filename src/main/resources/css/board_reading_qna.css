@@ -1,0 +1,392 @@
+/*기본 설정*/
+body{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color:#333;
+  }
+  
+  a{
+    text-decoration:none;
+  }
+  
+  a:link{
+    color:black;
+  }
+  
+  a:visited{
+    color:black;
+  }
+  
+  a:hover{
+    color:black;
+  }
+  
+  a:active{
+    color:black;
+  }
+/**/
+
+  /*전체 디자인*/
+  .wrap_mainframe .mainframe {
+    display: flex;
+    justify-content:center;
+    align-items:flex-start;
+    margin-top:40px;
+  }
+
+  .wrap_mainframe .mainframe .main_content { 
+    width:896px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin-right:40px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .board_title {
+    width:896px;
+    border:1px solid #ededed;
+    height:45px;
+    padding:11px 12px;
+    box-sizing:border-box;
+    font-weight:bolder;
+    margin-bottom:10px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body {
+    width:896px;
+    border:1px solid #ededed;
+    padding:11px 12px;
+    box-sizing:border-box;
+    border-collapse:collapse;
+    margin-bottom:16px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top{
+    height:70px;
+    width:896px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:left;
+    align-items:center;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .profile_pic {
+    height:70px;
+    width:70px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time {
+    height:70px;
+    width:802px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .namespace{
+    width:800px;
+    display:flex;
+    justify-content:center;
+    align-items:start;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .namespace .writer_name{
+    width:400px;
+    display:flex;
+    justify-content:left;
+    box-sizing:border-box;
+    padding:0 5px;
+    font-weight:bolder;
+    font-size:14px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .namespace .report{
+    width:400px;
+    display:flex;
+    justify-content:right;
+    box-sizing:border-box;
+    padding:0 5px;
+    font-size:12px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .writing_time{
+    width:800px;
+    display:flex;
+    justify-content:left;
+    align-items:start;
+    padding:0 5px 5px 5px;
+    font-size:12px;
+  }
+  
+  .wrap_mainframe .mainframe .main_content .content_body .body_main {
+    display:flex;
+    flex-direction:column;
+    width:870px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_main .main_title{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:16px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_main .bonmoon{
+    font-size:14px;
+    margin-bottom:16px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_counting {
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    font-size:14px;
+    margin-bottom:14px;
+  }
+
+  .body_counting span{
+    font-size:14px;
+  }
+
+  .body_button {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:14px;
+    background-color: #ededed;
+    width:70px;
+    height:35px;
+    padding:5px;
+    box-sizing:border-box;
+    cursor:pointer;
+  }
+
+  .body_button span {
+    font-size:14px;
+  }
+
+  .list_button {
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:896px;
+  }
+
+  .list_button_inner {
+    border:1px solid #0d339a;
+    background-color: white;
+    color:#0d339a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:85px;
+    height:30px;
+    cursor:pointer;
+  }
+  /**/
+
+
+  /*인기글 부분*/
+  .wrap_mainframe .mainframe .rank_board_div {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:344px;
+    font-size:12px;
+  }
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:344px;
+    background-color: whitesmoke;
+    margin-bottom:20px;
+  }
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_text{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:344px;
+    box-sizing:border-box;
+    padding:10px;
+    border:1px solid lightgray;
+  }
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_text .viewrank_title{
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:172px;
+    box-sizing:border-box;
+    font-weight:bolder;
+    color:#0d339a;
+  }
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_text .more{
+    display:flex;
+    justify-content:right;
+    align-items:end;
+    width:172px;
+    box-sizing: border-box;
+    font-size:10px;
+  } 
+  
+  
+  
+  
+  
+  
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_content{
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    width:344px;
+  }
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_content .contentbox{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:344px;
+    padding:10px 10px 10px 10px;
+    box-sizing:border-box;
+    border-right:1px solid lightgray;
+    border-bottom:1px solid lightgray;
+    border-left:1px solid lightgray;
+  } 
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_content .contentbox .content_title{
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:172px;
+    font-weight:bolder;
+  } 
+  
+  .wrap_mainframe .mainframe .rank_board_div .viewrank .viewrank_content .contentbox .write_time{
+    display:flex;
+    justify-content:right;
+    align-items:center;
+    width:172px;
+    font-size:8px;
+  } 
+  /* 여기까지 인기글 */
+
+
+  /*qna 답글입력창 css */
+  [contenteditable=true]:empty:not(:focus):before{
+    content: attr(placeholder);
+  }
+
+  .writing_title {
+    width:896px;
+    height:40px;
+  }
+
+  .writing_title .title {
+    width:896px;
+    height:40px;
+    resize:none;
+    border:1px solid #ededed;
+    font-size:15px;
+    padding:11px 12px;
+    box-sizing:border-box;
+    overflow:hidden;
+  }
+
+  .writing_body {
+    width:896px;
+    height:auto;
+    min-height:380px;
+    margin-bottom:3px; 
+    border:1px solid #ededed;
+    padding:16px 12px;
+    font-size:15px;
+    box-sizing:border-box;
+  }
+
+  .writing_body img {
+    display:block;
+    width:50%;
+    height:auto;
+  }
+
+  .button_row {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:896px;
+    height:40px;
+    font-size:12px;
+    margin-bottom:15px;
+  }
+
+  .button_row .left_div {
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:448px;
+    height:40px;
+  }
+
+  .button_row .right_div {
+    display:flex;
+    justify-content:right;
+    align-items:center;
+    width:448px;
+    height:40px;
+  }
+
+  .file_upload{
+    width:122px;
+    height:30px;
+    padding: 6px 25px;
+    background-color:#0d339a;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    display:inline-block;
+    box-sizing:border-box;
+    border:none;
+  }
+
+  .image {
+    display:none;
+  }
+
+  .writing_completion {
+    width:75px;
+    height:30px;
+    padding: 3px 12px;
+    background-color:#0d339a;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    display:inline-block;
+    box-sizing:border-box;
+    border:none;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /**/
+
+  /*Q랑 A텍스트 관련 CSS 추가 */
+  .qa_text {
+    display:flex;
+    width:896px;
+    height:50px;
+    font-size:36px;
+    padding:5px 12px;
+    box-sizing:border-box;
+    align-items:center;
+    font-weight:bold;
+  }

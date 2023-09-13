@@ -1,0 +1,379 @@
+/*기본 설정*/
+body{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color:#333;
+    background-color:#f8f8f8;
+  }
+  
+  a{
+    text-decoration:none;
+  }
+  
+  a:link{
+    color:black;
+  }
+  
+  a:visited{
+    color:black;
+  }
+  
+  a:hover{
+    color:black;
+  }
+  
+  a:active{
+    color:black;
+  }
+  /**/
+  
+  
+  /*메인 css*/
+  .wrap_mainframe {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .wrap_mainframe .mainframe {
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    margin-top:40px;
+  }
+
+  .table_head {
+    background-color:#f2f2f2;
+    font-size:14px;
+  }
+
+.table_head .date {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:220px;
+    height:40px;
+    border-top:1px solid #e3e3e3;
+    border-right:1px solid #e3e3e3;
+    box-sizing:border-box;
+}
+
+.table_head th {
+    vertical-align:bottom;
+}
+
+.blank_div {
+    width:80px;
+    height:40px;
+    border-top:1px solid #e3e3e3;
+    border-left:1px solid #e3e3e3;
+    border-right:1px solid #e3e3e3;
+    box-sizing:border-box;
+}
+
+.table_head,.table_body {
+    color:#a6a6a6;
+}
+
+
+.table_body {
+    border-bottom:1px solid #e3e3e3;
+    font-size:13px;
+}
+
+.table_body th {
+    height:900px;
+    width:80px;
+    vertical-align: top;
+}
+
+.time {
+    width:80px;
+    height:60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top:1px solid #e3e3e3;
+    border-left:1px solid #e3e3e3;
+    border-right:1px solid #e3e3e3;
+    box-sizing:border-box;
+}
+
+.times {
+    height:600px;
+    top:0;
+}
+
+.grid {
+    height:60px;
+    width:220px;
+    border-top:1px solid #e3e3e3;
+    border-right:1px solid #e3e3e3;
+    box-sizing:border-box;
+}
+
+/*     */
+.sidediv {
+    width:325px;
+    margin-right:10px;
+}
+
+.sidediv .nowschedule {
+    width:325px;
+    height:159px;
+    box-sizing:border-box;
+    padding:25px;
+    margin-bottom:5px;
+    border:1px solid lightgray;
+    background-color: white;
+}
+
+.sidediv .nowschedule .title{
+    font-size:18px;
+    font-weight:bolder;
+
+}
+
+.sidediv .nowschedule .lastupdate{
+    font-size:12px;
+    color:#a6a6a6;
+    margin-top:10px;
+}
+
+.sidediv .nowschedule .wrapping_option{
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    margin-top:10px;
+}
+
+.sidediv .nowschedule .wrapping_option span{
+    color:#0d339a;
+}
+
+.sidediv .nowschedule .wrapping_option .option{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:89px;
+    height:42px;
+    border:1px solid #ededed;
+}
+/*    */
+
+.sidediv .addschedule {
+    display:flex;
+    flex-direction:column;
+    width:325px;
+    box-sizing:border-box;
+    border:1px solid lightgray;
+}
+
+.sidediv .addschedule .title_div {
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:323px;
+    height:50px;
+    padding:0 25px 0 25px;
+    box-sizing:border-box;
+    color:#a6a6a6;
+    font-size:15px;
+    border-bottom:1px solid lightgray;
+}
+
+.sidediv .addschedule .title_div.act {
+    color:#0d339a;
+    background-color: #f8f8f8;
+}
+
+.sidediv .addschedule .title_div:after {
+    content:'기본시간표';
+    margin-left : 155px;
+    color:#a6a6a6;
+    font-size:12px;
+}
+
+.sidediv .addschedule .adding {
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    width:323px;
+    height:50px;
+    padding:0 25px 0 25px;
+    box-sizing:border-box;
+    background-color: white;
+}
+
+
+
+/*    */
+#customsubjects {
+    width : 544px;
+    height : 306px;
+    box-sizing:border-box;
+    padding:25px;
+    background-color: white;
+    position:fixed;
+    z-index:97;
+    bottom:0;
+    left:50%;
+    transform: translate(-50%, 0);
+}
+
+#customsubjects .title {
+    width:492px;
+    height:24px;
+    font-size:18px;
+    font-weight:bolder;
+    margin-bottom:20px;
+}
+
+#customsubjects .content_div {
+    display:flex;
+    align-items:center;
+    justify-content:left;
+    width:492px;
+    height:32px;
+    color:#a6a6a6;
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+#customsubjects .content_div_timeplace {
+    display:flex;
+    align-items:flex-start;
+    justify-content:left;
+    width:492px;
+    height:74px;
+    color:#a6a6a6;
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+
+#customsubjects h2 {
+    width:72px;
+    margin-right:8px;
+}
+
+#customsubjects .close {
+    position:absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background-color: lightgray;;
+    font-size:22px;
+    top:0;
+    right:20px;
+    transform: translate(0, -50%);
+    color:white;
+}
+
+#customsubjects .content_div_timeplace h2 {
+    margin-top:8px;
+}
+
+#customsubjects .content_div .text {
+    width:412px;
+    height:32px;
+    box-sizing:border-box;  
+    border: 1px solid #e3e3e3;
+    background-color: #f2f2f2;
+    padding-right:5px;
+    padding-left:5px;
+}
+
+#customsubjects .content_div_timeplace .timeplace_inner {
+    border:1px solid #e3e3e3;
+    width:412px;
+    padding:5px;
+    box-sizing: border-box;
+}
+
+#customsubjects .content_div_timeplace .timeplace .weeks {
+    display:flex;
+    margin-bottom:5px;
+}
+
+#customsubjects .content_div_timeplace .timeplace .weeks li{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:25px;
+    height:25px;
+    color:#a6a6a6;
+    background-color: #f2f2f2;
+    margin-right:1px;
+}
+
+#customsubjects .content_div_timeplace .timeplace .weeks li.active{
+    background-color: #0d339a;
+    color:white;
+}
+
+#customsubjects .content_div_timeplace .timeplace select {
+    border:1px solid #d6d6d6;
+    font-size:13px;
+    color:#292929;
+    height : 30px;
+}
+
+#customsubjects .content_div_timeplace .timeplace span {
+    margin-right:5px;
+}
+
+#customsubjects .content_div_timeplace .timeplace .starthour,.endhour {
+    width:75px;
+    margin-right:5px;
+}
+
+#customsubjects .content_div_timeplace .timeplace .startminute,.endminute {
+    width:46px;
+    margin-right:5px;
+}
+
+#customsubjects .submit {
+    display:flex;
+    justify-content:right;
+    align-items:center;
+    width:492px;
+    height:30px;
+    margin-top:20px;
+}
+
+#customsubjects .submit .button{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color: #0d339a;
+    color:white;
+    width:43px;
+    height:30px;
+    border:none;
+}
+
+/*          */
+
+
+
+
+/* 버어튼 */
+.custom_button {
+    width:154px;
+    height:40px;
+    background-color: #0d339a;
+    color:white;
+    border:none;
+    border-radius:25px;
+    position: fixed;
+    bottom:20px;
+    left:50%;
+    transform: translate(-50%, 0);
+}

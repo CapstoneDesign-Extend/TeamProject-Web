@@ -1,0 +1,197 @@
+/*기본 설정*/
+body{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    color:#333;
+  }
+  
+  a{
+    text-decoration:none;
+  }
+  
+  a:link{
+    color:black;
+  }
+  
+  a:visited{
+    color:black;
+  }
+  
+  a:hover{
+    color:black;
+  }
+  
+  a:active{
+    color:black;
+  }
+  /**/
+  
+  
+  /*메인 css*/
+  .wrap_mainframe {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .wrap_mainframe .mainframe {
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    margin-top:40px;
+    width:1280px;
+    height:860px;
+  }
+  /**/
+
+
+  .wrap_mainframe .mainframe .newpwd_div {
+    display:flex;
+    flex-direction:column;
+    width:480px;
+    padding:24px;
+    border:1px solid #ededed;
+    border-radius:15px;
+    box-sizing:border-box;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .title{
+    font-size:22px;
+    font-weight:bolder;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .newpwd_input{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:top;
+    width:432px;
+    margin-top:24px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .newpwd_input .newpwd_text{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .newpwd_input .newpwd_text .newpwd_title{
+    width:196px;
+    box-sizing:border-box;
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    font-size:12px;
+    padding-left:8px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .newpwd_input .newpwd_text .newpwd_explain{
+    width:236px;
+    box-sizing:border-box;
+    display:flex;
+    justify-content:right;
+    align-items:center;
+    font-size:12px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .newpwd_input .pwd_button{
+    width:432px;
+    height:40px;
+    box-sizing:border-box;
+    padding:8px;
+    border-radius:10px;
+    border:1px solid lightgray;
+    background-color: whitesmoke;
+    margin-top:4px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .newpwd_input .pwd_confirm_button{
+    width:432px;
+    height:40px;
+    box-sizing:border-box;
+    padding:8px;
+    border-radius:10px;
+    border:1px solid lightgray;
+    background-color: whitesmoke;
+    margin-top:4px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .currentpwd_div{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:top;
+    width:432px;
+    margin-top:24px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .currentpwd_div .currentpwd_title{
+    display:flex;
+    width:432px;
+    box-sizing:border-box;
+    justify-content:left;
+    align-items:center;
+    padding-left:8px;
+    font-size:12px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .currentpwd_div .currentpwd{
+    width:432px;
+    height:40px;
+    box-sizing:border-box;
+    padding:8px;
+    border-radius:10px;
+    border:1px solid lightgray;
+    background-color: whitesmoke;
+    margin-top:4px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .explain1{
+    margin-top:24px;
+    width:432px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .explain1 .text{
+    font-size:12px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .explain1 .text .bolder{
+    font-weight:bolder;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .explain1 .text .caution{
+    color:red;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .explain2{
+    margin-top:24px;
+    width:432px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .explain2 .text{
+    font-size:12px;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .explain2 .text .bolder{
+    font-weight:bolder;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .explain2 .text .caution{
+    color:red;
+  }
+
+  .wrap_mainframe .mainframe .newpwd_div .button .pwd_change_button{
+    margin-top:24px;
+    box-sizing:border-box;
+    width:432px;
+    height:40px;
+    background-color: #0d339a;
+    border-radius:12px;
+    border:none;
+    font-size:16px;
+    font-weight:bolder;
+    color:white;
+  }

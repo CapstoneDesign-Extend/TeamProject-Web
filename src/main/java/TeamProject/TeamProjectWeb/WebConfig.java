@@ -8,8 +8,11 @@ import jakarta.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -42,12 +45,18 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")                 // 인터셉터 적용할 URL 패턴 지정
                 .excludePathPatterns("/css/**", "/*.ico", "/error"); // 인터셉터에서 제외할 패턴을 지정
 
-        /*registry.addInterceptor(new LoginCheckInterceptor())
+        registry.addInterceptor(new LoginCheckInterceptor())
                 .order(2)
                 .addPathPatterns("/**")
                 .excludePathPatterns(   //화이트리스트 작성
                         "/", "/members/signup", "/login", "/logout", "/api/**",
                         "/css/**", "/*.ico", "/error"
-                );*/
+                );
     }
+
+    /*@Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver>
+                                             resolvers) {
+        resolvers.add(new LoginMemberArgumentResolver());
+    }*/
 }

@@ -38,63 +38,7 @@
     <script defer src="/js/main.js"></script>
 </head>
 <body>
-    <header>
-        <div class="inner">
-            <ul class="main-menu">
-                <div class="blank"> <!--정렬때문에 넣은 빈공간-->
-                  <a href="./index.html" class="homebutton">홈버튼</a>
-                </div>
-                <ul class="wrap_category">
-                    <li class="main_category_mypage">
-                        <a href="./mypage_main.html" class="main_category_name">
-                            마이페이지
-                        </a>
-                        <div class="sub_category_mypage hide">
-                            <div class="wrap_sub_category_mypage">
-                                <a href="./personal_info_change.html" class="sub_menu_content">개인정보관리</a>
-                                <a href="./subject.html" class="sub_menu_content">수강과목</a>
-                                <a href="./schedule.html" class="sub_menu_content">시간표</a>
-                                <a href="./bookmark.html" class="sub_menu_content">즐겨찾기</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="main_category">
-                        <a href="./notice.html" class="main_category_name">
-                            공지사항
-                        </a>
-                    </li>
-                    <li class="main_category_community">
-                        <a href="./board_collection.html" class="main_category_name">
-                            커뮤니티
-                        </a>
-                        <div class="sub_category_community hide">
-                            <div class="wrap_sub_category_community">
-                                <a href="./free_board.html" class="sub_menu_content">자유게시판</a>
-                                <a href="./qna_board.html" class="sub_menu_content">질문, 답변게시판</a>
-                                <a href="./market_board.html" class="sub_menu_content">장터게시판</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="wrap_othermain">
-                    <div class="search">
-                        <input type="text" />
-                        <span class="material-icons">search</span>
-                    </div>
-                    <li class="main_category">
-                        <a href="javascript:void(0)" class="main_category_name">
-                        <div class="profile">
-                            <img src="" alt="사진">
-                            <div class="user_nickname">
-                                홍길동(임시이름)
-                            </div>
-                        </div>
-                        </a>
-                    </li>
-                </div>
-            </ul>
-        </div>
-    </header>
+    <!--여기에 헤더 삽입-->
     <div class="wrap_mainframe">
         <div class="mainframe">
             <div class="firstdivision">
@@ -130,7 +74,7 @@
                             <div class="title">
                                 학과 공지사항
                             </div>
-                            <a href="./department_board.html" class="more">
+                            <a href="board/department_board.html" class="more">
                                 더보기
                             </a>
                         </div>
@@ -175,7 +119,7 @@
                             <div class="title" id="school_announcement">
                                 학교 통합 공지사항
                             </div>
-                            <a href="./school_integ_board.html" class="more">
+                            <a href="board/school_integ_board.html" class="more">
                                 더보기
                             </a>
                         </div>
@@ -222,7 +166,7 @@
                             <div class="title" id="school_announcement">
                                 자유게시판
                             </div>
-                            <a href="./free_board.html" class="more">
+                            <a href="board/free_board.html" class="more">
                                 더보기
                             </a>
                         </div>
@@ -267,7 +211,7 @@
                             <div class="title" id="school_announcement">
                                 질문, 답변게시판
                             </div>
-                            <a href="./qna_board.html" class="more">
+                            <a href="board/qna_board.html" class="more">
                                 더보기
                             </a>
                         </div>
@@ -312,7 +256,7 @@
                             <div class="title" id="school_announcement">
                                 장터게시판
                             </div>
-                            <a href="./market_board.html" class="more">
+                            <a href="board/market_board.html" class="more">
                                 더보기
                             </a>
                         </div>
@@ -358,7 +302,7 @@
                     <div class="title">
                         시간표
                     </div>
-                    <a href="./schedule.html" class="more">
+                    <a href="mypage/schedule.html" class="more">
                         더보기
                     </a>
                 </div>
@@ -523,22 +467,5 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div class="footinner">
-            <div class="footcategory">
-                <a href="./serviceagree.html">이용약관</a>
-                <a href="./privacy.html" style="font-weight:bolder">개인정보처리방침</a>
-                <a href="./youthpolicy.html">청소년보호정책</a>
-                <a href="./rules.html">커뮤니티이용규칙</a>
-                <a href="./inquire.html">문의사항</a>
-                <span class="copyright" style="font-weight:bolder">© Extend</span>
-            </div>
-            <div class="developer_div">
-                Web Developed by <span class="developer">정진호,최유리,최환규</span>
-                App Developed by <span class="developer">이재용</span>
-                Special thanks <span class="specialthanks">윤재민</span>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

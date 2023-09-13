@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extend</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/pwd_change.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <!--Google Api-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+          rel="stylesheet">          
+    <script defer src="/js/header.js"></script>
+</head>
+<body>
+<!--여기에 헤더 삽입-->
+    <div class="wrap_mainframe">
+        <div class="mainframe">
+            <form method="post" action="abc.jsp" id="pwd_change">
+                <div class="newpwd_div">
+                    <div class="title">
+                        비밀번호 변경
+                    </div>
+                    <div class="newpwd_input">
+                        <div class="newpwd_text">
+                            <span class="newpwd_title">새 비밀번호</span>
+                            <span class="newpwd_explain">영문,숫자,특문이 2종류 이상 조합된 8~20자</span> <!--조건은 db에 맞춰서 변경 -->
+                        </div>
+                        <input type="password" maxlength="20" placeholder="새 비밀번호" class="pwd_button" />
+                        <input type="password" maxlength="20" placeholder="새 비밀번호 확인" class="pwd_confirm_button" />
+                    </div>
+                    <div class="currentpwd_div">
+                        <span class="currentpwd_title">현재 비밀번호</span>
+                        <input type="password" maxlength="20" placeholder="현재 비밀번호" class="currentpwd" />
+                    </div>
+                    <div class="explain1">
+                        <p class="text">
+                            <span class="bolder">※ 혹시 타인에게 양도하려고 하시나요?</span><br/>
+                            Extend 이용약관에서는 타인에게 계정 판매, 양도 및 대여 등을 엄격하게 금지하고 있습니다.<br/>
+                            모니터링 시스템에 의해 계정 양도가 적발될 경우 해당 계정은 영구 정지, 탈퇴 등의 조치가 가해지며, 계정 양도로 인해 사기, 불법 행위가 발생할 경우 관련법에 따라 <span class="caution">법적 책임을 지게 될 수 있습니다.</span>
+                        </p>
+                    </div>
+                    <div class="explain2">
+                        <p class="text">
+                            <span class="bolder">※ 타인에 의한 계정 사용이 의심되시나요?</span><br/>
+                            개인정보 보호를 위해 비밀번호를 변경하여 주시기 바랍니다. 비밀번호를 변경하면 <br/><span class="caution">모든 디바이스(앱, 브라우저 등)에서 즉시 로그아웃 처리됩니다.</span>
+                        </p>
+                    </div>
+                    <div class="button">
+                        <input type="submit" class="pwd_change_button" value="비밀번호 변경">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

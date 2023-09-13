@@ -1,4 +1,4 @@
-package TeamProject.TeamProjectWeb.controller;
+/*package TeamProject.TeamProjectWeb.controller;
 
 import TeamProject.TeamProjectWeb.controller.login.SessionConst;
 import TeamProject.TeamProjectWeb.domain.Member;
@@ -33,7 +33,7 @@ public class HomeController {
         model.addAttribute("member", loginMember);
         return "loginHome";
     }
-}
+}*/
 
 
 

@@ -1,0 +1,330 @@
+body{
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color:#333;
+}
+
+a{
+  text-decoration:none;
+}
+
+a:link{
+  color:black;
+}
+
+a:visited{
+  color:black;
+}
+
+a:hover{
+  color:black;
+}
+
+a:active{
+  color:black;
+}
+
+
+/*게시판 보드용 css*/
+.board_base{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  width:400px;
+  height:140px;
+}
+
+.board_base:last-child{
+  margin-bottom:0;
+}
+
+.board_base .board_header {
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  margin-bottom:22px;
+  height:28px;
+}
+
+.board_base .board_header .title {
+  display:flex;
+  justify-content:left;
+  align-items:center;
+  width:200px;
+  font-size:20px;
+  font-weight:bolder;
+}
+
+.board_base .board_header .more {
+  display:flex;
+  justify-content:right;
+  align-items:center;
+  width:200px;
+  font-size:10px;
+}
+
+.board_base .board_content {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:14px;
+  margin-bottom:8px;
+  height:14px;
+}
+
+.board_base .board_content:last-child {
+  margin-bottom:0;
+}
+
+.board_base .board_content .board_post{
+  display:flex;
+  justify-content:left;
+  align-items:center;
+  width:200px;
+}
+
+.board_base .board_content .post_time{
+  display:flex;
+  justify-content:right;
+  align-items:center;
+  width:200px;
+}
+/**/
+
+
+
+
+
+
+
+
+
+
+/*첫번째 파트*/
+.wrap_mainframe {
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.wrap_mainframe .mainframe {
+  display:flex;
+  position:relative;
+  width:1280px;
+  height:860px;
+  margin-top:40px;
+}
+
+.wrap_mainframe .mainframe .firstdivision {
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  flex-direction: column;
+  background-color: white;
+  width: 400px;
+  margin-right:40px;
+}
+
+.wrap_mainframe .mainframe .firstdivision .calendar {
+  display:flex;
+  flex-direction:column;
+  width:400px;
+  height:364px; 
+  justify-content:flex-start;
+  align-items:start; 
+  padding-bottom: 40px;
+}
+
+.wrap_mainframe .mainframe .firstdivision .calendar .calendar_title {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom: 36px;
+}
+
+.wrap_mainframe .mainframe .firstdivision .calendar .title {
+  display:flex;
+  justify-content:left;
+  align-items:flex-end;
+  width:200px;
+  font-size:20px;
+  font-weight:bolder;
+}
+
+.wrap_mainframe .mainframe .firstdivision .calendar .more {
+  display:flex;
+  justify-content:right;
+  align-items:end;
+  width:200px;
+  height:28px;
+  font-size:10px;
+}
+
+.wrap_mainframe .mainframe .firstdivision .calendar .calendartoday {
+  display:flex;
+  justify-content:left;
+  align-items:center;
+  height:15px;
+  margin-bottom:14px;
+  font-size:12px;
+}
+
+.wrap_mainframe .mainframe .firstdivision .calendar .day {
+  width:57px;
+  height:20px;
+  margin-right:2.2px;
+  font-size:12px;
+}
+
+.wrap_mainframe .mainframe .firstdivision .boardblock {
+  display:flex;
+  flex-direction:column;
+  width:400px;
+  height:140px;
+  margin-bottom:40px;
+  justify-content:center;
+  align-items:center;
+}
+
+.wrap_mainframe .mainframe .firstdivision .boardblock:last-child {
+  margin-bottom:0px;
+}
+/*첫번째 파트*/
+
+
+
+
+/*두번째 파트 css 시작*/
+.wrap_mainframe .mainframe .seconddivision {
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  flex-direction: column;
+  background-color: white;
+  width: 400px;
+  margin-right:40px;
+}
+
+.wrap_mainframe .mainframe .seconddivision .boardblock{
+  display:flex;
+  flex-direction:column;
+  width:400px;
+  height:140px;
+  margin-bottom:40px;
+  justify-content:center;
+  align-items:center;
+}
+
+.wrap_mainframe .mainframe .seconddivision .boardblock:nth-child(2){
+  margin-bottom:84px;
+}
+
+.wrap_mainframe .mainframe .seconddivision .boardblock:last-child{
+  margin-bottom:0px;
+}
+/**/
+
+
+/*세번째 파트 css*/
+.scheduledivision .scheduletitle_div{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:510px;
+  height:28px;
+  color:#333333;
+  margin-bottom:22px;
+}
+
+.scheduledivision .scheduletitle_div .title{
+  display:flex;
+  justify-content:left;
+  align-items:center;
+  width:255px;
+  height:28px;
+  font-size:20px;
+}
+
+.scheduledivision .scheduletitle_div .more{
+  display:flex;
+  justify-content:right;
+  align-items:end;
+  width:255px;
+  height:28px;
+  font-size:10px;
+}
+
+.table_head {
+  background-color:#0d339a;
+  font-size:12px;
+  color:white;
+}
+
+.table_head .date {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:90px;
+  height:35px;
+  border-top:1px solid #e3e3e3;
+  border-right:1px solid #e3e3e3;
+  box-sizing:border-box;
+}
+
+.table_head th {
+  vertical-align:bottom;
+}
+
+.blank_div {
+  width:60px;
+  height: 35px;
+  border-top:1px solid #e3e3e3;
+  border-left:1px solid #e3e3e3;
+  border-right:1px solid #e3e3e3;
+  box-sizing:border-box;
+}
+
+.table_body {
+  color:black;
+}
+
+
+.table_body {
+  border-bottom:1px solid #e3e3e3;
+  font-size:11px;
+}
+
+.table_body th {
+  height:450px;
+  width:40px;
+  vertical-align: top;
+}
+
+.time {
+  width:60px;
+  height:44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top:1px solid #e3e3e3;
+  border-left:1px solid #e3e3e3;
+  border-right:1px solid #e3e3e3;
+  box-sizing:border-box;
+}
+
+.times {
+  height:300px;
+  top:0;
+}
+
+.grid {
+  height:44px;
+  width:90px;
+  border-top:1px solid #e3e3e3;
+  border-right:1px solid #e3e3e3;
+  box-sizing:border-box;
+}
