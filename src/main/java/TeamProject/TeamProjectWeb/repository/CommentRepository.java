@@ -8,6 +8,7 @@ import TeamProject.TeamProjectWeb.domain.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -31,6 +32,7 @@ public class CommentRepository {
     @PersistenceContext // EntityManager를 주입받기 위해 사용
     private final EntityManager em;
 
+    @Transactional
     public void saveComment(Long boardId, Long memberId, String content, String author) {
         Member member = em.find(Member.class, memberId); // memberId에 해당하는 Member 객체를 데이터베이스에서 조회
         Board board = em.find(Board.class, boardId); // boardId에 해당하는 Board 객체를 데이터베이스에서 조회
@@ -43,7 +45,7 @@ public class CommentRepository {
         Comment comment = new Comment();
         comment.setContent(content);
         comment.setFinalDate(LocalDateTime.now());
-        comment.setCount(0);
+        comment.setLikeCount(0);
         comment.setMember(member);
         comment.setBoard(board);
         comment.setAuthor(author);

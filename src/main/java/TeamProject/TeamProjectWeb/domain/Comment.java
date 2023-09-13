@@ -21,7 +21,7 @@ public class Comment { // 댓글 클래스
     private String content; // 본문
     private LocalDateTime finalDate; // 최종 등록된 날짜
     @Column(name = "click_count")
-    private int count; // 좋아요 갯수
+    private int likeCount; // 좋아요 갯수
     @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL) // 한 회원은 여러 댓글을 달 수 있음
     @JoinColumn(name = "memberId") // 외래키 => 조인할 속성 이름
     private Member member; // 해당 멤버의 학번을 사용할 거임
