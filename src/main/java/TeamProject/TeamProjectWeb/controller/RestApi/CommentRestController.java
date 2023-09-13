@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/comments")
@@ -28,7 +30,9 @@ public class CommentRestController {
         // 해당 댓글은 주어진 boardId와 memberId에 해당하는 게시글과 회원에 연결됨
         commentRepository.saveComment(boardId, memberId, content, author);
         // 댓글 작성이 성공적으로 완료되면 200 OK 상태 코드를 반환
-        return ResponseEntity.ok().build();
+        // 추가:: 응답이 비어있으면 안드로이드에서 처리 불가하기 때문에, 빈 객체로 응답하도록 변경
+        Comment comment = new Comment();
+        return ResponseEntity.ok().body(comment);
     }
 
     // 댓글 검색 API 엔드포인트 - 특정 게시글의 모든 댓글 조회
