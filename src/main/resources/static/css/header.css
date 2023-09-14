@@ -116,9 +116,10 @@
     align-items:center;
     background-color: #0d339a;
     color:white;
-    width:48px;
+    width:65px;
     height:30px;
-    border-radius:12px;
+    border-radius:9px;
+    font-size:12px;
   }
 
   header .main-menu .login_register .register_button {
@@ -130,7 +131,8 @@
     width:65px;
     height:30px;
     margin-left:5px;
-    border-radius:12px;
+    border-radius:9px;
+    font-size:12px;
   }
 
   header .main-menu .search{

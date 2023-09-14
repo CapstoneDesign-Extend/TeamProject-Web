@@ -8,66 +8,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons"rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+outlined"rel="stylesheet">
     <title>Title</title>
-    <link rel="stylesheet" href="/css/mainpage.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <script defer src="/js/header.js"></script>
 </head>
 <body>
-<header>
-    <div class="inner">
-        <ul class="main-menu">
-            <div class="blank"> <!--정렬때문에 넣은 빈공간-->
-                <a href="/html/index.html" class="homebutton"><span class="material-icons-outlined">home</span></a>
-            </div>
-            <ul class="wrap_category">
-                <li class="main_category_mypage">
-                    <a href="/html/mypage/mypage_main.html" class="main_category_name">
-                        마이페이지
-                    </a>
-                    <div class="sub_category_mypage hide">
-                        <div class="wrap_sub_category_mypage">
-                            <a href="/html/personal_info/personal_info_change.html" class="sub_menu_content">개인정보관리</a>
-                            <a href="javascript:void(0)" class="sub_menu_content">수강과목</a>
-                            <a href="/html/mypage/schedule.html" class="sub_menu_content">시간표</a>
-                            <a href="javascript:void(0)" class="sub_menu_content">즐겨찾기</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="main_category">
-                    <a href="html/board/notice.html" class="main_category_name">
-                        공지사항
-                    </a>
-                </li>
-                <li class="main_category_community">
-                    <a href="/html/board/board_collection.html" class="main_category_name">
-                        커뮤니티
-                    </a>
-                    <div class="sub_category_community hide">
-                        <div class="wrap_sub_category_community">
-                            <a href="/html/board/free_board.html" class="sub_menu_content">자유게시판</a>
-                            <a href="/html/board/qna_board.html" class="sub_menu_content">질문, 답변게시판</a>
-                            <a href="/html/board/market_board.html" class="sub_menu_content">장터게시판</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="wrap_othermain">
-                <div class="search">
-                    <input type="text" />
-                    <span class="material-icons">search</span>
+    <header>
+        <div class="inner">
+            <ul class="main-menu">
+                <div class="blank"> <!--정렬때문에 넣은 빈공간-->
+                    <a href="/static/html/index.html" class="homebutton"><span class="material-icons-outlined">home</span></a>
                 </div>
-                <a href="/html/mypage/alert.html" class="notification">
-                    <span class="material-icons-outlined">notifications</span>
-                </a>
-                <li class="main_category">
-                    <div class="login_register">
-                        <a href="/html/login.html" class="login_button">login</a>
-                        <a href="/html/register.html" class="register_button">register</a>
+                <ul class="wrap_category">
+                    <li class="main_category_mypage">
+                        <a href="/static/html/mypage/mypage_main.html" class="main_category_name">
+                            마이페이지
+                        </a>
+                        <div class="sub_category_mypage hide">
+                            <div class="wrap_sub_category_mypage">
+                                <a href="../static/html/personal_info/personal_info_change.html" class="sub_menu_content">개인정보관리</a>
+                                <a href="./subject.html" class="sub_menu_content">수강과목</a>
+                                <a href="../static/html/mypage/schedule.html" class="sub_menu_content">시간표</a>
+                                <a href="./bookmark.html" class="sub_menu_content">즐겨찾기</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="main_category">
+                        <a href="../static/html/board/notice.html" class="main_category_name">
+                            공지사항
+                        </a>
+                    </li>
+                    <li class="main_category_community">
+                        <a href="../static/html/board/board_collection.html" class="main_category_name">
+                            커뮤니티
+                        </a>
+                        <div class="sub_category_community hide">
+                            <div class="wrap_sub_category_community">
+                                <a href="../static/html/board/free_board.html" class="sub_menu_content">자유게시판</a>
+                                <a href="../static/html/board/qna_board.html" class="sub_menu_content">질문, 답변게시판</a>
+                                <a href="../static/html/board/market_board.html" class="sub_menu_content">장터게시판</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="wrap_othermain">
+                    <div class="search">
+                        <input type="text" />
+                        <span class="material-icons">search</span>
                     </div>
-                </li>
-            </div>
-        </ul>
-    </div>
-</header>
+                    <div class="login_register">
+                        <a href="/html/login.html" class="login_button">로그인</a>
+                        <a href="/html/register.html" class="register_button">회원가입</a>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </header>
 </body>
 </html>
