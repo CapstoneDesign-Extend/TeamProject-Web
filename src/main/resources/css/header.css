@@ -9,11 +9,14 @@
     /*position: fixed;*/
     position:relative;
     top:0;
+    left:50%;
     z-index: 9;
-    width:100%;
+    width:1920px;
     border-bottom: 1px solid #0d339a;
+    transform: translate(-50%, 0)
   }
   
+
   header .inner {
     height: 60px;
     width: 100%;
@@ -83,9 +86,53 @@
   
   header .main-menu .main_category .profile{
     display:flex;
-    padding: 0px 25px 0px 25px;
+    padding: 0px 25px 0px 0px;
   }
   
+  header .main-menu .main_category .profile .profile_pic_alter {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:47px;
+    height:24px;
+  }
+
+  header .main-menu .main_category .profile .user_nickname {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:117px;
+    height:24px;
+  }
+
+  header .main-menu .login_register {
+    display:flex;
+    padding: 0px 0px 0px 25px;
+  }
+
+  header .main-menu .login_register .login_button {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color: #0d339a;
+    color:white;
+    width:48px;
+    height:30px;
+    border-radius:12px;
+  }
+
+  header .main-menu .login_register .register_button {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color: #0d339a;
+    color:white;
+    width:65px;
+    height:30px;
+    margin-left:5px;
+    border-radius:12px;
+  }
+
   header .main-menu .search{
     position: relative;
     height: 30px;
@@ -210,12 +257,24 @@ header .sub_category_community .wrap_sub_category_community .sub_menu_content {
 /* 커뮤니티 서브메뉴 css */
 
 
-
+/*아이콘으로 된 버튼들 css */
 .homebutton {
   height:30px;
   width:30px;
-  background-color: red;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
+
+.notification {
+  height:30px;
+  width:30px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding-left:25px;
+}
+/**/
 
 
 

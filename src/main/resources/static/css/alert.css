@@ -167,3 +167,8 @@ body {
   color: #fff;
   letter-spacing: -.5px;
 }
+
+/*휴지통 아이콘 마우스 호버링시 마우스 포인터 변화*/
+.alert_delete {
+  cursor: pointer;
+}
