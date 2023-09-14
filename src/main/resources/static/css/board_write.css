@@ -61,6 +61,7 @@ body{
     box-sizing:border-box;
     padding:8px 12px;
     border:1px solid gray;
+    border-radius:10px;
     font-size:15px;
     appearance:none;
     -webkit-appearance:none;
@@ -80,6 +81,7 @@ body{
     height:40px;
     resize:none;
     border:1px solid gray;
+    border-radius:10px;
     font-size:15px;
     padding:11px 12px;
     box-sizing:border-box;
@@ -92,6 +94,7 @@ body{
     min-height:380px;
     margin-bottom:5px; 
     border:1px solid gray;
+    border-radius:10px;
     padding:16px 12px;
     font-size:15px;
     box-sizing:border-box;
@@ -168,6 +171,7 @@ body{
 
   .writing_div .price_contact .price {
     border:1px solid gray;
+    border-radius:10px;
     width:508px;
     height:40px;
     box-sizing:border-box;
@@ -179,6 +183,7 @@ body{
 
   .writing_div .price_contact .contact {
     border:1px solid gray;
+    border-radius:10px;
     width:508px;
     height:40px;
     box-sizing:border-box;
@@ -189,6 +194,7 @@ body{
 
   .writing_div .price_contact .inner_input {
     border:none;
+    border-radius:10px;
     width:508px;
     height:36px;
     padding:10px 12px;
