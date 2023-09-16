@@ -3,6 +3,7 @@ package TeamProject.TeamProjectWeb;
 import TeamProject.TeamProjectWeb.controller.filter.LogFilter;
 import TeamProject.TeamProjectWeb.controller.filter.LoginCheckFilter;
 import TeamProject.TeamProjectWeb.controller.intercepter.LogInterceptor;
+//import TeamProject.TeamProjectWeb.controller.intercepter.LoginCheckInterceptor;
 import TeamProject.TeamProjectWeb.controller.intercepter.LoginCheckInterceptor;
 import jakarta.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -49,8 +50,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(2)
                 .addPathPatterns("/**")
                 .excludePathPatterns(   //화이트리스트 작성
-                        "/", "/members/signup", "/login", "/logout", "/api/**",
-                        "/css/**", "/*.ico", "/error"
+                        "/", "/signup/**", "/login", "/logout", "/api/**", "/signup", "/**",
+                        "/css/**", "/*.ico", "/error /js/**", "templates/**", "fragments/**"
                 );
     }
 
