@@ -1,4 +1,4 @@
-/*package TeamProject.TeamProjectWeb.controller;
+package TeamProject.TeamProjectWeb.controller;
 
 import TeamProject.TeamProjectWeb.controller.login.SessionConst;
 import TeamProject.TeamProjectWeb.domain.Member;
@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -18,22 +17,24 @@ public class HomeController {
 
     private final MemberRepository memberRepository;
 
-    @GetMapping("/")//쿠키가 없어도 익셉션을 발생시키지 않음 (로그인 안해도 홈에 올수있어야하니까)
-    public String homeLogin(//@CookieValue(name="memberId", required = false) Long memberId,
-                            @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
-                            //이미 로그인 된 사용자를 찾을 때 사용. 세션을 생성하진않음
+    @GetMapping("/")
+    public String homeLogin(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
                             Model model) {
 
-        //세션에 회원 데이터가 없으면 home
+        // 세션에 회원 데이터가 없으면 main
         if (loginMember == null) {
-            return "home";
+            // loggedIn 값을 false로 모델에 추가
+            model.addAttribute("loggedIn", false);
+            return "main";
         }
 
-        //세션이 유지되면 로그인으로 이동
+        // 세션이 유지되면 loginMain으로 이동
         model.addAttribute("member", loginMember);
-        return "loginHome";
+        // loggedIn 값을 true로 모델에 추가
+        model.addAttribute("loggedIn", true);
+        return "loginMain";
     }
-}*/
+}
 
 
 

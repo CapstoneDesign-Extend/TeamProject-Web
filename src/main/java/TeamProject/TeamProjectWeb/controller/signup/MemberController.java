@@ -1,11 +1,11 @@
 package TeamProject.TeamProjectWeb.controller.signup;
 
 import TeamProject.TeamProjectWeb.domain.Member;
-import TeamProject.TeamProjectWeb.repository.MemberRepository;
-import jakarta.validation.Valid;
+import TeamProject.TeamProjectWeb.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +13,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/members")
+@RequestMapping("/signup")
 public class MemberController {
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
+
 
     // 회원 가입 페이지를 보여주는 GET 요청 핸들러
     @GetMapping("/signup")
