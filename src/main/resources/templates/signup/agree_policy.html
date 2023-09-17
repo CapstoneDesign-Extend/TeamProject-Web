@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +19,7 @@
 <body>
     <div class="wrap_mainframe">
         <div class="mainframe">
-            <form method="get" th:action="@{/signup/info_input}" id="agreement">
+            <form method="post" th:action="@{/signup/info_input}" id="agreement">
                 <div class="content_div" id="content">
                     <div class="title">
                         약관 동의

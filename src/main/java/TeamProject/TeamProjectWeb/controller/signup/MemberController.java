@@ -2,7 +2,9 @@ package TeamProject.TeamProjectWeb.controller.signup;
 
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -23,6 +25,8 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
+    @Autowired
+    private HttpSession httpSession;
 
     // 회원 가입 페이지를 보여주는 GET 요청 핸들러
     @GetMapping("/signup")
@@ -44,6 +48,46 @@ public class MemberController {
         return "signup/signup";
     }
 
+    // 회원 목록 페이지를 보여주는 GET 요청 핸들러
+    @GetMapping("/list")
+    public String listMembers(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "signup/list";
+    }
+
+    // 사용자가 signup.html 에서 데이터를 입력한 후, 이 핸들러를 통해 agree_policy 페이지로 데이터를 전달
+    @PostMapping("/agree_policy")
+    public String moveToAgreePolicy(@ModelAttribute("member") Member member) {
+        // 필요한 로직이 있다면 여기에 추가
+        httpSession.setAttribute("tempMember", member);  // 세션에 Member 객체 저장
+        return "signup/agree_policy"; // agree_policy 페이지로 이동
+    }
+
+    @PostMapping("/info_input")
+    public String showInfoInputForm(Model model) {
+        Member tempMember = (Member) httpSession.getAttribute("tempMember"); // 세션에서 Member 객체 가져오기
+        if(tempMember != null) {
+            model.addAttribute("member", tempMember);
+        } else {
+            model.addAttribute("member", new Member());
+        }
+        return "signup/info_input";
+    }
+
+
+    // 사용자가 info_input.html에서 데이터를 입력한 후, 이 핸들러를 통해 데이터를 저장하고 메인 페이지로 리다이렉트
+//    @PostMapping("/info_input")
+//    public String saveInfo(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return "signup/info_input"; // 유효성 검사 오류 시 info_input 페이지로 다시 돌아감
+//        } else {
+//            memberService.join(member); // Member 객체 저장
+//            return "redirect:/"; // 메인 페이지로 리다이렉트
+//        }
+//    }
+
+}
 //    // 회원 가입 처리를 위한 POST 요청 핸들러
 //    // 이거 근데.. 다음 페이지로 넘겨야하는데 이거 쓰는거 맞나 ? 일단 주석처리해봄;
 //    @PostMapping("/signup")
@@ -58,38 +102,3 @@ public class MemberController {
 //            return "redirect:/";
 //        }
 //    }
-
-    // 회원 목록 페이지를 보여주는 GET 요청 핸들러
-    @GetMapping("/list")
-    public String listMembers(Model model) {
-        List<Member> members = memberService.findMembers();
-        model.addAttribute("members", members);
-        return "signup/list";
-    }
-
-    @GetMapping("/info_input")
-    public String showInfoInputForm(Model model) {
-        model.addAttribute("member", new Member());
-        return "signup/info_input";
-    }
-
-    // 사용자가 signup.html에서 데이터를 입력한 후, 이 핸들러를 통해 agree_policy 페이지로 데이터를 전달
-    @PostMapping("/agree_policy")
-    public String moveToAgreePolicy(@ModelAttribute("member") Member member) {
-        // 필요한 로직이 있다면 여기에 추가
-
-        return "signup/agree_policy"; // agree_policy 페이지로 이동
-    }
-
-    // 사용자가 info_input.html에서 데이터를 입력한 후, 이 핸들러를 통해 데이터를 저장하고 메인 페이지로 리다이렉트
-    @PostMapping("/info_input")
-    public String saveInfo(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "signup/info_input"; // 유효성 검사 오류 시 info_input 페이지로 다시 돌아감
-        } else {
-            memberService.join(member); // Member 객체 저장
-            return "redirect:/"; // 메인 페이지로 리다이렉트
-        }
-    }
-
-}

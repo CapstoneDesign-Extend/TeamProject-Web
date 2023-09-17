@@ -1,7 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- ... (생략) ... -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extend</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/info_input.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script defer src="/js/password_confirm.js"></script>
+    <!--Google Api-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
 </head>
 <body>
 <div class="wrap_mainframe">
@@ -20,15 +33,15 @@
                 <div class="other_info">
                     <span class="text">이름</span>
                     <input type="text" maxlength="10" class="input" th:field="*{name}">
-                    <span class="text">생년월일</span>
-                    <input type="date" class="input" th:field="*{birthDate}">
-                    <span class="text">성별</span>
-                    <select th:field="*{gender}" class="input">
-                        <option disabled selected>성별 선택</option>
-                        <option value="남">남</option>
-                        <option value="여">여</option>
-                        <option value="기타">기타</option>
-                    </select>
+<!--                    <span class="text">생년월일</span>-->
+<!--                    <input type="date" class="input" th:field="*{birthDate}">-->
+<!--                    <span class="text">성별</span>-->
+<!--                    <select th:field="*{gender}" class="input">-->
+<!--                        <option disabled selected>성별 선택</option>-->
+<!--                        <option value="남">남</option>-->
+<!--                        <option value="여">여</option>-->
+<!--                        <option value="기타">기타</option>-->
+<!--                    </select>-->
                     <span class="text">이메일</span>
                     <input type="email" maxlength="255" class="input" th:field="*{email}">
                 </div>
