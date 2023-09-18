@@ -23,5 +23,6 @@ form.addEventListener('keyup', function(){
             registerbtn.disabled = false;
         }
     }
+    console.log(registerbtn.disabled)
 });
 

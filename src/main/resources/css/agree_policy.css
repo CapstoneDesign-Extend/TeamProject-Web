@@ -1,199 +1,190 @@
 /*기본 설정*/
 body{
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.4;
-    color:#333;
-  }
-  
-  a{
-    text-decoration:none;
-  }
-  
-  a:link{
-    color:black;
-  }
-  
-  a:visited{
-    color:black;
-  }
-  
-  a:hover{
-    color:black;
-  }
-  
-  a:active{
-    color:black;
-  }
-  /**/
-  
-  
-  /*메인 css*/
-  .wrap_mainframe {
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  
-  .wrap_mainframe .mainframe {
-    display:flex;
-    align-items:flex-start;
-    justify-content:center;
-    margin-top:40px;
-    width:1280px;
-    height:860px;
-  }
-  /**/
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color:#333;
+}
+
+a{
+  text-decoration:none;
+}
+
+a:link{
+  color:black;
+}
+
+a:visited{
+  color:black;
+}
+
+a:hover{
+  color:black;
+}
+
+a:active{
+  color:black;
+}
+/**/
 
 
-  .wrap_mainframe .mainframe .content_div {
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:top;
-    width:480px;
-    padding:24px;
-    box-sizing:border-box;
-    border:1px solid lightgray;
-    border-radius: 15px;
-  }
+/*메인 css*/
+.wrap_mainframe {
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-  .wrap_mainframe .mainframe .content_div .title {
-    font-size:22px;
-    font-weight:bolder;
-    margin-bottom:16px;
-  }
-
-  .wrap_mainframe .mainframe .content_div .allchecktext{
-    height:40px;
-    display:flex;
-    justify-content:left;
-    align-items:center;
-  }
-
-  .check_text{
-    font-size:12px;
-    margin-left:8px;
-  }
-
-  /*각 텍스트 블록별 css*/
-  .wrap_mainframe .mainframe .content_div .service_div_text{
-    height:40px;
-    display:flex;
-    justify-content:left;
-    align-items:center;
-  }
-
-  .wrap_mainframe .mainframe .content_div .privacy_div_text{
-    height:40px;
-    display:flex;
-    justify-content:left;
-    align-items:center;
-  }
-
-  .wrap_mainframe .mainframe .content_div .rules_div_text{
-    height:40px;
-    display:flex;
-    justify-content:left;
-    align-items:center;
-  }
-
-  .wrap_mainframe .mainframe .content_div .advertise_div_text{
-    height:40px;
-    display:flex;
-    justify-content:left;
-    align-items:center;
-  }
-
-  .wrap_mainframe .mainframe .content_div .name_div_text{
-    height:40px;
-    display:flex;
-    justify-content:left;
-    align-items:center;
-  }
-
-  .wrap_mainframe .mainframe .content_div .over14_div_text{
-    height:40px;
-    display:flex;
-    justify-content:left;
-    align-items:center;
-  }
-  /**/
+.wrap_mainframe .mainframe {
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  margin-top:40px;
+  width:1280px;
+  height:860px;
+}
+/**/
 
 
-  .div_content {
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    align-items:top;
-    width:430px;
-    max-height:144px;
-    padding:8px;
-    box-sizing:border-box;
-    overflow-y:scroll;
-    font-size:12px;
-    background-color: whitesmoke;
-    border:1px solid #ededed;
-    border-radius:15px;
-  }
+.wrap_mainframe .mainframe .content_div {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:top;
+  width:480px;
+  padding:24px;
+  box-sizing:border-box;
+  border:1px solid lightgray;
+  border-radius: 15px;
+}
 
-  .div_content_not {
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    align-items:top;
-    width:430px;
-    max-height:144px;
-    padding:8px;
-    box-sizing:border-box;
-    font-size:12px;
-    background-color: whitesmoke;
-    border:1px solid #ededed;
-    border-radius:15px;
-  }
+.wrap_mainframe .mainframe .content_div .title {
+  font-size:22px;
+  font-weight:bolder;
+  margin-bottom:16px;
+}
 
-  h1 {
-    font-weight:bolder;
-    margin-bottom:10px;
-  }
-  h3 {
-    font-weight:bolder;
-    margin-bottom:4px;
-  }
-  .div_content>ol{
-    margin-bottom:6px;
-  }
+.wrap_mainframe .mainframe .content_div .allchecktext{
+  height:40px;
+  display:flex;
+  justify-content:left;
+  align-items:center;
+}
+
+.check_text{
+  font-size:12px;
+  margin-left:8px;
+}
+
+/*각 텍스트 블록별 css*/
+.wrap_mainframe .mainframe .content_div .service_div_text{
+  height:40px;
+  display:flex;
+  justify-content:left;
+  align-items:center;
+}
+
+.wrap_mainframe .mainframe .content_div .privacy_div_text{
+  height:40px;
+  display:flex;
+  justify-content:left;
+  align-items:center;
+}
+
+.wrap_mainframe .mainframe .content_div .rules_div_text{
+  height:40px;
+  display:flex;
+  justify-content:left;
+  align-items:center;
+}
+
+.wrap_mainframe .mainframe .content_div .advertise_div_text{
+  height:40px;
+  display:flex;
+  justify-content:left;
+  align-items:center;
+}
+
+.wrap_mainframe .mainframe .content_div .name_div_text{
+  height:40px;
+  display:flex;
+  justify-content:left;
+  align-items:center;
+}
+
+.wrap_mainframe .mainframe .content_div .over14_div_text{
+  height:40px;
+  display:flex;
+  justify-content:left;
+  align-items:center;
+}
+/**/
+
+
+.div_content {
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:top;
+  width:430px;
+  max-height:144px;
+  padding:8px;
+  box-sizing:border-box;
+  overflow-y:scroll;
+  font-size:12px;
+  background-color: whitesmoke;
+  border:1px solid #ededed;
+  border-radius:15px;
+}
+
+.div_content_not {
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:top;
+  width:430px;
+  max-height:144px;
+  padding:8px;
+  box-sizing:border-box;
+  font-size:12px;
+  background-color: whitesmoke;
+  border:1px solid #ededed;
+  border-radius:15px;
+}
+
+h1 {
+  font-weight:bolder;
+  margin-bottom:10px;
+}
+h3 {
+  font-weight:bolder;
+  margin-bottom:4px;
+}
+.div_content>ol{
+  margin-bottom:6px;
+}
 
 /* 여기까지가 약관내부디자인 */
 
 
 .buttonarea {
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    width:430px;
-    margin-top:24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  width:430px;
+  margin-top:24px;
 }
 
 .buttonarea .phoneCertified{
-    width:430px;
-    height:40px;
-    margin-bottom:8px;
-    border:none;
-    border-radius:15px;
-    background-color: #0d339a;
-    color:white;
-    font-size:18px;
-}
-
-.buttonarea .ipinCertified{
-    width:430px;
-    height:40px;
-    border:none;
-    border-radius:15px;
-    background-color: whitesmoke;
-    font-size:18px;
+  width:430px;
+  height:40px;
+  margin-bottom:8px;
+  border:none;
+  border-radius:15px;
+  background-color: #0d339a;
+  color:white;
+  font-size:18px;
 }

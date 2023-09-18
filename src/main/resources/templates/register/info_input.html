@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extend</title>
     <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/info_input.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <script defer src="/js/password_confirm.js"></script>
+    <link th:href="@{/css/info_input.css}" rel="stylesheet">
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <script defer th:src="@{/js/password_confirm.js}"></script>
     <!--Google Api-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,14 +17,14 @@
           rel="stylesheet">
 </head>
 <body>
-<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
-    <ul>
-        <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
-    </ul>
-</div>
+<!--<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">-->
+<!--    <ul>-->
+<!--        <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>-->
+<!--    </ul>-->
+<!--</div>-->
 <div class="wrap_mainframe">
     <div class="mainframe">
-        <form th:action="@{/register/info_input/signup}" method="post" th:object="${member}">
+        <form th:action="@{/register/info_input/signup}" method="post" th:object="${member}" id="input_form">
             <div class="content_div">
                 <div class="important_info">
                     <span class="text">아이디</span>
@@ -38,19 +38,10 @@
                 <div class="other_info">
                     <span class="text">이름</span>
                     <input type="text" maxlength="10" class="input" th:field="*{name}">
-<!--                    <span class="text">생년월일</span>-->
-<!--                    <input type="date" class="input" th:field="*{birthDate}">-->
-<!--                    <span class="text">성별</span>-->
-<!--                    <select th:field="*{gender}" class="input">-->
-<!--                        <option disabled selected>성별 선택</option>-->
-<!--                        <option value="남">남</option>-->
-<!--                        <option value="여">여</option>-->
-<!--                        <option value="기타">기타</option>-->
-<!--                    </select>-->
                     <span class="text">이메일</span>
                     <input type="email" maxlength="255" class="input" th:field="*{email}">
                 </div>
-                <input type="submit" class="register" value="회원가입">
+                <input type="submit" class="register" value="회원가입" pattern=".+@bestcnd\.com" disabled="">
             </div>
         </form>
     </div>
