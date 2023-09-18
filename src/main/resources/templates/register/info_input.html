@@ -17,9 +17,14 @@
           rel="stylesheet">
 </head>
 <body>
+<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+    <ul>
+        <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+    </ul>
+</div>
 <div class="wrap_mainframe">
     <div class="mainframe">
-        <form th:action="@{/signup/info_input}" method="post" th:object="${member}">
+        <form th:action="@{/register/info_input/signup}" method="post" th:object="${member}">
             <div class="content_div">
                 <div class="important_info">
                     <span class="text">아이디</span>

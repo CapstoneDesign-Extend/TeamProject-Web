@@ -21,7 +21,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/signup")
+@RequestMapping("/register")
 public class MemberController {
     private final MemberService memberService;
 
@@ -29,7 +29,7 @@ public class MemberController {
     private HttpSession httpSession;
 
     // 회원 가입 페이지를 보여주는 GET 요청 핸들러
-    @GetMapping("/signup")
+    @GetMapping("/register")
     public String signUpForm(@ModelAttribute("member") Member member, Model model) {
 
         // 년도 목록을 생성 (예: 2023부터 1990까지)
@@ -45,7 +45,7 @@ public class MemberController {
         // "campusName" 변수를 모델에 추가
         model.addAttribute("campusName", ""); // 초기값은 빈 문자열로 설정 (또는 기본값으로 설정)
 
-        return "signup/signup";
+        return "register/register";
     }
 
     // 회원 목록 페이지를 보여주는 GET 요청 핸들러
@@ -53,15 +53,15 @@ public class MemberController {
     public String listMembers(Model model) {
         List<Member> members = memberService.findMembers();
         model.addAttribute("members", members);
-        return "signup/list";
+        return "register/list";
     }
 
-    // 사용자가 signup.html 에서 데이터를 입력한 후, 이 핸들러를 통해 agree_policy 페이지로 데이터를 전달
+    // 사용자가 register.html 에서 데이터를 입력한 후, 이 핸들러를 통해 agree_policy 페이지로 데이터를 전달
     @PostMapping("/agree_policy")
     public String moveToAgreePolicy(@ModelAttribute("member") Member member) {
         // 필요한 로직이 있다면 여기에 추가
         httpSession.setAttribute("tempMember", member);  // 세션에 Member 객체 저장
-        return "signup/agree_policy"; // agree_policy 페이지로 이동
+        return "register/agree_policy"; // agree_policy 페이지로 이동
     }
 
     @PostMapping("/info_input")
@@ -72,7 +72,22 @@ public class MemberController {
         } else {
             model.addAttribute("member", new Member());
         }
-        return "signup/info_input";
+        return "register/info_input";
+    }
+
+        // 회원 가입 처리를 위한 POST 요청 핸들러
+    // 이거 근데.. 다음 페이지로 넘겨야하는데 이거 쓰는거 맞나 ? 일단 주석처리해봄;
+    @PostMapping("/info_input/signup")
+    @Transactional // 오류 해결위해 추가됨::트랜잭션 적용
+    public String save(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            // 유효성 검사 오류가 있을 경우 다시 회원 가입 페이지로 돌아감
+            return "register/register";
+        } else {
+            // 유효성 검사를 통과한 경우 회원 정보를 저장하고, 메인 페이지로 리다이렉트
+            memberService.join(member);
+            return "redirect:/";
+        }
     }
 
 
@@ -88,6 +103,7 @@ public class MemberController {
 //    }
 
 }
+
 //    // 회원 가입 처리를 위한 POST 요청 핸들러
 //    // 이거 근데.. 다음 페이지로 넘겨야하는데 이거 쓰는거 맞나 ? 일단 주석처리해봄;
 //    @PostMapping("/signup")

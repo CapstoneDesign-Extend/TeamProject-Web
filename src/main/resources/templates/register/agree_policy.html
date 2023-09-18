@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extend</title>
     <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/agree_policy.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <script defer src="/js/allcheck.js"></script>
+    <link th:href="@{/css/agree_policy.css}" rel="stylesheet">
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <script defer th:src="@{/js/allcheck.js}"></script>
     <!--Google Api-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
 <body>
     <div class="wrap_mainframe">
         <div class="mainframe">
-            <form method="post" th:action="@{/signup/info_input}" id="agreement">
+            <form method="post" th:action="@{/register/info_input}" id="agreement">
                 <div class="content_div" id="content">
                     <div class="title">
                         약관 동의
@@ -511,8 +511,7 @@
                         <p>Extend은 국내 대학생을 위한 서비스이며, 본인 인증을 통해 만 14세 이상만 가입할 수 있습니다.</p>
                     </div>
                     <div class="buttonarea">
-                        <button type="submit" class="phoneCertified" id="phone" disabled>휴대폰 인증</button>
-                        <button type="button" class="ipinCertified" th:onclick="|window.location.href='@{/signup/info_input}'|" id="ipin" disabled>아이핀 인증</button>
+                        <input type="submit" class="phoneCertified" value="다음 페이지로" id="next" disabled="">
                     </div>
                 </div>
             </form>
