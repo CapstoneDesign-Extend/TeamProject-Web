@@ -42,8 +42,8 @@ public class MemberController {
         // "years"와 "year" 변수를 모델에 추가
         model.addAttribute("years", years);
         model.addAttribute("year", years.get(0)); // 기본값 설정
-        // "campusName" 변수를 모델에 추가
-        model.addAttribute("campusName", ""); // 초기값은 빈 문자열로 설정 (또는 기본값으로 설정)
+        // "schoolName" 변수를 모델에 추가
+        model.addAttribute("schoolName", ""); // 초기값은 빈 문자열로 설정 (또는 기본값으로 설정)
 
         return "register/register";
     }
@@ -81,10 +81,12 @@ public class MemberController {
     @Transactional // 오류 해결위해 추가됨::트랜잭션 적용
     public String save(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            // 유효성 검사 오류가 있을 경우 다시 회원 가입 페이지로 돌아감
             return "register/register";
         } else {
-            // 유효성 검사를 통과한 경우 회원 정보를 저장하고, 메인 페이지로 리다이렉트
+            Member tempMember = (Member) httpSession.getAttribute("tempMember");
+            if(tempMember != null) {
+                member.setSchoolName(tempMember.getSchoolName()); // schoolName 병합
+            }
             memberService.join(member);
             return "redirect:/";
         }
