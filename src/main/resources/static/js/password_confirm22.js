@@ -14,13 +14,14 @@ form.addEventListener('keyup', function(){
     else if(password_confirm.value == password.value){
         var warn = document.getElementById('not');
         warn.style.display = 'none'
-        for(var i=0; i<5; i++){
+        for(var i=0; i<6; i++){
             inputdiv[i] = document.getElementsByClassName('input')[i];
             console.log(inputdiv[i].value);
         }
-    
-        if(inputdiv[0].value!=null&& inputdiv[1].value!=null && inputdiv[2].value!=null && inputdiv[3].value!=null && inputdiv[4].value!=null) {
+        if(inputdiv[0].value!=""&& inputdiv[1].value!="" && inputdiv[2].value!="" && inputdiv[3].value!="" && inputdiv[4].value!="" && inputdiv[5].value!="") {
             registerbtn.disabled = false;
+        } else {
+            registerbtn.disabled = true;
         }
     }
     console.log(registerbtn.disabled)
