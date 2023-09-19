@@ -44,7 +44,7 @@ public class LoginController {
         // 폼 데이터의 유효성 검사 결과가 오류가 있는지 확인합니다.
         if (bindingResult.hasErrors()) {
             // 오류가 있을 경우 다시 로그인 폼으로 이동합니다.
-            return "login/login";
+            return "redirect:/login/login";
         }
 
         // 로그인 서비스를 이용해 로그인을 시도합니다.
@@ -61,21 +61,22 @@ public class LoginController {
             // 로그인 성공 처리: 회원 정보를 세션에 저장합니다.
             HttpSession session = request.getSession();
             session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-
+            model.addAttribute("loggedIn", true);
             // 로그인 후에 원래 페이지로 리다이렉트합니다.
             return "redirect:" + redirectURL;
         } else {
             // 로그인 실패시 오류 메시지를 설정하고 다시 로그인 폼으로 이동합니다.
             log.info("로그인 실패: loginId={}", form.getLoginId());
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
-            return "login/login";
+            return "redirect:/login/login";
         }
     }
 
     @PostMapping("/logout")
     public String logout(@RequestParam("loginId") String loginId,
                          HttpServletRequest request,
-                         HttpServletResponse response) {
+                         HttpServletResponse response,
+                         Model model) {
 
         // 로그아웃한 회원의 아이디를 로그로 기록합니다.
         log.info("로그아웃: {}", loginId);
@@ -87,7 +88,7 @@ public class LoginController {
         if (session != null) {
             session.invalidate();
         }
-
+        model.addAttribute("loggedIn", false);
         // 로그아웃 처리 후에는 메인 페이지로 리다이렉트합니다.
         return "redirect:/";
     }

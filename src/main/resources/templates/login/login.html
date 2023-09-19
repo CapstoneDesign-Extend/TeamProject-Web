@@ -18,13 +18,12 @@
     <header th:include="fragments/header-before.html"></header>
 </header>
 <!-- 로그인 여부에 따라 헤더를 동적으로 변경합니다. -->
-<form method="post" action="login.jsp"> <!--임시-->
+<form th:action="@{/login/login}" th:object="${loginForm}" method="post" action="/login">
 <div class="logingrid">
     <div class="logintitle">
         <h1>회원 로그인</h1>
     </div>
     <div class="logintext">
-        <form th:object="${loginForm}" method="post" action="/login">
             <!-- 로그인 폼 내용 -->
             <p class="input">
                 <input type="text" th:field="*{loginId}" maxlength="20" class="userid" placeholder="아이디" required />
@@ -38,7 +37,6 @@
             <p class="input">
                 <input type="submit" value="로그인" class="confirm" />
             </p>
-        </form>
     </div>
     <div class="loginfunction">
         <div class="loginmaintain">
