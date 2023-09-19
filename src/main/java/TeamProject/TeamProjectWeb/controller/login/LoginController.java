@@ -11,27 +11,25 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/login")
 public class LoginController {
 
     private final LoginService loginService;
 
-    private boolean loggedIn; // 로그인 여부를 나타내는 필드
+    //private boolean loggedIn; // 로그인 여부를 나타내는 필드
 
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm form, Model model, HttpServletRequest request) {
         // 로그인 여부를 확인하여 loggedIn 변수를 모델에 추가
-        boolean loggedIn = checkLoggedIn(request);
-        model.addAttribute("loggedIn", loggedIn);
+//        boolean loggedIn = checkLoggedIn(request);
+        model.addAttribute("loggedIn", false);
 
         return "login/login";
     }
@@ -94,9 +92,9 @@ public class LoginController {
         return "redirect:/";
     }
 
-    // 로그인 여부를 확인하는 메서드
-    private boolean checkLoggedIn(HttpServletRequest request) {
-        HttpSession session = request.getSession(false); // 세션이 없으면 새로 생성하지 않도록 false로 설정
-        return session != null && session.getAttribute(SessionConst.LOGIN_MEMBER) != null;
-    }
+//    // 로그인 여부를 확인하는 메서드
+//    private boolean checkLoggedIn(HttpServletRequest request) {
+//        HttpSession session = request.getSession(false); // 세션이 없으면 새로 생성하지 않도록 false로 설정
+//        return session != null && session.getAttribute(SessionConst.LOGIN_MEMBER) != null;
+//    }
 }

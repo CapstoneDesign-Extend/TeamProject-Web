@@ -9,7 +9,7 @@
   <title>회원가입</title>
 </head>
 <body>
-<form method="post" th:action="@{/signup/agree_policy}" id="register">
+<form method="post" th:action="@{/register/agree_policy}" id="register">
   <div class="wrap_content">
     <div class="text">
       <h2 class="main">Extend 회원가입</h2>
@@ -35,7 +35,7 @@
       </div>
       <div class="wrap_search">
         <!-- Thymeleaf에서 입력 필드에 데이터 바인딩 -->
-        <input type="text" name="campus_name" maxlength="20" placeholder="학교 이름 검색" class="search" id="search" th:value="${campusName}">
+        <input type="text" name="schoolName" maxlength="20" placeholder="학교 이름 검색" class="search" id="search" th:value="${schoolName}">
       </div>
     </div>
     <!-- 다음 페이지로 이동할 때 th:action을 사용하여 POST 요청 전송 -->

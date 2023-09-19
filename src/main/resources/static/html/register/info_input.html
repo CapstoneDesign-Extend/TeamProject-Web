@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/info_input.css">
     <link rel="stylesheet" href="/css/header.css">
-    <script defer src="/js/password_confirm.js"></script>
+    <script defer src="/js/password_confirm22.js"></script>
     <!--Google Api-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
 <body>
     <div class="wrap_mainframe">
         <div class="mainframe">
-            <form action="asdf.jsp">
+            <form action="asdf.jsp" id="input_form">
                 <div class="content_div">
                     <div class="important_info">
                         <span class="text">아이디</span>
@@ -33,19 +33,12 @@
                     <div class="other_info">
                         <span class="text">이름</span>
                         <input type="text" maxlength="10" class="input" name="name">
-                        <span class="text">생년월일</span>
-                        <input type="date" class="input" name="birth">
-                        <span class="text">성별</span>
-                        <select name="gender" class="input">
-                            <option disabled selected>성별 선택</option>
-                            <option value="남">남</option>
-                            <option value="여">여</option>
-                            <option value="기타">기타</option>
-                        </select>
+                        <span class="text">학번</span>
+                        <input type="number" maxlength="10" class="input" id="hakbun" name="student_id">
                         <span class="text">이메일</span>
                         <input type="email" maxlength="255" class="input" name="email">
                     </div>
-                    <input type="submit" class="register" value="회원가입">
+                    <input type="submit" class="register" value="회원가입" pattern=".+@bestcnd\.com" disabled="">
                 </div>
             </form>
         </div>

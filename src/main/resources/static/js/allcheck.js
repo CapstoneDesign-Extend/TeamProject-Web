@@ -36,15 +36,12 @@ div.addEventListener('click', function(){
 
 
     console.log(check1, check2, check3)
-    var button1 = document.getElementById('phone');
-    var button2 = document.getElementById('ipin');
+    var button1 = document.getElementById('next');
     if(check1 == false || check2 == false || check3 == false || check4 == false || check5 == false) {
         button1.disabled = true;
-        button2.disabled = true;
     }
     else if(check1 && check2 && check3 && check4 && check5) {
         button1.disabled = false;
-        button2.disabled = false;
     }
     
     if(check1){
