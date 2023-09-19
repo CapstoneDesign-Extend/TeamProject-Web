@@ -17,7 +17,7 @@ public class Member { // 회원 클래스
     @Column(name = "member_id")
     private Long id; // 임의로 사용할 키값
     @Column(name = "student_id")
-    private int studentId; // 학번
+    private Integer studentId; // 학번
     private String name; // 회원 이름
     private String schoolName; // 회원 학교
     @Enumerated(EnumType.STRING) // 데이터값을 int가 아닌 String으로 나오게 함
