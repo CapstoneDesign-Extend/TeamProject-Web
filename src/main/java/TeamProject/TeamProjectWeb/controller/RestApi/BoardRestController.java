@@ -42,15 +42,13 @@ public class BoardRestController {
     @GetMapping("/search/byBoardKind")
     public List<Board> getBoardsByBoardKind(@RequestParam("boardKind") BoardKind boardKind) {
         // 주어진 BoardKind를 가진 모든 게시글을 조회함
-        List<Board> boards = boardRepository.findByBoardKind(boardKind);
         // 조회된 게시글 목록을 반환함
-        return boards;
+        return boardRepository.findByBoardKind(boardKind);
     }
     // 특정 BoardKind 의 최신 게시글 리스트를 필요한 만큼만 반환하는 API 엔드포인트
     @GetMapping("/search/byBoardKindAmount")
     public List<Board> getLatestBoardsByBoardKind(@RequestParam("boardKind") BoardKind boardKind, @RequestParam("amount") int amount) {
-        List<Board> boards = boardRepository.findByBoardKindAmount(boardKind, amount);
-        return boards;
+        return boardRepository.findByBoardKindAmount(boardKind, amount);
     }
 
     // 제목으로 검색하는 API 엔드포인트

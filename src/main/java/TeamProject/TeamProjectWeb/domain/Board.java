@@ -27,13 +27,15 @@ public class Board { // 게시판 클래스
     @JsonBackReference // Board엔티티를 직렬화할 때 연관된 엔티티 클래스의 정보는 직렬화하지 않도록 하여 순환 참조로 인한 무한루프 방지
     private Member member; // 해당 멤버의 학번을 사용할 거임
     @Column(name = "view_count")
-    private int viewcnt; // 조회수
+    private int viewCnt; // 조회수
     private LocalDateTime finalDate; // 최종 등록된 날짜
     @Enumerated(EnumType.STRING) // DB에 저장할때, enum 각각 요소의 순서(상수)가 아닌, 문자열로 저장
     private BoardKind boardKind; // 게시판 종류
     private String author; // 익명 또는 사용자명을 저장, 게시판에 출력할때 가져오기위함
     @Column(name = "like_count")
     private int likeCnt; // 좋아요 개수
+    @Column(name = "chat_count")
+    private int chatCnt;  // 댓글수
 
 
     @OneToMany(mappedBy = "board", cascade = ALL, orphanRemoval = true) // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
