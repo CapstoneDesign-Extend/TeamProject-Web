@@ -2,7 +2,9 @@ package TeamProject.TeamProjectWeb.controller.RestApi;
 
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
+import TeamProject.TeamProjectWeb.dto.BoardDTO;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
+import TeamProject.TeamProjectWeb.utils.ConvertDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +30,7 @@ public class BoardRestController {
     }
     // 특정 id의 게시글을 반환하는 API 엔드포인트
     @GetMapping("/{id}")
-    public ResponseEntity<Board> getBoardById(@PathVariable Long id) {
+    public ResponseEntity<BoardDTO> getBoardById(@PathVariable Long id) {
         // 주어진 id에 해당하는 게시글을 조회함
         Board board = boardRepository.findOne(id);
         if (board == null) {
@@ -36,7 +38,8 @@ public class BoardRestController {
             return ResponseEntity.notFound().build();
         }
         // 주어진 id에 해당하는 게시글 정보를 ResponseEntity로 포장하여 반환함
-        return ResponseEntity.ok(board);
+        BoardDTO boardDTO = ConvertDTO.convertBoard(board);
+        return ResponseEntity.ok(boardDTO);
     }
     // 특정 BoardKind 의 게시글 리스트를 반환하는 API 엔드포인트
     @GetMapping("/search/byBoardKind")
