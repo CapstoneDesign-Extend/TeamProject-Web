@@ -2,8 +2,14 @@ package TeamProject.TeamProjectWeb.service;
 
 
 import TeamProject.TeamProjectWeb.domain.Board;
+import TeamProject.TeamProjectWeb.domain.BoardKind;
+import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,6 +63,26 @@ public class BoardService {
     public List<Board> searchBoardsByTitle(String title) {
         // 4. 게시글 검색 -> 연관된 제목으로 검색
         return boardRepository.findByTitle(title);
+    }
+
+    public Page<Board> findBoardListWithPaging(Pageable pageable) {
+        List<Board> boards = boardRepository.findBoardListWithPaging(pageable);
+        long totalCount = boardRepository.count();
+        return new PageImpl<>(boards, pageable, totalCount);
+    }
+
+    public Page<Board> findBoardListByKindWithPaging(BoardKind boardKind, Pageable pageable) {
+        List<Board> boards = boardRepository.findBoardListByKindWithPaging(boardKind, pageable);
+        long totalCount = boardRepository.countByBoardKind(boardKind);
+        return new PageImpl<>(boards, pageable, totalCount);
+    }
+
+    public List<MainBoardDTO> findRecentBoardsForMainPage(int limit) {
+        return boardRepository.findRecentBoardsForMainPage(limit);
+    }
+
+    public List<MainBoardDTO> findRecentBoardsByKindForMainPage(BoardKind boardKind, int limit) {
+        return boardRepository.findRecentBoardsByKindForMainPage(boardKind, limit);
     }
 
 }

@@ -1,8 +1,12 @@
 package TeamProject.TeamProjectWeb.controller.board;
 
 import TeamProject.TeamProjectWeb.domain.Board;
+import TeamProject.TeamProjectWeb.domain.BoardKind;
 import TeamProject.TeamProjectWeb.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -53,6 +57,32 @@ public class BoardController {
         List<Board> boards = boardService.findAllBoards();
         model.addAttribute("boards", boards);
         return "board/list";
+    }
+
+    @GetMapping("/all-paged-list")
+    public String pagedList(@RequestParam(defaultValue = "0") int page,
+                            @RequestParam(defaultValue = "10") int size,
+                            Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Board> boardPage = boardService.findBoardListWithPaging(pageable);
+        model.addAttribute("boardPage", boardPage);
+        return "board/pagedList";
+    }
+
+    @GetMapping("/paged-list")
+    public String pagedList(@RequestParam(defaultValue = "0") int page,
+                            @RequestParam(defaultValue = "10") int size,
+                            @RequestParam(required = false) BoardKind boardKind,
+                            Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Board> boardPage;
+        if(boardKind != null) {
+            boardPage = boardService.findBoardListByKindWithPaging(boardKind, pageable);
+        } else {
+            boardPage = boardService.findBoardListWithPaging(pageable);
+        }
+        model.addAttribute("boardPage", boardPage);
+        return "board/pagedList";
     }
 
     // 게시글 검색 처리를 합니다.
