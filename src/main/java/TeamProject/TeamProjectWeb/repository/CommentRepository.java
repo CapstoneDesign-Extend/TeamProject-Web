@@ -6,6 +6,7 @@ import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.CommentDTO;
+import TeamProject.TeamProjectWeb.utils.ConvertDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -63,15 +64,7 @@ public class CommentRepository {
         // Comment 엔터티 목록을 CommentDTO 목록으로 변환
         List<CommentDTO> commentDTOs = new ArrayList<>();
         for (Comment comment : comments) {
-            CommentDTO dto = new CommentDTO();
-            dto.setId(comment.getId());
-            dto.setBoardId(comment.getBoard().getId());
-            dto.setContent(comment.getContent());
-            dto.setFinalDate(comment.getFinalDate());
-            dto.setLikeCount(comment.getLikeCount());
-            dto.setMemberId(comment.getMember().getId());
-            dto.setAuthor(comment.getAuthor());
-            commentDTOs.add(dto);
+            commentDTOs.add(ConvertDTO.convertComment(comment));
         }
 
         return commentDTOs;
