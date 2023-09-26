@@ -3,6 +3,7 @@ package TeamProject.TeamProjectWeb.controller.RestApi;
 
 import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Member;
+import TeamProject.TeamProjectWeb.dto.CommentDTO;
 import TeamProject.TeamProjectWeb.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class CommentRestController {
 
     // 댓글 검색 API 엔드포인트 - 특정 게시글의 모든 댓글 조회
     @GetMapping("/{boardId}")
-    public List<Comment> getCommentsByBoardId(@PathVariable Long boardId) {
+    public List<CommentDTO> getCommentsByBoardId(@PathVariable Long boardId) {
         // 주어진 boardId에 해당하는 게시글의 모든 댓글을 조회하여 반환함
         // commentRepository의 findByBoardId 메소드를 호출하여 댓글 목록을 얻어옴
         return commentRepository.findByBoardId(boardId);

@@ -5,6 +5,7 @@ package TeamProject.TeamProjectWeb.repository;
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Member;
+import TeamProject.TeamProjectWeb.dto.CommentDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -53,11 +55,26 @@ public class CommentRepository {
         em.persist(comment);
     }
 
-    public List<Comment> findByBoardId(Long boardId) { // 게시판 id를 가져와 어디 게시판인지 파악함
+    public List<CommentDTO> findByBoardId(Long boardId) { // 게시판 id를 가져와 어디 게시판인지 파악함
         // 게시글 ID에 해당하는 댓글 목록 조회
         Query query = em.createQuery("SELECT c FROM Comment c WHERE c.board.id = :boardId");
         query.setParameter("boardId", boardId);
-        return query.getResultList();
+        List<Comment> comments = query.getResultList();
+        // Comment 엔터티 목록을 CommentDTO 목록으로 변환
+        List<CommentDTO> commentDTOs = new ArrayList<>();
+        for (Comment comment : comments) {
+            CommentDTO dto = new CommentDTO();
+            dto.setId(comment.getId());
+            dto.setBoardId(comment.getBoard().getId());
+            dto.setContent(comment.getContent());
+            dto.setFinalDate(comment.getFinalDate());
+            dto.setLikeCount(comment.getLikeCount());
+            dto.setMemberId(comment.getMember().getId());
+            dto.setAuthor(comment.getAuthor());
+            commentDTOs.add(dto);
+        }
+
+        return commentDTOs;
     }
 
 
