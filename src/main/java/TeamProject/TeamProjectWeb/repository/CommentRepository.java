@@ -88,6 +88,7 @@ public class CommentRepository {
         return query.getResultList();
     }
 
+    @Transactional
     public void deleteById(Long commentId) {
         // ID로 댓글 삭제
         Comment comment = em.find(Comment.class, commentId);
