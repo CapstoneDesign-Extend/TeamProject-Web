@@ -140,6 +140,4 @@ public class BoardRepository {
                 .setMaxResults(limit)
                 .getResultList();
     }
-
-
 }

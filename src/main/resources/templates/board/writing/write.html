@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extend</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/board_write.css}"> <!-- 수정됨 -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"> <!-- 수정됨 -->
+    <!--Google Api-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+          rel="stylesheet">          
+    <script defer src="/js/header.js" th:src="@{/js/header.js}"></script>
+    <script defer src="/js/write.js" th:src="@{/js/write.js}"></script>
+</head>
+<body>
+<!--여기에 헤더 삽입-->
+    <div class="wrap_mainframe">
+        <div class="mainframe">
+            <form enctype="multipart/form-data" th:action="@{/board/writing/write}" th:object="${board}" method="post">
+                <!-- 서버와의 통신을 위한 th:action 및 th:object 추가. 필요한 경우 th:action의 URL 수정 -->
+                <div class="writing_div">
+                    <div class="board_name">
+                        <input type="hidden" id="boardKind" name="boardKind">
+                        <select id="select_value" class="board_name_inner" onchange="ChangeValue()">
+                            <option value="free_board">자유게시판</option>
+                            <option value="market_board">장터게시판</option>
+                            <option value="qna_board">질문,답변 게시판</option>
+                            <option value="department_board">학과 공지사항</option>
+                        </select>
+                    </div>
+                    <div class="writing_title">
+                        <textarea class="title" placeholder="제목을 입력해 주세요" name="title" th:field="*{title}"></textarea>
+                    </div>
+                    <div id="price_contact" class="price_contact" style="display:none;">
+                        <div class="price">
+                            <input type="number" name="price" class="inner_input" placeholder="가격 입력" th:field="*{price}">
+                        </div>
+                        <div class="contact">
+                            <input type="text" name="contact" class="inner_input" placeholder="연락수단 입력">
+                        </div>
+                    </div>
+                    <!--<div id="writing_body" class="writing_body" contenteditable="true" placeholder="내용을 입력하세요" name="text_body" autofocus th:field="*{textBody}">-->
+                        <textarea id="writing_body" class="writing_body" name="content" th:field="*{content}" placeholder="내용을 입력하세요"></textarea>
+                        <!--본문내용이 들어갈 공간-->
+
+                    <div class="button_row">
+                        <div class="left_div">
+                            <label class="file_upload" for="image">이미지 업로드</label>
+                        </div>
+                        <div class="right_div">
+                            <label for="anonymous" class="checkbox_wrap">
+                                <input type="checkbox" class="anonymous" id="anonymous" name="anonymous"> <!--th:field="*{anonymous}"-->
+                                익명
+                            </label>
+                            <input type="submit" class="writing_completion" value="글 작성">
+                        </div>
+                    </div>
+                    <input id="image" class="image" type="file" accept="image/*" name="image"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+

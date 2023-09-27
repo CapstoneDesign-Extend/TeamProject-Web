@@ -1,4 +1,4 @@
-package TeamProject.TeamProjectWeb.controller.login;
+package TeamProject.TeamProjectWeb.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;

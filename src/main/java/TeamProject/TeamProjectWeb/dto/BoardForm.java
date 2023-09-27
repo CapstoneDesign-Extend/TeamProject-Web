@@ -1,5 +1,6 @@
-package TeamProject.TeamProjectWeb.controller.board;
+package TeamProject.TeamProjectWeb.dto;
 
+import TeamProject.TeamProjectWeb.domain.BoardKind;
 import lombok.Data;
 import TeamProject.TeamProjectWeb.domain.Board;
 
@@ -15,13 +16,20 @@ public class BoardForm {
     @NotEmpty(message = "내용을 입력해주세요.")
     private String content;
 
-    @NotEmpty(message = "최종 수정일을 입력해주세요.")
+    //@NotEmpty
+    private int price;
+
+    private BoardKind boardKind;
+
+//    @NotEmpty(message = "최종 수정일을 입력해주세요.")
     private LocalDateTime finalDate; // finalDate 필드를 LocalDateTime으로 변경
 
     public Board toBoard() {
         Board board = new Board();
         board.setTitle(title);
         board.setContent(content);
+        board.setPrice(price);
+        board.setBoardKind(boardKind);
         board.setFinalDate(finalDate); // finalDate를 LocalDateTime으로 설정
         return board;
     }

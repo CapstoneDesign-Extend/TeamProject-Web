@@ -2,6 +2,7 @@ package TeamProject.TeamProjectWeb.controller.board;
 
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
+import TeamProject.TeamProjectWeb.dto.BoardForm;
 import TeamProject.TeamProjectWeb.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -23,18 +26,21 @@ public class BoardController {
     private final BoardService boardService;
 
     // 게시글 작성 폼 페이지를 보여줍니다.
-    @GetMapping("/write")
-    public String writeForm(@ModelAttribute("boardForm") BoardForm form) {
-        return "board/writeForm";
+    @GetMapping("/writing/write")
+    public String writeForm(Model model) {
+        BoardForm form = new BoardForm(); // 초기화
+        model.addAttribute("board", form); // 뷰로 전달
+        return "board/writing/write";
     }
 
     // 게시글 작성을 처리합니다.
-    @PostMapping("/write")
+    @PostMapping("/writing/write")
     public String write(@Valid @ModelAttribute BoardForm form,
                         BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "board/writeForm";
+            return "board/writing/write";
         }
+        form.setFinalDate(LocalDateTime.now()); // 현재 시간을 finalDate에 설정
         Board board = form.toBoard();
         boardService.createBoard(board);
         return "redirect:/";

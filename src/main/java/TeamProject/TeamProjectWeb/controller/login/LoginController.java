@@ -1,6 +1,7 @@
 package TeamProject.TeamProjectWeb.controller.login;
 
 import TeamProject.TeamProjectWeb.domain.Member;
+import TeamProject.TeamProjectWeb.dto.LoginForm;
 import TeamProject.TeamProjectWeb.service.LoginService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

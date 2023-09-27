@@ -1,6 +1,6 @@
 package TeamProject.TeamProjectWeb.controller.comment;
 
-import TeamProject.TeamProjectWeb.controller.board.BoardForm;
+import TeamProject.TeamProjectWeb.dto.BoardForm;
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.service.BoardService;
