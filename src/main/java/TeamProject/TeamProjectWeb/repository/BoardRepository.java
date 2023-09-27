@@ -3,7 +3,9 @@ package TeamProject.TeamProjectWeb.repository;
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
 import TeamProject.TeamProjectWeb.domain.Member;
+import TeamProject.TeamProjectWeb.dto.BoardDTO;
 import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
+import TeamProject.TeamProjectWeb.utils.ConvertDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -32,9 +34,13 @@ public class BoardRepository {
         }
         em.persist(board);
     }
+    // 해당 id를 가진 게시글을 DTO로 반환
+    public BoardDTO findOneDTO(Long id){
+        return ConvertDTO.convertBoard(em.find(Board.class, id));
+    }
 
     // 해당 id를 가진 게시글 반환
-    public Board findOne(Long id){
+    public Board findOne(Long id){  // DTO를 반환하도록 변경
         return em.find(Board.class, id);
     }
     // 모든 게시글 리스트 반환
@@ -76,10 +82,11 @@ public class BoardRepository {
                 .setParameter("boardKind", boardKind)
                 .getResultList();
     }
-
-    public void delete(Board board) {
+    @Transactional
+    public void delete(Board board) {  // 사용금지:: 엔티티를 직접 사용하고있음
         em.remove(board);
     }
+    @Transactional
     public void deleteById(Long id) { // 해당 게시글 id로 삭제함
         Board board = em.find(Board.class, id);
         if (board != null) {

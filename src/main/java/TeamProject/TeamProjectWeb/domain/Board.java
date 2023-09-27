@@ -24,7 +24,7 @@ public class Board { // 게시판 클래스
     @NotNull
     private String title; // 제목
     private String content; // 본문
-    @ManyToOne(fetch=FetchType.LAZY, cascade = ALL) // fetch=FetchType.LAZY : 지연 로딩으로 실시간 업로딩 되는 것을 막음
+    @ManyToOne(fetch=FetchType.LAZY) // fetch=FetchType.LAZY : 지연 로딩으로 실시간 업로딩 되는 것을 막음
     @JoinColumn(name = "memberId") // 외래키 => 조인할 속성 이름
     @JsonBackReference // Board엔티티를 직렬화할 때 연관된 엔티티 클래스의 정보는 직렬화하지 않도록 하여 순환 참조로 인한 무한루프 방지
     private Member member; // 해당 멤버의 학번을 사용할 거임
@@ -38,18 +38,13 @@ public class Board { // 게시판 클래스
     private int likeCnt; // 좋아요 개수
     @Column(name = "chat_count")
     private int chatCnt;  // 댓글수
-    //@Column(name = "price")
     private Integer price;
-
-    @OneToMany(mappedBy = "board", cascade = ALL, orphanRemoval = true) // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
-    //@JsonManagedReference  // Board엔티티를 직렬화할 때 연관된 엔티티 클래스의 정보는 직렬화하지 않도록 하여 순환 참조로 인한 무한루프 방지
     @JsonIgnore
+    @OneToMany(mappedBy = "board", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, orphanRemoval = true) // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
     //== 게시글을 삭제하면 달려있는 댓글 모두 삭제 ==//
     private List<Comment> comments = new ArrayList<>();
-
-    @OneToMany(mappedBy = "board")
     @JsonIgnore
-    //@JsonManagedReference  // Board엔티티를 직렬화할 때 연관된 엔티티 클래스의 정보는 직렬화하지 않도록 하여 순환 참조로 인한 무한루프 방지
+    @OneToMany(mappedBy = "board")
     private List<File> files = new ArrayList<>();
 
 

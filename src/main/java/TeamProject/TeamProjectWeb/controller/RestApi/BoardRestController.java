@@ -32,14 +32,13 @@ public class BoardRestController {
     @GetMapping("/{id}")
     public ResponseEntity<BoardDTO> getBoardById(@PathVariable Long id) {
         // 주어진 id에 해당하는 게시글을 조회함
-        Board board = boardRepository.findOne(id);
-        if (board == null) {
+        BoardDTO dto = boardRepository.findOneDTO(id);
+        if (dto == null) {
             // 주어진 id에 해당하는 게시글이 없는 경우 404 Not Found 상태 코드를 반환함
             return ResponseEntity.notFound().build();
         }
         // 주어진 id에 해당하는 게시글 정보를 ResponseEntity로 포장하여 반환함
-        BoardDTO boardDTO = ConvertDTO.convertBoard(board);
-        return ResponseEntity.ok(boardDTO);
+        return ResponseEntity.ok(dto);
     }
     // 특정 BoardKind 의 게시글 리스트를 반환하는 API 엔드포인트
     @GetMapping("/search/byBoardKind")
@@ -103,13 +102,13 @@ public class BoardRestController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBoard(@PathVariable Long id) {
         // 주어진 id에 해당하는 게시글을 조회함
-        Board board = boardRepository.findOne(id);
-        if (board == null) {
+        BoardDTO dto = boardRepository.findOneDTO(id);
+        if (dto == null) {
             // 주어진 id에 해당하는 게시글이 없는 경우 404 Not Found 상태 코드를 반환함
             return ResponseEntity.notFound().build();
         }
         // 주어진 id에 해당하는 게시글을 boardRepository의 delete 메소드를 호출하여 데이터베이스에서 삭제함
-        boardRepository.delete(board);
+        boardRepository.deleteById(dto.getId());
         // 삭제 성공 시 204 No Content 상태 코드를 반환함
         return ResponseEntity.noContent().build();
     }
