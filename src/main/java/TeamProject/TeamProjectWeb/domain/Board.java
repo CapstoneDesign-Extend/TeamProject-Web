@@ -38,7 +38,7 @@ public class Board { // 게시판 클래스
     private int likeCnt; // 좋아요 개수
     @Column(name = "chat_count")
     private int chatCnt;  // 댓글수
-    private int price;
+    private Integer price;  // null을 허용하기 위해 Wrapper클래스 사용
     @JsonIgnore
     @OneToMany(mappedBy = "board", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, orphanRemoval = true) // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
     //== 게시글을 삭제하면 달려있는 댓글 모두 삭제 ==//
