@@ -2,8 +2,12 @@ package TeamProject.TeamProjectWeb.utils;
 
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.Comment;
+import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.BoardDTO;
 import TeamProject.TeamProjectWeb.dto.CommentDTO;
+import TeamProject.TeamProjectWeb.dto.MemberDTO;
+
+import java.util.Optional;
 
 public class ConvertDTO {
     public static CommentDTO convertComment(Comment comment){
@@ -30,5 +34,33 @@ public class ConvertDTO {
         dto.setLikeCnt(board.getLikeCnt());
         dto.setChatCnt(board.getChatCnt());
         return dto;
+    }
+    public static MemberDTO convertMember(Member member){
+        MemberDTO dto = new MemberDTO();
+        dto.setId(member.getId());
+        dto.setStudentId(member.getStudentId());
+        dto.setName(member.getName());
+        dto.setSchoolName(member.getSchoolName());
+        dto.setAccess(member.getAccess());
+        dto.setLoginId(member.getLoginId());
+        dto.setPassword(member.getPassword());
+        dto.setEmail(member.getEmail());
+        return dto;
+    }
+    public static Optional<MemberDTO> convertMember(Optional<Member> optionalMember) {
+        if (optionalMember.isPresent()) {
+            Member member = optionalMember.get();
+            MemberDTO dto = new MemberDTO();
+            dto.setId(member.getId());
+            dto.setStudentId(member.getStudentId());
+            dto.setName(member.getName());
+            dto.setSchoolName(member.getSchoolName());
+            dto.setAccess(member.getAccess());
+            dto.setLoginId(member.getLoginId());
+            dto.setPassword(member.getPassword());
+            dto.setEmail(member.getEmail());
+            return Optional.of(dto);
+        }
+        return Optional.empty();
     }
 }

@@ -1,7 +1,9 @@
 package TeamProject.TeamProjectWeb.controller.RestApi;
 
 import TeamProject.TeamProjectWeb.domain.Member;
+import TeamProject.TeamProjectWeb.dto.MemberDTO;
 import TeamProject.TeamProjectWeb.repository.MemberRepository;
+import TeamProject.TeamProjectWeb.utils.ConvertDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +20,15 @@ public class MemberRestController {
 
     // 특정 ID의 회원 정보를 조회하는 API 엔드포인트
     @GetMapping("/{id}")
-    public ResponseEntity<Member> getMemberById(@PathVariable Long id) {
+    public ResponseEntity<MemberDTO> getMemberById(@PathVariable Long id) {
         // MemberRepository 를 사용하여 해당 ID의 회원 정보를 조회
-        Member member = memberRepository.findOne(id);
+        MemberDTO dto = memberRepository.findOneDTO(id);
         // 조회된 회원 정보가 없을 경우 404 응답 반환
-        if (member == null) {
+        if (dto == null) {
             return ResponseEntity.notFound().build();
         }
         // 조회된 회원 정보를 200 응답과 함께 반환
-        return ResponseEntity.ok(member);
+        return ResponseEntity.ok(dto);
     }
 
     // 학번으로 해당 학번의 모든 회원 정보를 조회하는 API 엔드포인트
@@ -45,15 +47,16 @@ public class MemberRestController {
 
     // 로그인 아이디로 회원 정보를 조회하는 API 엔드포인트
     @GetMapping("/byLoginId/{loginId}")
-    public ResponseEntity<Member> getMemberByLoginId(@PathVariable String loginId) {
+    public ResponseEntity<MemberDTO> getMemberByLoginId(@PathVariable String loginId) {
         // MemberRepository를 사용하여 해당 로그인 아이디의 회원 정보를 조회
         Optional<Member> optionalMember = memberRepository.findByLoginId(loginId);
+        Optional<MemberDTO> optionalDTO = ConvertDTO.convertMember(optionalMember);
         // 조회된 회원 정보가 없을 경우 404 응답 반환
         if (optionalMember.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         // 조회된 회원 정보를 200 응답과 함께 반환
-        return ResponseEntity.ok(optionalMember.get());
+        return ResponseEntity.ok(optionalDTO.get());
     }
 
     //  이메일로 회원 정보를 조회하는 API 엔드포인트

@@ -3,6 +3,7 @@ package TeamProject.TeamProjectWeb.repository;
 
 import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Member;
+import TeamProject.TeamProjectWeb.dto.MemberDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
@@ -38,7 +39,7 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
     public Member findOne(Long id){ //-- 해당 id로 member을 찾아줌 --//
         return em.find(Member.class, id);
     }
-
+    public MemberDTO findOneDTO(Long id) {return em.find(MemberDTO.class, id);}
     @Transactional
     public Optional<Member> findByEmail(String email) {
         try {
@@ -116,6 +117,7 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
             return Optional.empty();
         }
     }
+
 
     public List<Comment> findCommentsByMemberId(Long memberId) { // 멤버 ID를 매개변수로 받아 해당 멤버와 연결된 댓글 목록을 조회
         String jpql = "SELECT c FROM Member m JOIN m.comments c WHERE m.id = :memberId";
