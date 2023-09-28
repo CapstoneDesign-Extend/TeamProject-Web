@@ -80,7 +80,7 @@ public class BoardRestController {
 
     // 게시글 수정 API 엔드포인트
     @PutMapping("/{id}")
-    public ResponseEntity<Board> updateBoard(@PathVariable Long id, @RequestBody Board updatedBoard) {
+    public ResponseEntity<BoardDTO> updateBoard(@PathVariable Long id, @RequestBody Board updatedBoard) {
         // 주어진 id에 해당하는 게시글을 조회함
         Board board = boardRepository.findOne(id);
         if (board == null) {
@@ -90,12 +90,13 @@ public class BoardRestController {
         // 주어진 id에 해당하는 게시글을 수정하기 위해 요청 바디에서 받은 updatedBoard 객체의 정보로 기존 게시글을 업데이트함
         board.setTitle(updatedBoard.getTitle());
         board.setContent(updatedBoard.getContent());
+        board.setAuthor((updatedBoard.getAuthor()));
         // 추가적인 필드 업데이트 등 필요한 로직 작성
 
         // 수정된 게시글을 boardRepository의 save 메소드를 호출하여 데이터베이스에 저장함
         boardRepository.save(board);
         // 수정된 게시글 정보를 ResponseEntity로 포장하여 반환함
-        return ResponseEntity.ok(board);
+        return ResponseEntity.ok(ConvertDTO.convertBoard(board));
     }
 
     // 게시글 삭제 API 엔드포인트
