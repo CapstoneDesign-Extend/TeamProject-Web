@@ -5,7 +5,10 @@ import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Like;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.LikeDTO;
+import TeamProject.TeamProjectWeb.repository.BoardRepository;
+import TeamProject.TeamProjectWeb.repository.CommentRepository;
 import TeamProject.TeamProjectWeb.repository.LikeRepository;
+import TeamProject.TeamProjectWeb.repository.MemberRepository;
 import TeamProject.TeamProjectWeb.utils.ConvertDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +20,27 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LikeRestController {
     private final LikeRepository likeRepository;
+    private final MemberRepository memberRepository;
+    private final BoardRepository boardRepository;
+    private final CommentRepository commentRepository;
 
-    @PostMapping("/board/{boardId}")
-    public LikeDTO addLikeToBoard(@PathVariable Long boardId, @RequestBody Member member) {
+    @PostMapping("/board/{boardId}/member/{memberId}")
+    public LikeDTO addLikeToBoard(@PathVariable Long boardId, @PathVariable Long memberId) {  // 호출할 때마다 like 추가, 삭제를 반복
+        Optional<Member> memberOptional = Optional.ofNullable(memberRepository.findOne(memberId));
+        if(!memberOptional.isPresent()) {
+            throw new RuntimeException("Member not found");
+        }
+
+        Member member = memberOptional.get();
+
         Optional<Like> existingLike = likeRepository.findByMemberAndBoard(member, boardId);
         if (existingLike.isPresent()) {
             likeRepository.delete(existingLike.get());
-            return null; // 좋아요 취소 시
+            return new LikeDTO(); // 좋아요 취소 시
         }
+
         Like newLike = new Like();
-        Board board = new Board(); // Assuming you have a default constructor
-        board.setId(boardId);  // id만 넣어도 지연 로딩(fetch = FetchType.LAZY)을 통해 별도 쿼리 없이 JPA가 다른 필드에도 접근할 수 있다고 함
+        Board board = boardRepository.findOne(boardId); // JPA provides this for reference
         newLike.setBoard(board);
         newLike.setMember(member);
         newLike.setLikeType(Like.LikeType.POST);
@@ -35,16 +48,23 @@ public class LikeRestController {
         return ConvertDTO.convertLike(newLike);
     }
 
-    @PostMapping("/comment/{commentId}")
-    public LikeDTO addLikeToComment(@PathVariable Long commentId, @RequestBody Member member) {
+    @PostMapping("/comment/{commentId}/member/{memberId}")
+    public LikeDTO addLikeToComment(@PathVariable Long commentId, @PathVariable Long memberId) {  // 호출할 때마다 like 추가, 삭제를 반복
+        Optional<Member> memberOptional = Optional.ofNullable(memberRepository.findOne(memberId));
+        if(!memberOptional.isPresent()) {
+            throw new RuntimeException("Member not found");
+        }
+
+        Member member = memberOptional.get();
+
         Optional<Like> existingLike = likeRepository.findByMemberAndComment(member, commentId);
         if (existingLike.isPresent()) {
             likeRepository.delete(existingLike.get());
-            return null; // 좋아요 취소 시
+            return new LikeDTO(); // 좋아요 취소 시
         }
+
         Like newLike = new Like();
-        Comment comment = new Comment(); // Assuming you have a default constructor
-        comment.setId(commentId);  // id만 넣어도 지연 로딩(fetch = FetchType.LAZY)을 통해 별도 쿼리 없이 JPA가 다른 필드에도 접근할 수 있다고 함
+        Comment comment = commentRepository.findById(commentId); // JPA provides this for reference
         newLike.setComment(comment);
         newLike.setMember(member);
         newLike.setLikeType(Like.LikeType.COMMENT);

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/boards")
@@ -42,10 +43,13 @@ public class BoardRestController {
     }
     // 특정 BoardKind 의 게시글 리스트를 반환하는 API 엔드포인트
     @GetMapping("/search/byBoardKind")
-    public List<Board> getBoardsByBoardKind(@RequestParam("boardKind") BoardKind boardKind) {
+    public List<BoardDTO> getBoardsByBoardKind(@RequestParam("boardKind") BoardKind boardKind) {
         // 주어진 BoardKind를 가진 모든 게시글을 조회함
+        List<Board> boards = boardRepository.findByBoardKind(boardKind);
         // 조회된 게시글 목록을 반환함
-        return boardRepository.findByBoardKind(boardKind);
+        return boards.stream()
+                .map(board -> ConvertDTO.convertBoard(board))
+                .collect(Collectors.toList());  // DTO를 반환하도록 변환
     }
     // 특정 BoardKind 의 최신 게시글 리스트를 필요한 만큼만 반환하는 API 엔드포인트
     @GetMapping("/search/byBoardKindAmount")

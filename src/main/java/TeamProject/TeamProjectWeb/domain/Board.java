@@ -46,6 +46,8 @@ public class Board { // 게시판 클래스
     @JsonIgnore
     @OneToMany(mappedBy = "board")
     private List<File> files = new ArrayList<>();
+    @OneToMany(mappedBy = "board", orphanRemoval = true)  // board가 삭제되면 연관된 likes도 함께 삭제
+    private List<Like> likes = new ArrayList<>();
 
 
     //== 생성 메소드 --//
