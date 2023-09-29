@@ -30,7 +30,7 @@ public class MemberRepository { // repository 패키지는 DB에 접근하는 �
         if (member.getId() == null) {
             em.persist(member); // 새로운 엔티티라면 데이터베이스에 삽입
         } else {
-            em.merge(member); // 이미 존재하는 엔티티라면 데이터베이스에 업데이트
+            member = em.merge(member); // 이미 존재하는 엔티티라면 데이터베이스에 업데이트
         }
         return member;
     }

@@ -67,7 +67,7 @@ public class MemberController {
     @PostMapping("/info_input")
     public String showInfoInputForm(Model model) {
         Member tempMember = (Member) httpSession.getAttribute("tempMember"); // 세션에서 Member 객체 가져오기
-        if(tempMember != null) {
+        if (tempMember != null) {
             model.addAttribute("member", tempMember);
         } else {
             model.addAttribute("member", new Member());
@@ -75,23 +75,32 @@ public class MemberController {
         return "register/info_input";
     }
 
-        // 회원 가입 처리를 위한 POST 요청 핸들러
+    // 회원 가입 처리를 위한 POST 요청 핸들러
     // 이거 근데.. 다음 페이지로 넘겨야하는데 이거 쓰는거 맞나 ? 일단 주석처리해봄;
     @PostMapping("/info_input/signup")
-    @Transactional // 오류 해결위해 추가됨::트랜잭션 적용
-    public String save(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
+    //@Transactional(rollbackFor = IllegalArgumentException.class)
+    public String save(@Validated @ModelAttribute Member member, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "register/register";
         } else {
-            Member tempMember = (Member) httpSession.getAttribute("tempMember");
-            if(tempMember != null) {
-                member.setSchoolName(tempMember.getSchoolName()); // schoolName 병합
+            try {
+                Member tempMember = (Member) httpSession.getAttribute("tempMember");
+                if (tempMember != null) {
+                    member.setSchoolName(tempMember.getSchoolName()); // schoolName 병합
+                }
+                memberService.join(member);
+                return "redirect:/";
+            } catch (IllegalArgumentException e) {
+                Member tempMember = (Member) httpSession.getAttribute("tempMember");
+                if (tempMember != null) {
+                    model.addAttribute("member", tempMember); // 이전 데이터를 다시 추가
+                }
+                model.addAttribute("errorMessage", e.getMessage());
+                return "register/info_input"; // 중복 아이디가 있을 경우, 다시 회원가입 입력 페이지로 돌아갑니다.
             }
-            memberService.join(member);
-            return "redirect:/";
         }
     }
-
+}
 
     // 사용자가 info_input.html에서 데이터를 입력한 후, 이 핸들러를 통해 데이터를 저장하고 메인 페이지로 리다이렉트
 //    @PostMapping("/info_input")
@@ -104,7 +113,6 @@ public class MemberController {
 //        }
 //    }
 
-}
 
 //    // 회원 가입 처리를 위한 POST 요청 핸들러
 //    // 이거 근데.. 다음 페이지로 넘겨야하는데 이거 쓰는거 맞나 ? 일단 주석처리해봄;

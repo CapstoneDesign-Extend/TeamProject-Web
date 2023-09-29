@@ -26,6 +26,7 @@
     <div class="mainframe">
         <form th:action="@{/register/info_input/signup}" method="post" th:object="${member}" id="input_form">
             <div class="content_div">
+                <div th:if="${not #strings.isEmpty(errorMessage)}" class="alert alert-danger" th:text="${errorMessage}"></div>
                 <div class="important_info">
                     <span class="text">아이디</span>
                     <input type="text" maxlength="20" class="input" th:field="*{loginId}">

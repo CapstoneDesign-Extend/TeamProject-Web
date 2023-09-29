@@ -23,11 +23,13 @@ public class BoardService {
 
     private final BoardRepository boardRepository; // 게시판 저장소 의존성 주입
 
+    @Transactional
     public void createBoard(Board board) {
         // 1. 게시글 생성 -> 각각 알맞은 게시판 속성 저장
         boardRepository.save(board);
     }
 
+    @Transactional
     public Board updateBoard(Long boardId, Board board) {
         // 2. 게시글 수정 -> 해당 권한을 가진 member만 수정 가능
         // 게시글 ID를 기반으로 게시글 내용을 수정하는 메서드
@@ -41,6 +43,7 @@ public class BoardService {
         return updatedBoard; // 수정된 게시글 반환
     }
 
+    @Transactional
     public void deleteBoard(Long boardId) {
         // 3. 게시글 삭제 -> 해당 member id로 판별
         // 게시글 ID를 기반으로 게시글을 삭제하는 메서드
@@ -56,14 +59,12 @@ public class BoardService {
         return boardRepository.findOne(boardId);
     }
 
-    @Transactional(readOnly = true)
     public List<Board> findAllBoards() {
         // 모든 게시글 조회
         // 모든 게시글을 반환하는 메서드
         return boardRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     public List<Board> searchBoardsByTitle(String title) {
         // 4. 게시글 검색 -> 연관된 제목으로 검색
         // 제목을 기반으로 게시글을 검색하는 메서드
