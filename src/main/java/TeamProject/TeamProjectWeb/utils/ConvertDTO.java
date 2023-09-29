@@ -2,9 +2,11 @@ package TeamProject.TeamProjectWeb.utils;
 
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.Comment;
+import TeamProject.TeamProjectWeb.domain.Like;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.BoardDTO;
 import TeamProject.TeamProjectWeb.dto.CommentDTO;
+import TeamProject.TeamProjectWeb.dto.LikeDTO;
 import TeamProject.TeamProjectWeb.dto.MemberDTO;
 
 import java.util.Optional;
@@ -62,5 +64,17 @@ public class ConvertDTO {
             return Optional.of(dto);
         }
         return Optional.empty();
+    }
+    public static LikeDTO convertLike(Like like) {
+        LikeDTO dto = new LikeDTO();
+        dto.setLikeId(like.getId());
+        dto.setMemberId(like.getMember().getId());
+        if (like.getBoard() != null) {
+            dto.setBoardId(like.getBoard().getId());
+        }
+        if (like.getComment() != null) {
+            dto.setCommentId(like.getComment().getId());
+        }
+        return dto;
     }
 }

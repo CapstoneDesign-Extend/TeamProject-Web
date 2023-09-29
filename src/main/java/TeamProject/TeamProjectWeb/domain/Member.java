@@ -37,6 +37,7 @@ public class Member { // 회원 클래스
     private String email;
     @OneToMany(mappedBy = "member") // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
     @JsonManagedReference // Board엔티티를 직렬화할 때 연관된 엔티티 클래스의 정보는 직렬화하지 않도록 하여 순환 참조로 인한 무한루프 방지
+    // (현재 DTO 전환 작업중, 작업 끝나면 해당 어노테이션 삭제 가능)
     private List<Board> board = new ArrayList<>();
     @OneToMany(mappedBy = "member") // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
     private List<Comment> comments = new ArrayList<>();
@@ -44,7 +45,8 @@ public class Member { // 회원 클래스
     private List<Timetable> timetables = new ArrayList<>(); // 한 명의 사용자는 여러 시간표를 가질 수 있음
     @OneToMany(mappedBy = "member")
     private List<Notification> notifications = new ArrayList<>(); // 한 명의 사용자는 여러 알림을 받음
-
+    @OneToMany(mappedBy = "member", orphanRemoval = true)  // member가 삭제되면 연관된 like도 함께 삭제
+    private  List<Like> likes = new ArrayList<>();
 
     //-- 연관관계 편의 메소드 --//
     public void addTimetable(Timetable timetable){ //-- 스케쥴 저장 --//
