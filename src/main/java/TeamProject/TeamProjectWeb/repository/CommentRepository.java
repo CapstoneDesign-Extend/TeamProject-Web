@@ -53,6 +53,9 @@ public class CommentRepository {
         comment.setBoard(board);
         comment.setAuthor(author);
 
+        // chatCnt ++
+        board.setChatCnt(board.getChatCnt() + 1);
+
         em.persist(comment);
     }
 
@@ -90,14 +93,29 @@ public class CommentRepository {
 
     @Transactional
     public void deleteById(Long commentId) {
-        // ID로 댓글 삭제
+        // ID로 댓글 조회
         Comment comment = em.find(Comment.class, commentId);
         if (comment != null) {
+            // 해당 댓글의 게시글 참조 가져오기
+            Board board = comment.getBoard();
+            // chatCnt 값을 감소시키는 로직 추가
+            board.setChatCnt(board.getChatCnt() - 1);
             em.remove(comment);
         }
     }
 
+    @Transactional
     public void deleteByMember(Member member) {
+        // 멤버에 연결된 모든 댓글 조회
+        List<Comment> memberComments = em.createQuery("SELECT c FROM Comment c WHERE c.member = :member", Comment.class)
+                .setParameter("member", member)
+                .getResultList();
+
+        for (Comment comment : memberComments) {
+            Board board = comment.getBoard();
+            board.setChatCnt(board.getChatCnt() - 1);
+        }
+
         // 멤버로 댓글 삭제
         Query query = em.createQuery("DELETE FROM Comment c WHERE c.member = :member");
         query.setParameter("member", member);

@@ -70,13 +70,15 @@ public class BoardRestController {
     }
     // 제목과 본문에서 검색하는 API 엔드포인트
     @GetMapping("/search/byKeyword")
-    public List<Board> getBoardsByKeyword(@RequestParam("keyword") String keyword) {
-        return boardRepository.findByKeyword(keyword);
+    public List<BoardDTO> getBoardsByKeyword(@RequestParam("keyword") String keyword) {
+        List<Board> boards = boardRepository.findByKeyword(keyword);
+        return boards.stream().map(ConvertDTO::convertBoard).collect(Collectors.toList());
     }
     // 키워드로 특정 게시판 검색
     @GetMapping("/search/byKeywordKind")
-    public List<Board> getBoardsByKeywordKind(@RequestParam("keyword") String keyword, @RequestParam("boardKind") BoardKind boardKind){
-        return boardRepository.findByKeywordKind(keyword, boardKind);
+    public List<BoardDTO> getBoardsByKeywordKind(@RequestParam("keyword") String keyword, @RequestParam("boardKind") BoardKind boardKind){
+        List<Board> boards = boardRepository.findByKeywordKind(keyword, boardKind);
+        return boards.stream().map(ConvertDTO::convertBoard).collect(Collectors.toList());
     }
     // 모든 게시글 조회 API 엔드포인트
     @GetMapping

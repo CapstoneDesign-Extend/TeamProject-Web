@@ -84,13 +84,8 @@ public class LikeRestController {
 
         // Check if the member liked the board
         List<Like> likedBoardList = likeRepository.findByMemberAndBoard(memberId, boardId);
-//        for (Like l : likedBoardList){
-//            System.out.println(l.get);
-//        }
-        System.out.println("**************************" + likedBoardList.size());
-        boolean likedBoard = !likedBoardList.isEmpty();
-        System.out.println("**************************" + likedBoard);
 
+        boolean likedBoard = !likedBoardList.isEmpty();
 
         // Find comments of the board that the member liked
         List<Like> likedComments = likeRepository.findCommentsByMemberAndBoard(memberId, boardId);
