@@ -35,34 +35,28 @@ public class LikeRepository {
     }
 
     @Transactional
-    public Optional<Like> findByMemberAndBoard(Member member, Long boardId) {
-        try {
-            return Optional.ofNullable(em.createQuery("SELECT l FROM Like l WHERE l.member = :member AND l.board.id = :boardId", Like.class)
-                    .setParameter("member", member)
-                    .setParameter("boardId", boardId)
-                    .getSingleResult());
-        } catch (NoResultException e) {
-            return Optional.empty();
-        }
+    public List<Like> findByMemberAndBoard(Long memberId, Long boardId) {
+        return em.createQuery("SELECT l FROM Like l WHERE l.member.id = :memberId AND l.board.id = :boardId", Like.class)
+                .setParameter("memberId", memberId)
+                .setParameter("boardId", boardId)
+                .getResultList();
     }
+
+
     @Transactional
-    public List<Like> findCommentsByMemberAndBoard(Member member, Long boardId) {
-        return em.createQuery("SELECT l FROM Like l WHERE l.member = :member AND l.comment.board.id = :boardId", Like.class)
-                .setParameter("member", member)
+    public List<Like> findCommentsByMemberAndBoard(Long memberId, Long boardId) {
+        return em.createQuery("SELECT l FROM Like l WHERE l.member.id = :memberId AND l.comment.board.id = :boardId", Like.class)
+                .setParameter("memberId", memberId)
                 .setParameter("boardId", boardId)
                 .getResultList();
     }
 
     @Transactional
-    public Optional<Like> findByMemberAndComment(Member member, Long commentId) {
-        try {
-            return Optional.ofNullable(em.createQuery("SELECT l FROM Like l WHERE l.member = :member AND l.comment.id = :commentId", Like.class)
-                    .setParameter("member", member)
-                    .setParameter("commentId", commentId)
-                    .getSingleResult());
-        } catch (NoResultException e) {
-            return Optional.empty();
-        }
+    public List<Like> findByMemberAndComment(Long memberId, Long commentId) {
+        return em.createQuery("SELECT l FROM Like l WHERE l.member.id = :memberId AND l.comment.id = :commentId", Like.class)
+                .setParameter("memberId", memberId)
+                .setParameter("commentId", commentId)
+                .getResultList();
     }
 
     @Transactional
