@@ -18,10 +18,13 @@
     <header th:include="fragments/header-before.html"></header>
 </header>
 <!-- 로그인 여부에 따라 헤더를 동적으로 변경합니다. -->
-<form th:action="@{/login/login}" th:object="${loginForm}" method="post" action="/login">
+<form th:action="@{/login}" th:object="${loginForm}" method="post" action="/login">
 <div class="logingrid">
     <div class="logintitle">
         <h1>회원 로그인</h1>
+    </div>
+    <div class="login-warning" th:if="${errorMessage}">
+        <span th:text="${errorMessage}"></span>
     </div>
     <div class="logintext">
             <!-- 로그인 폼 내용 -->

@@ -22,7 +22,16 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
             log.info("미인증 사용자 요청");
+
+            // 이미 로그인 페이지나 에러 페이지에 있는 경우 리다이렉트 없이 진행
+            if ("/login".equals(requestURI) || requestURI.startsWith("/login") || "/error".equals(requestURI)) {
+                // 이미 로그인 페이지에 있는 경우 경고만 표시
+                request.setAttribute("errorMessage", "로그인 후 이용가능합니다.");
+                return true;
+            }
+
             // 로그인 페이지로 리다이렉트하며, 로그인 후 다시 이전 페이지로 돌아올 수 있도록 redirectURL 을 지정합니다.
+            request.setAttribute("errorMessage", "로그인 후 이용가능합니다.");  // 추가된 부분
             response.sendRedirect("/login?redirectURL=" + requestURI);
             return false; // 인증되지 않은 사용자의 요청을 처리하지 않고 종료합니다.
         }

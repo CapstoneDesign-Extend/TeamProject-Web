@@ -50,8 +50,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(2)
                 .addPathPatterns("/**")
                 .excludePathPatterns(   //화이트리스트 작성
-                        "/", "/register/**", "/login/**", "/logout/**", "/api/**", "/register",
-                        "/css/**", "/*.ico", "/error /js/**", "fragments/**"//, "templates/**"
+                        "/", "/register/**", "/login/**", "/logout/**", "/api/**", "/register", "/login",
+                        "/css/**", "/*.ico", "/error", "/js/**", "fragments/**"//, "templates/**"
                 );
     }
 }

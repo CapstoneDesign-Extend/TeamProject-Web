@@ -19,7 +19,6 @@ import java.util.Optional;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/login")
 public class LoginController {
 
     private final LoginService loginService;
@@ -32,7 +31,12 @@ public class LoginController {
 //        boolean loggedIn = checkLoggedIn(request);
         model.addAttribute("loggedIn", false);
 
-        return "login/login";
+        // 인터셉터에서 설정한 errorMessage 를 가져와 모델에 추가
+        if (request.getAttribute("errorMessage") != null) {
+            model.addAttribute("errorMessage", request.getAttribute("errorMessage"));
+        }
+
+        return "/login/login";
     }
 
     @PostMapping("/login")
