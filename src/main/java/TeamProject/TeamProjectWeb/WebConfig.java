@@ -50,14 +50,14 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(2)
                 .addPathPatterns("/**")
                 .excludePathPatterns(   //화이트리스트 작성
-                        "/", "/signup/**", "/login", "/logout", "/api/**", "/signup", "/**",
-                        "/css/**", "/*.ico", "/error /js/**", "templates/**", "fragments/**"
+                        "/", "/register/**", "/login/**", "/logout/**", "/api/**", "/register",
+                        "/css/**", "/*.ico", "/error /js/**", "fragments/**"//, "templates/**"
                 );
     }
-
+}
     /*@Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver>
                                              resolvers) {
         resolvers.add(new LoginMemberArgumentResolver());
     }*/
-}
+

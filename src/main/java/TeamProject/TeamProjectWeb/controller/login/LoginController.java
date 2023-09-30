@@ -52,8 +52,10 @@ public class LoginController {
         Optional<Member> loginMemberOptional = loginService.login(form.getLoginId(), form.getPassword());
 
         // 로그인 성공 여부를 확인합니다.
+        // 회원 조회에 성공하면 해당 회원 정보가 Optional<Member>로 반환
         if (loginMemberOptional.isPresent()) {
             // 로그인에 성공했다면 해당 회원 정보를 가져옵니다.
+            // 해당 회원 정보를 HttpSession 객체에 저장합니다. 이를 통해 로그인 상태를 관리합니다.
             Member loginMember = loginMemberOptional.get();
             // 로그인 성공을 로그로 기록합니다.
             log.info("로그인 성공: memberId={}, loginId={}", loginMember.getId(), loginMember.getLoginId());
@@ -63,7 +65,7 @@ public class LoginController {
             HttpSession session = request.getSession();
             session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
             model.addAttribute("loggedIn", true);
-            // 로그인 후에 원래 페이지로 리다이렉트합니다.
+            // 로그인에 성공했을 경우, 사용자는 원래의 페이지(redirectURL)로 리다이렉트
             return "redirect:" + redirectURL;
         } else {
             // 로그인 실패시 오류 메시지를 설정하고 다시 로그인 폼으로 이동합니다.
@@ -93,10 +95,10 @@ public class LoginController {
         // 로그아웃 처리 후에는 메인 페이지로 리다이렉트합니다.
         return "redirect:/";
     }
+}
 
 //    // 로그인 여부를 확인하는 메서드
 //    private boolean checkLoggedIn(HttpServletRequest request) {
 //        HttpSession session = request.getSession(false); // 세션이 없으면 새로 생성하지 않도록 false로 설정
 //        return session != null && session.getAttribute(SessionConst.LOGIN_MEMBER) != null;
 //    }
-}

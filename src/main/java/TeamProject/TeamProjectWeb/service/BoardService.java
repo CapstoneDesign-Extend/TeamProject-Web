@@ -3,6 +3,8 @@ package TeamProject.TeamProjectWeb.service;
 
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
+import TeamProject.TeamProjectWeb.domain.Member;
+import TeamProject.TeamProjectWeb.dto.BoardForm;
 import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,6 +30,24 @@ public class BoardService {
     public void createBoard(Board board) {
         // 1. 게시글 생성 -> 각각 알맞은 게시판 속성 저장
         boardRepository.save(board);
+    }
+
+    @Transactional
+    public Board createBoardWithAuthor(BoardForm form, Member loggedInMember) {
+        Board board = form.toBoard();
+
+        if (form.isAnonymous()) {
+            board.setAuthor("익명"); // 익명으로 표시
+        } else {
+            board.setAuthor(loggedInMember.getLoginId());
+        }
+        board.setMember(loggedInMember);
+
+        // 게시글 작성 시간을 현재 시간으로 설정한다.
+        board.setFinalDate(LocalDateTime.now());  // 게시글 작성 시간 설정
+        // 게시글을 생성하는 서비스 메소드를 호출한다.
+        boardRepository.save(board);
+        return board;
     }
 
     @Transactional
