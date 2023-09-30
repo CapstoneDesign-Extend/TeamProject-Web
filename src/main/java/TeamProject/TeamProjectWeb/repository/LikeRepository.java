@@ -45,6 +45,13 @@ public class LikeRepository {
             return Optional.empty();
         }
     }
+    @Transactional
+    public List<Like> findCommentsByMemberAndBoard(Member member, Long boardId) {
+        return em.createQuery("SELECT l FROM Like l WHERE l.member = :member AND l.comment.board.id = :boardId", Like.class)
+                .setParameter("member", member)
+                .setParameter("boardId", boardId)
+                .getResultList();
+    }
 
     @Transactional
     public Optional<Like> findByMemberAndComment(Member member, Long commentId) {

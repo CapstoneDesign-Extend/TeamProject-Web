@@ -5,6 +5,7 @@ import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Like;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.LikeDTO;
+import TeamProject.TeamProjectWeb.dto.LikeStatusDTO;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
 import TeamProject.TeamProjectWeb.repository.CommentRepository;
 import TeamProject.TeamProjectWeb.repository.LikeRepository;
@@ -12,9 +13,12 @@ import TeamProject.TeamProjectWeb.repository.MemberRepository;
 import TeamProject.TeamProjectWeb.utils.ConvertDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/like")
@@ -77,5 +81,51 @@ public class LikeRestController {
         comment.setLikeCount(comment.getLikeCount() + 1); // likeCnt(Comment) ++
         likeRepository.save(newLike);
         return ConvertDTO.convertLike(newLike);
+    }
+    // 클라이언트에서 게시글을 확인하기 직전, 현재 접속자가 liked한 post + comment들에 "좋아요 Clicked" 처리 하기 위한 정보 제공
+    @GetMapping("/liked/board-and-comments/{boardId}/member/{memberId}")
+    public ResponseEntity<LikeStatusDTO> getLikedBoardAndComments(@PathVariable Long boardId, @PathVariable Long memberId) {
+        Member member = memberRepository.findOne(memberId);
+        if (member == null) {
+            throw new RuntimeException("Member not found");
+        }
+
+        // Check if the member liked the board
+        boolean likedBoard = likeRepository.findByMemberAndBoard(member, boardId).isPresent();
+
+        // Find comments of the board that the member liked
+        List<Like> likedComments = likeRepository.findCommentsByMemberAndBoard(member, boardId);
+
+        List<Long> commentIds = likedComments.stream()
+                .map(like -> like.getComment().getId())
+                .collect(Collectors.toList());
+
+        LikeStatusDTO response = new LikeStatusDTO();
+        response.setIsLikedBoard(likedBoard);
+        response.setLikedCommentIds(commentIds);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/board/{boardId}/member/{memberId}/exists")
+    public ResponseEntity<Boolean> isLikedBoard(@PathVariable Long boardId, @PathVariable Long memberId) {
+        Member member = memberRepository.findOne(memberId);
+        if (member == null) {
+            throw new RuntimeException("Member not found");
+        }
+
+        boolean exists = likeRepository.findByMemberAndBoard(member, boardId).isPresent();
+        return ResponseEntity.ok(exists);
+    }
+
+    @GetMapping("/comment/{commentId}/member/{memberId}/exists")
+    public ResponseEntity<Boolean> isLikedComment(@PathVariable Long commentId, @PathVariable Long memberId) {
+        Member member = memberRepository.findOne(memberId);
+        if (member == null) {
+            throw new RuntimeException("Member not found");
+        }
+
+        boolean exists = likeRepository.findByMemberAndComment(member, commentId).isPresent();
+        return ResponseEntity.ok(exists);
     }
 }
