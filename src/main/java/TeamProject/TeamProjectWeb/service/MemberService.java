@@ -17,7 +17,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    @Transactional
+    //@Transactional
     public Member join(Member member) {
         // 로그인 아이디가 이미 존재하는지 확인하여 중복 가입을 방지
         if (isLoginIdExists(member.getLoginId())) {

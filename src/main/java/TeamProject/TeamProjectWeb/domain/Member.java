@@ -31,7 +31,7 @@ public class Member { // 회원 클래스
     private String loginId; // 로그인 시 아이디
     @NotNull
     private String password; // 로그인 시 비밀번호
-    @Column(unique = true, name = "memberEmail")
+    @Column(unique = false, name = "memberEmail")
     @Email(message = "유효하지 않은 이메일입니다.")
     @NotNull
     private String email;
