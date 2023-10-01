@@ -37,6 +37,8 @@ public class HomeController {
         addRecentBoardsToModel(BoardKind.FREE, "recentFreeBoards", model);
         // 장터게시판의 최근 게시글 5개
         addRecentBoardsToModel(BoardKind.MARKET, "recentMarketBoards", model);
+        // QnA 게시판의 최근 게시글 5개
+        addRecentBoardsToModel(BoardKind.QNA, "recentQnaBoards", model);
 
 //        // 세션에 회원 데이터가 있으면 게시글 데이터를 가져와서 추가
 //        List<MainBoardDTO> recentBoards = boardService.findRecentBoardsForMainPage(BoardConstants.RECENT_BOARD_LIMIT);
@@ -46,7 +48,7 @@ public class HomeController {
         model.addAttribute("member", loginMember);
         // loggedIn 값을 true로 모델에 추가
         model.addAttribute("loggedIn", true);
-        return "loginMain";
+        return "main";
     }
 
     private void addRecentBoardsToModel(BoardKind boardKind, String attributeName, Model model) {
