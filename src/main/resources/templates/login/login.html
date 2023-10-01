@@ -28,19 +28,19 @@
 <!--            <span th:text="${session.errorMessage}"></span>-->
 <!--        </div>-->
         <div class="logintext">
-                <!-- 로그인 폼 내용 -->
-                <p class="input">
-                    <input type="text" th:field="*{loginId}" maxlength="20" class="userid" placeholder="아이디" required />
-                </p>
-                <p class="input">
-                    <input type="password" th:field="*{password}" maxlength="20" class="userid" placeholder="비밀번호" required />
-                </p>
-                <div class="login-warning" th:if="${errorMessage}">
-                    <span th:text="${errorMessage}"></span>
-                </div>
-                <p class="input">
-                    <input type="submit" value="로그인" class="confirm" />
-                </p>
+            <!-- 로그인 폼 내용 -->
+            <p class="input">
+                <input type="text" th:field="*{loginId}" maxlength="20" class="userid" placeholder="아이디" required />
+            </p>
+            <p class="input">
+                <input type="password" th:field="*{password}" maxlength="20" class="userid" placeholder="비밀번호" required />
+            </p>
+            <div class="login-warning" th:if="${errorMessage}">
+                <span th:text="${errorMessage}"></span>
+            </div>
+        </div>
+        <div class="loginbutton">
+            <input type="submit" value="로그인" class="confirm" />
         </div>
         <div class="loginfunction">
             <div class="loginmaintain">
@@ -52,7 +52,7 @@
         </div>
         <div class="register">
             <p>
-                withrium에 처음오셨다면? <a href="../register/register.html" class="aregister">회원가입</a>
+                Extend 에 처음오셨다면? <a href="/register/register" class="aregister">회원가입</a>
             </p>
         </div>
     </div>
