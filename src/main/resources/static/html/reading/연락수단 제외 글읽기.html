@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extend</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/board_reading_market.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <!--Google Api-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+          rel="stylesheet">          
+    <script defer src="/js/calendar.js"></script>
+    <script defer src="/js/header.js"></script>
+    <script defer src="/js/reading.js"></script>
+</head>
+<body>
+<!--여기에 헤더 삽입-->
+      <div class="wrap_mainframe">
+            <div class="mainframe">
+                  <div class="main_content">
+                        <div class="board_title">
+                            <span>장터게시판</span>
+                        </div>
+                        <div class="content_body">
+                            <div class="body_top">
+                                <img src="/tmp.jpg" class="profile_pic">
+                                <div class="name_time">
+                                    <div class="namespace">
+                                        <div class="writer_name">
+                                            익명
+                                        </div>
+                                        <div class="report">
+                                            신고
+                                        </div>
+                                    </div>
+                                    <div class="writing_time">
+                                        6분전
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body_main">
+                                <div class="main_title">
+                                    <p>진짜로 이제 뭐하냐</p>
+                                </div>
+                                <div class="wrap_price_div">
+                                    <div class="price_main">
+                                        68000원
+                                    </div>
+                                </div>
+                                <div class="bonmoon">
+                                    <p>그래서 이제 뭐함</p>
+                                    <p>진짜로 그래서 이제 뭐함</p>
+                                </div>
+                            </div>
+                            <div class="body_counting">
+                                <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
+                                <span class="recom_count">7&nbsp;</span>
+                                <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
+                                <span class="comment_count">10</span>
+                            </div>
+                            <div class="body_button">
+                                <span class="material-icons-outlined" style="color:black;">favorite_border</span>
+                                <span>&nbsp;좋아요</span>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment_div">
+                                <div class="comment_top">
+                                    <img src="/tmp.jpg" alt="" class="comment_profile_pic">
+                                    <div class="textspace">
+                                        <div class="name">
+                                            익명
+                                        </div>
+                                        <div class="likey_report">
+                                            <div class="likey">
+                                                좋아요
+                                            </div>
+                                            <div class="report">
+                                                신고
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment_body">
+                                    <div class="comment_main">
+                                        케로로장재미슴
+                                    </div>
+                                </div>
+                                <div class="time">
+                                    3분 전
+                                </div>
+                            </div>
+                        </div>
+                        <form enctype="multipart/form-data">
+                            <div class="comment_wrapping">
+                                <div class="comment_input">
+                                    <input type="text" class="comment_input_inner" placeholder="댓글을 입력해주세요" name="comment_text">
+                                    <label for="anonymous" class="checkbox_wrap">
+                                        <input type="checkbox" class="anonymous" id="anonymous" name="anonymous">
+                                        익명
+                                    </label>
+                                </div>
+                                <div class="editwrap">
+                                    <button type="submit" class="wrapsubmit"><span class="material-icons">edit</span></button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="list_button"> 
+                            <button type="button" class="list_button_inner" onclick="location.href='../board/market_board.html'"><span class="material-icons">list</span>글 목록</button>
+                        </div>
+                  </div>
+                  <div class="rank_board_div">
+                        <div class="viewrank">
+                            <div class="viewrank_text">
+                                <div class="viewrank_title">
+                                    조회수 인기글
+                                </div>
+                                <div class="more">
+                                    <a href="hot_board.html">더보기</a>
+                                </div>
+                            </div>
+                            <div class="viewrank_content">
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="viewrank">
+                            <div class="viewrank_text">
+                                <div class="viewrank_title">
+                                    추천수 인기글
+                                </div>
+                                <div class="more">
+                                    <a href="hot_board.html">더보기</a>
+                                </div>
+                            </div>
+                            <div class="viewrank_content">
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                                <a href="javascript:void(0)" class="contentbox">
+                                    <div class="content_title">첫번째 글</div>
+                                    <div class="write_time">06/07 17:26</div>
+                                </a>
+                            </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+</body>
+</html>
