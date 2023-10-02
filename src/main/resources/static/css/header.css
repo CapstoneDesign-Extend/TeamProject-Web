@@ -288,6 +288,7 @@ footer {
   height:100px;
   position:relative;
   left:50%;
+  bottom:0;
   transform: translate(-50%,0);
   background-color: #ededed;
   display:flex;

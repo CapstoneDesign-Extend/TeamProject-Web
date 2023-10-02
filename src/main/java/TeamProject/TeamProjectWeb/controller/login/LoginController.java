@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -26,14 +27,14 @@ public class LoginController {
     //private boolean loggedIn; // 로그인 여부를 나타내는 필드
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute("loginForm") LoginForm form, Model model, HttpServletRequest request) {
+    public String loginForm(@ModelAttribute("loginForm") LoginForm form, Model model, HttpSession session) {
         // 로그인 여부를 확인하여 loggedIn 변수를 모델에 추가
 //        boolean loggedIn = checkLoggedIn(request);
         model.addAttribute("loggedIn", false);
 
-        // 인터셉터에서 설정한 errorMessage 를 가져와 모델에 추가
-        if (request.getAttribute("errorMessage") != null) {
-            model.addAttribute("errorMessage", request.getAttribute("errorMessage"));
+        // 세션에서 인터셉터에서 설정한 errorMessage 를 가져와 모델에 추가
+        if (session.getAttribute("errorMessage") != null) {
+            model.addAttribute("errorMessage", session.getAttribute("errorMessage"));
         }
 
         return "/login/login";
@@ -44,12 +45,14 @@ public class LoginController {
                         BindingResult bindingResult,
                         @RequestParam(defaultValue = "/") String redirectURL,
                         HttpServletRequest request,
-                        Model model) {
+                        Model model,
+                        RedirectAttributes redirectAttributes,
+                        HttpSession session) {
 
         // 폼 데이터의 유효성 검사 결과가 오류가 있는지 확인합니다.
         if (bindingResult.hasErrors()) {
             // 오류가 있을 경우 다시 로그인 폼으로 이동합니다.
-            return "redirect:/login/login";
+            return "redirect:/login";
         }
 
         // 로그인 서비스를 이용해 로그인을 시도합니다.
@@ -64,18 +67,21 @@ public class LoginController {
             // 로그인 성공을 로그로 기록합니다.
             log.info("로그인 성공: memberId={}, loginId={}", loginMember.getId(), loginMember.getLoginId());
 
-
+            // 로그인 성공 후 세션의 errorMessage 를 삭제합니다.
+            session.removeAttribute("errorMessage");
             // 로그인 성공 처리: 회원 정보를 세션에 저장합니다.
-            HttpSession session = request.getSession();
+            session = request.getSession();
             session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
             model.addAttribute("loggedIn", true);
             // 로그인에 성공했을 경우, 사용자는 원래의 페이지(redirectURL)로 리다이렉트
             return "redirect:" + redirectURL;
         } else {
+            session.removeAttribute("errorMessage");
             // 로그인 실패시 오류 메시지를 설정하고 다시 로그인 폼으로 이동합니다.
             log.info("로그인 실패: loginId={}", form.getLoginId());
-            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
-            return "redirect:/login/login";
+            redirectAttributes.addFlashAttribute("errorMessage", "아이디 또는 비밀번호가 맞지 않습니다.");
+            //bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
+            return "redirect:/login";
         }
     }
 

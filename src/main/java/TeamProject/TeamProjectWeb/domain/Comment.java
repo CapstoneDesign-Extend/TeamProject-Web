@@ -19,7 +19,7 @@ public class Comment { // 댓글 클래스
     @Column(name = "comment_id")
     private Long id;
     @ManyToOne(fetch=FetchType.LAZY) // cascade = CascadeType.PERSIST : Comment 테이블을 persist 할 때 Border 테이블도 같이 해줌
-    @JoinColumn(name = "border_id") // 게시판 테이블에 PK와 연결해줌
+    @JoinColumn(name = "board_id") // 게시판 테이블에 PK와 연결해줌
     @JsonIgnore  // 이 엔티티를 직렬화해서 반환할 때, Board 는 제외(순환참조 오류 방지-땜빵식해결, 원래는 DTO를 만들어서 써야함)
     private Board board; // 게시판 id를 가져오기 위해
     private String content; // 본문

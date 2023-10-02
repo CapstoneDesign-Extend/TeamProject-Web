@@ -66,12 +66,8 @@ public class BoardService {
 
     @Transactional
     public void deleteBoard(Long boardId) {
-        // 3. 게시글 삭제 -> 해당 member id로 판별
         // 게시글 ID를 기반으로 게시글을 삭제하는 메서드
-        Board board = boardRepository.findOne(boardId);
-        if (board != null) {
-            boardRepository.delete(board);
-        }
+        boardRepository.deleteById(boardId);
     }
 
     public Board findBoardById(Long boardId) {
@@ -117,3 +113,14 @@ public class BoardService {
     }
 
 }
+
+
+//    @Transactional
+//    public void deleteBoard(Long boardId) {
+//        // 3. 게시글 삭제 -> 해당 member id로 판별
+//        // 게시글 ID를 기반으로 게시글을 삭제하는 메서드
+//        Board board = boardRepository.findOne(boardId);
+//        if (board != null) {
+//            boardRepository.delete(board);
+//        }
+//    }
