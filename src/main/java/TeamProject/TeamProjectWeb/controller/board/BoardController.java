@@ -1,9 +1,13 @@
 package TeamProject.TeamProjectWeb.controller.board;
 
+import TeamProject.TeamProjectWeb.controller.login.SessionConst;
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
+import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.BoardForm;
 import TeamProject.TeamProjectWeb.service.BoardService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,14 +39,24 @@ public class BoardController {
 
     // 게시글 작성을 처리합니다.
     @PostMapping("/writing/write")
-    public String write(@Valid @ModelAttribute BoardForm form,
-                        BindingResult bindingResult) {
+    public String write(@Valid @ModelAttribute BoardForm form,  // 게시글 작성 폼 데이터 바인딩
+                        BindingResult bindingResult, // 폼 검증 결과
+                        HttpServletRequest request) {  // 현재의 요청 객체
+        // 만약 폼 검증에서 오류가 발생했다면
         if (bindingResult.hasErrors()) {
+            // 다시 게시글 작성 페이지로 돌아간다.
             return "board/writing/write";
         }
-        form.setFinalDate(LocalDateTime.now()); // 현재 시간을 finalDate에 설정
-        Board board = form.toBoard();
-        boardService.createBoard(board);
+
+        // 현재의 세션을 가져온다. 없다면 null 을 반환한다.
+        HttpSession session = request.getSession(false);
+        Member loggedInMember = null;
+        if (session != null) {
+            loggedInMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        }
+
+        boardService.createBoardWithAuthor(form, loggedInMember);
+        // 게시글 작성이 완료되면 홈페이지로 리다이렉트한다.
         return "redirect:/";
     }
 

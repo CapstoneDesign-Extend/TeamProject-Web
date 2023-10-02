@@ -27,9 +27,9 @@ public class Board { // 게시판 클래스
     @Column(length = 2048)
     private String content; // 본문
     @ManyToOne(fetch=FetchType.LAZY) // fetch=FetchType.LAZY : 지연 로딩으로 실시간 업로딩 되는 것을 막음
-    @JoinColumn(name = "memberId") // 외래키 => 조인할 속성 이름
+    @JoinColumn(name = "member_id") // 외래키 => 조인할 속성 이름
     @JsonBackReference // Board엔티티를 직렬화할 때 연관된 엔티티 클래스의 정보는 직렬화하지 않도록 하여 순환 참조로 인한 무한루프 방지
-    private Member member; // 해당 멤버의 학번을 사용할 거임
+    private Member member; // 해당 멤버의 시퀀스 넘버를 사용할 거임
     @Column(name = "view_count")
     private int viewCnt; // 조회수
     private LocalDateTime finalDate; // 최종 등록된 날짜

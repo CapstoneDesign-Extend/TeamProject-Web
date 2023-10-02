@@ -18,10 +18,6 @@ import java.util.List;
 @Repository // 자동으로 스프링 bean으로 사용됨
 @RequiredArgsConstructor
 public class BoardRepository {
-    // 1. 게시글 생성 -> 각각 알맞은 게시판 속성 저장
-    // 2. 게시글 수정 -> 해당 권한을 가진 member만 수정 가능
-    // 3. 게시글 삭제 -> 해당 member id로 판별
-    // 4. 게시글 검색 -> 연관된 제목으로 검색
 
     @PersistenceContext // EntityManager를 주입받기 위해 사용
     private final EntityManager em;
@@ -34,6 +30,7 @@ public class BoardRepository {
         }
         em.persist(board);
     }
+
     // 해당 id를 가진 게시글을 DTO로 반환
     public BoardDTO findOneDTO(Long id){
         return ConvertDTO.convertBoard(em.find(Board.class, id));
@@ -50,6 +47,7 @@ public class BoardRepository {
                 .getResultList();
         return result;
     }
+
     // 해당 boardKind 의 게시글 리스트 반환
     public List<Board> findByBoardKind(BoardKind boardKind) {
         return em.createQuery("select b from Board b where b.boardKind = :boardKind order by b.finalDate desc", Board.class)
@@ -69,12 +67,14 @@ public class BoardRepository {
                 .setParameter("title", "%" + title + "%")
                 .getResultList();
     }
+
     // 제목이나 본문에 해당 키워드를 포함하는 게시글들을 반환
     public List<Board> findByKeyword(String keyword) {
         return em.createQuery("select b from Board b where b.title like :keyword or b.content like :keyword order by b.finalDate desc", Board.class)
                 .setParameter("keyword", "%" + keyword + "%")
                 .getResultList();
     }
+
     // 특정 boardKind 의 게시글만 키워드로 검색
     public List<Board> findByKeywordKind(String keyword, BoardKind boardKind) {
         return em.createQuery("select b from Board b where (b.title like :keyword or b.content like :keyword) and b.boardKind = :boardKind order by b.finalDate desc", Board.class)
@@ -82,10 +82,12 @@ public class BoardRepository {
                 .setParameter("boardKind", boardKind)
                 .getResultList();
     }
+
     @Transactional
     public void delete(Board board) {  // 사용금지:: 엔티티를 직접 사용하고있음
         em.remove(board);
     }
+
     @Transactional
     public void deleteById(Long id) { // 해당 게시글 id로 삭제함
         Board board = em.find(Board.class, id);
@@ -124,7 +126,7 @@ public class BoardRepository {
                 .getSingleResult();
     }
 
-    //이 쿼리는 Board 엔터티의 title과 finalDate만을 선택하여 MainBoardDTO에 할당하고,
+    // 이 쿼리는 Board 엔터티의 title 과 finalDate 만을 선택하여 MainBoardDTO 에 할당하고,
     // 최근 게시글을 기준으로 내림차순 정렬하여 결과를 반환
     public List<MainBoardDTO> findRecentBoardsForMainPage(int limit) {
         return em.createQuery("select new TeamProject.TeamProjectWeb.dto.MainBoardDTO(b.title, b.finalDate) from Board b order by b.finalDate desc", MainBoardDTO.class)
@@ -132,7 +134,7 @@ public class BoardRepository {
                 .getResultList();
     }
 
-    // 이 쿼리는 특정 BoardKind에 따른 Board 엔터티의 title과 finalDate만을 선택하여 MainBoardDTO에 할당하고,
+    // 이 쿼리는 특정 BoardKind 에 따른 Board 엔터티의 title 과 finalDate 만을 선택하여 MainBoardDTO 에 할당하고,
     // 최근 게시글을 기준으로 내림차순 정렬하여 결과를 반환
     public List<MainBoardDTO> findRecentBoardsByKindForMainPage(BoardKind boardKind, int limit) {
         return em.createQuery("select new TeamProject.TeamProjectWeb.dto.MainBoardDTO(b.title, b.finalDate) from Board b where b.boardKind = :boardKind order by b.finalDate desc", MainBoardDTO.class)

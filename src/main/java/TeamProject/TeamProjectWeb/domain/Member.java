@@ -26,7 +26,7 @@ public class Member { // 회원 클래스
     @Enumerated(EnumType.STRING) // 데이터값을 int가 아닌 String으로 나오게 함
     //db에 저장할 때, 열거형의 순서(상수)가 아닌 열거형의 이름으로 저장
     private Access access; // 주어질 권한
-    @Column(unique=true) //== 유니크 속성을 부여하여 중복으로 아이디를 만드는 것을 방지함 ==/
+    @Column(unique = true) //== 유니크 속성을 부여하여 중복으로 아이디를 만드는 것을 방지함 ==/
     @NotNull
     private String loginId; // 로그인 시 아이디
     @NotNull
@@ -46,23 +46,24 @@ public class Member { // 회원 클래스
     @OneToMany(mappedBy = "member")
     private List<Notification> notifications = new ArrayList<>(); // 한 명의 사용자는 여러 알림을 받음
     @OneToMany(mappedBy = "member", orphanRemoval = true)  // member가 삭제되면 연관된 like도 함께 삭제
-    private  List<Like> likes = new ArrayList<>();
+    private List<Like> likes = new ArrayList<>();
 
     //-- 연관관계 편의 메소드 --//
-    public void addTimetable(Timetable timetable){ //-- 스케쥴 저장 --//
+    public void addTimetable(Timetable timetable) { //-- 스케쥴 저장 --//
         this.timetables.add(timetable);
     }
-    public void addComment(Comment comment){ //-- 작성된 댓글 저장 --//
+
+    public void addComment(Comment comment) { //-- 작성된 댓글 저장 --//
         this.comments.add(comment);
     }
 
     public Member(Long id) {
         this.id = id;
     }
-    public Member(){}
 
-
-
+    public Member() {
+    }
+}
 
     /*
     //@NotNull
@@ -83,4 +84,4 @@ public class Member { // 회원 클래스
     private List<TimeSchedule> timetable; // 본인의 시간표 ( null 이어도 작동이 되어야 함 )
     private List<Notification> notifications;   // 알림
     */
-}
+

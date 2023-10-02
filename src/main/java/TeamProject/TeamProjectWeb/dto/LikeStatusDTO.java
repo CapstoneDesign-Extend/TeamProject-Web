@@ -1,10 +1,12 @@
 package TeamProject.TeamProjectWeb.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
 
 public class LikeStatusDTO {  // 특정 게시글에 "현재 접속자"가 좋아요를 했는지, 그리고 그(특정 게시글에 작성된) 댓글들에 좋아요를 했다면 그 댓글목록을 정의하기 위함
+    @JsonProperty("isLikedBoard")  // 직렬화할때, 프로퍼티를 지맘대로 isLikedBoard -> likedBoard 로 바꿔서 내가 직접 지정함
     private boolean isLikedBoard;
     private List<Long> likedCommentIds;
 

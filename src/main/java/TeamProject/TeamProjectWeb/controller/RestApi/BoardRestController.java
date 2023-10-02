@@ -23,11 +23,11 @@ public class BoardRestController {
     // 게시글 생성 API 엔드포인트
     @PostMapping
     @Transactional
-    public ResponseEntity<Board> createBoard(@RequestBody Board board) {
+    public ResponseEntity<BoardDTO> createBoard(@RequestBody Board board) {
         // 게시글을 생성하는 API 엔드포인트로, 요청 바디에서 받은 board 객체를 boardRepository의 save 메소드를 호출하여 데이터베이스에 저장함
         // 저장된 게시글 정보를 ResponseEntity로 포장하여 반환함
         boardRepository.save(board);
-        return ResponseEntity.ok(board);
+        return ResponseEntity.ok(ConvertDTO.convertBoard(board));
     }
     // 특정 id의 게시글을 반환하는 API 엔드포인트
     @GetMapping("/{id}")
@@ -63,27 +63,29 @@ public class BoardRestController {
 
     // 제목으로 검색하는 API 엔드포인트
     @GetMapping("/search/byTitle")
-    public List<Board> getBoardsByTitle(@RequestParam("title") String title) {
+    public List<BoardDTO> getBoardsByTitle(@RequestParam("title") String title) {
         // 주어진 title을 포함하는 모든 게시글을 조회함
         // boardRepository의 findByTitle 메소드를 호출하여 검색된 게시글 목록을 반환함
-        return boardRepository.findByTitle(title);
+        return ConvertDTO.convertBoardList(boardRepository.findByTitle(title));
     }
     // 제목과 본문에서 검색하는 API 엔드포인트
     @GetMapping("/search/byKeyword")
-    public List<Board> getBoardsByKeyword(@RequestParam("keyword") String keyword) {
-        return boardRepository.findByKeyword(keyword);
+    public List<BoardDTO> getBoardsByKeyword(@RequestParam("keyword") String keyword) {
+        List<Board> boards = boardRepository.findByKeyword(keyword);
+        return boards.stream().map(ConvertDTO::convertBoard).collect(Collectors.toList());
     }
     // 키워드로 특정 게시판 검색
     @GetMapping("/search/byKeywordKind")
-    public List<Board> getBoardsByKeywordKind(@RequestParam("keyword") String keyword, @RequestParam("boardKind") BoardKind boardKind){
-        return boardRepository.findByKeywordKind(keyword, boardKind);
+    public List<BoardDTO> getBoardsByKeywordKind(@RequestParam("keyword") String keyword, @RequestParam("boardKind") BoardKind boardKind){
+        List<Board> boards = boardRepository.findByKeywordKind(keyword, boardKind);
+        return boards.stream().map(ConvertDTO::convertBoard).collect(Collectors.toList());
     }
     // 모든 게시글 조회 API 엔드포인트
     @GetMapping
-    public List<Board> getAllBoards() {
+    public List<BoardDTO> getAllBoards() {
         // 모든 게시글을 조회함
         // boardRepository의 findAll 메소드를 호출하여 모든 게시글 목록을 반환함
-        return boardRepository.findAll();
+        return ConvertDTO.convertBoardList(boardRepository.findAll());
     }
 
     // 게시글 수정 API 엔드포인트

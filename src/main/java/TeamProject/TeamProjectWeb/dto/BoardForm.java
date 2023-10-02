@@ -1,6 +1,7 @@
 package TeamProject.TeamProjectWeb.dto;
 
 import TeamProject.TeamProjectWeb.domain.BoardKind;
+import TeamProject.TeamProjectWeb.domain.Member;
 import lombok.Data;
 import TeamProject.TeamProjectWeb.domain.Board;
 
@@ -21,6 +22,11 @@ public class BoardForm {
 
     private BoardKind boardKind;
 
+    private Long authorId;    // 사용자의 member_id 값을 저장하기 위한 속성
+    private String author;   // "익명" 또는 사용자명을 저장하기 위한 속성
+    private boolean anonymous; // 사용자가 익명을 원하는지 여부를 저장
+
+
 //    @NotEmpty(message = "최종 수정일을 입력해주세요.")
     private LocalDateTime finalDate; // finalDate 필드를 LocalDateTime으로 변경
 
@@ -31,6 +37,11 @@ public class BoardForm {
         board.setPrice(price);
         board.setBoardKind(boardKind);
         board.setFinalDate(finalDate); // finalDate를 LocalDateTime으로 설정
+        board.setAuthor(author);  // author 설정
+
+//        // Board와 Member 사이의 연관관계 설정
+//        Member member = new Member(authorId);
+//        board.setMember(member);
         return board;
     }
 }

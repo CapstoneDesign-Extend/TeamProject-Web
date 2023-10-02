@@ -18,12 +18,16 @@
     <header th:include="fragments/header-before.html"></header>
 </header>
 <!-- 로그인 여부에 따라 헤더를 동적으로 변경합니다. -->
-<form th:action="@{/login/login}" th:object="${loginForm}" method="post" action="/login">
-<div class="logingrid">
-    <div class="logintitle">
-        <h1>회원 로그인</h1>
-    </div>
-    <div class="logintext">
+<form th:action="@{/login}" th:object="${loginForm}" method="post" action="/login">
+<div id="wrapping">
+    <div class="logingrid">
+        <div class="logintitle">
+            <h1>회원 로그인</h1>
+        </div>
+<!--        <div class="login-warning" th:if="${session.errorMessage}">-->
+<!--            <span th:text="${session.errorMessage}"></span>-->
+<!--        </div>-->
+        <div class="logintext">
             <!-- 로그인 폼 내용 -->
             <p class="input">
                 <input type="text" th:field="*{loginId}" maxlength="20" class="userid" placeholder="아이디" required />
@@ -31,28 +35,29 @@
             <p class="input">
                 <input type="password" th:field="*{password}" maxlength="20" class="userid" placeholder="비밀번호" required />
             </p>
-            <p class="loginerror" th:if="${#fields.hasErrors('loginFail')}">
-                <span th:errors="*{loginFail}"></span>
-            </p>
-            <p class="input">
-                <input type="submit" value="로그인" class="confirm" />
-            </p>
-    </div>
-    <div class="loginfunction">
-        <div class="loginmaintain">
-            <p><input type="checkbox">로그인 유지</p>
+            <div class="login-warning" th:if="${errorMessage}">
+                <span th:text="${errorMessage}"></span>
+            </div>
         </div>
-        <div class="idpw">
-            <a href="javascript:void(0)" class="aidpw">아이디/비밀번호 찾기</a>
+        <div class="loginbutton">
+            <input type="submit" value="로그인" class="confirm" />
         </div>
-    </div>
-    <div class="register">
-        <p>
-            withrium에 처음오셨다면? <a href="../register/register.html" class="aregister">회원가입</a>
-        </p>
+        <div class="loginfunction">
+            <div class="loginmaintain">
+                <p><input type="checkbox">로그인 유지</p>
+            </div>
+            <div class="idpw">
+                <a href="javascript:void(0)" class="aidpw">아이디/비밀번호 찾기</a>
+            </div>
+        </div>
+        <div class="register">
+            <p>
+                Extend 에 처음오셨다면? <a href="/register/register" class="aregister">회원가입</a>
+            </p>
+        </div>
     </div>
 </div>
 </form>
-<footer th:include="fragments/footer.html"></footer>
+<!--<footer th:include="fragments/footer.html"></footer>-->
 </body>
 </html>

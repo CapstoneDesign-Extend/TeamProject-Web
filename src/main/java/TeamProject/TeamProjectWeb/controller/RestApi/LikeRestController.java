@@ -32,18 +32,16 @@ public class LikeRestController {
     @Transactional  // JPA의 변경 감지(Dirty Checking)기능을 사용하면 likeCnt를 수정한 후 boardRepository.save()를 호출할 필요 없음
     @PostMapping("/board/{boardId}/member/{memberId}")
     public LikeDTO addLikeToBoard(@PathVariable Long boardId, @PathVariable Long memberId) {  // 호출할 때마다 like 추가, 삭제를 반복
-        Optional<Member> memberOptional = Optional.ofNullable(memberRepository.findOne(memberId));
-        if(!memberOptional.isPresent()) {
+        Member member = memberRepository.findOne(memberId);
+        if (member == null) {
             throw new RuntimeException("Member not found");
         }
 
-        Member member = memberOptional.get();
-
-        Optional<Like> existingLike = likeRepository.findByMemberAndBoard(member, boardId);
+        List<Like> existingLikes = likeRepository.findByMemberAndBoard(memberId, boardId);
         Board board = boardRepository.findOne(boardId);
-        if (existingLike.isPresent()) {
-            likeRepository.delete(existingLike.get());
-            board.setLikeCnt(board.getLikeCnt() - 1);  // likeCnt(Board) --
+        if (!existingLikes.isEmpty()) {
+            likeRepository.delete(existingLikes.get(0));
+            board.setLikeCnt(board.getLikeCnt() - 1);
             return new LikeDTO(); // 좋아요 취소 시
         }
 
@@ -59,18 +57,16 @@ public class LikeRestController {
     @Transactional  // JPA는 변경 감지(Dirty Checking)기능을 제공:: 트랜젝션 내에서 엔터티의 상태를 변경하면 트랜잭션 종료 시점에 해당 변경이 DB에 자동으로 반영됨
     @PostMapping("/comment/{commentId}/member/{memberId}")
     public LikeDTO addLikeToComment(@PathVariable Long commentId, @PathVariable Long memberId) {  // 호출할 때마다 like 추가, 삭제를 반복
-        Optional<Member> memberOptional = Optional.ofNullable(memberRepository.findOne(memberId));
-        if(!memberOptional.isPresent()) {
+        Member member = memberRepository.findOne(memberId);
+        if (member == null) {
             throw new RuntimeException("Member not found");
         }
 
-        Member member = memberOptional.get();
-
-        Optional<Like> existingLike = likeRepository.findByMemberAndComment(member, commentId);
+        List<Like> existingLikes = likeRepository.findByMemberAndComment(memberId, commentId);
         Comment comment = commentRepository.findById(commentId);
-        if (existingLike.isPresent()) {
-            likeRepository.delete(existingLike.get());
-            comment.setLikeCount(comment.getLikeCount() - 1);  // likeCnt(Comment) --
+        if (!existingLikes.isEmpty()) {
+            likeRepository.delete(existingLikes.get(0));
+            comment.setLikeCount(comment.getLikeCount() - 1);
             return new LikeDTO(); // 좋아요 취소 시
         }
 
@@ -85,16 +81,14 @@ public class LikeRestController {
     // 클라이언트에서 게시글을 확인하기 직전, 현재 접속자가 liked한 post + comment들에 "좋아요 Clicked" 처리 하기 위한 정보 제공
     @GetMapping("/liked/board-and-comments/{boardId}/member/{memberId}")
     public ResponseEntity<LikeStatusDTO> getLikedBoardAndComments(@PathVariable Long boardId, @PathVariable Long memberId) {
-        Member member = memberRepository.findOne(memberId);
-        if (member == null) {
-            throw new RuntimeException("Member not found");
-        }
 
         // Check if the member liked the board
-        boolean likedBoard = likeRepository.findByMemberAndBoard(member, boardId).isPresent();
+        List<Like> likedBoardList = likeRepository.findByMemberAndBoard(memberId, boardId);
+
+        boolean likedBoard = !likedBoardList.isEmpty();
 
         // Find comments of the board that the member liked
-        List<Like> likedComments = likeRepository.findCommentsByMemberAndBoard(member, boardId);
+        List<Like> likedComments = likeRepository.findCommentsByMemberAndBoard(memberId, boardId);
 
         List<Long> commentIds = likedComments.stream()
                 .map(like -> like.getComment().getId())
@@ -109,12 +103,8 @@ public class LikeRestController {
 
     @GetMapping("/board/{boardId}/member/{memberId}/exists")
     public ResponseEntity<Boolean> isLikedBoard(@PathVariable Long boardId, @PathVariable Long memberId) {
-        Member member = memberRepository.findOne(memberId);
-        if (member == null) {
-            throw new RuntimeException("Member not found");
-        }
-
-        boolean exists = likeRepository.findByMemberAndBoard(member, boardId).isPresent();
+        List<Like> likes = likeRepository.findByMemberAndBoard(memberId, boardId);
+        boolean exists = !likes.isEmpty();
         return ResponseEntity.ok(exists);
     }
 
@@ -125,7 +115,9 @@ public class LikeRestController {
             throw new RuntimeException("Member not found");
         }
 
-        boolean exists = likeRepository.findByMemberAndComment(member, commentId).isPresent();
+        List<Like> likes = likeRepository.findByMemberAndComment(memberId, commentId);
+        boolean exists = !likes.isEmpty();
+
         return ResponseEntity.ok(exists);
     }
 }

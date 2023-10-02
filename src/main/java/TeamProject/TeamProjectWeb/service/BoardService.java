@@ -3,30 +3,27 @@ package TeamProject.TeamProjectWeb.service;
 
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
+import TeamProject.TeamProjectWeb.domain.Member;
+import TeamProject.TeamProjectWeb.dto.BoardForm;
 import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true) // 조회 시 readOnly = true 해당 속성을 주면 최적화됨
 //@AllArgsConstructor // 현재 클래스가 가지고 있는 필드를 가지고 생성자를 만들어줌
 @RequiredArgsConstructor // 현재 클래스가 가지고 있는 필드 중 private final 필드만을 가지고 생성자를 만들어줌
 public class BoardService {
-    @Value("${file.dir}")
-    private String fileDir; // 파일 경로
+
     private final BoardRepository boardRepository; // 게시판 저장소 의존성 주입
 
     @Transactional
@@ -36,15 +33,21 @@ public class BoardService {
     }
 
     @Transactional
-    public void createImageBoard(Board board, MultipartFile file) throws IOException {
-        UUID uuid = UUID.randomUUID(); // 동일한 파일 이름으로 저장되는 것을 막음
-        // file.getOriginalFilename() : 클라이언트가 저장한 파일 이름
-        String fileName = uuid + "_" + file.getOriginalFilename(); // 서버에 저장할 파일 이름 만들기
+    public Board createBoardWithAuthor(BoardForm form, Member loggedInMember) {
+        Board board = form.toBoard();
 
-        File saveFile = new File(fileDir, fileName); // 해당 경로에 해당 이름으로 저자욀 파일 생성
-        file.transferTo(saveFile); // 저장함
+        if (form.isAnonymous()) {
+            board.setAuthor("익명"); // 익명으로 표시
+        } else {
+            board.setAuthor(loggedInMember.getLoginId());
+        }
+        board.setMember(loggedInMember);
 
+        // 게시글 작성 시간을 현재 시간으로 설정한다.
+        board.setFinalDate(LocalDateTime.now());  // 게시글 작성 시간 설정
+        // 게시글을 생성하는 서비스 메소드를 호출한다.
         boardRepository.save(board);
+        return board;
     }
 
     @Transactional
@@ -63,12 +66,8 @@ public class BoardService {
 
     @Transactional
     public void deleteBoard(Long boardId) {
-        // 3. 게시글 삭제 -> 해당 member id로 판별
         // 게시글 ID를 기반으로 게시글을 삭제하는 메서드
-        Board board = boardRepository.findOne(boardId);
-        if (board != null) {
-            boardRepository.delete(board);
-        }
+        boardRepository.deleteById(boardId);
     }
 
     public Board findBoardById(Long boardId) {
@@ -114,3 +113,14 @@ public class BoardService {
     }
 
 }
+
+
+//    @Transactional
+//    public void deleteBoard(Long boardId) {
+//        // 3. 게시글 삭제 -> 해당 member id로 판별
+//        // 게시글 ID를 기반으로 게시글을 삭제하는 메서드
+//        Board board = boardRepository.findOne(boardId);
+//        if (board != null) {
+//            boardRepository.delete(board);
+//        }
+//    }

@@ -171,41 +171,14 @@
                         <div class="title" id="school_announcement">
                             자유게시판
                         </div>
-                        <a href="board/free_board.html" class="more">
+                        <a href="/board/free_board" class="more">
                             더보기
                         </a>
                     </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            아 오늘 시험 망했네
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
-                    </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            난 라면먹고 잔다
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
-                    </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            옆방 너무 시끄러움
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
-                    </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            우리 축제에 누구옴?
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
+                    <!-- 자유 게시판의 최근 게시글 5개를 반복하여 표시 -->
+                    <div class="board_content" th:each="board : ${recentFreeBoards}">
+                        <div class="board_post" th:text="${board.title}"></div>
+                        <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                     </div>
                 </div>
             </div>
@@ -216,41 +189,14 @@
                         <div class="title" id="school_announcement">
                             질문, 답변게시판
                         </div>
-                        <a href="board/qna_board.html" class="more">SSSS
+                        <a href="/board/qna_board" class="more">
                             더보기
                         </a>
                     </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            아 오늘 시험 망했네
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
-                    </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            난 라면먹고 잔다
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
-                    </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            옆방 너무 시끄러움
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
-                    </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            우리 축제에 누구옴?
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
+                    <!-- QnA 게시판의 최근 게시글 5개를 반복하여 표시 -->
+                    <div class="board_content" th:each="board : ${recentQnaBoards}">
+                        <div class="board_post" th:text="${board.title}"></div>
+                        <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                     </div>
                 </div>
             </div>
@@ -261,41 +207,14 @@
                         <div class="title" id="school_announcement">
                             장터게시판
                         </div>
-                        <a href="board/market_board.html" class="more">
+                        <a href="/board/market_board" class="more">
                             더보기
                         </a>
                     </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            아 오늘 시험 망했네
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
-                    </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            난 라면먹고 잔다
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
-                    </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            옆방 너무 시끄러움
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
-                    </div>
-                    <div class="board_content">
-                        <div class="board_post">
-                            우리 축제에 누구옴?
-                        </div>
-                        <div class="post_time">
-                            03/24
-                        </div>
+                    <!-- 장터 게시판의 최근 게시글 5개를 반복하여 표시 -->
+                    <div class="board_content" th:each="board : ${recentMarketBoards}">
+                        <div class="board_post" th:text="${board.title}"></div>
+                        <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                     </div>
                 </div>
             </div>
