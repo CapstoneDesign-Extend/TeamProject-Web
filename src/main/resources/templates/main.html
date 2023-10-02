@@ -176,11 +176,9 @@
                         </a>
                     </div>
                     <!-- 자유 게시판의 최근 게시글 5개를 반복하여 표시 -->
-                    <div th:each="board : ${recentFreeBoards}">
-                        <div class="board_content">
-                            <div class="board_post" th:text="${board.title}"></div>
-                            <div class="post_time" th:text="${board.formattedFinalDate}"></div>
-                        </div>
+                    <div class="board_content" th:each="board : ${recentFreeBoards}">
+                        <div class="board_post" th:text="${board.title}"></div>
+                        <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                     </div>
                 </div>
             </div>
@@ -196,11 +194,9 @@
                         </a>
                     </div>
                     <!-- QnA 게시판의 최근 게시글 5개를 반복하여 표시 -->
-                    <div th:each="board : ${recentQnaBoards}">
-                        <div class="board_content">
-                            <div class="board_post" th:text="${board.title}"></div>
-                            <div class="post_time" th:text="${board.formattedFinalDate}"></div>
-                        </div>
+                    <div class="board_content" th:each="board : ${recentQnaBoards}">
+                        <div class="board_post" th:text="${board.title}"></div>
+                        <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                     </div>
                 </div>
             </div>
@@ -216,11 +212,9 @@
                         </a>
                     </div>
                     <!-- 장터 게시판의 최근 게시글 5개를 반복하여 표시 -->
-                    <div th:each="board : ${recentMarketBoards}">
-                        <div class="board_content">
-                            <div class="board_post" th:text="${board.title}"></div>
-                            <div class="post_time" th:text="${board.formattedFinalDate}"></div>
-                        </div>
+                    <div class="board_content" th:each="board : ${recentMarketBoards}">
+                        <div class="board_post" th:text="${board.title}"></div>
+                        <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                     </div>
                 </div>
             </div>
