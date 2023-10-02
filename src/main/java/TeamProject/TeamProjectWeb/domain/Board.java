@@ -18,11 +18,13 @@ import static jakarta.persistence.CascadeType.ALL;
 @Table(name = "board")
 public class Board { // 게시판 클래스
     @Id
-    @GeneratedValue // 자동 생성 => 시퀀스
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")
     private Long id;
     @NotNull
+    @Column(length = 30)
     private String title; // 제목
+    @Column(length = 2048)
     private String content; // 본문
     @ManyToOne(fetch=FetchType.LAZY) // fetch=FetchType.LAZY : 지연 로딩으로 실시간 업로딩 되는 것을 막음
     @JoinColumn(name = "memberId") // 외래키 => 조인할 속성 이름
@@ -33,11 +35,15 @@ public class Board { // 게시판 클래스
     private LocalDateTime finalDate; // 최종 등록된 날짜
     @Enumerated(EnumType.STRING) // DB에 저장할때, enum 각각 요소의 순서(상수)가 아닌, 문자열로 저장
     private BoardKind boardKind; // 게시판 종류
+    @Column(length = 10)
     private String author; // 익명 또는 사용자명을 저장, 게시판에 출력할때 가져오기위함
     @Column(name = "like_count")
     private int likeCnt; // 좋아요 개수
     @Column(name = "chat_count")
     private int chatCnt;  // 댓글수
+    @Column(length = 50)
+    private String fileName;
+    private String filePath;
     private Integer price;  // null을 허용하기 위해 Wrapper클래스 사용
     @JsonIgnore
     @OneToMany(mappedBy = "board", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, orphanRemoval = true) // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌

@@ -19,7 +19,28 @@ public class FileService {
     //    private final FileDTO fileDTO;
     private final FileRepository fileRepository;
 
-    public File findById(Long id) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*public File findById(Long id) {
         return fileRepository.findById(id);
     }
 
@@ -55,7 +76,7 @@ public class FileService {
     public void deleteFileById(Long fileId) {
         fileRepository.deleteById(fileId);
     }
-
+*/
 }
 
     /*public void saveFile1(java.io.File file) { // 파일 받아옴

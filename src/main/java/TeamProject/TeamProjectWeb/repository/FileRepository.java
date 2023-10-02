@@ -2,6 +2,7 @@ package TeamProject.TeamProjectWeb.repository;
 
 import TeamProject.TeamProjectWeb.domain.File;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,28 @@ public class FileRepository { // CRUD를 수행하는 클래스
     public File findById(Long id) {
         // 주어진 ID로 파일 엔티티 조회
         return em.find(File.class, id);
+    }
+    public File findByServerFileName(String serverFileName) {
+        String jpql = "SELECT f FROM File f WHERE f.serverFileName = :serverFileName";
+        return em.createQuery(jpql, File.class)
+                .setParameter("serverFileName", serverFileName)
+                .getSingleResult();
+    }
+    public File updateFileById(Long id, File updatedFile) {
+        File existingFile = em.find(File.class, id); // ID로 엔티티 조회
+
+        if (existingFile != null) {
+            // 엔티티를 찾았을 경우, 업데이트할 내용을 설정
+            existingFile.setFileName(updatedFile.getFileName());
+            existingFile.setUploadFileName(updatedFile.getUploadFileName());
+            existingFile.setServerFileName(updatedFile.getServerFileName());
+
+            // 엔티티를 merge하여 수정
+            return em.merge(existingFile);
+        } else {
+            // 엔티티를 찾지 못했을 경우 예외 처리 또는 필요한 로직 수행
+            throw new EntityNotFoundException("File with ID " + id + " not found.");
+        }
     }
 
     //-- 파일 삭제 --//

@@ -16,7 +16,7 @@ public class FileController {
     private final FileService fileService;
 
     // 파일 업로드 폼을 보여줍니다.
-    @GetMapping("/upload")
+    /*@GetMapping("/upload")
     public String uploadForm() {
         return "file/uploadForm";
     }
@@ -46,5 +46,5 @@ public class FileController {
         // 파일 ID를 이용하여 파일을 삭제합니다.
         fileService.deleteFileById(fileId);
         return "redirect:/";
-    }
+    }*/
 }
