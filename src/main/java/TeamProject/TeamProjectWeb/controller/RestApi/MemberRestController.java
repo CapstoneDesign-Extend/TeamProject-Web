@@ -33,15 +33,16 @@ public class MemberRestController {
 
     // 학번으로 해당 학번의 모든 회원 정보를 조회하는 API 엔드포인트
     @GetMapping("/byStudentId/{studentId}")
-    public ResponseEntity<List<Member>> getAllMembersByStudentId(@PathVariable int studentId) {
+    public ResponseEntity<List<MemberDTO>> getAllMembersByStudentId(@PathVariable int studentId) {
         // MemberRepository를 사용하여 해당 학번의 모든 회원 정보를 조회
         List<Member> members = memberRepository.findAllByStudentId(studentId);
         // 조회된 회원 정보가 없을 경우 404 응답 반환
         if (members.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+        List<MemberDTO> memberDTOList = ConvertDTO.convertMemberList(members);
         // 조회된 회원 정보를 200 응답과 함께 반환
-        return ResponseEntity.ok(members);
+        return ResponseEntity.ok(memberDTOList);
     }
 
 
@@ -61,32 +62,33 @@ public class MemberRestController {
 
     //  이메일로 회원 정보를 조회하는 API 엔드포인트
     @GetMapping("/byEmail/{email}")
-    public ResponseEntity<Member> getMemberByEmail(@PathVariable String email) {
+    public ResponseEntity<MemberDTO> getMemberByEmail(@PathVariable String email) {
         // MemberRepository를 사용하여 해당 이메일의 회원 정보를 조회
         Optional<Member> optionalMember = memberRepository.findByEmail(email);
         // 조회된 회원 정보가 없을 경우 404 응답 반환
         if (optionalMember.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+        MemberDTO dto = ConvertDTO.convertMember(optionalMember.get());
         // 조회된 회원 정보를 200 응답과 함께 반환
-        return ResponseEntity.ok(optionalMember.get());
+        return ResponseEntity.ok(dto);
     }
 
 
     // 모든 회원 정보를 조회하는 API 엔드포인트
     @GetMapping
-    public List<Member> getAllMembers() {
+    public List<MemberDTO> getAllMembers() {
         // MemberRepository 를 사용하여 모든 회원 정보를 조회
-        return memberRepository.findAll();
+        return ConvertDTO.convertMemberList(memberRepository.findAll());
     }
 
     // 회원을 생성하는 API 엔드포인트
     @PostMapping
-    public ResponseEntity<Member> createMember(@RequestBody Member member) {
+    public ResponseEntity<MemberDTO> createMember(@RequestBody Member member) {
         // MemberRepository 를 사용하여 회원 정보를 저장
         memberRepository.save(member);
         // 저장된 회원 정보를 200 응답과 함께 반환
-        return ResponseEntity.ok(member);
+        return ResponseEntity.ok(ConvertDTO.convertMember(member));
     }
 
     // 특정 ID의 회원 정보를 삭제하는 API 엔드포인트

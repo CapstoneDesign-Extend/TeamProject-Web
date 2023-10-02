@@ -9,6 +9,8 @@ import TeamProject.TeamProjectWeb.dto.CommentDTO;
 import TeamProject.TeamProjectWeb.dto.LikeDTO;
 import TeamProject.TeamProjectWeb.dto.MemberDTO;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class ConvertDTO {
@@ -37,6 +39,25 @@ public class ConvertDTO {
         dto.setChatCnt(board.getChatCnt());
         return dto;
     }
+    public static List<BoardDTO> convertBoardList(List<Board> boards){
+        List<BoardDTO> boardDTOList = new ArrayList<>();
+        for (Board board : boards){
+            BoardDTO dto = new BoardDTO();
+            dto.setId(board.getId());
+            dto.setTitle(board.getTitle());
+            dto.setContent(board.getContent());
+            dto.setAuthor(board.getAuthor());
+            dto.setMemberId(board.getMember().getId());
+            dto.setFinalDate(board.getFinalDate());
+            dto.setBoardKind(board.getBoardKind());
+            dto.setViewCnt(board.getViewCnt());
+            dto.setLikeCnt(board.getLikeCnt());
+            dto.setChatCnt(board.getChatCnt());
+            boardDTOList.add(dto);
+        }
+
+        return boardDTOList;
+    }
     public static MemberDTO convertMember(Member member){
         MemberDTO dto = new MemberDTO();
         dto.setId(member.getId());
@@ -64,6 +85,22 @@ public class ConvertDTO {
             return Optional.of(dto);
         }
         return Optional.empty();
+    }
+    public static List<MemberDTO> convertMemberList(List<Member> members){
+        List<MemberDTO> memberDTOS = new ArrayList<>();
+        for (Member member : members){
+            MemberDTO dto = new MemberDTO();
+            dto.setId(member.getId());
+            dto.setStudentId(member.getStudentId());
+            dto.setName(member.getName());
+            dto.setSchoolName(member.getSchoolName());
+            dto.setAccess(member.getAccess());
+            dto.setLoginId(member.getLoginId());
+            dto.setPassword(member.getPassword());
+            dto.setEmail(member.getEmail());
+            memberDTOS.add(dto);
+        }
+        return memberDTOS;
     }
     public static LikeDTO convertLike(Like like) {
         LikeDTO dto = new LikeDTO();
