@@ -33,11 +33,11 @@ public class HomeController {
             return "main";
         }
 
-        // 자유게시판의 최근 게시글 5개
+        // 자유게시판의 최근 게시글 4개
         addRecentBoardsToModel(BoardKind.FREE, "recentFreeBoards", model);
-        // 장터게시판의 최근 게시글 5개
+        // 장터게시판의 최근 게시글 4개
         addRecentBoardsToModel(BoardKind.MARKET, "recentMarketBoards", model);
-        // QnA 게시판의 최근 게시글 5개
+        // QnA 게시판의 최근 게시글 4개
         addRecentBoardsToModel(BoardKind.QNA, "recentQnaBoards", model);
 
 //        // 세션에 회원 데이터가 있으면 게시글 데이터를 가져와서 추가
@@ -52,7 +52,7 @@ public class HomeController {
     }
 
     private void addRecentBoardsToModel(BoardKind boardKind, String attributeName, Model model) {
-        List<MainBoardDTO> recentBoards = boardService.findRecentBoardsByKindForMainPage(boardKind, BoardConstants.RECENT_BOARD_LIMIT);
+        List<MainBoardDTO> recentBoards = boardService.findRecentBoardsByKindForMainPage(boardKind, BoardConstants.RECENT_BOARD_LIMIT_FOUR);
         model.addAttribute(attributeName, recentBoards);
     }
 }

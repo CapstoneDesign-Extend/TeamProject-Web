@@ -142,4 +142,20 @@ public class BoardRepository {
                 .setMaxResults(limit)
                 .getResultList();
     }
+
+
+    // 게시글 종류와 페이징 정보를 받아서 해당 게시글들과 그에 연관된 댓글을 가져오는 메서드를 정의
+    public List<Board> findBoardWithComments(BoardKind boardKind, Pageable pageable) {
+        // JPQL 쿼리로, Board에서 comments를 join fetch로 가져옵니다.
+        // where 절로 게시글의 종류를 조건으로 하며, finalDate를 기준으로 내림차순으로 정렬합니다.
+        return em.createQuery("select b from Board b join fetch b.comments where b.boardKind = :boardKind order by b.finalDate desc", Board.class)
+                // JPQL 쿼리의 :boardKind 변수에 실제 boardKind 값을 바인딩합니다.
+                .setParameter("boardKind", boardKind)
+                // 페이징 처리를 위해 시작 위치를 설정합니다.
+                .setFirstResult((int) pageable.getOffset())
+                // 한 페이지에 가져올 결과의 수를 설정합니다.
+                .setMaxResults(pageable.getPageSize())
+                // 쿼리를 실행하고 결과를 리스트로 반환합니다.
+                .getResultList();
+    }
 }

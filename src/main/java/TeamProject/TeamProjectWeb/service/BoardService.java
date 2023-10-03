@@ -112,6 +112,26 @@ public class BoardService {
         return boardRepository.findRecentBoardsByKindForMainPage(boardKind, limit);
     }
 
+    public List<Board> findByBoardKind(BoardKind boardKind) {
+        // 특정 게시판 종류로 게시글을 검색하는 메서드
+        return boardRepository.findByBoardKind(boardKind);
+    }
+
+    public List<Board> findByBoardKindAmount(BoardKind boardKind, int amount) {
+        // 특정 게시판 종류로 제한된 수만큼의 게시글을 검색하는 메서드
+        return boardRepository.findByBoardKindAmount(boardKind, amount);
+    }
+
+    public List<Board> findByKeyword(String keyword) {
+        // 키워드로 게시글을 검색하는 메서드
+        return boardRepository.findByKeyword(keyword);
+    }
+
+    public List<Board> findByKeywordKind(String keyword, BoardKind boardKind) {
+        // 키워드와 게시판 종류로 게시글을 검색하는 메서드
+        return boardRepository.findByKeywordKind(keyword, boardKind);
+    }
+
 }
 
 

@@ -1,10 +1,12 @@
 package TeamProject.TeamProjectWeb.controller.board;
 
+import TeamProject.TeamProjectWeb.constants.BoardConstants;
 import TeamProject.TeamProjectWeb.controller.login.SessionConst;
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.BoardForm;
+import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
 import TeamProject.TeamProjectWeb.service.BoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -148,5 +149,24 @@ public class BoardController {
     public String delete(@PathVariable Long boardId) {
         boardService.deleteBoard(boardId);
         return "redirect:/";
+    }
+
+    @GetMapping("/board_collection")
+    public String collectionPage(Model model) {
+
+        model.addAttribute("loggedIn", true);
+
+        // 자유게시판의 최근 게시글 7개
+        addRecentBoardsToModel(BoardKind.FREE, "recentFreeBoards", model);
+        // 장터게시판의 최근 게시글 7개
+        addRecentBoardsToModel(BoardKind.MARKET, "recentMarketBoards", model);
+        // QnA 게시판의 최근 게시글 7개
+        addRecentBoardsToModel(BoardKind.QNA, "recentQnaBoards", model);
+        return "board/board_collection";
+    }
+
+    private void addRecentBoardsToModel(BoardKind boardKind, String attributeName, Model model) {
+        List<MainBoardDTO> recentBoards = boardService.findRecentBoardsByKindForMainPage(boardKind, BoardConstants.RECENT_BOARD_LIMIT_SEVEN);
+        model.addAttribute(attributeName, recentBoards);
     }
 }

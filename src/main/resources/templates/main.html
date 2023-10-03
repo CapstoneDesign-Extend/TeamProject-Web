@@ -175,7 +175,7 @@
                             더보기
                         </a>
                     </div>
-                    <!-- 자유 게시판의 최근 게시글 5개를 반복하여 표시 -->
+                    <!-- 자유 게시판의 최근 게시글 4개를 반복하여 표시 -->
                     <div class="board_content" th:each="board : ${recentFreeBoards}">
                         <div class="board_post" th:text="${board.title}"></div>
                         <div class="post_time" th:text="${board.formattedFinalDate}"></div>
@@ -193,7 +193,7 @@
                             더보기
                         </a>
                     </div>
-                    <!-- QnA 게시판의 최근 게시글 5개를 반복하여 표시 -->
+                    <!-- QnA 게시판의 최근 게시글 4개를 반복하여 표시 -->
                     <div class="board_content" th:each="board : ${recentQnaBoards}">
                         <div class="board_post" th:text="${board.title}"></div>
                         <div class="post_time" th:text="${board.formattedFinalDate}"></div>
@@ -211,7 +211,7 @@
                             더보기
                         </a>
                     </div>
-                    <!-- 장터 게시판의 최근 게시글 5개를 반복하여 표시 -->
+                    <!-- 장터 게시판의 최근 게시글 4개를 반복하여 표시 -->
                     <div class="board_content" th:each="board : ${recentMarketBoards}">
                         <div class="board_post" th:text="${board.title}"></div>
                         <div class="post_time" th:text="${board.formattedFinalDate}"></div>
@@ -391,6 +391,6 @@
         </div>
     </div>
 </div>
-<footer th:include="fragments/footer.html"></footer>
+<footer th:include="/fragments/footer.html"></footer>
 </body>
 </html>
