@@ -4,20 +4,25 @@ import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.BoardDTO;
+import TeamProject.TeamProjectWeb.dto.BoardSummaryDTO;
 import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
+import TeamProject.TeamProjectWeb.utils.BoardRepositoryCustom;
 import TeamProject.TeamProjectWeb.utils.ConvertDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
 @Repository // 자동으로 스프링 bean으로 사용됨
 @RequiredArgsConstructor
-public class BoardRepository {
+public class BoardRepository implements BoardRepositoryCustom {
 
     @PersistenceContext // EntityManager를 주입받기 위해 사용
     private final EntityManager em;
@@ -157,5 +162,27 @@ public class BoardRepository {
                 .setMaxResults(pageable.getPageSize())
                 // 쿼리를 실행하고 결과를 리스트로 반환합니다.
                 .getResultList();
+    }
+
+    @Override
+    public Page<BoardSummaryDTO> findSummaryByBoardKind(BoardKind boardKind, Pageable pageable) {
+        String jpql = "SELECT new TeamProject.TeamProjectWeb.dto.BoardSummaryDTO(b.id, b.title, b.content, b.finalDate, b.author, " +
+                "(SELECT COUNT(l) FROM Like l WHERE l.board = b), " +
+                "(SELECT COUNT(c) FROM Comment c WHERE c.board = b)) " +
+                "FROM Board b WHERE b.boardKind = :boardKind order by b.finalDate desc";
+
+        // Execute the query and fetch the results
+        List<BoardSummaryDTO> results = em.createQuery(jpql, BoardSummaryDTO.class)
+                .setParameter("boardKind", boardKind)
+                .setFirstResult((int) pageable.getOffset())
+                .setMaxResults(pageable.getPageSize())
+                .getResultList();
+
+        // Get the total count of records for pagination metadata
+        long total = em.createQuery("SELECT COUNT(b) FROM Board b WHERE b.boardKind = :boardKind", Long.class)
+                .setParameter("boardKind", boardKind)
+                .getSingleResult();
+
+        return new PageImpl<>(results, pageable, total);
     }
 }

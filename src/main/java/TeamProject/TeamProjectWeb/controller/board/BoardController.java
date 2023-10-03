@@ -6,6 +6,7 @@ import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.BoardForm;
+import TeamProject.TeamProjectWeb.dto.BoardSummaryDTO;
 import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
 import TeamProject.TeamProjectWeb.service.BoardService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,7 +63,7 @@ public class BoardController {
     }
 
     // 게시글 상세 페이지를 보여줍니다.
-    @GetMapping("/{boardId}")
+    @GetMapping("/reading/{boardId}")
     public String view(@PathVariable Long boardId, Model model) {
         Board board = boardService.findBoardById(boardId);
         if (board == null) {
@@ -168,5 +169,13 @@ public class BoardController {
     private void addRecentBoardsToModel(BoardKind boardKind, String attributeName, Model model) {
         List<MainBoardDTO> recentBoards = boardService.findRecentBoardsByKindForMainPage(boardKind, BoardConstants.RECENT_BOARD_LIMIT_SEVEN);
         model.addAttribute(attributeName, recentBoards);
+    }
+
+    @GetMapping("/{boardKind}")
+    public String showBoardSummary(@PathVariable BoardKind boardKind, Model model, Pageable pageable) {
+        Page<BoardSummaryDTO> boardSummaryPage = boardService.getBoardSummaryByKind(boardKind, pageable);
+        model.addAttribute("boardSummaryPage", boardSummaryPage);
+        model.addAttribute("boardKind", boardKind);
+        return "board/boardSummary";
     }
 }

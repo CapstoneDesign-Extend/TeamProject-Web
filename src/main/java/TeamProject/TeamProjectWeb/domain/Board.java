@@ -36,7 +36,7 @@ public class Board { // 게시판 클래스
     @Enumerated(EnumType.STRING) // DB에 저장할때, enum 각각 요소의 순서(상수)가 아닌, 문자열로 저장
     private BoardKind boardKind; // 게시판 종류
     @Column(length = 10)
-    private String author; // 익명 또는 사용자명을 저장, 게시판에 출력할때 가져오기위함
+    private String author; // 익명 또는 사용자 id (loginId)을 저장, 게시판에 출력할때 가져오기위함
     @Column(name = "like_count")
     private int likeCnt; // 좋아요 개수
     @Column(name = "chat_count")

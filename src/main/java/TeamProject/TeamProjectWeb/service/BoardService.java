@@ -5,6 +5,7 @@ import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.BoardForm;
+import TeamProject.TeamProjectWeb.dto.BoardSummaryDTO;
 import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -130,6 +131,10 @@ public class BoardService {
     public List<Board> findByKeywordKind(String keyword, BoardKind boardKind) {
         // 키워드와 게시판 종류로 게시글을 검색하는 메서드
         return boardRepository.findByKeywordKind(keyword, boardKind);
+    }
+
+    public Page<BoardSummaryDTO> getBoardSummaryByKind(BoardKind boardKind, Pageable pageable) {
+        return boardRepository.findSummaryByBoardKind(boardKind, pageable);
     }
 
 }

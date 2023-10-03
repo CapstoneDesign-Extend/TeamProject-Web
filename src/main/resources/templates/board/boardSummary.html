@@ -1,0 +1,42 @@
+<!-- HTML to render board summary content -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Board Summary</title>
+</head>
+<body>
+<h1 th:text="'Board Summary for ' + ${boardKind}"></h1>
+<table>
+  <!-- Table headers -->
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th>Author</th>
+    <th>Date</th>
+    <th>Like Count</th>
+    <th>Comment Count</th>
+  </tr>
+  </thead>
+  <!-- Table data -->
+  <tbody>
+  <tr th:each="summary : ${boardSummaryPage.content}">
+    <td th:text="${summary.title}"></td>
+    <td th:text="${summary.content.length() <= 100 ? summary.content : summary.content.substring(0, 100) + '...'}"></td> <!-- Snippet logic in the template -->
+    <td th:text="${summary.author}"></td>
+    <td th:text="${summary.finalDate}"></td>
+    <td th:text="${summary.likeCnt}"></td>
+    <td th:text="${summary.chatCnt}"></td>
+  </tr>
+  </tbody>
+</table>
+<!-- Pagination controls -->
+<div th:if="${boardSummaryPage.totalPages > 1}">
+  <ul>
+    <li th:each="pageNumber : ${#numbers.sequence(1, boardSummaryPage.totalPages)}">
+      <a th:href="@{/boards/{boardKind}(boardKind=${boardKind}, page=${pageNumber - 1})}" th:text="${pageNumber}"></a>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
