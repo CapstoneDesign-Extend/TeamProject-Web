@@ -3,15 +3,61 @@ package TeamProject.TeamProjectWeb.controller.RestApi;
 
 import TeamProject.TeamProjectWeb.domain.File;
 import TeamProject.TeamProjectWeb.repository.FileRepository;
+import org.springframework.core.io.Resource;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.HttpStatus;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/api/files")
 @RequiredArgsConstructor
 public class FileRestController {
     private final FileRepository fileRepository;
+
+    @Value("${file.dir}")
+    private String fileDir; // 파일 경로
+
+
+    @PostMapping("/upload")
+    public ResponseEntity<File> uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+        File storedFile = new File();
+        storedFile = storedFile.storeFile(multipartFile);
+        File savedFile = fileRepository.save(storedFile);
+        return ResponseEntity.ok(savedFile);
+    }
+
+    @GetMapping("/download/{serverFileName}")
+    public ResponseEntity<?> downloadFile(@PathVariable String serverFileName) {
+        File file = fileRepository.findByServerFileName(serverFileName);
+        if (file == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Path path = Paths.get(fileDir + serverFileName);
+        byte[] fileBytes;
+        try {
+            fileBytes = Files.readAllBytes(path);
+        } catch (IOException e) {
+            // 여기에서 예외를 처리합니다. 예를 들면, 로그를 기록하거나 에러 메시지를 반환할 수 있습니다.
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error reading the file.");
+        }
+
+        Resource resource = new ByteArrayResource(fileBytes);
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(resource);
+    }
 
     // 파일 저장 API 엔드포인트
     @PostMapping
