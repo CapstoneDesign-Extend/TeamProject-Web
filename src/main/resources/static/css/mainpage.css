@@ -71,19 +71,23 @@ a:active{
   justify-content:center;
   align-items:center;
   font-size:14px;
+  height:20px;
   margin-bottom:8px;
-  height:14px;
 }
+
 
 .board_base .board_content:last-child {
   margin-bottom:0;
 }
 
 .board_base .board_content .board_post{
-  display:flex;
+  display:block;
   justify-content:left;
   align-items:center;
   width:200px;
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
 }
 
 .board_base .board_content .post_time{
@@ -96,9 +100,28 @@ a:active{
 
 
 
-
-
-
+/*로그인 안하면 게시판에 띄워주는 창*/
+.needlogin {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  width:400px;
+  height:112px;
+  color:rgb(166, 166, 166);
+}
+.needlogin .login_button {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-color: #0d339a;
+  color:white;
+  width:65px;
+  height:30px;
+  border-radius:9px;
+  font-size:12px;
+}
+/**/
 
 
 
