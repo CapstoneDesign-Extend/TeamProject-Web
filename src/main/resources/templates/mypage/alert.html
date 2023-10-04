@@ -20,7 +20,12 @@
     <script defer src="/js/alert.js"></script>
 </head>
 <body>
-<!--여기에 헤더 삽입-->
+<header th:if="${loggedIn}">
+    <header th:include="/fragments/header-after.html"></header>
+</header>
+<header th:unless="${loggedIn}">
+    <header th:include="/fragments/header-before.html"></header>
+</header>
     <div class="wrap_mainframe">
         <div class="mainframe">
             <div class="today_alert">
@@ -30,87 +35,87 @@
                 <div class="alert_main">
                     <div class="alert_div">
                         <div class="alert_top">
-                            <img src="" alt="" class="alert_profile_pic">
+                            <img src="/img_source/Extend.png" alt="" class="alert_profile_pic">
                             <div class="alert_name">
-                                익스텐드 운영진
+                                Extend
                             </div>
                             <div class="alert_time">
-                                6분전
+                                5분전
                             </div>
                             <div class="alert_delete" onclick="deleting(event)">
                                <span class="material-icons">delete</span>
                             </div>
                         </div>
                         <div class="alert_body">
-                            그래서 이제 뭐함
+                            게시글이 등록되었습니다.
                         </div>
                     </div>
                     <div class="alert_div">
                         <div class="alert_top">
-                            <img src="" alt="" class="alert_profile_pic">
+                            <img src="/img_source/Extend.png" alt="" class="alert_profile_pic">
                             <div class="alert_name">
-                                익스텐드 운영진
+                                Extend
                             </div>
                             <div class="alert_time">
-                                6분전
+                                2시간전
                             </div>
                             <div class="alert_delete" onclick="deleting(event)">
                                <span class="material-icons">delete</span>
                             </div>
                         </div>
                         <div class="alert_body">
-                            그래서 이제 뭐함0
+                            게시글이 등록되었습니다.
                         </div>
                     </div>
                     <div class="alert_div">
                         <div class="alert_top">
-                            <img src="" alt="" class="alert_profile_pic">
+                            <img src="/img_source/Extend.png" alt="" class="alert_profile_pic">
                             <div class="alert_name">
-                                익스텐드 운영진
+                                Extend
                             </div>
                             <div class="alert_time">
-                                6분전
+                                1일전
                             </div>
                             <div class="alert_delete" onclick="deleting(event)">
                                <span class="material-icons">delete</span>
                             </div>
                         </div>
                         <div class="alert_body">
-                            그래서 이제 뭐함1
+                            게시글이 등록되었습니다.
                         </div>
                     </div>
                     <div class="alert_div">
                         <div class="alert_top">
-                            <img src="" alt="" class="alert_profile_pic">
+                            <img src="/img_source/Extend.png" alt="" class="alert_profile_pic">
                             <div class="alert_name">
-                                익스텐드 운영진
+                                Extend
                             </div>
                             <div class="alert_time">
-                                6분전
+                                3일전
                             </div>
                             <div class="alert_delete" onclick="deleting(event)">
                                <span class="material-icons">delete</span>
                             </div>
                         </div>
                         <div class="alert_body">
-                            그래서 이제 뭐함2
+                            게시글이 등록되었습니다.
                         </div>
                     </div>
                     <div class="alert_div">
                         <div class="alert_top">
-                            <img src="" alt="" class="alert_profile_pic">
+                            <img src="/img_source/Extend.png" alt="" class="alert_profile_pic">
                             <div class="alert_name">
-                                익스텐드 운영진
+                                Extend
                             </div>
                             <div class="alert_time">
-                                6분전
+                                6일전
                             </div>
                             <div class="alert_delete" onclick="deleting(event)">
                                <span class="material-icons">delete</span>
                             </div>
                         </div>
                         <div class="alert_body">
-                            그래서 이제 뭐함3
+                            회원가입이 완료되었습니다.
                         </div>
                     </div>
                 </div>
@@ -130,6 +135,6 @@
             </div>
         </div>
     </div>
-
+<footer th:include="/fragments/footer.html"></footer>
 </body>
 </html>

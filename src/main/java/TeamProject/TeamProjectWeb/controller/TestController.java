@@ -96,5 +96,17 @@ public class TestController {
         return "personal_info/withdraw";
     }
 
+    @GetMapping("/mypage/schedule")
+    public String schedule(Model model){
+        model.addAttribute("loggedIn", true);
+        return "/mypage/schedule";
+    }
+
+    @GetMapping("/mypage/alert")
+    public String alert(Model model){
+        model.addAttribute("loggedIn", true);
+        return "/mypage/alert";
+    }
+
 
 }

@@ -200,4 +200,10 @@ public class BoardController {
         model.addAttribute("loggedIn", true);
         return "board/testBoardSummaryList";
     }
+
+    @GetMapping("/notice")
+    public String notice(Model model){
+        model.addAttribute("loggedIn", true);
+        return "board/notice";
+    }
 }

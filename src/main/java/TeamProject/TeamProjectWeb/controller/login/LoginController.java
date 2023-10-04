@@ -85,7 +85,7 @@ public class LoginController {
         }
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(@RequestParam("loginId") String loginId,
                          HttpServletRequest request,
                          HttpServletResponse response,
