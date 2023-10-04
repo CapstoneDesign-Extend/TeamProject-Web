@@ -34,7 +34,7 @@
 <div th:if="${boardSummaryPage.totalPages > 1}">
   <ul>
     <li th:each="pageNumber : ${#numbers.sequence(1, boardSummaryPage.totalPages)}">
-      <a th:href="@{/boards/{boardKind}(boardKind=${boardKind}, page=${pageNumber - 1})}" th:text="${pageNumber}"></a>
+      <a th:href="@{/board/{boardKind}(boardKind=${boardKind}, page=${pageNumber - 1})}" th:text="${pageNumber}"></a>
     </li>
   </ul>
 </div>

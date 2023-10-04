@@ -18,7 +18,7 @@ import static jakarta.persistence.CascadeType.ALL;
 @Table(name = "board")
 public class Board { // 게시판 클래스
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue//(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")
     private Long id;
     @NotNull
