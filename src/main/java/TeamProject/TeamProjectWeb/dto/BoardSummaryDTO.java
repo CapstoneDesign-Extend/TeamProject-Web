@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 public class BoardSummaryDTO {
@@ -17,7 +19,20 @@ public class BoardSummaryDTO {
     private long chatCnt;          // Count of comments the post has received
 
 
-    // getters and setters...
+    public String getFriendlyTime() {
+        LocalDateTime now = LocalDateTime.now();
+        Duration duration = Duration.between(finalDate, now);
+        long minutesPassed = duration.toMinutes();
+
+        if (minutesPassed < 60) {
+            return minutesPassed + "분전";
+        } else if (minutesPassed < 24 * 60) {
+            return (minutesPassed / 60) + "시간전";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
+            return finalDate.format(formatter);
+        }
+    }
 
 
     public BoardSummaryDTO(Long id, String title, String content, LocalDateTime finalDate, String author, long likeCnt, long chatCnt) {

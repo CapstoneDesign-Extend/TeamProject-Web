@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/free_board.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <!--Google Api-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+          rel="stylesheet">          
+    <script defer src="/js/calendar.js"></script>
+    <script defer src="/js/header.js"></script>
+</head>
+<body>
+<header th:if="${loggedIn}">
+    <header th:include="/fragments/header-after.html"></header>
+</header>
+<header th:unless="${loggedIn}">
+    <header th:include="/fragments/header-before.html"></header>
+</header>
+<div class="wrap_mainframe">
+    <div class="mainframe">
+        <div class="board_div">
+            <div class="board_name">
+                <div class="board_name_text">
+                    <span class="board_name_text_inner" th:text="${boardKind}"></span>
+                </div>
+                <div class="write">
+                    <a href="/board/writing/write" style="height:24px  "><span class="material-icons">edit</span></a>
+                </div>
+            </div>
+            <div class="board_content_list">
+                <a th:each="summary : ${boardSummaryPage.content}" th:href="@{/board/reading/{id}(id=${summary.id})}" class="board_content_div">
+                    <div class="title" th:text="${summary.title}">임시글 제목</div>
+                    <div class="content_inner" th:text="${summary.content.length() <= 100 ? summary.content : summary.content.substring(0, 100) + '...'}">임시글 내용</div>
+                    <div class="info_block">
+                        <div class="time_name">
+                            <span class="writing_time" th:text="${summary.friendlyTime}">5분전</span>
+                            <span class="writer_name" th:text="${summary.author}">익명</span>
+                        </div>
+                        <div class="recom_comment">
+                            <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
+                            <span class="recom_count" th:text="${summary.likeCnt}">7</span>
+                            <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
+                            <span class="comment_count" th:text="${summary.chatCnt}">10</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Pagination controls -->
+        <div class="pagination" th:if="${boardSummaryPage.totalPages > 1}">
+            <ul>
+                <li th:each="pageNumber : ${#numbers.sequence(1, boardSummaryPage.totalPages)}">
+                    <a th:href="@{/board/{boardKind}(boardKind=${boardKind}, page=${pageNumber - 1})}" th:text="${pageNumber}"></a>
+                </li>
+            </ul>
+        </div>
+
+            <div class="rank_board_div">
+                <div class="viewrank">
+                    <div class="viewrank_text">
+                        <div class="viewrank_title">
+                            조회수 인기글
+                        </div>
+                        <div class="more">
+                            <a href="hot_board.html">더보기</a>
+                        </div>
+                    </div>
+                    <div class="viewrank_content">
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="viewrank">
+                    <div class="viewrank_text">
+                        <div class="viewrank_title">
+                            추천수 인기글
+                        </div>
+                        <div class="more">
+                            <a href="hot_board.html">더보기</a>
+                        </div>
+                    </div>
+                    <div class="viewrank_content">
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                        <a href="javascript:void(0)" class="contentbox">
+                            <div class="content_title">첫번째 글</div>
+                            <div class="write_time">06/07 17:26</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<footer th:include="/fragments/footer.html"></footer>
+</body>
+</html>

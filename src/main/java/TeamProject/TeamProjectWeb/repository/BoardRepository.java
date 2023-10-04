@@ -171,6 +171,7 @@ public class BoardRepository implements BoardRepositoryCustom {
                 "(SELECT COUNT(c) FROM Comment c WHERE c.board = b)) " +
                 "FROM Board b WHERE b.boardKind = :boardKind order by b.finalDate desc";
 
+
         // Execute the query and fetch the results
         List<BoardSummaryDTO> results = em.createQuery(jpql, BoardSummaryDTO.class)
                 .setParameter("boardKind", boardKind)

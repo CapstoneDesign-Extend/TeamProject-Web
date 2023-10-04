@@ -171,16 +171,14 @@
                         <div class="title" id="school_announcement">
                             자유게시판
                         </div>
-                        <a href="/board/free_board" class="more">
+                        <a href="/board/FREE" class="more">
                             더보기
                         </a>
                     </div>
-                    <!-- 자유 게시판의 최근 게시글 5개를 반복하여 표시 -->
-                    <div th:each="board : ${recentFreeBoards}">
-                        <div class="board_content">
-                            <div class="board_post" th:text="${board.title}"></div>
-                            <div class="post_time" th:text="${board.formattedFinalDate}"></div>
-                        </div>
+                    <!-- 자유 게시판의 최근 게시글 4개를 반복하여 표시 -->
+                    <div class="board_content" th:each="board : ${recentFreeBoards}">
+                        <div class="board_post" th:text="${board.title}"></div>
+                        <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                     </div>
                 </div>
             </div>
@@ -191,16 +189,14 @@
                         <div class="title" id="school_announcement">
                             질문, 답변게시판
                         </div>
-                        <a href="/board/qna_board" class="more">
+                        <a href="/board/QNA" class="more">
                             더보기
                         </a>
                     </div>
-                    <!-- QnA 게시판의 최근 게시글 5개를 반복하여 표시 -->
-                    <div th:each="board : ${recentQnaBoards}">
-                        <div class="board_content">
-                            <div class="board_post" th:text="${board.title}"></div>
-                            <div class="post_time" th:text="${board.formattedFinalDate}"></div>
-                        </div>
+                    <!-- QnA 게시판의 최근 게시글 4개를 반복하여 표시 -->
+                    <div class="board_content" th:each="board : ${recentQnaBoards}">
+                        <div class="board_post" th:text="${board.title}"></div>
+                        <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                     </div>
                 </div>
             </div>
@@ -211,16 +207,14 @@
                         <div class="title" id="school_announcement">
                             장터게시판
                         </div>
-                        <a href="/board/market_board" class="more">
+                        <a href="/board/MARKET" class="more">
                             더보기
                         </a>
                     </div>
-                    <!-- 장터 게시판의 최근 게시글 5개를 반복하여 표시 -->
-                    <div th:each="board : ${recentMarketBoards}">
-                        <div class="board_content">
-                            <div class="board_post" th:text="${board.title}"></div>
-                            <div class="post_time" th:text="${#dates.format(board.finalDate, 'MM/dd')}"></div>
-                        </div>
+                    <!-- 장터 게시판의 최근 게시글 4개를 반복하여 표시 -->
+                    <div class="board_content" th:each="board : ${recentMarketBoards}">
+                        <div class="board_post" th:text="${board.title}"></div>
+                        <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                     </div>
                 </div>
             </div>
@@ -397,6 +391,6 @@
         </div>
     </div>
 </div>
-<footer th:include="fragments/footer.html"></footer>
+<footer th:include="/fragments/footer.html"></footer>
 </body>
 </html>

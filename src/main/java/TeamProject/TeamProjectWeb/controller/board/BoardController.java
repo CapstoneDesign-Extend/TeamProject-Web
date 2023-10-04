@@ -175,10 +175,10 @@ public class BoardController {
     public String showBoardSummary(@PathVariable BoardKind boardKind,
                                    @RequestParam(defaultValue = "0") int page,
                                    Model model) {
-        Pageable pageable = PageRequest.of(page, 10); // 10개의 게시글을 가져옵니다.
+        Pageable pageable = PageRequest.of(page, 8); // 10개의 게시글을 가져옵니다.
         Page<BoardSummaryDTO> boardSummaryPage = boardService.getBoardSummaryByKind(boardKind, pageable);
         model.addAttribute("boardSummaryPage", boardSummaryPage);
         model.addAttribute("boardKind", boardKind);
-        return "board/boardSummary";
+        return "board/testBoardSummaryList";
     }
 }
