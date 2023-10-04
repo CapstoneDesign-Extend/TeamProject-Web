@@ -4,6 +4,7 @@ import TeamProject.TeamProjectWeb.constants.BoardConstants;
 import TeamProject.TeamProjectWeb.controller.login.SessionConst;
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
+import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.BoardForm;
 import TeamProject.TeamProjectWeb.dto.BoardSummaryDTO;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,6 +38,7 @@ public class BoardController {
     public String writeForm(Model model) {
         BoardForm form = new BoardForm(); // 초기화
         model.addAttribute("board", form); // 뷰로 전달
+        model.addAttribute("loggedIn", true);
         return "board/writing/write";
     }
 
@@ -67,10 +70,24 @@ public class BoardController {
     public String view(@PathVariable Long boardId, Model model) {
         Board board = boardService.findBoardById(boardId);
         if (board == null) {
-            return "redirect:/"; // 게시글이 존재하지 않으면 메인 페이지로 리다이렉트
+            return "redirect:/";
         }
+
+        List<Comment> comments = board.getComments();
+        model.addAttribute("comments", comments);
+
+        List<String> formattedCommentDates = new ArrayList<>();
+        for (Comment comment : comments) {
+            formattedCommentDates.add(boardService.formatCommentDate(comment.getFinalDate()));
+        }
+        model.addAttribute("formattedCommentDates", formattedCommentDates);
+
+        String formattedDate = boardService.formatFinalDate(board.getFinalDate());
+        model.addAttribute("formattedDate", formattedDate);
+        model.addAttribute("boardKind", board.getBoardKind());
         model.addAttribute("board", board);
-        return "board/detail";
+        model.addAttribute("loggedIn", true);
+        return "/board/reading/reading_normal";
     }
 
     // 게시글 목록 페이지를 보여줍니다.
@@ -163,6 +180,7 @@ public class BoardController {
         addRecentBoardsToModel(BoardKind.MARKET, "recentMarketBoards", model);
         // QnA 게시판의 최근 게시글 7개
         addRecentBoardsToModel(BoardKind.QNA, "recentQnaBoards", model);
+        model.addAttribute("loggedIn", true);
         return "board/board_collection";
     }
 
@@ -175,10 +193,11 @@ public class BoardController {
     public String showBoardSummary(@PathVariable BoardKind boardKind,
                                    @RequestParam(defaultValue = "0") int page,
                                    Model model) {
-        Pageable pageable = PageRequest.of(page, 8); // 10개의 게시글을 가져옵니다.
+        Pageable pageable = PageRequest.of(page, 6); // 10개의 게시글을 가져옵니다.
         Page<BoardSummaryDTO> boardSummaryPage = boardService.getBoardSummaryByKind(boardKind, pageable);
         model.addAttribute("boardSummaryPage", boardSummaryPage);
         model.addAttribute("boardKind", boardKind);
+        model.addAttribute("loggedIn", true);
         return "board/testBoardSummaryList";
     }
 }

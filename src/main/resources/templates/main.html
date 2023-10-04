@@ -39,10 +39,10 @@
 </head>
 <body>
 <header th:if="${loggedIn}">
-    <header th:include="fragments/header-after.html"></header>
+    <header th:include="/fragments/header-after"></header>
 </header>
 <header th:unless="${loggedIn}">
-    <header th:include="fragments/header-before.html"></header>
+    <header th:include="/fragments/header-before"></header>
 </header>
 <div class="wrap_mainframe">
     <div class="mainframe">
@@ -391,6 +391,6 @@
         </div>
     </div>
 </div>
-<footer th:include="/fragments/footer.html"></footer>
+<footer th:include="/fragments/footer"></footer>
 </body>
 </html>

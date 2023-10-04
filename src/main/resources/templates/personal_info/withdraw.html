@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extend</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/withdraw.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <!--Google Api-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+          rel="stylesheet">          
+    <script defer src="/js/calendar.js"></script>
+    <script defer src="/js/header.js"></script>
+</head>
+<body>
+<header th:if="${loggedIn}">
+    <header th:include="/fragments/header-after.html"></header>
+</header>
+<header th:unless="${loggedIn}">
+    <header th:include="/fragments/header-before.html"></header>
+</header>
+    <div class="wrap_mainframe">
+        <div class="mainframe">
+            <form method="post" action="abc.jsp" id="withdraw">
+                <div class="confirm_div">
+                    <div class="title">
+                        회원 탈퇴
+                    </div>
+                    <div class="password_confirm">
+                        <span class="confirm_title">계정 비밀번호</span>
+                        <input type="password" maxlength="20" placeholder="계정 비밀번호" class="pwd_button" />
+                    </div>
+                    <div class="explain1">
+                        <p class="explain1_text">
+                            ※ 탈퇴 및 가입을 반복할 경우, 서비스 악용 방지를 위해 재가입이 제한됩니다. 최초 탈퇴 시에는 가입 시점을 기준으로 1일간 제한되며, 2회 이상 탈퇴를 반복할 경우 30일간 제한됩니다.
+                        </p>
+                    </div>
+                    <div class="explain2">
+                        <p class="explain2_text">
+                            ※ 탈퇴 후 개인 정보, 시간표 등의 데이터가 삭제되며, 복구할 수 없습니다.<br/>
+                            ※ 다시 가입하여도, 게시판 등 이용 제한 기록은 초기화되지 않습니다.<br/>
+                            ※ 작성한 게시물은 삭제되지 않으며, (알수없음)으로 닉네임이 표시됩니다.<br/>
+                            ※ 자세한 내용은 개인정보처리방침을 확인해주세요.
+                        </p>
+                    </div>
+                    <div class="button">
+                        <input type="submit" class="withdraw_confirm_button" value="회원 탈퇴">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<footer th:include="/fragments/footer.html"></footer>
+</body>
+</html>

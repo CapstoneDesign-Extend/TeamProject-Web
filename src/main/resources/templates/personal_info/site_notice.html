@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,47 +26,69 @@
 <header th:unless="${loggedIn}">
     <header th:include="/fragments/header-before.html"></header>
 </header>
-<div class="wrap_mainframe">
-    <div class="mainframe">
-        <div class="board_div">
-            <div class="board_name">
-                <div class="board_name_text">
-                    <span class="board_name_text_inner" th:text="${boardKind}"></span>
-                </div>
-                <div class="write">
-                    <a href="/board/writing/write" style="height:24px  "><span class="material-icons">edit</span></a>
-                </div>
-            </div>
-            <div class="board_content_list">
-                <a th:each="summary : ${boardSummaryPage.content}" th:href="@{/board/reading/{id}(id=${summary.id})}" class="board_content_div">
-                    <div class="title" th:text="${summary.title}">임시글 제목</div>
-                    <div class="content_inner" th:text="${summary.content.length() <= 100 ? summary.content : summary.content.substring(0, 100) + '...'}">임시글 내용</div>
-                    <div class="info_block">
-                        <div class="time_name">
-                            <span class="writing_time" th:text="${summary.friendlyTime}">5분전</span>
-                            <span class="writer_name" th:text="${summary.author}">익명</span>
-                        </div>
-                        <div class="recom_comment">
-                            <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
-                            <span class="recom_count" th:text="${summary.likeCnt}">7</span>
-                            <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
-                            <span class="comment_count" th:text="${summary.chatCnt}">10</span>
-                        </div>
+    <div class="wrap_mainframe">
+        <div class="mainframe">
+            <div class="board_div">
+                <div class="board_name">
+                    <div class="board_name_text">
+                        <span class="board_name_text_inner">공지사항</span>
                     </div>
-                </a>
+                    <div class="write">
+                        <a href="writing_page.html" style="height:24px  "><span class="material-icons">edit</span></a>
+                    </div>
+                </div>
+                <div class="board_content_list">
+                    <a href="javascript:void(0)" class="board_content_div">
+                        <div class="title">첫번째 임시글</div>
+                        <div class="content_inner">임시글 내용</div>
+                        <div class="info_block">
+                            <div class="time_name">
+                                <span class="writing_time">5분전</span>
+                                <span class="writer_name">익명</span>
+                            </div>
+                             <div class="recom_comment">
+                                <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
+                                <span class="recom_count">7</span>
+                                <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
+                                <span class="comment_count">10</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="javascript:void(0)" class="board_content_div">
+                        <div class="title">첫번째 임시글</div>
+                        <div class="content_inner">임시글 내용</div>
+                        <div class="info_block">
+                            <div class="time_name">
+                                <span class="writing_time">5분전</span>
+                                <span class="writer_name">익명</span>
+                            </div>
+                             <div class="recom_comment">
+                                <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
+                                <span class="recom_count">7</span>
+                                <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
+                                <span class="comment_count">10</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="javascript:void(0)" class="board_content_div">
+                        <div class="title">첫번째 임시글</div>
+                        <div class="content_inner">임시글 내용</div>
+                        <div class="info_block">
+                            <div class="time_name">
+                                <span class="writing_time">5분전</span>
+                                <span class="writer_name">익명</span>
+                            </div>
+                             <div class="recom_comment">
+                                <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
+                                <span class="recom_count">7</span>
+                                <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
+                                <span class="comment_count">10</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
-            <!-- Pagination controls -->
-            <div class="pagination" th:if="${boardSummaryPage.totalPages > 1}">
-                <ul class="num_list">
-                    <li class="num_list_inner" th:each="pageNumber : ${#numbers.sequence(1, boardSummaryPage.totalPages)}">
-                        <a class="num_list_link" th:href="@{/board/{boardKind}(boardKind=${boardKind}, page=${pageNumber - 1})}" th:text="${pageNumber}">1</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-
-        <div class="rank_board_div">
+            <div class="rank_board_div">
                 <div class="viewrank">
                     <div class="viewrank_text">
                         <div class="viewrank_title">

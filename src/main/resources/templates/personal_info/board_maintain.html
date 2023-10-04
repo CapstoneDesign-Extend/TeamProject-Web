@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/board_maintain.css">
+        <link rel="stylesheet" href="/css/header.css">
+        <!--Google Api-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+              rel="stylesheet">          
+        <script defer src="/js/calendar.js"></script>
+        <script defer src="/js/header.js"></script>
+    </head>
+</head>
+<body>
+<header th:if="${loggedIn}">
+    <header th:include="/fragments/header-after.html"></header>
+</header>
+<header th:unless="${loggedIn}">
+    <header th:include="/fragments/header-before.html"></header>
+</header>
+    <div class="wrap_mainframe">
+        <div class="mainframe">
+            <div class="content">
+                <span>관리중인 게시판이 없어요</span>
+            </div>
+        </div>
+    </div>
+<footer th:include="/fragments/footer.html"></footer>
+</body>
+</html>

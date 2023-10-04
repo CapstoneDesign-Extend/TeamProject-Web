@@ -16,7 +16,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -135,6 +138,36 @@ public class BoardService {
 
     public Page<BoardSummaryDTO> getBoardSummaryByKind(BoardKind boardKind, Pageable pageable) {
         return boardRepository.findSummaryByBoardKind(boardKind, pageable);
+    }
+
+    public String formatFinalDate(LocalDateTime finalDate) {
+        LocalDateTime now = LocalDateTime.now();
+        Duration duration = Duration.between(finalDate, now);
+        long minutes = duration.toMinutes();
+
+        if(minutes < 60) {
+            return minutes + "분 전";
+        } else if(minutes < 1440) {
+            return (minutes / 60) + "시간 전";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
+            return finalDate.format(formatter);
+        }
+    }
+
+    public String formatCommentDate(LocalDateTime commentDate) {
+        LocalDateTime now = LocalDateTime.now();
+        long minutesDifference = ChronoUnit.MINUTES.between(commentDate, now);
+        long hoursDifference = ChronoUnit.HOURS.between(commentDate, now);
+        long daysDifference = ChronoUnit.DAYS.between(commentDate, now);
+
+        if (minutesDifference < 60) {
+            return minutesDifference + "분 전";
+        } else if (hoursDifference < 24) {
+            return hoursDifference + "시간 전";
+        } else {
+            return daysDifference + "일 전";
+        }
     }
 
 }

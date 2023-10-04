@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extend</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/alert.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <!--Google Api-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+          rel="stylesheet">          
+    <script defer src="/js/header.js"></script>
+    <script defer src="/js/alert.js"></script>
+</head>
+<body>
+<!--여기에 헤더 삽입-->
+    <div class="wrap_mainframe">
+        <div class="mainframe">
+            <div class="today_alert">
+                <div class="alert_title">
+                    오늘 받은 알림
+                </div>
+                <div class="alert_main">
+                    <div class="alert_div">
+                        <div class="alert_top">
+                            <img src="" alt="" class="alert_profile_pic">
+                            <div class="alert_name">
+                                익스텐드 운영진
+                            </div>
+                            <div class="alert_time">
+                                6분전
+                            </div>
+                            <div class="alert_delete" onclick="deleting(event)">
+                               <span class="material-icons">delete</span>
+                            </div>
+                        </div>
+                        <div class="alert_body">
+                            그래서 이제 뭐함
+                        </div>
+                    </div>
+                    <div class="alert_div">
+                        <div class="alert_top">
+                            <img src="" alt="" class="alert_profile_pic">
+                            <div class="alert_name">
+                                익스텐드 운영진
+                            </div>
+                            <div class="alert_time">
+                                6분전
+                            </div>
+                            <div class="alert_delete" onclick="deleting(event)">
+                               <span class="material-icons">delete</span>
+                            </div>
+                        </div>
+                        <div class="alert_body">
+                            그래서 이제 뭐함0
+                        </div>
+                    </div>
+                    <div class="alert_div">
+                        <div class="alert_top">
+                            <img src="" alt="" class="alert_profile_pic">
+                            <div class="alert_name">
+                                익스텐드 운영진
+                            </div>
+                            <div class="alert_time">
+                                6분전
+                            </div>
+                            <div class="alert_delete" onclick="deleting(event)">
+                               <span class="material-icons">delete</span>
+                            </div>
+                        </div>
+                        <div class="alert_body">
+                            그래서 이제 뭐함1
+                        </div>
+                    </div>
+                    <div class="alert_div">
+                        <div class="alert_top">
+                            <img src="" alt="" class="alert_profile_pic">
+                            <div class="alert_name">
+                                익스텐드 운영진
+                            </div>
+                            <div class="alert_time">
+                                6분전
+                            </div>
+                            <div class="alert_delete" onclick="deleting(event)">
+                               <span class="material-icons">delete</span>
+                            </div>
+                        </div>
+                        <div class="alert_body">
+                            그래서 이제 뭐함2
+                        </div>
+                    </div>
+                    <div class="alert_div">
+                        <div class="alert_top">
+                            <img src="" alt="" class="alert_profile_pic">
+                            <div class="alert_name">
+                                익스텐드 운영진
+                            </div>
+                            <div class="alert_time">
+                                6분전
+                            </div>
+                            <div class="alert_delete" onclick="deleting(event)">
+                               <span class="material-icons">delete</span>
+                            </div>
+                        </div>
+                        <div class="alert_body">
+                            그래서 이제 뭐함3
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="previous_alert">
+                <div class="alert_title">
+                    이전 알림
+                </div>
+                <div class="alert_main">
+
+                </div>
+            </div>
+            <div class="layer_toast hide" id="layer_toast">
+                <div class="layer_toast_inner" id="layer_toast_inner">
+                    <p class="message">알림이 삭제되었습니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

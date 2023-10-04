@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extend</title>
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/email_change.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <!--Google Api-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
+          rel="stylesheet">          
+    <script defer src="/js/header.js"></script>
+</head>
+<body>
+<header th:if="${loggedIn}">
+    <header th:include="/fragments/header-after.html"></header>
+</header>
+<header th:unless="${loggedIn}">
+    <header th:include="/fragments/header-before.html"></header>
+</header>
+    <div class="wrap_mainframe">
+        <div class="mainframe">
+            <form method="post" action="abc.jsp" id="email_change">
+                <div class="email_div">
+                    <div class="title">
+                        이메일 변경
+                    </div>
+                    <div class="newemail_input">
+                        <span class="newemail_title">이메일</span>
+                        <input type="email" maxlength="255" placeholder="이메일" class="email_button" />
+                    </div>
+                    <div class="currentpwd_div">
+                        <span class="currentpwd_title">계정 비밀번호</span>
+                        <input type="password" maxlength="20" placeholder="계정 비밀번호" class="currentpwd" />
+                    </div>
+                    <div class="explain1">
+                        <p class="text">
+                            ※ 반드시 본인의 이메일을 입력해주세요.<br/>
+                            ※ 계정 분실 시 아이디/비밀번호 찾기, 개인정보 관련 주요 고지사항 안내 등에 사용됩니다.
+                        </p>
+                    </div>
+                    <div class="button">
+                        <input type="submit" class="email_change_button" value="이메일 변경">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<footer th:include="/fragments/footer.html"></footer>
+</body>
+</html>

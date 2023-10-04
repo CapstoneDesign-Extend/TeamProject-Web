@@ -268,3 +268,34 @@ a:active{
   font-size:8px;
 } 
 /* 여기까지 인기글 */
+
+
+
+/*목록 숫자*/
+.pagination {
+  margin-top:8px;
+}
+
+.num_list {
+  display:flex;
+  justify-content:center;
+  align-items: center;
+}
+
+.num_list_inner {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:18px;
+  height:18px;
+  border:1px dashed rgb(227,227,227);
+  margin-right:5px;
+}
+
+.num_list_inner:last-child {
+  margin-right:0;
+}
+
+.num_list_link {
+  font-size:14px;
+}
