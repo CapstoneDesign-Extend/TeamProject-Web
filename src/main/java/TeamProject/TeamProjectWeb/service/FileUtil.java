@@ -1,25 +1,74 @@
 package TeamProject.TeamProjectWeb.service;
 
 
-import TeamProject.TeamProjectWeb.domain.File;
-import TeamProject.TeamProjectWeb.repository.FileRepository;
+import TeamProject.TeamProjectWeb.domain.Board;
+import TeamProject.TeamProjectWeb.domain.UploadFile;
+import TeamProject.TeamProjectWeb.repository.BoardRepository;
+import TeamProject.TeamProjectWeb.repository.UploadFileRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true) // 조회 시 readOnly = true 해당 속성을 주면 최적화됨
 //@AllArgsConstructor // 현재 클래스가 가지고 있는 필드를 가지고 생성자를 만들어줌
 @RequiredArgsConstructor // 현재 클래스가 가지고 있는 필드 중 private final 필드만을 가지고 생성자를 만들어줌
-public class FileService {
+public class FileUtil {
 
     //    private final FileDTO fileDTO;
-    private final FileRepository fileRepository;
+    private final BoardRepository boardRepository;
+    private final UploadFileRepository uploadFileRepository;
 
+    //== 편의 메소드 ==//
+    @Value("${file.dir}")
+    private String fileDir; // 파일 경로
+    public String getFullPath(String fileName){
+        return fileDir + fileName; // 파일경로 + 파일이름 = fileFullName
+    }
 
+    public List<UploadFile> uploadFiles(List<MultipartFile> multipartFiles) throws IOException { //== 여러 개의 파일 저장 ==//
+        List<UploadFile> uploadFileResult = new ArrayList<>();
+
+        for (MultipartFile multipartFile : multipartFiles) {
+            if(!multipartFile.isEmpty()){ // 파일이 존재하면
+                uploadFileResult.add(uploadFile(multipartFile)); // 밑에 작성한 uploadFile 메소드를 이용해 파일 저장
+            }
+        }
+        return uploadFileResult;
+    }
+
+    public UploadFile uploadFile(MultipartFile multipartFile) throws IOException { //== 실질적인 파일 저장 ==//
+        if (multipartFile.isEmpty()) { // 서버에서 넘어온 파일이 없으면
+            return null;
+        }
+        String originalFileName = multipartFile.getOriginalFilename(); // 클라이언트가 업로드한 파일명
+        String serverFileName = createStoreFileName(originalFileName); // 서버에 저장할 파일명
+        UploadFile uploadFile = new UploadFile(originalFileName,serverFileName); // 객체를 새로 생성
+        uploadFileRepository.save(uploadFile); // db에도 저장함
+
+        // storeFileName(경로)를 가지고 transferTo() 메소드를 이용해 저장함
+        multipartFile.transferTo(new java.io.File(getFullPath(serverFileName)));
+
+        return new UploadFile(originalFileName, serverFileName); // 해당 데이터를 File 도메인에 저장
+    }
+    private String createStoreFileName(String originalFilename) { //== 서버에 저장할 파일명 만들기 ==//
+        String ext = extractExt(originalFilename);
+        String uuid = UUID.randomUUID().toString();
+
+        return uuid + "." + ext; // uuid.확장자로 리턴함
+    }
+    private String extractExt(String originalFilename) { //== 확장자만 잘라냄 ==//
+        int pos = originalFilename.lastIndexOf(".");
+
+        return originalFilename.substring(pos + 1);
+    }
 
 
 

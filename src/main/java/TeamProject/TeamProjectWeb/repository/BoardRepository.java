@@ -27,13 +27,20 @@ public class BoardRepository implements BoardRepositoryCustom {
     @PersistenceContext // EntityManager를 주입받기 위해 사용
     private final EntityManager em;
 
-    @Transactional
-    public void save(Board board){ // 게시글 저장
+    public Board save(Board board){ // 게시글 저장
+//        board.setAttachFile(uploadFile);
         // Board 엔티티를 생성할 떄, 영속 상태가 아닌 Member 엔티티를 사용중이라면 해당 Member 엔티티를 영속 상태로 만들기
         if (board.getMember() != null && board.getMember().getId() != null){
             board.setMember(em.getReference(Member.class, board.getMember().getId()));
         }
         em.persist(board);
+        return board;
+    }
+    public void update(Board board) {
+        em.merge(board);
+    }
+    public Board findById(Long id){
+        return em.find(Board.class, id);
     }
 
     // 해당 id를 가진 게시글을 DTO로 반환
