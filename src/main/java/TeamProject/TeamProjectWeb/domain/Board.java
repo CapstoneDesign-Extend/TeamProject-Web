@@ -51,7 +51,7 @@ public class Board { // 게시판 클래스
 
     @OneToOne(fetch = FetchType.LAZY)
     private UploadFile attachFile; // 올릴 파일
-    @OneToMany(mappedBy = "Images")
+    @OneToMany(mappedBy = "board")
     private List<UploadFile> imageFiles; // 파일 리스트
 
 
