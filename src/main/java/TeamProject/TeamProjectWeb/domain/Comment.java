@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "comment")
+@Table(name = "comments")
 @Getter @Setter
 public class Comment { // 댓글 클래스
     @Id

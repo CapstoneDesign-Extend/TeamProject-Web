@@ -1,12 +1,10 @@
 package TeamProject.TeamProjectWeb.controller.file;
 
 
-import TeamProject.TeamProjectWeb.domain.File;
 import TeamProject.TeamProjectWeb.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequiredArgsConstructor

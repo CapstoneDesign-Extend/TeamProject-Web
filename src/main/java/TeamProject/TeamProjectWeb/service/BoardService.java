@@ -37,7 +37,7 @@ public class BoardService {
     }
 
     @Transactional
-    public Board createBoardWithAuthor(BoardForm form, Member loggedInMember) {
+    public Board createBoardWithAuthor(BoardForm form, Member loggedInMember) { // 여기다 이미지 관련 내용 추가
         Board board = form.toBoard();
 
         if (form.isAnonymous()) {
