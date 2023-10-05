@@ -10,6 +10,10 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.ui.Model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 @Aspect
 @Component
 public class HeaderAspect {
@@ -19,6 +23,24 @@ public class HeaderAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         boolean loggedIn = checkLoggedIn(request);
         model.addAttribute("loggedIn", loggedIn);
+    }
+
+    public static String timeFriendly(LocalDateTime dateTime) {
+        LocalDateTime now = LocalDateTime.now();
+        long minutesDifference = ChronoUnit.MINUTES.between(dateTime, now);
+        long hoursDifference = ChronoUnit.HOURS.between(dateTime, now);
+        long daysDifference = ChronoUnit.DAYS.between(dateTime, now);
+
+        if (minutesDifference < 60) {
+            return minutesDifference + "분 전";
+        } else if (hoursDifference < 24) {
+            return hoursDifference + "시간 전";
+        } else if (daysDifference < 7) {
+            return daysDifference + "일 전";
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
+            return dateTime.format(formatter);
+        }
     }
 
 

@@ -121,8 +121,5 @@ public class CommentRepository {
         query.setParameter("member", member);
         query.executeUpdate();
     }
-
-
-
 }
 

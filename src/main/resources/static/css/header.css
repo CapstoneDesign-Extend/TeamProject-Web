@@ -96,7 +96,7 @@ a:active{
     display:flex;
     justify-content:center;
     align-items:center;
-    width:76px;
+    width:80px;
   }
 
   @media (max-width: 820px) {

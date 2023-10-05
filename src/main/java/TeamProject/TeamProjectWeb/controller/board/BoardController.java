@@ -62,7 +62,7 @@ public class BoardController {
 
         boardService.createBoardWithAuthor(form, loggedInMember);
         // 게시글 작성이 완료되면 홈페이지로 리다이렉트한다.
-        return "redirect:/";
+        return "redirect:/board/board_collection";
     }
 
     // 게시글 상세 페이지를 보여줍니다.
@@ -71,6 +71,10 @@ public class BoardController {
         Board board = boardService.findBoardById(boardId);
         if (board == null) {
             return "redirect:/";
+        }
+
+        if (model.containsAttribute("message")) {
+            model.addAttribute("error", model.getAttribute("message"));
         }
 
         List<Comment> comments = board.getComments();

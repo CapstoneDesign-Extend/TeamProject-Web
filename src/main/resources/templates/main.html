@@ -176,9 +176,14 @@
                         </a>
                     </div>
                     <!-- 자유 게시판의 최근 게시글 4개를 반복하여 표시 -->
-                    <div class="board_content" th:each="board : ${recentFreeBoards}">
+                    <div th:if="${loggedIn}" class="board_content" th:each="board : ${recentFreeBoards}">
                         <div class="board_post" th:text="${board.title}"></div>
                         <div class="post_time" th:text="${board.formattedFinalDate}"></div>
+                    </div>
+                    <div th:unless="${loggedIn}" class="needlogin">
+                        <p>로그인을 해야 볼 수 있는 게시판입니다.</p>
+                        <br>
+                        <a href="/login" class="login_button">로그인</a>
                     </div>
                 </div>
             </div>
@@ -194,9 +199,14 @@
                         </a>
                     </div>
                     <!-- QnA 게시판의 최근 게시글 4개를 반복하여 표시 -->
-                    <div class="board_content" th:each="board : ${recentQnaBoards}">
+                    <div th:if="${loggedIn}" class="board_content" th:each="board : ${recentQnaBoards}">
                         <div class="board_post" th:text="${board.title}"></div>
                         <div class="post_time" th:text="${board.formattedFinalDate}"></div>
+                    </div>
+                    <div th:unless="${loggedIn}" class="needlogin">
+                        <p>로그인을 해야 볼 수 있는 게시판입니다.</p>
+                        <br>
+                        <a href="/login" class="login_button">로그인</a>
                     </div>
                 </div>
             </div>
@@ -212,9 +222,14 @@
                         </a>
                     </div>
                     <!-- 장터 게시판의 최근 게시글 4개를 반복하여 표시 -->
-                    <div class="board_content" th:each="board : ${recentMarketBoards}">
+                    <div th:if="${loggedIn}" class="board_content" th:each="board : ${recentMarketBoards}">
                         <div class="board_post" th:text="${board.title}"></div>
                         <div class="post_time" th:text="${board.formattedFinalDate}"></div>
+                    </div>
+                    <div th:unless="${loggedIn}" class="needlogin">
+                        <p>로그인을 해야 볼 수 있는 게시판입니다.</p>
+                        <br>
+                        <a href="/login" class="login_button">로그인</a>
                     </div>
                 </div>
             </div>

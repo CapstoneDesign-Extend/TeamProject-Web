@@ -3,6 +3,7 @@ package TeamProject.TeamProjectWeb.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "comment")
-@Getter @Setter
+@Data
 public class Comment { // 댓글 클래스
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 생성 => 시퀀스
@@ -34,6 +35,16 @@ public class Comment { // 댓글 클래스
     @OneToMany(mappedBy = "comment", orphanRemoval = true)  // comment가 삭제되면 연관된 likes도 함께 삭제
     private List<Like> likes = new ArrayList<>();
 
+    public Comment(int chatCnt, String content, String authorName, LocalDateTime now) {
+        this.content = content;
+        this.finalDate = now;
+        this.author = authorName;
+        // chatCnt 파라미터는 Comment 클래스의 필드가 아니기 때문에 사용하지 않았습니다. 필요에 따라 적절하게 사용하실 수 있습니다.
+    }
+
+    public Comment() {
+
+    }
 
     //== 연관관계 메소드 ==//
     public void setBoard(Board board){ //-- 게시글에 댓글 저장 메소드 --//

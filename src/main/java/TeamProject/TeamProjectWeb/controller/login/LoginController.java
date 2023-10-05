@@ -86,22 +86,25 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public String logout(@RequestParam("loginId") String loginId,
-                         HttpServletRequest request,
-                         HttpServletResponse response,
-                         Model model) {
+    public String logout(HttpServletRequest request, HttpServletResponse response, Model model) {
 
-        // 로그아웃한 회원의 아이디를 로그로 기록합니다.
-        log.info("로그아웃: {}", loginId);
-
-        // 현재 세션을 가져옵니다. (false로 설정하여 세션이 없으면 새로 생성하지 않습니다)
         HttpSession session = request.getSession(false);
 
-        // 세션이 존재하는 경우, 세션을 무효화하여 로그아웃 처리합니다.
+        // 세션에서 로그인 회원 정보를 가져옵니다.
         if (session != null) {
+            Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+            // 로그인한 회원 정보가 있다면 로그로 남깁니다.
+            if (loginMember != null) {
+                log.info("로그아웃: memberId={}, loginId={}", loginMember.getId(), loginMember.getLoginId());
+            }
+
+            // 세션을 무효화하여 로그아웃 처리합니다.
             session.invalidate();
         }
+
         model.addAttribute("loggedIn", false);
+
         // 로그아웃 처리 후에는 메인 페이지로 리다이렉트합니다.
         return "redirect:/";
     }

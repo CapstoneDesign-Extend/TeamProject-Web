@@ -15,10 +15,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
-          rel="stylesheet">          
+          rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script defer src="/js/calendar.js"></script>
     <script defer src="/js/header.js"></script>
     <script defer src="/js/reading.js"></script>
+    <script defer src="/js/comment.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <header th:if="${loggedIn}">
@@ -65,38 +68,43 @@
                                 <span>&nbsp;좋아요</span>
                             </div>
                         </div>
-                      <div th:each="comment : ${comments}" class="comment">
-                          <div class="comment_div">
-                              <div class="comment_top">
-                                  <img src="/tmp.jpg" alt="" class="comment_profile_pic">
-                                  <div class="textspace">
-                                      <div class="name" th:text="${comment.author}">익명</div>
-                                      <div class="likey_report">
-                                          <div class="likey">좋아요</div>
-                                          <div class="report">신고</div>
+                      <div class="comment-list">
+                          <div th:each="comment, stat : ${comments}" class="comment">
+                              <div class="comment_div">
+                                  <div class="comment_top">
+                                      <img src="/tmp.jpg" alt="" class="comment_profile_pic">
+                                      <div class="textspace">
+                                          <div class="name" th:text="${comment.author}">익명</div>
+                                          <div class="likey_report">
+                                              <div class="likey">좋아요</div>
+                                              <div class="report">신고</div>
+                                          </div>
                                       </div>
                                   </div>
+                                  <div class="comment_body">
+                                      <div class="comment_main" th:text="${comment.content}">케로로장재미슴</div>
+                                  </div>
+                                  <div class="time" th:text="${formattedCommentDates[stat.index]}">3분 전</div>
                               </div>
-                              <div class="comment_body">
-                                  <div class="comment_main" th:text="${comment.content}">케로로장재미슴</div>
-                              </div>
-                              <!-- 댓글 작성 시간도 마찬가지로 포맷팅 필요 -->
-                              <div class="time">3분 전</div>
                           </div>
                       </div>
-                        <form enctype="multipart/form-data">
-                            <div class="comment_wrapping">
-                                <div class="comment_input">
-                                    <input type="text" class="comment_input_inner" placeholder="댓글을 입력해주세요" name="comment_text">
-                                    <label for="anonymous" class="checkbox_wrap">
-                                        <input type="checkbox" class="anonymous" id="anonymous" name="anonymous">
-                                        익명
-                                    </label>
-                                </div>
-                                <div class="editwrap">
-                                    <button type="submit" class="wrapsubmit"><span class="material-icons">edit</span></button>
-                                </div>
-                            </div>
+                      <div th:if="${error}" class="alert alert-danger" role="alert">
+                          <p th:text="${error}"></p>
+                      </div>
+                      <form enctype="multipart/form-data">
+                          <input type="hidden" name="boardId" th:value="${board.id}" />
+                          <div class="comment_wrapping">
+                              <div class="comment_input">
+                                  <input type="text" class="comment_input_inner" placeholder="댓글을 입력해주세요" name="comment_text">
+                                  <label for="anonymous" class="checkbox_wrap">
+                                      <input type="checkbox" class="anonymous" id="anonymous" name="anonymous">
+                                      익명
+                                  </label>
+                              </div>
+                              <div class="editwrap">
+                                  <button type="submit" class="wrapsubmit"><span class="material-icons">edit</span></button>
+                              </div>
+                          </div>
                         </form>
                         <div class="list_button">
                             <button type="button" class="list_button_inner" th:data-board-kind="${boardKind}" onclick="location.href='/board/' + this.getAttribute('data-board-kind')">

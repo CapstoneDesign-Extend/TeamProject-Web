@@ -1,6 +1,7 @@
 package TeamProject.TeamProjectWeb.service;
 
 
+import TeamProject.TeamProjectWeb.HeaderAspect;
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
 import TeamProject.TeamProjectWeb.domain.Member;
@@ -22,6 +23,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import static TeamProject.TeamProjectWeb.HeaderAspect.timeFriendly;
+
 @Service
 @Transactional(readOnly = true) // 조회 시 readOnly = true 해당 속성을 주면 최적화됨
 //@AllArgsConstructor // 현재 클래스가 가지고 있는 필드를 가지고 생성자를 만들어줌
@@ -29,6 +32,7 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository; // 게시판 저장소 의존성 주입
+    private final HeaderAspect headerAspect;
 
     @Transactional
     public void createBoard(Board board) {
@@ -140,34 +144,25 @@ public class BoardService {
         return boardRepository.findSummaryByBoardKind(boardKind, pageable);
     }
 
-    public String formatFinalDate(LocalDateTime finalDate) {
-        LocalDateTime now = LocalDateTime.now();
-        Duration duration = Duration.between(finalDate, now);
-        long minutes = duration.toMinutes();
 
-        if(minutes < 60) {
-            return minutes + "분 전";
-        } else if(minutes < 1440) {
-            return (minutes / 60) + "시간 전";
-        } else {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
-            return finalDate.format(formatter);
-        }
+    public String formatFinalDate(LocalDateTime finalDate) {
+        return timeFriendly(finalDate);
     }
 
     public String formatCommentDate(LocalDateTime commentDate) {
-        LocalDateTime now = LocalDateTime.now();
-        long minutesDifference = ChronoUnit.MINUTES.between(commentDate, now);
-        long hoursDifference = ChronoUnit.HOURS.between(commentDate, now);
-        long daysDifference = ChronoUnit.DAYS.between(commentDate, now);
+        return timeFriendly(commentDate);
+    }
 
-        if (minutesDifference < 60) {
-            return minutesDifference + "분 전";
-        } else if (hoursDifference < 24) {
-            return hoursDifference + "시간 전";
-        } else {
-            return daysDifference + "일 전";
-        }
+    public void incrementCommentCount(Long boardId) {
+        Board board = boardRepository.findOne(boardId);
+        board.setChatCnt(board.getChatCnt() + 1);
+        boardRepository.save(board);
+    }
+
+    public void decrementCommentCount(Long boardId) {
+        Board board = boardRepository.findOne(boardId);
+        board.setChatCnt(board.getChatCnt() - 1);
+        boardRepository.save(board);
     }
 
 }
