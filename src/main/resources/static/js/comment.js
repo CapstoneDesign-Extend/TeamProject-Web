@@ -9,7 +9,7 @@ $(document).ready(function() {
                 <div class="comment_top">
                     <img src="/tmp.jpg" alt="" class="comment_profile_pic">
                     <div class="textspace">
-                        <div class="name">${comment.author}</div>
+                        <div class="name">${comment.authorName}</div>
                         <div class="likey_report">
                             <div class="likey">좋아요</div>
                             <div class="report">신고</div>
@@ -46,8 +46,9 @@ $(document).ready(function() {
             success: function(response) {
                 addCommentToDOM(response);
                 $('.comment_input_inner').val('');  // 댓글 입력란 초기화
-                console.log(response);
-                console.log(response);
+
+                // chatCnt 값으로 댓글 카운트 업데이트
+                $('.comment_count').text(response.chatCnt);
             },
             error: function(error) {
                 console.log(error);

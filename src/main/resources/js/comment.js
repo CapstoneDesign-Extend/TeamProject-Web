@@ -1,43 +1,29 @@
-// 문서가 준비되면 실행되는 함수
 $(document).ready(function() {
-    // 페이지 로드 시 댓글 목록 불러오기
     // 현재 페이지의 게시글 ID를 가져옴
     let boardId = $('input[name="boardId"]').val();
 
-    // 페이지 로드 시 게시글에 해당하는 댓글 목록을 불러옴
-    $.ajax({
-        type: 'GET',
-        url: '/comment?boardId=' + boardId,
-        success: function(response) {
-            // 기존 댓글들을 화면에서 제거
-            $('.comment').empty();
-            // 불러온 댓글들을 화면에 추가
-            response.forEach(comment => {
-                let commentHTML = `
-                    <div class="comment_div">
-                        <div class="comment_top">
-                            <img src="/tmp.jpg" alt="" class="comment_profile_pic">
-                            <div class="textspace">
-                                <div class="name">${comment.author}</div>
-                                <div class="likey_report">
-                                    <div class="likey">좋아요</div>
-                                    <div class="report">신고</div>
-                                </div>
-                            </div>
+    function addCommentToDOM(comment) {
+        let formattedTime = moment(comment.creationTime).fromNow(); // 여기서 시간을 포맷팅합니다.
+        let commentHTML = `
+            <div class="comment_div">
+                <div class="comment_top">
+                    <img src="/tmp.jpg" alt="" class="comment_profile_pic">
+                    <div class="textspace">
+                        <div class="name">${comment.author}</div>
+                        <div class="likey_report">
+                            <div class="likey">좋아요</div>
+                            <div class="report">신고</div>
                         </div>
-                        <div class="comment_body">
-                            <div class="comment_main">${comment.content}</div>
-                        </div>
-                        <div class="time">${comment.creationTime}</div>
                     </div>
-                `;
-                $('.comment').append(commentHTML);
-            });
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
+                </div>
+                <div class="comment_body">
+                    <div class="comment_main">${comment.content}</div>
+                </div>
+                <div class="time">${formattedTime}</div>
+            </div>
+        `;
+        $('.comment-list').append(commentHTML);
+    }
 
     // 댓글 작성 버튼 클릭 시 실행되는 이벤트 핸들러
     $('.wrapsubmit').click(function(e) {
@@ -58,31 +44,15 @@ $(document).ready(function() {
                 boardId: boardId
             },
             success: function(response) {
-                $('.comment').empty();
-                response.forEach(comment => {
-                    let commentHTML = `
-                        <div class="comment_div">
-                            <div class="comment_top">
-                                <img src="/tmp.jpg" alt="" class="comment_profile_pic">
-                                <div class="textspace">
-                                    <div class="name">${comment.author}</div>
-                                    <div class="likey_report">
-                                        <div class="likey">좋아요</div>
-                                        <div class="report">신고</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="comment_body">
-                                <div class="comment_main">${comment.content}</div>
-                            </div>
-                            <div class="time">${comment.creationTime}</div>
-                        </div>
-                    `;
-                    $('.comment').append(commentHTML);
-                });
+                addCommentToDOM(response);
+                $('.comment_input_inner').val('');  // 댓글 입력란 초기화
+
+                // chatCnt 값으로 댓글 카운트 업데이트
+                $('.comment_count').text(response.chatCnt);
             },
             error: function(error) {
                 console.log(error);
+                alert("댓글 저장에 실패했습니다.");
             }
         });
     });

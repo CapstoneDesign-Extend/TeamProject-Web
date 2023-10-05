@@ -6,6 +6,7 @@ import TeamProject.TeamProjectWeb.dto.BoardForm;
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.dto.CommentDTO;
+import TeamProject.TeamProjectWeb.dto.CommentResponse;
 import TeamProject.TeamProjectWeb.service.BoardService;
 import TeamProject.TeamProjectWeb.service.CommentService;
 import jakarta.servlet.http.HttpSession;
@@ -49,7 +50,7 @@ public class CommentController {
             authorName = loggedInMember.getLoginId();
         }
 
-        Comment newComment = commentService.addComment(boardId, content, loggedInMember.getId(), authorName);
+        CommentResponse newComment = commentService.addComment(boardId, content, loggedInMember.getId(), authorName);
         return ResponseEntity.ok(newComment);
     }
 

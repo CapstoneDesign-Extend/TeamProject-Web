@@ -5,8 +5,10 @@ import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.CommentDTO;
+import TeamProject.TeamProjectWeb.dto.CommentResponse;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
 import TeamProject.TeamProjectWeb.repository.CommentRepository;
+import TeamProject.TeamProjectWeb.utils.TimeUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,13 +25,26 @@ public class CommentService {
 
     private final BoardRepository boardRepository;
 
-    private BoardService boardService;
+    private final BoardService boardService;
 
-    public Comment addComment(Long boardId, String content, Long memberId, String authorName) {
+    public Comment addComment2(Long boardId, String content, Long memberId, String authorName) {
         commentRepository.saveComment(boardId, memberId, content, authorName);
         Board board = boardRepository.findOne(boardId);
         // 아래에서 Comment 객체를 반환할 때 새롭게 작성된 댓글의 내용과 해당 게시물의 최종 댓글 수를 함께 반환합니다.
         return new Comment(board.getChatCnt(), content, authorName, LocalDateTime.now());
+    }
+
+    public CommentResponse addComment(Long boardId, String content, Long memberId, String authorName) {
+        commentRepository.saveComment(boardId, memberId, content, authorName);
+        Board board = boardRepository.findOne(boardId);
+
+        CommentResponse response = new CommentResponse();
+        response.setChatCnt((long) board.getChatCnt());
+        response.setContent(content);
+        response.setAuthorName(authorName);
+        response.setFormattedFinalDate(boardService.formatCommentDate(LocalDateTime.now()));
+
+        return response;
     }
 
     @Transactional(readOnly = true)
@@ -87,6 +102,10 @@ public class CommentService {
     public Comment findById(Long commentId) {
         // 댓글 ID로 댓글 조회
         return commentRepository.findById(commentId);
+    }
+
+    public String formatCommentDate(LocalDateTime commentDate) {
+        return TimeUtils.timeFriendly(commentDate); // 예시로 TimeUtils라는 유틸리티 클래스 이름을 사용하였습니다.
     }
 
 }

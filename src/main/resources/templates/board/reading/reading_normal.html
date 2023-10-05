@@ -21,6 +21,7 @@
     <script defer src="/js/header.js"></script>
     <script defer src="/js/reading.js"></script>
     <script defer src="/js/comment.js"></script>
+    <script defer src="/js/like.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -30,6 +31,8 @@
 <header th:unless="${loggedIn}">
     <header th:include="/fragments/header-before"></header>
 </header>
+<div id="loggedInUser" th:data-member-id="${loginMemberId}"></div>
+    <!-- 사용자 프로필 정보 -->
       <div class="wrap_mainframe">
             <div class="mainframe">
                   <div class="main_content">
@@ -63,7 +66,7 @@
                                 <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
                                 <span class="comment_count" th:text="${board.chatCnt}">10</span>
                             </div>
-                            <div class="body_button">
+                            <div class="body_button" th:data-board-id="${board.id}">
                                 <span class="material-icons-outlined" style="color:black;">favorite_border</span>
                                 <span>&nbsp;좋아요</span>
                             </div>

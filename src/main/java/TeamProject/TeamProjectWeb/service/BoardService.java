@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static TeamProject.TeamProjectWeb.HeaderAspect.timeFriendly;
+import static TeamProject.TeamProjectWeb.utils.TimeUtils.timeFriendly;
 
 @Service
 @Transactional(readOnly = true) // 조회 시 readOnly = true 해당 속성을 주면 최적화됨
@@ -32,7 +32,6 @@ import static TeamProject.TeamProjectWeb.HeaderAspect.timeFriendly;
 public class BoardService {
 
     private final BoardRepository boardRepository; // 게시판 저장소 의존성 주입
-    private final HeaderAspect headerAspect;
 
     @Transactional
     public void createBoard(Board board) {
