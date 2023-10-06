@@ -14,6 +14,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,7 @@ public class CommentRepository {
         Query query = em.createQuery("SELECT c FROM Comment c WHERE c.board.id = :boardId");
         query.setParameter("boardId", boardId);
         List<Comment> comments = query.getResultList();
+
         // Comment 엔터티 목록을 CommentDTO 목록으로 변환
         List<CommentDTO> commentDTOs = new ArrayList<>();
         for (Comment comment : comments) {

@@ -33,24 +33,26 @@ public class FileUtil {
         return fileDir + fileName; // 파일경로 + 파일이름 = fileFullName
     }
 
-    public List<UploadFile> uploadFiles(List<MultipartFile> multipartFiles) throws IOException { //== 여러 개의 파일 저장 ==//
+    public List<UploadFile> uploadFiles(List<MultipartFile> multipartFiles, Long boardId) throws IOException { //== 여러 개의 파일 저장 ==//
         List<UploadFile> uploadFileResult = new ArrayList<>();
 
         for (MultipartFile multipartFile : multipartFiles) {
             if(!multipartFile.isEmpty()){ // 파일이 존재하면
-                uploadFileResult.add(uploadFile(multipartFile)); // 밑에 작성한 uploadFile 메소드를 이용해 파일 저장
+                uploadFileResult.add(uploadFile(multipartFile, boardId)); // 밑에 작성한 uploadFile 메소드를 이용해 파일 저장
             }
         }
         return uploadFileResult;
     }
 
-    public UploadFile uploadFile(MultipartFile multipartFile) throws IOException { //== 실질적인 파일 저장 ==//
+    public UploadFile uploadFile(MultipartFile multipartFile, Long boardId) throws IOException { //== 실질적인 파일 저장 ==//
         if (multipartFile.isEmpty()) { // 서버에서 넘어온 파일이 없으면
             return null;
         }
         String originalFileName = multipartFile.getOriginalFilename(); // 클라이언트가 업로드한 파일명
         String serverFileName = createStoreFileName(originalFileName); // 서버에 저장할 파일명
         UploadFile uploadFile = new UploadFile(originalFileName,serverFileName); // 객체를 새로 생성
+        Board board = boardRepository.findById(boardId);
+        uploadFile.setBoard(board);
         uploadFileRepository.save(uploadFile); // db에도 저장함
 
         // storeFileName(경로)를 가지고 transferTo() 메소드를 이용해 저장함

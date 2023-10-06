@@ -1,7 +1,7 @@
 package TeamProject.TeamProjectWeb.controller.file;
 
 
-import TeamProject.TeamProjectWeb.service.FileService;
+import TeamProject.TeamProjectWeb.service.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/file")
 public class FileController {
 
-    private final FileService fileService;
+    private final FileUtil fileUtil;
 
     // 파일 업로드 폼을 보여줍니다.
     /*@GetMapping("/upload")
