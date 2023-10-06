@@ -36,7 +36,7 @@ public class FileRestController {
     }*/
     @PostMapping("/uploadImage") // 이미지 파일 처리하는 메소드
     public ResponseEntity<Board> uploadFiles(@RequestParam("imageFiles") List<MultipartFile> multipartFiles, Long boardId) throws IOException { // 매개변수 이미지, 보드Id로 받아서 해당 보드에 저장하게끔
-        List<UploadFile> uploadImageFiles = fileUtil.uploadFiles(multipartFiles); // 받아온 multipartFile을 로컬 경로와 DB에 저장
+        List<UploadFile> uploadImageFiles = fileUtil.uploadFiles(multipartFiles, boardId); // 받아온 multipartFile을 로컬 경로와 DB에 저장
 
         Board board = null;
         if (!multipartFiles.isEmpty()) { // 이미지가 존재하면
@@ -48,7 +48,7 @@ public class FileRestController {
     }
     @PostMapping("/uploadAttach") // 첨부파일 처리하는 메소드
     public ResponseEntity<Board> uploadFile(@RequestParam("attachFile") MultipartFile multipartFile, Long boardId) throws IOException { // 매개변수 파일, 보드Id로 받아서 해당 보드에 저장하게끔
-        UploadFile attachFile = fileUtil.uploadFile(multipartFile);
+        UploadFile attachFile = fileUtil.uploadFile(multipartFile, boardId);
 
         Board board = null;
         if (!multipartFile.isEmpty()) { // 첨부파일이 존재하면
