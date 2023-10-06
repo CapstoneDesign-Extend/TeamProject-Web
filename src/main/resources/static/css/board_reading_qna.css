@@ -109,6 +109,13 @@ body{
     font-size:12px;
   }
 
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .namespace .report .inner_button {
+    padding: 0 5px 0 5px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .namespace .report .inner_button:last-child{
+    padding: 0 0 0 5px;
+  }
   .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .writing_time{
     width:800px;
     display:flex;
