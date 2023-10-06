@@ -34,7 +34,7 @@ public class FileRestController {
         File savedFile = fileRepository.save(storedFile);
         return ResponseEntity.ok(savedFile);
     }*/
-    @PostMapping("/upload") // 이미지 파일 처리하는 메소드
+    @PostMapping("/uploadImage") // 이미지 파일 처리하는 메소드
     public ResponseEntity<Board> uploadFiles(@RequestParam("imageFiles") List<MultipartFile> multipartFiles, Long boardId) throws IOException { // 매개변수 이미지, 보드Id로 받아서 해당 보드에 저장하게끔
         List<UploadFile> uploadImageFiles = fileUtil.uploadFiles(multipartFiles); // 받아온 multipartFile을 로컬 경로와 DB에 저장
 
@@ -46,7 +46,7 @@ public class FileRestController {
         }
         return ResponseEntity.ok(board); // 파일을 저장한 객체 반환
     }
-    @PostMapping("/upload") // 첨부파일 처리하는 메소드
+    @PostMapping("/uploadAttach") // 첨부파일 처리하는 메소드
     public ResponseEntity<Board> uploadFile(@RequestParam("attachFile") MultipartFile multipartFile, Long boardId) throws IOException { // 매개변수 파일, 보드Id로 받아서 해당 보드에 저장하게끔
         UploadFile attachFile = fileUtil.uploadFile(multipartFile);
 
