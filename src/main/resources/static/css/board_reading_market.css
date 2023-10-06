@@ -65,7 +65,7 @@ body{
 
   .wrap_mainframe .mainframe .main_content .content_body .body_top{
     height:70px;
-    width:896px;
+    width:872px;
     margin-bottom:15px;
     display:flex;
     justify-content:left;
@@ -106,6 +106,14 @@ body{
     box-sizing:border-box;
     padding:0 5px;
     font-size:12px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .namespace .report .inner_button {
+    padding: 0 5px 0 5px;
+  }
+
+  .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .namespace .report .inner_button:last-child{
+    padding: 0 0 0 5px;
   }
 
   .wrap_mainframe .mainframe .main_content .content_body .body_top .name_time .writing_time{
@@ -285,7 +293,7 @@ body{
 
   .comment_div .comment_top .textspace {
     display : flex;
-    font-size:14px;
+    font-size:12px;
     justify-content:center;
     align-items:center;
     width:842px;
@@ -310,6 +318,18 @@ body{
   .comment_div .comment_top .textspace .likey_report .likey{
     padding-right:10px;
   }
+
+.comment_div .comment_top .textspace .likey_report .likey{
+  padding-right:10px;
+}
+
+.comment_div .comment_top .textspace .likey_report .report{
+  padding-right:10px;
+}
+
+.comment_div .comment_top .textspace .likey_report .delete{
+  padding-right:5px;
+}
 
   .comment_body {
     font-size:14px;

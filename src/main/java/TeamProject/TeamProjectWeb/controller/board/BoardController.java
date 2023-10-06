@@ -10,6 +10,7 @@ import TeamProject.TeamProjectWeb.dto.BoardForm;
 import TeamProject.TeamProjectWeb.dto.BoardSummaryDTO;
 import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
 import TeamProject.TeamProjectWeb.service.BoardService;
+import TeamProject.TeamProjectWeb.service.LikeService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
+    private final LikeService likeService;
 
     // 게시글 작성 폼 페이지를 보여줍니다.
     @GetMapping("/writing/write")
@@ -73,16 +75,21 @@ public class BoardController {
             return "redirect:/";
         }
 
+        // 세션에서 로그인 회원 정보를 가져옵니다.
+        Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+
         if (model.containsAttribute("message")) {
             model.addAttribute("error", model.getAttribute("message"));
         }
 
-        // 세션에서 로그인 회원 정보를 가져옵니다.
-        Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-
         if (loginMember != null) {
             // 로그인한 회원 정보가 있다면 memberId를 모델에 추가
             model.addAttribute("loginMemberId", loginMember.getId());
+        }
+
+        if (loginMember != null) {
+            boolean isLiked = likeService.isBoardLikedByMember(loginMember.getId(), boardId);
+            model.addAttribute("isLiked", isLiked);
         }
 
         List<Comment> comments = board.getComments();

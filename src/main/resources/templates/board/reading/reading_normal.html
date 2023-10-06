@@ -46,7 +46,11 @@
                                 <div class="name_time">
                                     <div class="namespace">
                                         <div class="writer_name" th:text="${board.author}">익명</div>
-                                        <div class="report">신고</div>
+                                        <div class="report">
+                                            <a href="javascript:void(0)" class="inner_button">삭제</a>
+                                            <a href="javascript:void(0)" class="inner_button">수정</a>
+                                            <a href="javascript:void(0)" class="inner_button">신고</a>
+                                        </div>
                                     </div>
                                     <div class="writing_time" th:text="${formattedDate}">6분전</div>
                                 </div>
@@ -62,12 +66,14 @@
                             </div>
                             <div class="body_counting">
                                 <span class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
-                                <span class="recom_count" th:text="${board.likeCnt}">7;</span>
+                                <span class="recom_count" th:text="${board.likeCnt}">7</span>
                                 <span class="material-icons" style="color:#0d339a;">chat_bubble_outline</span>
                                 <span class="comment_count" th:text="${board.chatCnt}">10</span>
                             </div>
                             <div class="body_button" th:data-board-id="${board.id}">
-                                <span class="material-icons-outlined" style="color:black;">favorite_border</span>
+                                <span class="material-icons-outlined"
+                                      th:style="'color:' + (${isLiked} ? '#b63826' : 'black')"
+                                      style="color:black;">favorite_border</span>
                                 <span>&nbsp;좋아요</span>
                             </div>
                         </div>
@@ -79,8 +85,15 @@
                                       <div class="textspace">
                                           <div class="name" th:text="${comment.author}">익명</div>
                                           <div class="likey_report">
-                                              <div class="likey">좋아요</div>
-                                              <div class="report">신고</div>
+                                              <div class="likey">
+                                                  <a href="javascript:void(0)">좋아요</a>
+                                              </div>
+                                              <div class="report">
+                                                  <a href="javascript:void(0)">신고</a>
+                                              </div>
+                                              <div class="delete">
+                                                  <a href="javascript:void(0)">삭제</a>
+                                              </div>
                                           </div>
                                       </div>
                                   </div>

@@ -11,9 +11,16 @@ $(document).ready(function() {
                     <div class="textspace">
                         <div class="name">${comment.authorName}</div>
                         <div class="likey_report">
-                            <div class="likey">좋아요</div>
-                            <div class="report">신고</div>
-                        </div>
+                             <div class="likey">
+                                 <a>좋아요</a>
+                             </div>
+                             <div class="report">
+                                 <a>신고</a>
+                             </div>
+                             <div class="delete">
+                                 <a>삭제</a>
+                             </div>
+                         </div>
                     </div>
                 </div>
                 <div class="comment_body">

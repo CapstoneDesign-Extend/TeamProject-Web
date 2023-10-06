@@ -60,6 +60,11 @@ public class LikeRepository {
     }
 
     @Transactional
+    public void delete(Like like) {
+        em.remove(like);
+    }
+
+    @Transactional
     public List<Like> findAllByBoardId(Long boardId) {
         return em.createQuery("SELECT l FROM Like l WHERE l.board.id = :boardId", Like.class)
                 .setParameter("boardId", boardId)
@@ -73,8 +78,4 @@ public class LikeRepository {
                 .getResultList();
     }
 
-    @Transactional
-    public void delete(Like like) {
-        em.remove(like);
-    }
 }

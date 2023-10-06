@@ -1,6 +1,8 @@
 package TeamProject.TeamProjectWeb.service;
 
+import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.Like;
+import TeamProject.TeamProjectWeb.dto.LikeResponse;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
 import TeamProject.TeamProjectWeb.repository.CommentRepository;
 import TeamProject.TeamProjectWeb.repository.LikeRepository;
@@ -17,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 // 클래스 레벨의 트랜잭션 설정. 기본적으로 읽기 전용 트랜잭션입니다.
 // 하지만 아래의 메서드들에서 명시적으로 트랜잭션 설정을 오버라이드할 수 있습니다.
-@Transactional(readOnly = true)
+
 public class LikeService {
 
     // 좋아요 관련 데이터 접근 객체
@@ -35,23 +37,25 @@ public class LikeService {
     // 게시글에 대한 좋아요의 토글 기능을 수행하는 메서드.
     // 존재하는 좋아요는 삭제하고, 없다면 새로 만듭니다.
     @Transactional
-    public Like toggleLikeBoard(Long memberId, Long boardId) {
-        // 주어진 멤버 ID와 게시글 ID를 사용해 기존의 좋아요를 찾습니다.
+    public LikeResponse toggleLikeBoard(Long memberId, Long boardId) {
         List<Like> existingLikes = likeRepository.findByMemberAndBoard(memberId, boardId);
+        Board board = boardRepository.findOne(boardId);
 
-        // 좋아요가 이미 존재한다면 삭제
+        boolean isLiked = false;
         if (!existingLikes.isEmpty()) {
             likeRepository.delete(existingLikes.get(0));
-            return null;
+            board.decrementLikeCount(); // 게시물 좋아요 수 감소
+        } else {
+            Like newLike = new Like();
+            newLike.setMember(memberRepository.findOne(memberId));
+            newLike.setBoard(board);
+            newLike.setLikeType(Like.LikeType.POST);
+            likeRepository.save(newLike);
+            board.incrementLikeCount(); // 게시물 좋아요 수 증가
+            isLiked = true;
         }
 
-        // 새로운 좋아요 객체 생성 및 설정
-        Like newLike = new Like();
-        newLike.setMember(memberRepository.findOne(memberId)); // 멤버 설정
-        newLike.setBoard(boardRepository.findOne(boardId));   // 게시글 설정
-        newLike.setLikeType(Like.LikeType.POST); // 좋아요 유형 설정: 게시글
-
-        return likeRepository.save(newLike); // 저장 후 결과 반환
+        return new LikeResponse(isLiked, board.getLikeCnt());
     }
 
     // 댓글에 대한 좋아요의 토글 기능을 수행하는 메서드.
@@ -87,3 +91,24 @@ public class LikeService {
 
     // 나머지 기능들...
 }
+
+
+//    @Transactional
+//    public Like toggleLikeBoard(Long memberId, Long boardId) {
+//        // 주어진 멤버 ID와 게시글 ID를 사용해 기존의 좋아요를 찾습니다.
+//        List<Like> existingLikes = likeRepository.findByMemberAndBoard(memberId, boardId);
+//
+//        // 좋아요가 이미 존재한다면 삭제
+//        if (!existingLikes.isEmpty()) {
+//            likeRepository.delete(existingLikes.get(0));
+//            return null;
+//        }
+//
+//        // 새로운 좋아요 객체 생성 및 설정
+//        Like newLike = new Like();
+//        newLike.setMember(memberRepository.findOne(memberId)); // 멤버 설정
+//        newLike.setBoard(boardRepository.findOne(boardId));   // 게시글 설정
+//        newLike.setLikeType(Like.LikeType.POST); // 좋아요 유형 설정: 게시글
+//
+//        return likeRepository.save(newLike); // 저장 후 결과 반환
+//    }
