@@ -20,9 +20,9 @@ public class Board { // 게시판 클래스
     @Column(name = "board_id")
     private Long id;
     @NotNull
-    @Column(length = 30)
+    @Column(length = 50)
     private String title; // 제목
-    @Column(length = 2048)
+    @Column(length = 4096)
     private String content; // 본문
     @ManyToOne(fetch=FetchType.LAZY) // fetch=FetchType.LAZY : 지연 로딩으로 실시간 업로딩 되는 것을 막음
     @JoinColumn(name = "member_id") // 외래키 => 조인할 속성 이름
@@ -73,7 +73,10 @@ public class Board { // 게시판 클래스
         this.imageFileEntities.add(fileEntity);
         fileEntity.setBoard(this);
     }
-
+    public void removeFileEntity(FileEntity fileEntity) {
+        this.imageFileEntities.remove(fileEntity);
+        fileEntity.setBoard(null);
+    }
     //== 생성 메소드 --//
     public static Board createBoard(BoardKind boardKind){ // 어떤 게시판의 게시글인지 알기 위해 사용
         Board board = new Board();

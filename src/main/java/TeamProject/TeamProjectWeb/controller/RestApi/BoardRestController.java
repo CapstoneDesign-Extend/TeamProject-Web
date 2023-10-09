@@ -43,7 +43,7 @@ public class BoardRestController {
         }
         List<String> fileUrls = new ArrayList<>();
         for (FileEntity fileEntity : board.getFileEntities()) {
-            String url = "/api/file/download/" + fileEntity.getId();
+            String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
             fileUrls.add(url);
         }
         dto.setImageURLs(fileUrls);
@@ -62,7 +62,19 @@ public class BoardRestController {
         List<Board> boards = boardRepository.findByBoardKind(boardKind);
         // 조회된 게시글 목록을 반환함
         return boards.stream()
-                .map(board -> ConvertDTO.convertBoard(board))
+                .map(board -> {
+                    BoardDTO dto = ConvertDTO.convertBoard(board);
+
+                    // 해당 게시글에 파일이 있다면 그 URL 리스트도 담아서 반환
+                    List<String> fileUrls = new ArrayList<>();
+                    for (FileEntity fileEntity : board.getFileEntities()) {
+                        String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+                        fileUrls.add(url);
+                    }
+                    dto.setImageURLs(fileUrls);
+
+                    return dto;
+                })
                 .collect(Collectors.toList());  // DTO를 반환하도록 변환
     }
     // 특정 BoardKind 의 최신 게시글 리스트를 필요한 만큼만 반환하는 API 엔드포인트
@@ -104,6 +116,7 @@ public class BoardRestController {
 
     // 게시글 수정 API 엔드포인트
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<BoardDTO> updateBoard(@PathVariable Long id, @RequestBody Board updatedBoard) {
         // 주어진 id에 해당하는 게시글을 조회함
         Board board = boardRepository.findOne(id);
