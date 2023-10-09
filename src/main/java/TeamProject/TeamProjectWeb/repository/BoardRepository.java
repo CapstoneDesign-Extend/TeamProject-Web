@@ -39,6 +39,7 @@ public class BoardRepository implements BoardRepositoryCustom {
     public void update(Board board) {
         em.merge(board);
     }
+
     public Board findById(Long id){
         return em.find(Board.class, id);
     }

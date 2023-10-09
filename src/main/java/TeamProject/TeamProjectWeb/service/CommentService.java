@@ -35,10 +35,12 @@ public class CommentService {
     }
 
     public CommentResponse addComment(Long boardId, String content, Long memberId, String authorName) {
-        commentRepository.saveComment(boardId, memberId, content, authorName);
+        Comment comment = commentRepository.saveComment2(boardId, memberId, content, authorName);
         Board board = boardRepository.findOne(boardId);
 
         CommentResponse response = new CommentResponse();
+        response.setId(comment.getId()); // 댓글의 ID 추가
+        response.setLikeCount(comment.getLikeCount()); // 좋아요 개수 추가
         response.setChatCnt((long) board.getChatCnt());
         response.setContent(content);
         response.setAuthorName(authorName);

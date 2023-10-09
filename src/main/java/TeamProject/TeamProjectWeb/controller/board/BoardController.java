@@ -23,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -181,12 +182,29 @@ public class BoardController {
         return "redirect:/board/" + updatedBoard.getId();
     }
 
-    // 게시글 삭제를 처리합니다.
-    @PostMapping("/{boardId}/delete")
-    public String delete(@PathVariable Long boardId) {
-        boardService.deleteBoard(boardId);
-        return "redirect:/";
+    //게시글 삭제를 처리합니다.
+    @DeleteMapping("/delete/{boardId}")
+    public String delete(@PathVariable Long boardId, HttpSession session, RedirectAttributes redirectAttributes) {
+        Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (loginMember == null) {
+            redirectAttributes.addFlashAttribute("message", "로그인이 필요한 서비스입니다.");
+            return "redirect:/login"; // 로그인 페이지로 리다이렉트
+        }
+        try {
+            boardService.deleteBoard(boardId, loginMember);
+        } catch (IllegalStateException e) {
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
+            return "redirect:/board/reading/" + boardId; // 삭제 실패 시 해당 게시글로 리다이렉트
+        }
+        return "redirect:/board/board_collection";
     }
+
+//    // 게시글 삭제를 처리합니다.
+//    @PostMapping("/delete/{boardId}")
+//    public String delete(@PathVariable Long boardId) {
+//        boardService.deleteBoard(boardId);
+//        return "redirect:/board/board_collection";
+//    }
 
     @GetMapping("/board_collection")
     public String collectionPage(Model model) {
@@ -212,7 +230,7 @@ public class BoardController {
     public String showBoardSummary(@PathVariable BoardKind boardKind,
                                    @RequestParam(defaultValue = "0") int page,
                                    Model model) {
-        Pageable pageable = PageRequest.of(page, 6); // 10개의 게시글을 가져옵니다.
+        Pageable pageable = PageRequest.of(page, 6); // 6개의 게시글을 가져옵니다.
         Page<BoardSummaryDTO> boardSummaryPage = boardService.getBoardSummaryByKind(boardKind, pageable);
         model.addAttribute("boardSummaryPage", boardSummaryPage);
         model.addAttribute("boardKind", boardKind);

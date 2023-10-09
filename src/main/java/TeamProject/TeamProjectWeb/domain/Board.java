@@ -74,4 +74,3 @@ public class Board { // 게시판 클래스
     }
 
 }
-

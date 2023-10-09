@@ -26,7 +26,7 @@ public class LikeController {
 
     // 댓글에 대한 좋아요 토글 기능을 처리하는 엔드포인트입니다.
     @PostMapping("/comment/{commentId}/member/{memberId}")
-    public ResponseEntity<Like> toggleLikeComment(@PathVariable Long commentId, @PathVariable Long memberId) {
+    public ResponseEntity<LikeResponse> toggleLikeComment(@PathVariable Long commentId, @PathVariable Long memberId) {
         return ResponseEntity.ok(likeService.toggleLikeComment(memberId, commentId));
     }
 

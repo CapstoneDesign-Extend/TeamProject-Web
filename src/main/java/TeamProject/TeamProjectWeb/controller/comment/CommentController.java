@@ -19,9 +19,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,6 +32,8 @@ import java.util.List;
 public class CommentController {
 
     private final CommentService commentService;
+
+    private final BoardService boardService;
 
     @PostMapping
     public ResponseEntity<?> addComment(@RequestParam Long boardId,
@@ -60,15 +65,31 @@ public class CommentController {
         return ResponseEntity.ok(commentDTOs);
     }
 
-    @DeleteMapping("/{commentId}")
-    public ResponseEntity<?> deleteComment(@PathVariable Long commentId, HttpSession session) {
-        Member loggedInMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        if (loggedInMember == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+    @DeleteMapping("/delete/{commentId}")
+    public ResponseEntity<?> deleteComment(@PathVariable Long commentId, HttpSession session, RedirectAttributes redirectAttributes) {
+        Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (loginMember == null) {
+            // 로그인이 필요한 서비스입니다.
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("로그인이 필요한 서비스입니다.");
         }
+        try {
+            Comment comment = commentService.findById(commentId);  // 먼저 댓글 객체를 조회
+            Long boardId = comment.getBoard().getId();                   // 해당 댓글과 연결된 Board의 ID를 가져옴
 
-        commentService.deleteComment(commentId, loggedInMember.getId());
-        return ResponseEntity.ok().build();
+            commentService.deleteComment(commentId, loginMember.getId());
+
+            Board board = boardService.findBoardById(boardId);  // 연결된 Board 객체를 조회
+            int updatedChatCnt = board.getComments().size();
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", comment.getId());
+            response.put("message", "댓글이 성공적으로 삭제되었습니다.");
+            response.put("chatCnt", updatedChatCnt);
+
+            return ResponseEntity.ok().body(response);
+        } catch (IllegalStateException | IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage() != null ? e.getMessage() : "댓글 삭제 중 오류가 발생했습니다.");
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 package TeamProject.TeamProjectWeb.service;
 
 import TeamProject.TeamProjectWeb.domain.Board;
+import TeamProject.TeamProjectWeb.domain.Comment;
 import TeamProject.TeamProjectWeb.domain.Like;
 import TeamProject.TeamProjectWeb.dto.LikeResponse;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
@@ -60,23 +61,26 @@ public class LikeService {
 
     // 댓글에 대한 좋아요의 토글 기능을 수행하는 메서드.
     @Transactional
-    public Like toggleLikeComment(Long memberId, Long commentId) {
-        // 주어진 멤버 ID와 댓글 ID를 사용해 기존의 좋아요를 찾습니다.
+    public LikeResponse toggleLikeComment(Long memberId, Long commentId) {
         List<Like> existingLikes = likeRepository.findByMemberAndComment(memberId, commentId);
+        Comment comment = commentRepository.findById(commentId);  // 해당 댓글을 찾습니다.
 
-        // 좋아요가 이미 존재한다면 삭제
+        boolean isLiked = false;
         if (!existingLikes.isEmpty()) {
             likeRepository.delete(existingLikes.get(0));
-            return null;
+            comment.decrementLikeCount();  // 해당 코드가 없다고 했으므로 주석 처리
+        } else {
+            Like newLike = new Like();
+            newLike.setMember(memberRepository.findOne(memberId));
+            newLike.setComment(comment);
+            newLike.setLikeType(Like.LikeType.COMMENT);
+            likeRepository.save(newLike);
+            comment.incrementLikeCount();  // 해당 코드가 없다고 했으므로 주석 처리
+            isLiked = true;
         }
 
-        // 새로운 좋아요 객체 생성 및 설정
-        Like newLike = new Like();
-        newLike.setMember(memberRepository.findOne(memberId));   // 멤버 설정
-        newLike.setComment(commentRepository.findById(commentId)); // 댓글 설정
-        newLike.setLikeType(Like.LikeType.COMMENT); // 좋아요 유형 설정: 댓글
-
-        return likeRepository.save(newLike); // 저장 후 결과 반환
+        // 현재 댓글의 좋아요 수를 어떻게 가져올지 결정해야 합니다.
+        return new LikeResponse(isLiked, comment.getLikeCount());  // 여기서 0은 임시 값입니다. 실제 댓글의 좋아요 수를 가져와야 합니다.
     }
 
     // 주어진 멤버가 특정 게시글에 좋아요를 눌렀는지 확인하는 메서드

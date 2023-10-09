@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extend</title>
     <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/css/board_reading_normal.css">
     <link rel="stylesheet" href="/css/header.css">
     <!--Google Api-->
@@ -19,10 +20,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script defer src="/js/calendar.js"></script>
     <script defer src="/js/header.js"></script>
-    <script defer src="/js/reading.js"></script>
+    <script defer src="/js/reading_normal.js"></script>
     <script defer src="/js/comment.js"></script>
     <script defer src="/js/like.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <header th:if="${loggedIn}">
@@ -47,8 +47,14 @@
                                     <div class="namespace">
                                         <div class="writer_name" th:text="${board.author}">익명</div>
                                         <div class="report">
-                                            <a href="javascript:void(0)" class="inner_button">삭제</a>
-                                            <a href="javascript:void(0)" class="inner_button">수정</a>
+                                            <th:block th:if="${message}">
+                                                <div class="error-message" th:text="${message}"></div>
+                                            </th:block>
+                                            <form th:action="@{'/board/delete/' + ${board.id}}" method="post" style="display:inline;" id="deleteForm">
+                                                <input type="hidden" name="_method" value="DELETE"/>
+                                                <div onclick="confirmDelete(document.getElementById('deleteForm'))">삭제</div>
+                                            </form>
+                                            <a href="/board/${board.id}/edit" class="inner_button">수정</a>
                                             <a href="javascript:void(0)" class="inner_button">신고</a>
                                         </div>
                                     </div>
@@ -86,13 +92,14 @@
                                           <div class="name" th:text="${comment.author}">익명</div>
                                           <div class="likey_report">
                                               <div class="likey">
-                                                  <a href="javascript:void(0)">좋아요</a>
+                                                  <!-- data-comment-id 를 추가하여 각 댓글에 대한 구분이 가능하도록 합니다. -->
+                                                  <a href="javascript:void(0)" th:data-comment-id="${comment.id}" class="comment-like">좋아요</a>
                                               </div>
                                               <div class="report">
                                                   <a href="javascript:void(0)">신고</a>
                                               </div>
                                               <div class="delete">
-                                                  <a href="javascript:void(0)">삭제</a>
+                                                  <a href="javascript:void(0)" th:data-comment-id="${comment.id}" class="comment-delete">삭제</a>
                                               </div>
                                           </div>
                                       </div>
@@ -100,7 +107,13 @@
                                   <div class="comment_body">
                                       <div class="comment_main" th:text="${comment.content}">케로로장재미슴</div>
                                   </div>
-                                  <div class="time" th:text="${formattedCommentDates[stat.index]}">3분 전</div>
+                                  <div class="time">
+                                      <div class="time_text" th:text="${formattedCommentDates[stat.index]}">3분전</div>
+                                      <div class="comment_likey_count">
+                                          <span id="" class="material-icons-outlined" style="color:#b63826;">favorite_border</span>
+                                          <span class="recom_count2" th:text="${comment.likeCount}">7&nbsp;</span>
+                                      </div>
+                                  </div>
                               </div>
                           </div>
                       </div>

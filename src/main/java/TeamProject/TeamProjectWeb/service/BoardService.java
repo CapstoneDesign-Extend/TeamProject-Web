@@ -26,7 +26,7 @@ import java.util.List;
 import static TeamProject.TeamProjectWeb.utils.TimeUtils.timeFriendly;
 
 @Service
-@Transactional(readOnly = false)
+@Transactional
 //@AllArgsConstructor // 현재 클래스가 가지고 있는 필드를 가지고 생성자를 만들어줌
 @RequiredArgsConstructor // 현재 클래스가 가지고 있는 필드 중 private final 필드만을 가지고 생성자를 만들어줌
 public class BoardService {
@@ -72,9 +72,15 @@ public class BoardService {
     }
 
     @Transactional
-    public void deleteBoard(Long boardId) {
-        // 게시글 ID를 기반으로 게시글을 삭제하는 메서드
-        boardRepository.deleteById(boardId);
+    public void deleteBoard(Long boardId, Member loginMember) {
+        Board board = boardRepository.findById(boardId);
+        if (board == null) {
+            throw new IllegalStateException("게시글이 존재하지 않습니다.");
+        }
+        if (!board.getMember().getId().equals(loginMember.getId())) {
+            throw new IllegalStateException("자신의 글만 삭제할 수 있습니다.");
+        }
+        boardRepository.delete(board);
     }
 
     public Board findBoardById(Long boardId) {
@@ -150,18 +156,6 @@ public class BoardService {
 
     public String formatCommentDate(LocalDateTime commentDate) {
         return timeFriendly(commentDate);
-    }
-
-    public void incrementCommentCount(Long boardId) {
-        Board board = boardRepository.findOne(boardId);
-        board.setChatCnt(board.getChatCnt() + 1);
-        boardRepository.save(board);
-    }
-
-    public void decrementCommentCount(Long boardId) {
-        Board board = boardRepository.findOne(boardId);
-        board.setChatCnt(board.getChatCnt() - 1);
-        boardRepository.save(board);
     }
 
 }

@@ -46,6 +46,20 @@ public class Comment { // 댓글 클래스
 
     }
 
+    public void incrementLikeCount() {
+        this.likeCount++;
+    }
+
+    public void decrementLikeCount() {
+        if (this.likeCount > 0) {
+            this.likeCount--;
+        }
+    }
+
+    public int getLikeCount() {
+        return this.likeCount;
+    }
+
     //== 연관관계 메소드 ==//
     public void setBoard(Board board){ //-- 게시글에 댓글 저장 메소드 --//
         this.board = board;

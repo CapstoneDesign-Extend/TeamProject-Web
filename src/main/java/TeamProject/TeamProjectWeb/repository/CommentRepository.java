@@ -60,6 +60,31 @@ public class CommentRepository {
         em.persist(comment);
     }
 
+    @Transactional
+    public Comment saveComment2(Long boardId, Long memberId, String content, String author) {
+        Member member = em.find(Member.class, memberId); // memberId에 해당하는 Member 객체를 데이터베이스에서 조회
+        Board board = em.find(Board.class, boardId); // boardId에 해당하는 Board 객체를 데이터베이스에서 조회
+
+        if (member == null || board == null) {
+            // 만약 member나 board가 null인 경우, 잘못된 boardId나 memberId가 전달된 것으로 간주하고 예외를 던짐
+            throw new IllegalArgumentException("Invalid boardId or memberId");
+        }
+
+        Comment comment = new Comment();
+        comment.setContent(content);
+        comment.setFinalDate(LocalDateTime.now());
+        comment.setLikeCount(0);
+        comment.setMember(member);
+        comment.setBoard(board);
+        comment.setAuthor(author);
+
+        // chatCnt ++
+        board.setChatCnt(board.getChatCnt() + 1);
+
+        em.persist(comment);
+        return comment;
+    }
+
     public List<CommentDTO> findByBoardId(Long boardId) { // 게시판 id를 가져와 어디 게시판인지 파악함
         // 게시글 ID에 해당하는 댓글 목록 조회
         Query query = em.createQuery("SELECT c FROM Comment c WHERE c.board.id = :boardId");
