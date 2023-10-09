@@ -26,6 +26,8 @@ public class BoardDTO {
     private int likeCnt; // 좋아요 개수
     private int chatCnt; // 댓글수
 
+    private Integer price;  // 가격
+
     private List<String> imageURLs; // 이미지 URL 목록
 
 }
