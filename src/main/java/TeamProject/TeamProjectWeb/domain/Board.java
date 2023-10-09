@@ -11,8 +11,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jakarta.persistence.CascadeType.ALL;
-
 @Entity
 @Getter @Setter
 @Table(name = "board")
@@ -22,9 +20,9 @@ public class Board { // 게시판 클래스
     @Column(name = "board_id")
     private Long id;
     @NotNull
-    @Column(length = 30)
+    @Column(length = 50)
     private String title; // 제목
-    @Column(length = 2048)
+    @Column(length = 4096)
     private String content; // 본문
     @ManyToOne(fetch=FetchType.LAZY) // fetch=FetchType.LAZY : 지연 로딩으로 실시간 업로딩 되는 것을 막음
     @JoinColumn(name = "member_id") // 외래키 => 조인할 속성 이름
@@ -59,12 +57,26 @@ public class Board { // 게시판 클래스
     @OneToMany(mappedBy = "board", orphanRemoval = true)  // board가 삭제되면 연관된 likes도 함께 삭제
     private List<Like> likes = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private UploadFile attachFile; // 올릴 파일
-    @OneToMany(mappedBy = "board")
-    private List<UploadFile> imageFiles; // 파일 리스트
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    // 게시글이 삭제되면, 관련 파일도 함께 삭제 (cascade)  +  게시글의 파일 목록에서 파일을 제거하면, db에서도 해당파일 삭제 (orphanRemoval)
+    private List<FileEntity> imageFileEntities = new ArrayList<>(); // 파일 리스트
+
+    // 연관된 파일들을 가져오는 메서드
+    public List<FileEntity> getFileEntities() {
+        return imageFileEntities;
+    }
 
 
+
+    // ====  연관 관계 편의 메소드 : 일관성 있는 동작 위함  ====
+    public void addFileEntity(FileEntity fileEntity) {
+        this.imageFileEntities.add(fileEntity);
+        fileEntity.setBoard(this);
+    }
+    public void removeFileEntity(FileEntity fileEntity) {
+        this.imageFileEntities.remove(fileEntity);
+        fileEntity.setBoard(null);
+    }
     //== 생성 메소드 --//
     public static Board createBoard(BoardKind boardKind){ // 어떤 게시판의 게시글인지 알기 위해 사용
         Board board = new Board();

@@ -2,6 +2,7 @@ package TeamProject.TeamProjectWeb.controller.RestApi;
 
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
+import TeamProject.TeamProjectWeb.domain.FileEntity;
 import TeamProject.TeamProjectWeb.dto.BoardDTO;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
 import TeamProject.TeamProjectWeb.utils.ConvertDTO;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,11 +31,23 @@ public class BoardRestController {
         boardRepository.save(board);
         return ResponseEntity.ok(ConvertDTO.convertBoard(board));
     }
-    // 특정 id의 게시글을 반환하는 API 엔드포인트
+    // 특정 id의 게시글을 반환하는 API 엔드포인트 + 이미지 URL 목록도 저장해서 반환
     @GetMapping("/{id}")
     public ResponseEntity<BoardDTO> getBoardById(@PathVariable Long id) {
         // 주어진 id에 해당하는 게시글을 조회함
         BoardDTO dto = boardRepository.findOneDTO(id);
+        // 해당 게시글에 파일이 있다면 그 URL 리스트도 담아서 반환
+        Board board = boardRepository.findById(id);
+        if (board == null){
+            throw new IllegalArgumentException("Board not found.");
+        }
+        List<String> fileUrls = new ArrayList<>();
+        for (FileEntity fileEntity : board.getFileEntities()) {
+            String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+            fileUrls.add(url);
+        }
+        dto.setImageURLs(fileUrls);
+
         if (dto == null) {
             // 주어진 id에 해당하는 게시글이 없는 경우 404 Not Found 상태 코드를 반환함
             return ResponseEntity.notFound().build();
@@ -48,7 +62,19 @@ public class BoardRestController {
         List<Board> boards = boardRepository.findByBoardKind(boardKind);
         // 조회된 게시글 목록을 반환함
         return boards.stream()
-                .map(board -> ConvertDTO.convertBoard(board))
+                .map(board -> {
+                    BoardDTO dto = ConvertDTO.convertBoard(board);
+
+                    // 해당 게시글에 파일이 있다면 그 URL 리스트도 담아서 반환
+                    List<String> fileUrls = new ArrayList<>();
+                    for (FileEntity fileEntity : board.getFileEntities()) {
+                        String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+                        fileUrls.add(url);
+                    }
+                    dto.setImageURLs(fileUrls);
+
+                    return dto;
+                })
                 .collect(Collectors.toList());  // DTO를 반환하도록 변환
     }
     // 특정 BoardKind 의 최신 게시글 리스트를 필요한 만큼만 반환하는 API 엔드포인트
@@ -57,7 +83,19 @@ public class BoardRestController {
         List<Board> boards = boardRepository.findByBoardKindAmount(boardKind, amount);
 
         return boards.stream()
-                .map(board -> ConvertDTO.convertBoard(board))
+                .map(board -> {
+                    BoardDTO dto = ConvertDTO.convertBoard(board);
+
+                    // 해당 게시글에 파일이 있다면 그 URL 리스트도 담아서 반환
+                    List<String> fileUrls = new ArrayList<>();
+                    for (FileEntity fileEntity : board.getFileEntities()) {
+                        String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+                        fileUrls.add(url);
+                    }
+                    dto.setImageURLs(fileUrls);
+
+                    return dto;
+                })
                 .collect(Collectors.toList());  // DTO를 반환하도록 변환
     }
 
@@ -72,13 +110,41 @@ public class BoardRestController {
     @GetMapping("/search/byKeyword")
     public List<BoardDTO> getBoardsByKeyword(@RequestParam("keyword") String keyword) {
         List<Board> boards = boardRepository.findByKeyword(keyword);
-        return boards.stream().map(ConvertDTO::convertBoard).collect(Collectors.toList());
+
+        return boards.stream()
+                .map(board -> {
+                    BoardDTO dto = ConvertDTO.convertBoard(board);
+
+                    List<String> fileUrls = new ArrayList<>();
+                    for (FileEntity fileEntity : board.getFileEntities()) {
+                        String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+                        fileUrls.add(url);
+                    }
+                    dto.setImageURLs(fileUrls);
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
     // 키워드로 특정 게시판 검색
     @GetMapping("/search/byKeywordKind")
     public List<BoardDTO> getBoardsByKeywordKind(@RequestParam("keyword") String keyword, @RequestParam("boardKind") BoardKind boardKind){
         List<Board> boards = boardRepository.findByKeywordKind(keyword, boardKind);
-        return boards.stream().map(ConvertDTO::convertBoard).collect(Collectors.toList());
+
+        return boards.stream()
+                .map(board -> {
+                    BoardDTO dto = ConvertDTO.convertBoard(board);
+
+                    List<String> fileUrls = new ArrayList<>();
+                    for (FileEntity fileEntity : board.getFileEntities()) {
+                        String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+                        fileUrls.add(url);
+                    }
+                    dto.setImageURLs(fileUrls);
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
     // 모든 게시글 조회 API 엔드포인트
     @GetMapping
@@ -90,6 +156,7 @@ public class BoardRestController {
 
     // 게시글 수정 API 엔드포인트
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<BoardDTO> updateBoard(@PathVariable Long id, @RequestBody Board updatedBoard) {
         // 주어진 id에 해당하는 게시글을 조회함
         Board board = boardRepository.findOne(id);

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static jakarta.persistence.CascadeType.ALL;
 
@@ -24,5 +25,7 @@ public class BoardDTO {
     private int viewCnt; // 조회수
     private int likeCnt; // 좋아요 개수
     private int chatCnt; // 댓글수
+
+    private List<String> imageURLs; // 이미지 URL 목록
 
 }
