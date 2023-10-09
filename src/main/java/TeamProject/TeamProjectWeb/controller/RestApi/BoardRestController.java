@@ -2,6 +2,7 @@ package TeamProject.TeamProjectWeb.controller.RestApi;
 
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
+import TeamProject.TeamProjectWeb.domain.FileEntity;
 import TeamProject.TeamProjectWeb.dto.BoardDTO;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
 import TeamProject.TeamProjectWeb.utils.ConvertDTO;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,11 +31,23 @@ public class BoardRestController {
         boardRepository.save(board);
         return ResponseEntity.ok(ConvertDTO.convertBoard(board));
     }
-    // 특정 id의 게시글을 반환하는 API 엔드포인트
+    // 특정 id의 게시글을 반환하는 API 엔드포인트 + 이미지 URL 목록도 저장해서 반환
     @GetMapping("/{id}")
     public ResponseEntity<BoardDTO> getBoardById(@PathVariable Long id) {
         // 주어진 id에 해당하는 게시글을 조회함
         BoardDTO dto = boardRepository.findOneDTO(id);
+        // 해당 게시글에 파일이 있다면 그 URL 리스트도 담아서 반환
+        Board board = boardRepository.findById(id);
+        if (board == null){
+            throw new IllegalArgumentException("Board not found.");
+        }
+        List<String> fileUrls = new ArrayList<>();
+        for (FileEntity fileEntity : board.getFileEntities()) {
+            String url = "/api/file/download/" + fileEntity.getId();
+            fileUrls.add(url);
+        }
+        dto.setImageURLs(fileUrls);
+
         if (dto == null) {
             // 주어진 id에 해당하는 게시글이 없는 경우 404 Not Found 상태 코드를 반환함
             return ResponseEntity.notFound().build();

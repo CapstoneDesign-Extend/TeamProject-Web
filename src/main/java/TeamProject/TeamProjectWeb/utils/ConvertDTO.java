@@ -1,13 +1,7 @@
 package TeamProject.TeamProjectWeb.utils;
 
-import TeamProject.TeamProjectWeb.domain.Board;
-import TeamProject.TeamProjectWeb.domain.Comment;
-import TeamProject.TeamProjectWeb.domain.Like;
-import TeamProject.TeamProjectWeb.domain.Member;
-import TeamProject.TeamProjectWeb.dto.BoardDTO;
-import TeamProject.TeamProjectWeb.dto.CommentDTO;
-import TeamProject.TeamProjectWeb.dto.LikeDTO;
-import TeamProject.TeamProjectWeb.dto.MemberDTO;
+import TeamProject.TeamProjectWeb.domain.*;
+import TeamProject.TeamProjectWeb.dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +106,17 @@ public class ConvertDTO {
         if (like.getComment() != null) {
             dto.setCommentId(like.getComment().getId());
         }
+        return dto;
+    }
+    public static FileDTO convertFile(FileEntity file){
+        FileDTO dto = new FileDTO();
+        dto.setId(file.getId());
+        dto.setFileName(file.getFileName());
+        dto.setOrigenalFileName(file.getFileName());
+        dto.setContentType(file.getContentType());
+        dto.setSize(file.getSize());
+        dto.setBoardId(file.getBoard().getId());
+
         return dto;
     }
 }

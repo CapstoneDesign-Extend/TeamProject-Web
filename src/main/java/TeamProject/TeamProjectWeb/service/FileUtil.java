@@ -2,9 +2,9 @@ package TeamProject.TeamProjectWeb.service;
 
 
 import TeamProject.TeamProjectWeb.domain.Board;
-import TeamProject.TeamProjectWeb.domain.UploadFile;
+import TeamProject.TeamProjectWeb.domain.FileEntity;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
-import TeamProject.TeamProjectWeb.repository.UploadFileRepository;
+import TeamProject.TeamProjectWeb.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class FileUtil {
 
     //    private final FileDTO fileDTO;
     private final BoardRepository boardRepository;
-    private final UploadFileRepository uploadFileRepository;
+    private final FileRepository fileRepository;
 
     //== 편의 메소드 ==//
     @Value("${file.dir}")
@@ -33,32 +33,32 @@ public class FileUtil {
         return fileDir + fileName; // 파일경로 + 파일이름 = fileFullName
     }
 
-    public List<UploadFile> uploadFiles(List<MultipartFile> multipartFiles, Long boardId) throws IOException { //== 여러 개의 파일 저장 ==//
-        List<UploadFile> uploadFileResult = new ArrayList<>();
+    public List<FileEntity> uploadFiles(List<MultipartFile> multipartFiles, Long boardId) throws IOException { //== 여러 개의 파일 저장 ==//
+        List<FileEntity> fileEntityResult = new ArrayList<>();
 
         for (MultipartFile multipartFile : multipartFiles) {
             if(!multipartFile.isEmpty()){ // 파일이 존재하면
-                uploadFileResult.add(uploadFile(multipartFile, boardId)); // 밑에 작성한 uploadFile 메소드를 이용해 파일 저장
+                fileEntityResult.add(uploadFile(multipartFile, boardId)); // 밑에 작성한 uploadFile 메소드를 이용해 파일 저장
             }
         }
-        return uploadFileResult;
+        return fileEntityResult;
     }
 
-    public UploadFile uploadFile(MultipartFile multipartFile, Long boardId) throws IOException { //== 실질적인 파일 저장 ==//
+    public FileEntity uploadFile(MultipartFile multipartFile, Long boardId) throws IOException { //== 실질적인 파일 저장 ==//
         if (multipartFile.isEmpty()) { // 서버에서 넘어온 파일이 없으면
             return null;
         }
         String originalFileName = multipartFile.getOriginalFilename(); // 클라이언트가 업로드한 파일명
         String serverFileName = createStoreFileName(originalFileName); // 서버에 저장할 파일명
-        UploadFile uploadFile = new UploadFile(originalFileName,serverFileName); // 객체를 새로 생성
+        FileEntity fileEntity = new FileEntity(originalFileName,serverFileName); // 객체를 새로 생성
         Board board = boardRepository.findById(boardId);
-        uploadFile.setBoard(board);
-        uploadFileRepository.save(uploadFile); // db에도 저장함
+        fileEntity.setBoard(board);
+        fileRepository.save(fileEntity); // db에도 저장함
 
         // storeFileName(경로)를 가지고 transferTo() 메소드를 이용해 저장함
         multipartFile.transferTo(new java.io.File(getFullPath(serverFileName)));
 
-        return new UploadFile(originalFileName, serverFileName); // 해당 데이터를 File 도메인에 저장
+        return new FileEntity(originalFileName, serverFileName); // 해당 데이터를 File 도메인에 저장
     }
     private String createStoreFileName(String originalFilename) { //== 서버에 저장할 파일명 만들기 ==//
         String ext = extractExt(originalFilename);
