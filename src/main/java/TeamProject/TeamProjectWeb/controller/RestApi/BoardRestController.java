@@ -168,6 +168,7 @@ public class BoardRestController {
         board.setTitle(updatedBoard.getTitle());
         board.setContent(updatedBoard.getContent());
         board.setAuthor((updatedBoard.getAuthor()));
+        board.setPrice(updatedBoard.getPrice());
         // 추가적인 필드 업데이트 등 필요한 로직 작성
 
         // 수정된 게시글을 boardRepository의 save 메소드를 호출하여 데이터베이스에 저장함

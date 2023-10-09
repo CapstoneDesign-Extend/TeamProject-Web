@@ -31,6 +31,7 @@ public class ConvertDTO {
         dto.setViewCnt(board.getViewCnt());
         dto.setLikeCnt(board.getLikeCnt());
         dto.setChatCnt(board.getChatCnt());
+        dto.setPrice(board.getPrice());
         return dto;
     }
     public static List<BoardDTO> convertBoardList(List<Board> boards){
