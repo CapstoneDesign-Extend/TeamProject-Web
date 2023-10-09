@@ -31,10 +31,10 @@
                     <img src="/img_source/anonymous.png" alt="사진" class="profile_picture">
                     </img>
                     <div class="text_area">
-                        <div class="nickname">
+                        <div class="nickname" th:text="${member.loginId}">
                             hwan123
                         </div>
-                        <div class="name">
+                        <div class="name" th:text="${member.name}">
                             최환규
                         </div>
                     </div>
@@ -244,7 +244,7 @@
                 <div class="calendar">
                     <div class="calendar_title">
                         <div class="title">
-                            학과일정
+                            달력
                         </div>
                         <a href="javascript:void(0)" class="more">
                             더보기

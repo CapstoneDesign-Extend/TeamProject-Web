@@ -149,6 +149,14 @@ public class BoardService {
         return boardRepository.findSummaryByBoardKind(boardKind, pageable);
     }
 
+    public List<Board> findTopByLikeCountAndFinalDate() {
+        return boardRepository.findTopByLikeCountAndFinalDate();
+    }
+
+    public List<Board> findTopByChatCountAndFinalDate() {
+        return boardRepository.findTopByChatCountAndFinalDate();
+    }
+
 
     public String formatFinalDate(LocalDateTime finalDate) {
         return timeFriendly(finalDate);

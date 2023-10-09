@@ -75,6 +75,11 @@ public class BoardController {
         if (board == null) {
             return "redirect:/";
         }
+        List<Board> boardsByLike = boardService.findTopByLikeCountAndFinalDate();
+        List<Board> boardsByChat = boardService.findTopByChatCountAndFinalDate();
+
+        model.addAttribute("boardsByLike", boardsByLike);
+        model.addAttribute("boardsByChat", boardsByChat);
 
         // 세션에서 로그인 회원 정보를 가져옵니다.
         Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
@@ -230,6 +235,12 @@ public class BoardController {
     public String showBoardSummary(@PathVariable BoardKind boardKind,
                                    @RequestParam(defaultValue = "0") int page,
                                    Model model) {
+        List<Board> boardsByLike = boardService.findTopByLikeCountAndFinalDate();
+        List<Board> boardsByChat = boardService.findTopByChatCountAndFinalDate();
+
+        model.addAttribute("boardsByLike", boardsByLike);
+        model.addAttribute("boardsByChat", boardsByChat);
+
         Pageable pageable = PageRequest.of(page, 6); // 6개의 게시글을 가져옵니다.
         Page<BoardSummaryDTO> boardSummaryPage = boardService.getBoardSummaryByKind(boardKind, pageable);
         model.addAttribute("boardSummaryPage", boardSummaryPage);

@@ -21,7 +21,12 @@
     <script defer src="/js/referrer.js" th:src="@{/js/referrer.js}"></script>
 </head>
 <body>
-<!--여기에 헤더 삽입-->
+<header th:if="${loggedIn}">
+    <header th:include="/fragments/header-after.html"></header>
+</header>
+<header th:unless="${loggedIn}">
+    <header th:include="/fragments/header-before.html"></header>
+</header>
     <div class="wrap_mainframe">
         <div class="mainframe">
             <form enctype="multipart/form-data" th:action="@{/board/writing/write}" th:object="${board}" method="post">
@@ -63,11 +68,12 @@
                             <input type="submit" class="writing_completion" value="글 작성">
                         </div>
                     </div>
-                    <input id="fileEntity" class="fileEntity" type="fileEntity" multiple accept="*/*" name="fileEntity"/>
+                    <input id="fileEntity" class="fileEntity" type="hidden" multiple accept="*/*" name="fileEntity"/>
                 </div>
             </form>
         </div>
     </div>
+<footer th:include="/fragments/footer.html"></footer>
 </body>
 </html>
 

@@ -20,7 +20,12 @@
   <title>Document</title>
 </head>
 <body>
-<!--여기에 헤더 삽입-->
+<header th:if="${loggedIn}">
+  <header th:include="/fragments/header-after"></header>
+</header>
+<header th:unless="${loggedIn}">
+  <header th:include="/fragments/header-before"></header>
+</header>
   <div class="wrap_mainframe">
     <div class="mainframe">
       <div class="sidediv">

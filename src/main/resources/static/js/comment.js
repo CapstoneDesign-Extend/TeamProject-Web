@@ -7,7 +7,7 @@ $(document).ready(function() {
         let commentHTML = `
             <div class="comment_div">
                 <div class="comment_top">
-                    <img src="/tmp.jpg" alt="" class="comment_profile_pic">
+                    <img src="/img_source/anonymous.png" alt="" class="comment_profile_pic">
                     <div class="textspace">
                         <div class="name">${comment.authorName}</div>
                         <div class="likey_report">

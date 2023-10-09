@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -193,5 +194,19 @@ public class BoardRepository implements BoardRepositoryCustom {
                 .getSingleResult();
 
         return new PageImpl<>(results, pageable, total);
+    }
+
+    public List<Board> findTopByLikeCountAndFinalDate() {
+        return em.createQuery("select b from Board b where b.finalDate > :oneWeekAgo order by b.likeCnt desc, b.chatCnt desc", Board.class)
+                .setParameter("oneWeekAgo", LocalDateTime.now().minusDays(7))
+                .setMaxResults(4)
+                .getResultList();
+    }
+
+    public List<Board> findTopByChatCountAndFinalDate() {
+        return em.createQuery("select b from Board b where b.finalDate > :oneWeekAgo order by b.chatCnt desc, b.likeCnt desc", Board.class)
+                .setParameter("oneWeekAgo", LocalDateTime.now().minusDays(7))
+                .setMaxResults(4)
+                .getResultList();
     }
 }

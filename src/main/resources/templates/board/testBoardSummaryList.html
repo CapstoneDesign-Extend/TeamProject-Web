@@ -64,66 +64,40 @@
                 </ul>
             </div>
         </div>
-
-
         <div class="rank_board_div">
-                <div class="viewrank">
-                    <div class="viewrank_text">
-                        <div class="viewrank_title">
-                            조회수 인기글
-                        </div>
-                        <div class="more">
-                            <a href="hot_board.html">더보기</a>
-                        </div>
-                    </div>
-                    <div class="viewrank_content">
-                        <a href="javascript:void(0)" class="contentbox">
-                            <div class="content_title">첫번째 글</div>
-                            <div class="write_time">06/07 17:26</div>
-                        </a>
-                        <a href="javascript:void(0)" class="contentbox">
-                            <div class="content_title">첫번째 글</div>
-                            <div class="write_time">06/07 17:26</div>
-                        </a>
-                        <a href="javascript:void(0)" class="contentbox">
-                            <div class="content_title">첫번째 글</div>
-                            <div class="write_time">06/07 17:26</div>
-                        </a>
-                        <a href="javascript:void(0)" class="contentbox">
-                            <div class="content_title">첫번째 글</div>
-                            <div class="write_time">06/07 17:26</div>
-                        </a>
+            <div class="viewrank">
+                <div class="viewrank_text">
+                    <div class="viewrank_title">댓글수 인기글</div>
+                    <div class="more">
+                        <a href="javascript:void(0)">더보기</a>
                     </div>
                 </div>
-                <div class="viewrank">
-                    <div class="viewrank_text">
-                        <div class="viewrank_title">
-                            추천수 인기글
-                        </div>
-                        <div class="more">
-                            <a href="hot_board.html">더보기</a>
-                        </div>
-                    </div>
-                    <div class="viewrank_content">
-                        <a href="javascript:void(0)" class="contentbox">
-                            <div class="content_title">첫번째 글</div>
-                            <div class="write_time">06/07 17:26</div>
+                <div class="viewrank_content">
+                    <th:block th:each="board : ${boardsByChat}">
+                        <a th:href="@{/board/reading/{id}(id=${board.id})}" class="contentbox">
+                            <div class="content_title" th:text="${board.title}"></div>
+                            <div class="write_time" th:text="${board.formattedFinalDate}"></div>
                         </a>
-                        <a href="javascript:void(0)" class="contentbox">
-                            <div class="content_title">첫번째 글</div>
-                            <div class="write_time">06/07 17:26</div>
-                        </a>
-                        <a href="javascript:void(0)" class="contentbox">
-                            <div class="content_title">첫번째 글</div>
-                            <div class="write_time">06/07 17:26</div>
-                        </a>
-                        <a href="javascript:void(0)" class="contentbox">
-                            <div class="content_title">첫번째 글</div>
-                            <div class="write_time">06/07 17:26</div>
-                        </a>
-                    </div>
+                    </th:block>
                 </div>
             </div>
+            <div class="viewrank">
+                <div class="viewrank_text">
+                    <div class="viewrank_title">추천수 인기글</div>
+                    <div class="more">
+                        <a href="javascript:void(0)">더보기</a>
+                    </div>
+                </div>
+                <div class="viewrank_content">
+                    <th:block th:each="board : ${boardsByLike}">
+                        <a th:href="@{/board/reading/{id}(id=${board.id})}" class="contentbox">
+                            <div class="content_title" th:text="${board.title}"></div>
+                            <div class="write_time" th:text="${board.formattedFinalDate}"></div>
+                        </a>
+                    </th:block>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
 <footer th:include="/fragments/footer.html"></footer>

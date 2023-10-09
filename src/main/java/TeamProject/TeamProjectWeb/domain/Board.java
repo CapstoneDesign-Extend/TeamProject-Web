@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,11 @@ public class Board { // 게시판 클래스
     public void removeFileEntity(FileEntity fileEntity) {
         this.imageFileEntities.remove(fileEntity);
         fileEntity.setBoard(null);
+    }
+
+    public String getFormattedFinalDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd HH:mm");
+        return finalDate.format(formatter);
     }
     //== 생성 메소드 --//
     public static Board createBoard(BoardKind boardKind){ // 어떤 게시판의 게시글인지 알기 위해 사용

@@ -41,15 +41,15 @@
     
                         </img>
                         <div class="profile_inner">
-                            <div class="id">
+                            <div class="id" th:text="${loggedInMember.loginId}">
                                 hwan123
                             </div>
                             <div class="name_nickname">
-                                <span>최환규</span>
+                                <span th:text="${loggedInMember.name}">최환규</span>
                                 /
-                                <span>201804077</span>
+                                <span th:text="${loggedInMember.studentId}">201804077</span>
                             </div>
-                            <div class="school_info">
+                            <div class="school_info" th:text="${loggedInMember.schoolName}">
                                 서일대 18학번
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                     <a href="javascript:void(0)" class="account_content_div">
                         문의하기
                     </a>
-                    <a href="javascript:void(0)" class="account_content_div">
+                    <a href="/board/notice" class="account_content_div">
                         공지사항
                     </a>
                     <a href="/personal_info/serviceagreement" class="account_content_div">
