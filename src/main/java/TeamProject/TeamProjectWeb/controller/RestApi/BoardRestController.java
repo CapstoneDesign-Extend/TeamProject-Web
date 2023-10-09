@@ -83,7 +83,19 @@ public class BoardRestController {
         List<Board> boards = boardRepository.findByBoardKindAmount(boardKind, amount);
 
         return boards.stream()
-                .map(board -> ConvertDTO.convertBoard(board))
+                .map(board -> {
+                    BoardDTO dto = ConvertDTO.convertBoard(board);
+
+                    // 해당 게시글에 파일이 있다면 그 URL 리스트도 담아서 반환
+                    List<String> fileUrls = new ArrayList<>();
+                    for (FileEntity fileEntity : board.getFileEntities()) {
+                        String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+                        fileUrls.add(url);
+                    }
+                    dto.setImageURLs(fileUrls);
+
+                    return dto;
+                })
                 .collect(Collectors.toList());  // DTO를 반환하도록 변환
     }
 
@@ -98,13 +110,41 @@ public class BoardRestController {
     @GetMapping("/search/byKeyword")
     public List<BoardDTO> getBoardsByKeyword(@RequestParam("keyword") String keyword) {
         List<Board> boards = boardRepository.findByKeyword(keyword);
-        return boards.stream().map(ConvertDTO::convertBoard).collect(Collectors.toList());
+
+        return boards.stream()
+                .map(board -> {
+                    BoardDTO dto = ConvertDTO.convertBoard(board);
+
+                    List<String> fileUrls = new ArrayList<>();
+                    for (FileEntity fileEntity : board.getFileEntities()) {
+                        String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+                        fileUrls.add(url);
+                    }
+                    dto.setImageURLs(fileUrls);
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
     // 키워드로 특정 게시판 검색
     @GetMapping("/search/byKeywordKind")
     public List<BoardDTO> getBoardsByKeywordKind(@RequestParam("keyword") String keyword, @RequestParam("boardKind") BoardKind boardKind){
         List<Board> boards = boardRepository.findByKeywordKind(keyword, boardKind);
-        return boards.stream().map(ConvertDTO::convertBoard).collect(Collectors.toList());
+
+        return boards.stream()
+                .map(board -> {
+                    BoardDTO dto = ConvertDTO.convertBoard(board);
+
+                    List<String> fileUrls = new ArrayList<>();
+                    for (FileEntity fileEntity : board.getFileEntities()) {
+                        String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+                        fileUrls.add(url);
+                    }
+                    dto.setImageURLs(fileUrls);
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
     // 모든 게시글 조회 API 엔드포인트
     @GetMapping
