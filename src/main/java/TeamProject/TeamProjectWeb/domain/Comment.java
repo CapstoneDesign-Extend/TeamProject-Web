@@ -28,7 +28,7 @@ public class Comment { // 댓글 클래스
     @Column(name = "click_count")
     private int likeCount; // 좋아요 갯수
     @ManyToOne(fetch=FetchType.LAZY) // 한 회원은 여러 댓글을 달 수 있음
-    @JoinColumn(name = "memberId") // 외래키 => 조인할 속성 이름
+    @JoinColumn(name = "member_id") // 외래키 => 조인할 속성 이름
     //@JsonBackReference // 양방향 연관관계에서 역참조 엔티티의 정보를 직렬화하지 않도록 하기(순환 참조로 인한 무한루프 방지)
     private Member member; // 해당 멤버의 학번을 사용할 거임
     private String author; // 익명 또는 사용자명을 저장, 댓글 표시할때 가져오기위함
