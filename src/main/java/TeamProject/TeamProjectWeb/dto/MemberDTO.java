@@ -13,4 +13,5 @@ public class MemberDTO {
     private String loginId; // 로그인 시 아이디
     private String password; // 로그인 시 비밀번호
     private String email;
+    private String department;  // 학과
 }
