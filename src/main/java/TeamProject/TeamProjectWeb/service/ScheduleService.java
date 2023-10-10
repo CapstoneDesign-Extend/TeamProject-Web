@@ -1,5 +1,6 @@
 package TeamProject.TeamProjectWeb.service;
 
+import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.domain.Schedule;
 import TeamProject.TeamProjectWeb.domain.Time;
 import TeamProject.TeamProjectWeb.repository.ScheduleRepository;
@@ -11,7 +12,6 @@ import java.util.List;
 
 @Service
 @Transactional // 조회 시 readOnly = true 해당 속성을 주면 최적화됨
-//@AllArgsConstructor // 현재 클래스가 가지고 있는 필드를 가지고 생성자를 만들어줌
 @RequiredArgsConstructor // 현재 클래스가 가지고 있는 필드 중 private final 필드만을 가지고 생성자를 만들어줌
 public class ScheduleService {
 
@@ -32,6 +32,10 @@ public class ScheduleService {
         Time time = new Time();
         time.fromInt(timeValue);
         return time;
+    }
+
+    public List<Schedule> getSchedulesByMember(Member member) {
+        return scheduleRepository.findByMember(member);
     }
 
     public List<Schedule> getAllSchedules() {
