@@ -17,6 +17,7 @@
   <link rel="stylesheet" type="text/css" href="/css/header.css">
   <script defer src="/js/header.js"></script>
   <script defer src="/js/schedule.js"></script>
+  <script defer src="/js/timeTable.js"></script>
   <title>Document</title>
 </head>
 <body>
@@ -30,7 +31,7 @@
     <div class="mainframe">
       <div class="sidediv">
         <div class="nowschedule">
-          <h2 class="title">시간표 1</h2>
+          <h2 class="title">시간표</h2>
           <div class="lastupdate">
             <span>06/25 14:12</span> 변경
           </div>
@@ -42,7 +43,7 @@
         </div>
         <div class="addschedule">
           <a href="javascript:void(0)" class="title_div act"> <!--새로운 시간표가 추가될때는 활성화는 act가 붙고 아니면 안붙음-->
-            시간표 1
+            시간표
           </a>
           <a class="adding">
             <span class="material-icons">add</span>새 시간표
@@ -117,7 +118,7 @@
                     </div>
                   </div>
                 </th>
-                <td>
+                <td class="td0">
                   <div class="grid"></div>
                   <div class="grid"></div>
                   <div class="grid"></div>
@@ -134,7 +135,7 @@
                   <div class="grid"></div>
                   <div class="grid"></div>
                 </td>
-                <td>
+                <td class="td1">
                   <div class="grid"></div>
                   <div class="grid"></div>
                   <div class="grid"></div>
@@ -151,7 +152,7 @@
                   <div class="grid"></div>
                   <div class="grid"></div>
                 </td>
-                <td>
+                <td class="td2">
                   <div class="grid"></div>
                   <div class="grid"></div>
                   <div class="grid"></div>
@@ -168,7 +169,7 @@
                   <div class="grid"></div>
                   <div class="grid"></div>
                 </td>
-                <td>
+                <td class="td3">
                   <div class="grid"></div>
                   <div class="grid"></div>
                   <div class="grid"></div>
@@ -185,7 +186,7 @@
                   <div class="grid"></div>
                   <div class="grid"></div>
                 </td>
-                <td>
+                <td class="td4">
                   <div class="grid"></div>
                   <div class="grid"></div>
                   <div class="grid"></div>
@@ -298,6 +299,7 @@
                 <option value="50">50분</option>
                 <option value="55">55분</option>
               </select>
+              <input type="text" placeholder="예) 배양303" class="classPlace">
             </p>
           </div>
         </div>

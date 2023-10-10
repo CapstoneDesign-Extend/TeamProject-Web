@@ -3,6 +3,8 @@ package TeamProject.TeamProjectWeb.controller;
 
 import TeamProject.TeamProjectWeb.controller.login.SessionConst;
 import TeamProject.TeamProjectWeb.domain.Member;
+import TeamProject.TeamProjectWeb.domain.Schedule;
+import TeamProject.TeamProjectWeb.service.ScheduleService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,28 +12,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
 public class TestController {
+
+    private final ScheduleService scheduleService;
     private Member getLoggedInMember(HttpSession session) {
         return (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
     }
-
-//    @GetMapping("/fragments/header-before")
-//    public String headerBefore() {
-//
-//    }
-
-//    @GetMapping("/fragments/header-after")
-//    public String headerAfter(Model model, HttpSession session) {
-//        Member loggedInMember = getLoggedInMember(session);
-//        if(loggedInMember != null) {
-//            model.addAttribute("member", loggedInMember);
-//        }
-//        model.addAttribute("loggedIn", loggedInMember != null);
-//        return "/fragments/header-after";
-//    }
 
     @GetMapping("/mypage/mypage_main")
     public String myPageController(Model model, HttpSession session){
@@ -177,7 +168,8 @@ public class TestController {
     public String schedule(Model model, HttpSession session){
         Member loggedInMember = getLoggedInMember(session);
         if(loggedInMember != null) {
-            model.addAttribute("member", loggedInMember);
+            List<Schedule> schedules = scheduleService.getSchedulesByMember(loggedInMember);
+            model.addAttribute("schedules", schedules);
         }
         model.addAttribute("loggedIn", true);
         return "/mypage/schedule";
@@ -195,3 +187,18 @@ public class TestController {
 
 
 }
+
+//    @GetMapping("/fragments/header-before")
+//    public String headerBefore() {
+//
+//    }
+
+//    @GetMapping("/fragments/header-after")
+//    public String headerAfter(Model model, HttpSession session) {
+//        Member loggedInMember = getLoggedInMember(session);
+//        if(loggedInMember != null) {
+//            model.addAttribute("member", loggedInMember);
+//        }
+//        model.addAttribute("loggedIn", loggedInMember != null);
+//        return "/fragments/header-after";
+//    }

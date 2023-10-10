@@ -12,8 +12,6 @@ public class Schedule {
     static final int WED = 2;
     static final int THU = 3;
     static final int FRI = 4;
-    static final int SAT = 5;
-    static final int SUN = 6;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 생성 => 시퀀스

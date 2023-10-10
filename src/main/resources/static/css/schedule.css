@@ -6,49 +6,49 @@ body{
     line-height: 1.4;
     color:#333;
     background-color:#f8f8f8;
-  }
-  
-  a{
+}
+
+a{
     text-decoration:none;
-  }
-  
-  a:link{
+}
+
+a:link{
     color:black;
-  }
-  
-  a:visited{
+}
+
+a:visited{
     color:black;
-  }
-  
-  a:hover{
+}
+
+a:hover{
     color:black;
-  }
-  
-  a:active{
+}
+
+a:active{
     color:black;
-  }
-  /**/
-  
-  
-  /*메인 css*/
-  .wrap_mainframe {
+}
+/**/
+
+
+/*메인 css*/
+.wrap_mainframe {
     position:relative;
     display:flex;
     align-items:center;
     justify-content:center;
-  }
-  
-  .wrap_mainframe .mainframe {
+}
+
+.wrap_mainframe .mainframe {
     display:flex;
     align-items:flex-start;
     justify-content:center;
     margin-top:40px;
-  }
+}
 
-  .table_head {
+.table_head {
     background-color:#f2f2f2;
     font-size:14px;
-  }
+}
 
 .table_head .date {
     display:flex;
@@ -113,6 +113,19 @@ body{
     border-top:1px solid #e3e3e3;
     border-right:1px solid #e3e3e3;
     box-sizing:border-box;
+}
+
+.td0, .td1, .td2, .td3, .td4 {
+    position: relative;
+}
+
+.schedule-item {
+    position: absolute;
+    font-weight: bold;
+    color: #2c3e50; /* 어두운 회색조 */
+    background-color: #f5f5f5; /* 예시 색상 */
+    border: 1px solid #ddd; /* 예시 테두리 */
+    width: 218px; /* 너비를 명시적으로 설정 */
 }
 
 /*     */
@@ -283,7 +296,7 @@ body{
 #customsubjects .content_div .text {
     width:412px;
     height:32px;
-    box-sizing:border-box;  
+    box-sizing:border-box;
     border: 1px solid #e3e3e3;
     background-color: #f2f2f2;
     padding-right:5px;
@@ -337,6 +350,16 @@ body{
 #customsubjects .content_div_timeplace .timeplace .startminute,.endminute {
     width:46px;
     margin-right:5px;
+}
+#customsubjects .content_div_timeplace .timeplace .classPlace{
+    padding: 0 5px;
+    width: 400px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #d6d6d6;
+    color: #292929;
+    font-size: 13px;
+    background-color: #f2f2f2;
 }
 
 #customsubjects .submit {
