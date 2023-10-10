@@ -1,5 +1,6 @@
 package TeamProject.TeamProjectWeb.controller.RestApi;
 
+import TeamProject.TeamProjectWeb.domain.Access;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.MemberDTO;
 import TeamProject.TeamProjectWeb.repository.MemberRepository;
@@ -89,6 +90,31 @@ public class MemberRestController {
         memberRepository.save(member);
         // 저장된 회원 정보를 200 응답과 함께 반환
         return ResponseEntity.ok(ConvertDTO.convertMember(member));
+    }
+
+    // ID를 사용하여 회원 정보를 수정하는 API 엔드포인트
+    @PutMapping("/{id}")
+    public ResponseEntity<MemberDTO> updateMember(@PathVariable Long id, @RequestBody MemberDTO updatedMemberDTO) {
+        // 해당 ID로 회원을 찾아옵니다.
+        Member existingMember = memberRepository.findOne(id);
+        if (existingMember == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // 업데이트된 회원 정보를 기존 회원 정보에 복사하거나 업데이트합니다.
+        existingMember.setName(updatedMemberDTO.getName());
+        existingMember.setSchoolName(updatedMemberDTO.getSchoolName());
+        existingMember.setDepartment(updatedMemberDTO.getDepartment());
+        existingMember.setAccess(updatedMemberDTO.getAccess());
+        existingMember.setLoginId(updatedMemberDTO.getLoginId());
+        existingMember.setPassword(updatedMemberDTO.getPassword());
+        existingMember.setEmail(updatedMemberDTO.getEmail());
+
+            // 업데이트된 회원 정보를 저장합니다.
+        memberRepository.save(existingMember);
+
+        // 업데이트된 회원 정보를 반환합니다.
+        return ResponseEntity.ok(updatedMemberDTO);
     }
 
     // 특정 ID의 회원 정보를 삭제하는 API 엔드포인트
