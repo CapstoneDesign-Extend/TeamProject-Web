@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>내정보 - Extend</title>
     <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/mypage_main.css">
@@ -16,6 +17,7 @@
           rel="stylesheet">
     <script defer src="/js/calendar.js"></script>
     <script defer src="/js/header.js"></script>
+    <script defer src="/js/myPageTimeTable.js"></script>
 </head>
 <body>
 <header th:if="${loggedIn}">
@@ -68,148 +70,148 @@
                         </tbody>
                       </table>
                     </div>
-                    <div class="tablebody">
-                      <table class="table_body">
-                        <tbody>
-                          <tr>
-                            <th>
-                              <div class="times">
-                                <div class="time">
-                                  오전 9시
-                                </div>
-                                <div class="time">
-                                  오전 10시
-                                </div>
-                                <div class="time">
-                                  오전 11시
-                                </div>
-                                <div class="time">
-                                  오전 12시
-                                </div>
-                                <div class="time">
-                                  오후 1시
-                                </div>
-                                <div class="time">
-                                  오후 2시
-                                </div>
-                                <div class="time">
-                                  오후 3시
-                                </div>
-                                <div class="time">
-                                  오후 4시
-                                </div>
-                                <div class="time">
-                                  오후 5시
-                                </div>
-                                <div class="time">
-                                  오후 6시
-                                </div>
-                                <div class="time">
-                                  오후 7시
-                                </div>
-                                <div class="time">
-                                  오후 8시
-                                </div>
-                                <div class="time">
-                                  오후 9시
-                                </div>
-                                <div class="time">
-                                  오후 10시
-                                </div>
-                                <div class="time">
-                                  오후 11시
-                                </div>
-                              </div>
-                            </th>
-                            <td>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                            </td>
-                            <td>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                            </td>
-                            <td>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                            </td>
-                            <td>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                            </td>
-                            <td>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                              <div class="grid"></div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+                       <div class="tablebody">
+                          <table class="table_body">
+                              <tbody>
+                              <tr>
+                                  <th>
+                                      <div class="times">
+                                          <div class="time">
+                                              오전 9시
+                                          </div>
+                                          <div class="time">
+                                              오전 10시
+                                          </div>
+                                          <div class="time">
+                                              오전 11시
+                                          </div>
+                                          <div class="time">
+                                              오전 12시
+                                          </div>
+                                          <div class="time">
+                                              오후 1시
+                                          </div>
+                                          <div class="time">
+                                              오후 2시
+                                          </div>
+                                          <div class="time">
+                                              오후 3시
+                                          </div>
+                                          <div class="time">
+                                              오후 4시
+                                          </div>
+                                          <div class="time">
+                                              오후 5시
+                                          </div>
+                                          <div class="time">
+                                              오후 6시
+                                          </div>
+                                          <div class="time">
+                                              오후 7시
+                                          </div>
+                                          <div class="time">
+                                              오후 8시
+                                          </div>
+                                          <div class="time">
+                                              오후 9시
+                                          </div>
+                                          <div class="time">
+                                              오후 10시
+                                          </div>
+                                          <div class="time">
+                                              오후 11시
+                                          </div>
+                                      </div>
+                                  </th>
+                                  <td class="td0">
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                  </td>
+                                  <td class="td1">
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                  </td>
+                                  <td class="td2">
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                  </td>
+                                  <td class="td3">
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                  </td>
+                                  <td class="td4">
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                      <div class="grid"></div>
+                                  </td>
+                              </tr>
+                              </tbody>
+                          </table>
+                       </div>
                 </div>
             </div>
             <div class="thirddivision">

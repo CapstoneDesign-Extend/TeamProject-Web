@@ -169,6 +169,7 @@ public class TestController {
         Member loggedInMember = getLoggedInMember(session);
         if(loggedInMember != null) {
             List<Schedule> schedules = scheduleService.getSchedulesByMember(loggedInMember);
+            model.addAttribute("member", loggedInMember);
             model.addAttribute("schedules", schedules);
         }
         model.addAttribute("loggedIn", true);

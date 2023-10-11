@@ -45,4 +45,24 @@ public class ScheduleService {
     public Schedule addSchedule(Schedule schedule) {
         return scheduleRepository.save(schedule);
     }
+
+    // 수업 정보 수정
+    public Schedule editSchedule(Schedule updatedSchedule) {
+        Schedule existingSchedule = scheduleRepository.findById(updatedSchedule.getId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 수업 정보를 찾을 수 없습니다."));
+
+        existingSchedule.setStartTime(updatedSchedule.getStartTime());
+        existingSchedule.setEndTime(updatedSchedule.getEndTime());
+        existingSchedule.setClassTitle(updatedSchedule.getClassTitle());
+        existingSchedule.setClassPlace(updatedSchedule.getClassPlace());
+        existingSchedule.setProfessorName(updatedSchedule.getProfessorName());
+        existingSchedule.setDay(updatedSchedule.getDay());
+
+        return existingSchedule; // Transactional 어노테이션이 있기 때문에 자동으로 commit 됩니다.
+    }
+
+    // 수업 정보 삭제
+    public void deleteSchedule(Long id) {
+        scheduleRepository.deleteById(id);
+    }
 }

@@ -4,8 +4,10 @@ import TeamProject.TeamProjectWeb.constants.BoardConstants;
 import TeamProject.TeamProjectWeb.controller.login.SessionConst;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
 import TeamProject.TeamProjectWeb.domain.Member;
+import TeamProject.TeamProjectWeb.domain.Schedule;
 import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
 import TeamProject.TeamProjectWeb.service.BoardService;
+import TeamProject.TeamProjectWeb.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import java.util.List;
 public class HomeController {
 
     private final BoardService boardService; // 서비스 의존성 추가
+    private final ScheduleService scheduleService;
 
     @GetMapping("/")
     public String homeLogin(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
@@ -31,6 +34,11 @@ public class HomeController {
             // loggedIn 값을 false로 모델에 추가
             model.addAttribute("loggedIn", false);
             return "main";
+        }
+        // 세션에 회원 데이터가 있으면 게시글 데이터를 가져와서 추가
+        if (loginMember != null) {
+            List<Schedule> userSchedules = scheduleService.getSchedulesByMember(loginMember);
+            model.addAttribute("userSchedules", userSchedules);
         }
 
         // 자유게시판의 최근 게시글 4개
