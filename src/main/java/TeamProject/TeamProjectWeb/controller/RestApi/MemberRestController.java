@@ -5,6 +5,7 @@ import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.MemberDTO;
 import TeamProject.TeamProjectWeb.repository.MemberRepository;
 import TeamProject.TeamProjectWeb.utils.ConvertDTO;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -119,6 +120,7 @@ public class MemberRestController {
 
     // 특정 ID의 회원 정보를 삭제하는 API 엔드포인트
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Void> deleteMemberById(@PathVariable Long id) {
         // MemberRepository 를 사용하여 해당 ID의 회원 정보를 조회
         Member member = memberRepository.findOne(id);
