@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extend</title>
     <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/board_write.css}"> <!-- 수정됨 -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/board_write2.css}"> <!-- 수정됨 -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"> <!-- 수정됨 -->
     <!--Google Api-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,10 +46,7 @@
                     </div>
                     <div id="price_contact" class="price_contact" style="display:none;">
                         <div class="price">
-                            <input type="number" name="price" class="inner_input" placeholder="가격 입력" th:field="*{price}">
-                        </div>
-                        <div class="contact">
-                            <input type="text" name="contact" class="inner_input" placeholder="연락수단 입력">
+                            <input type="number" name="price" class="inner_input" placeholder="가격 입력">
                         </div>
                     </div>
                     <!--<div id="writing_body" class="writing_body" contenteditable="true" placeholder="내용을 입력하세요" name="text_body" autofocus th:field="*{textBody}">-->
