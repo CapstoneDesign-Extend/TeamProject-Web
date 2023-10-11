@@ -9,6 +9,7 @@ import TeamProject.TeamProjectWeb.dto.BoardForm;
 import TeamProject.TeamProjectWeb.dto.BoardSummaryDTO;
 import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
+import TeamProject.TeamProjectWeb.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -32,6 +33,8 @@ import static TeamProject.TeamProjectWeb.utils.TimeUtils.timeFriendly;
 public class BoardService {
 
     private final BoardRepository boardRepository; // 게시판 저장소 의존성 주입
+
+    private final MemberRepository memberRepository;
 
     @Transactional
     public void createBoard(Board board) {
@@ -125,6 +128,10 @@ public class BoardService {
         return boardRepository.findRecentBoardsByKindForMainPage(boardKind, limit);
     }
 
+    public List<MainBoardDTO> findRecentBoardsByKindForDepartmentBoard(BoardKind boardKind, int limit, String schoolName, String department) {
+        return boardRepository.findRecentBoardsByKindForDepartmentBoard(boardKind, limit, schoolName, department);
+    }
+
     public List<Board> findByBoardKind(BoardKind boardKind) {
         // 특정 게시판 종류로 게시글을 검색하는 메서드
         return boardRepository.findByBoardKind(boardKind);
@@ -145,8 +152,16 @@ public class BoardService {
         return boardRepository.findByKeywordKind(keyword, boardKind);
     }
 
-    public Page<BoardSummaryDTO> getBoardSummaryByKind(BoardKind boardKind, Pageable pageable) {
-        return boardRepository.findSummaryByBoardKind(boardKind, pageable);
+    public Page<BoardSummaryDTO> getBoardSummaryByKindAndMember(BoardKind boardKind, Pageable pageable, Member loggedInMember) {
+        // 학과 단위 게시판인 경우 학과 정보를 기반으로 게시글 요약 정보 가져오기
+        if (boardKind == BoardKind.ISSUE || boardKind == BoardKind.TIP || boardKind == BoardKind.REPORT || boardKind == BoardKind.QNA) {
+            String schoolName = loggedInMember.getSchoolName();
+            String department = loggedInMember.getDepartment();
+            return boardRepository.findSummaryByBoardKindAndSchoolAndDepartment(boardKind, pageable, schoolName, department);
+        } else {
+            // 학교 단위 게시판인 경우 학교 전체 게시글 요약 정보 가져오기
+            return boardRepository.findSummaryByBoardKind(boardKind, pageable);
+        }
     }
 
     public List<Board> findTopByLikeCountAndFinalDate() {

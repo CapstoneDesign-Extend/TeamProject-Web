@@ -194,14 +194,14 @@
                 <div class="board_base">
                     <div class="board_header">
                         <div class="title" id="school_announcement">
-                            질문, 답변게시판
+                            새내기 게시판
                         </div>
-                        <a href="/board/QNA" class="more">
+                        <a href="/board/FRESH" class="more">
                             더보기
                         </a>
                     </div>
                     <!-- QnA 게시판의 최근 게시글 4개를 반복하여 표시 -->
-                    <div th:if="${loggedIn}" class="board_content" th:each="board : ${recentQnaBoards}">
+                    <div th:if="${loggedIn}" class="board_content" th:each="board : ${recentFreshBoards}">
                         <div class="board_post" th:text="${board.title}"></div>
                         <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                     </div>

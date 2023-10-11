@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -157,6 +158,15 @@ public class BoardRepository implements BoardRepositoryCustom {
                 .getResultList();
     }
 
+    public List<MainBoardDTO> findRecentBoardsByKindForDepartmentBoard(BoardKind boardKind, int limit, String schoolName, String department) {
+        return em.createQuery("select new TeamProject.TeamProjectWeb.dto.MainBoardDTO(b.title, b.finalDate) from Board b where b.boardKind = :boardKind AND b.member.schoolName = :schoolName AND b.member.department = :department order by b.finalDate desc", MainBoardDTO.class)
+                .setParameter("boardKind", boardKind)
+                .setParameter("schoolName", schoolName)
+                .setParameter("department", department)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
 
     // 게시글 종류와 페이징 정보를 받아서 해당 게시글들과 그에 연관된 댓글을 가져오는 메서드를 정의
     public List<Board> findBoardWithComments(BoardKind boardKind, Pageable pageable) {
@@ -173,22 +183,23 @@ public class BoardRepository implements BoardRepositoryCustom {
                 .getResultList();
     }
 
+    // 게시판 종류에 따른 게시글 요약 정보 조회
     @Override
     public Page<BoardSummaryDTO> findSummaryByBoardKind(BoardKind boardKind, Pageable pageable) {
+        // JPQL 쿼리를 이용해 게시판 종류에 따른 게시글 정보 및 좋아요와 댓글의 개수를 가져옵니다.
         String jpql = "SELECT new TeamProject.TeamProjectWeb.dto.BoardSummaryDTO(b.id, b.title, b.content, b.finalDate, b.author, " +
                 "(SELECT COUNT(l) FROM Like l WHERE l.board = b), " +
                 "(SELECT COUNT(c) FROM Comment c WHERE c.board = b)) " +
                 "FROM Board b WHERE b.boardKind = :boardKind order by b.finalDate desc";
 
-
-        // Execute the query and fetch the results
+        // 위에서 정의한 JPQL 쿼리 실행
         List<BoardSummaryDTO> results = em.createQuery(jpql, BoardSummaryDTO.class)
                 .setParameter("boardKind", boardKind)
                 .setFirstResult((int) pageable.getOffset())
                 .setMaxResults(pageable.getPageSize())
                 .getResultList();
 
-        // Get the total count of records for pagination metadata
+        // 페이지네이션을 위한 총 게시글 개수 조회
         long total = em.createQuery("SELECT COUNT(b) FROM Board b WHERE b.boardKind = :boardKind", Long.class)
                 .setParameter("boardKind", boardKind)
                 .getSingleResult();
@@ -196,16 +207,43 @@ public class BoardRepository implements BoardRepositoryCustom {
         return new PageImpl<>(results, pageable, total);
     }
 
+    // 게시판 종류, 학과, 학교에 따른 게시글 요약 정보 조회
+    public Page<BoardSummaryDTO> findSummaryByBoardKindAndSchoolAndDepartment(BoardKind boardKind, Pageable pageable, String schoolName, String department) {
+        // 게시판 종류, 학과, 학교 정보를 기반으로 게시글 정보 및 좋아요와 댓글의 개수를 가져옵니다.
+        String jpql = "SELECT new TeamProject.TeamProjectWeb.dto.BoardSummaryDTO(b.id, b.title, b.content, b.finalDate, b.author, " +
+                "(SELECT COUNT(l) FROM Like l WHERE l.board = b), " +
+                "(SELECT COUNT(c) FROM Comment c WHERE c.board = b)) " +
+                "FROM Board b WHERE b.boardKind = :boardKind AND b.member.schoolName = :schoolName AND b.member.department = :department order by b.finalDate desc";
+
+        List<BoardSummaryDTO> results = em.createQuery(jpql, BoardSummaryDTO.class)
+                .setParameter("boardKind", boardKind)
+                .setParameter("schoolName", schoolName)
+                .setParameter("department", department)
+                .setFirstResult((int) pageable.getOffset())
+                .setMaxResults(pageable.getPageSize())
+                .getResultList();
+
+        long total = em.createQuery("SELECT COUNT(b) FROM Board b WHERE b.boardKind = :boardKind AND b.member.schoolName = :schoolName AND b.member.department = :department", Long.class)
+                .setParameter("boardKind", boardKind)
+                .setParameter("schoolName", schoolName)
+                .setParameter("department", department)
+                .getSingleResult();
+
+        return new PageImpl<>(results, pageable, total);
+    }
+
     public List<Board> findTopByLikeCountAndFinalDate() {
-        return em.createQuery("select b from Board b where b.finalDate > :oneWeekAgo order by b.likeCnt desc, b.chatCnt desc", Board.class)
+        return em.createQuery("select b from Board b where b.finalDate > :oneWeekAgo and b.boardKind NOT IN :departmentBoards order by b.likeCnt desc, b.chatCnt desc", Board.class)
                 .setParameter("oneWeekAgo", LocalDateTime.now().minusDays(7))
+                .setParameter("departmentBoards", Arrays.asList(BoardKind.ISSUE, BoardKind.TIP, BoardKind.REPORT, BoardKind.QNA))
                 .setMaxResults(4)
                 .getResultList();
     }
 
     public List<Board> findTopByChatCountAndFinalDate() {
-        return em.createQuery("select b from Board b where b.finalDate > :oneWeekAgo order by b.chatCnt desc, b.likeCnt desc", Board.class)
+        return em.createQuery("select b from Board b where b.finalDate > :oneWeekAgo and b.boardKind NOT IN :departmentBoards order by b.chatCnt desc, b.likeCnt desc", Board.class)
                 .setParameter("oneWeekAgo", LocalDateTime.now().minusDays(7))
+                .setParameter("departmentBoards", Arrays.asList(BoardKind.ISSUE, BoardKind.TIP, BoardKind.REPORT, BoardKind.QNA))
                 .setMaxResults(4)
                 .getResultList();
     }
