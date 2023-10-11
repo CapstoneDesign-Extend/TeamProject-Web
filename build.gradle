@@ -30,6 +30,7 @@ dependencies {
 	/*컴파일 오류 발생시 org.springframework.boot:spring-boot-starter-devtools 대신에
 	org.springframework.boot:spring-boot-devtools로 변경*/
 
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc' // @Transaction 사용 시 필요
 
