@@ -26,6 +26,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -218,12 +219,32 @@ public class BoardController {
 
         // 자유게시판의 최근 게시글 7개
         addRecentBoardsToModel(BoardKind.FREE, "recentFreeBoards", model);
-        // 장터게시판의 최근 게시글 7개
+
         addRecentBoardsToModel(BoardKind.MARKET, "recentMarketBoards", model);
-        // QnA 게시판의 최근 게시글 7개
-        addRecentBoardsToModel(BoardKind.QNA, "recentQnaBoards", model);
+        addRecentBoardsToModel(BoardKind.FRESH, "recentFreshBoards", model);
+        addRecentBoardsToModel(BoardKind.FOSSIL, "recentFossilBoards", model);
+        addRecentBoardsToModel(BoardKind.INFO, "recentInfoBoards", model);
+        addRecentBoardsToModel(BoardKind.CAREER, "recentCareerBoards", model);
+
         model.addAttribute("loggedIn", true);
         return "board/board_collection";
+    }
+
+    @GetMapping("/board_department_collection")
+    public String collectionDepartmentPage(Model model,@ModelAttribute("loggedInMember") Member loggedInMember) {
+
+        // 학과 정보가 없는 경우
+        if (loggedInMember.getDepartment() == null || loggedInMember.getDepartment().isEmpty()) {
+            // 인증 페이지로 리다이렉트
+            return "redirect:/personal_info/certification";
+        }
+        model.addAttribute("loggedIn", true);
+
+        addRecentDepartmentBoardsToModel(BoardKind.TIP, "recentTipBoards", model, loggedInMember);  // 여기에 loggedInMember 추가
+        addRecentDepartmentBoardsToModel(BoardKind.REPORT, "recentReportBoards", model, loggedInMember);
+        addRecentDepartmentBoardsToModel(BoardKind.QNA, "recentQnaBoards", model, loggedInMember);
+
+        return "board/board_department_collection";
     }
 
     private void addRecentBoardsToModel(BoardKind boardKind, String attributeName, Model model) {
@@ -231,21 +252,46 @@ public class BoardController {
         model.addAttribute(attributeName, recentBoards);
     }
 
+    private void addRecentDepartmentBoardsToModel(BoardKind boardKind, String attributeName, Model model, Member loggedInMember) {
+        List<MainBoardDTO> recentBoards = boardService.findRecentBoardsByKindForDepartmentBoard(boardKind, BoardConstants.RECENT_BOARD_LIMIT_SEVEN, loggedInMember.getSchoolName(), loggedInMember.getDepartment());
+        model.addAttribute(attributeName, recentBoards);
+    }
+
     @GetMapping("/{boardKind}")
     public String showBoardSummary(@PathVariable BoardKind boardKind,
                                    @RequestParam(defaultValue = "0") int page,
+                                   @ModelAttribute("loggedInMember") Member loggedInMember,
                                    Model model) {
+        // 로그인 여부 확인
+        if (loggedInMember == null) {
+            // 로그인하지 않은 사용자를 로그인 페이지로 리다이렉트
+            return "redirect:/login";
+        }
+
+        // 학과 게시판에 해당하는 BoardKind들의 요청이 들어올 때, 학과 정보가 없는 사용자는 certification 페이지로 리다이렉트
+        if (Arrays.asList(BoardKind.ISSUE, BoardKind.TIP, BoardKind.REPORT, BoardKind.QNA).contains(boardKind)) {
+            if (loggedInMember.getDepartment() == null || loggedInMember.getDepartment().isEmpty()) {
+                return "redirect:/personal_info/certification";
+            }
+        }
+
+        // 인기 게시글 정보 가져오기
         List<Board> boardsByLike = boardService.findTopByLikeCountAndFinalDate();
         List<Board> boardsByChat = boardService.findTopByChatCountAndFinalDate();
 
+        // 모델에 데이터 추가
         model.addAttribute("boardsByLike", boardsByLike);
         model.addAttribute("boardsByChat", boardsByChat);
 
-        Pageable pageable = PageRequest.of(page, 6); // 6개의 게시글을 가져옵니다.
-        Page<BoardSummaryDTO> boardSummaryPage = boardService.getBoardSummaryByKind(boardKind, pageable);
+        Pageable pageable = PageRequest.of(page, 6);
+
+        // 로그인한 사용자의 학과와 학교 정보를 기반으로 게시판 요약 정보 가져오기
+        Page<BoardSummaryDTO> boardSummaryPage = boardService.getBoardSummaryByKindAndMember(boardKind, pageable, loggedInMember);
+
         model.addAttribute("boardSummaryPage", boardSummaryPage);
         model.addAttribute("boardKind", boardKind);
         model.addAttribute("loggedIn", true);
+
         return "board/testBoardSummaryList";
     }
 

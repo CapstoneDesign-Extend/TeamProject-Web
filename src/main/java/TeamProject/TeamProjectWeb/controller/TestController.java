@@ -84,6 +84,16 @@ public class TestController {
         return "personal_info/restrict";
     }
 
+    @GetMapping("/personal_info/certification")
+    public String certification(Model model, HttpSession session){
+        Member loggedInMember = getLoggedInMember(session);
+        if(loggedInMember != null) {
+            model.addAttribute("member", loggedInMember);
+        }
+        model.addAttribute("loggedIn", true);
+        return "personal_info/certification";
+    }
+
     @GetMapping("/personal_info/board_maintain")
     public String boardMaintain(Model model, HttpSession session){
         Member loggedInMember = getLoggedInMember(session);
