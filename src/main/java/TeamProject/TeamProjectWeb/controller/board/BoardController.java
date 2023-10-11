@@ -218,12 +218,30 @@ public class BoardController {
 
         // 자유게시판의 최근 게시글 7개
         addRecentBoardsToModel(BoardKind.FREE, "recentFreeBoards", model);
-        // 장터게시판의 최근 게시글 7개
+
         addRecentBoardsToModel(BoardKind.MARKET, "recentMarketBoards", model);
+        addRecentBoardsToModel(BoardKind.FRESH, "recentFreshBoards", model);
+        addRecentBoardsToModel(BoardKind.FOSSIL, "recentFossilBoards", model);
+        addRecentBoardsToModel(BoardKind.INFO, "recentInfoBoards", model);
+        addRecentBoardsToModel(BoardKind.CAREER, "recentCareerBoards", model);
+
+        model.addAttribute("loggedIn", true);
+        return "board/board_collection";
+    }
+
+    @GetMapping("/board_department_collection")
+    public String collectionDepartmentPage(Model model) {
+
+        model.addAttribute("loggedIn", true);
+
+
+        addRecentBoardsToModel(BoardKind.TIP, "recentTipBoards", model);
+
+        addRecentBoardsToModel(BoardKind.REPORT, "recentReportBoards", model);
         // QnA 게시판의 최근 게시글 7개
         addRecentBoardsToModel(BoardKind.QNA, "recentQnaBoards", model);
         model.addAttribute("loggedIn", true);
-        return "board/board_collection";
+        return "board/board_department_collection";
     }
 
     private void addRecentBoardsToModel(BoardKind boardKind, String attributeName, Model model) {

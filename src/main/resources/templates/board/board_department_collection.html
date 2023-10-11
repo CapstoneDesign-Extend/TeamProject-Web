@@ -30,14 +30,14 @@
               <div class="board_base">
                   <div class="board_header">
                       <div class="title" id="school_announcement">
-                          자유게시판
+                          질문, 답변 게시판
                       </div>
-                      <a href="/board/FREE" class="more">
+                      <a href="/board/QNA" class="more">
                           더보기
                       </a>
                   </div>
-                  <!-- 자유 게시판의 최근 게시글 7개를 반복하여 표시 -->
-                  <div class="board_content" th:each="board : ${recentFreeBoards}">
+                  <!-- qna 게시판의 최근 게시글 7개를 반복하여 표시 -->
+                  <div class="board_content" th:each="board : ${recentQnaBoards}">
                       <div class="board_post" th:text="${board.title}"></div>
                       <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                   </div>
@@ -49,14 +49,13 @@
               <div class="board_base">
                   <div class="board_header">
                       <div class="title" id="school_announcement">
-                          새내기 게시판
+                          학과 꿀팁 게시판
                       </div>
-                      <a href="/board/FRESH" class="more">
+                      <a href="/board/TIP" class="more">
                           더보기
                       </a>
                   </div>
-                  <!-- QnA 게시판의 최근 게시글 7개를 반복하여 표시 -->
-                  <div class="board_content" th:each="board : ${recentFreshBoards}">
+                  <div class="board_content" th:each="board : ${recentTipBoards}">
                       <div class="board_post" th:text="${board.title}"></div>
                       <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                   </div>
@@ -68,14 +67,13 @@
               <div class="board_base">
                   <div class="board_header">
                       <div class="title" id="school_announcement">
-                          장터게시판
+                          학과 신문고
                       </div>
-                      <a href="/board/MARKET" class="more">
+                      <a href="/board/REPORT" class="more">
                           더보기
                       </a>
                   </div>
-                  <!-- 장터 게시판의 최근 게시글 4개를 반복하여 표시 -->
-                  <div class="board_content" th:each="board : ${recentMarketBoards}">
+                  <div class="board_content" th:each="board : ${recentReportBoards}">
                       <div class="board_post" th:text="${board.title}"></div>
                       <div class="post_time" th:text="${board.formattedFinalDate}"></div>
                   </div>

@@ -17,8 +17,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined"
           rel="stylesheet">          
     <script defer src="/js/header.js" th:src="@{/js/header.js}"></script>
-    <script defer src="/js/write.js" th:src="@{/js/write.js}"></script>
     <script defer src="/js/referrer.js" th:src="@{/js/referrer.js}"></script>
+    <script defer src="/js/write.js" th:src="@{/js/write.js}"></script>
 </head>
 <body>
 <header th:if="${loggedIn}">
@@ -35,9 +35,15 @@
                     <div class="board_name">
                         <input type="hidden" id="boardKind" name="boardKind" value="FREE">
                         <select id="select_value" class="board_name_inner" onchange="ChangeValue()">
-                            <option value="free_board">자유게시판</option>
-                            <option value="market_board">장터게시판</option>
+                            <option value="tip_board">학과꿀팁</option>
+                            <option value="report_board">신문고</option>
                             <option value="qna_board">질문,답변 게시판</option>
+                            <option value="market_board">장터게시판</option>
+                            <option value="free_board">자유게시판</option>
+                            <option value="fresh_board">새내기게시판</option>
+                            <option value="fossil_board">졸업생게시판</option>
+                            <option value="info_board">정보게시판</option>
+                            <option value="career_board">취업 및 진로게시판</option>
                         <!--<option value="department_board">학과 공지사항</option>-->
                         </select>
                     </div>
@@ -46,7 +52,7 @@
                     </div>
                     <div id="price_contact" class="price_contact" style="display:none;">
                         <div class="price">
-                            <input type="number" name="price" class="inner_input" placeholder="가격 입력">
+                            <input type="number" name="price" class="inner_input" placeholder="가격 입력" th:field="*{price}">
                         </div>
                     </div>
                     <!--<div id="writing_body" class="writing_body" contenteditable="true" placeholder="내용을 입력하세요" name="text_body" autofocus th:field="*{textBody}">-->

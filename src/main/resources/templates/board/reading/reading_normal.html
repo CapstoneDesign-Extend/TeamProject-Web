@@ -54,7 +54,7 @@
                                                 <input type="hidden" name="_method" value="DELETE"/>
                                                 <div onclick="confirmDelete(document.getElementById('deleteForm'))">삭제</div>
                                             </form>
-                                            <a href="/board/${board.id}/edit" class="inner_button">수정</a>
+                                            <!-- <a href="/board/${board.id}/edit" class="inner_button">수정</a>-->
                                             <a href="javascript:void(0)" class="inner_button">신고</a>
                                         </div>
                                     </div>
@@ -64,6 +64,11 @@
                             <div class="body_main">
                                 <div class="main_title">
                                     <p th:text="${board.title}">진짜로 이제 뭐하냐</p>
+                                </div>
+                                <div class="wrap_price_div" th:if="${board.boardKind == 'MARKET'}">
+                                    <div class="price_main" th:text="${board.price}">
+                                        68000원
+                                    </div>
                                 </div>
                                 <div class="bonmoon">
                                     <p th:text="${board.content}">그래서 이제 뭐함</p>

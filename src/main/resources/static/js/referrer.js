@@ -19,6 +19,16 @@ window.addEventListener('load',function(){
     } else if(split_ref.indexOf('MARKET')>=0) {
         selectbox.options[3].selected = true;
         inputbox.value = "MARKET";
+        var select_str = document.getElementById('select_value');
+        var value_text = select_str.options[select_str.selectedIndex].value;
+        var contact_div = document.getElementById('price_contact');
+        var boardKindInput = document.getElementById('boardKind');
+        if(value_text == "market_board") {
+            contact_div.style.display = "flex";
+            boardKindInput.value = "MARKET";  // BoardKind enum 값 설정
+        } else {
+            contact_div.style.display = "none";
+        }
     } else if(split_ref.indexOf('FREE')>=0) {
         selectbox.options[4].selected = true;
         inputbox.value = "FREE";

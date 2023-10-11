@@ -1,5 +1,5 @@
-const searchEl = document.querySelector('.search');
-const searchInputEl = searchEl.querySelector('input');
+// const searchEl = document.querySelector('.search');
+// const searchInputEl = searchEl.querySelector('input');
 
 
 searchEl.addEventListener('click', function(){
@@ -20,11 +20,11 @@ const maincategory = document.getElementsByClassName('main_category_mypage')[0];
 const maincategory_community = document.getElementsByClassName('main_category_community')[0];
 const maincategory_department = document.getElementsByClassName('main_category_department')[0];
 const subcategory = document.querySelector('.sub_category_mypage');
-const subcategory_community = document.querySelector('.sub_category_community')
-const subcategory_department = document.querySelector('.sub_category_department')
+const subcategory_community = document.querySelector('.sub_category_community');
+const subcategory_department = document.querySelector('.sub_category_department');
 const wrapsubcategory = document.querySelector('.wrap_sub_category_mypage');
 const wrapsubcategory_community = document.querySelector('.wrap_sub_category_community');
-const wrapsubcategory_department = document.querySelector('.wrap_sub_category_department')
+const wrapsubcategory_department = document.querySelector('.wrap_sub_category_department');
 const mainframe = document.querySelector('.mainframe');
 
 //마이페이지 버튼 호버링
