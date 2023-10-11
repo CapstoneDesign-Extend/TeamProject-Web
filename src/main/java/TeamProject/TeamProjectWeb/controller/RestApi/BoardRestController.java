@@ -3,11 +3,16 @@ package TeamProject.TeamProjectWeb.controller.RestApi;
 import TeamProject.TeamProjectWeb.domain.Board;
 import TeamProject.TeamProjectWeb.domain.BoardKind;
 import TeamProject.TeamProjectWeb.domain.FileEntity;
+import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.BoardDTO;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
+import TeamProject.TeamProjectWeb.repository.MemberRepository;
 import TeamProject.TeamProjectWeb.utils.ConvertDTO;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +24,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/boards")
 @RequiredArgsConstructor
 public class BoardRestController {
-
     private final BoardRepository boardRepository;
+    @Autowired
+    private MemberRepository memberRepository;
 
     // 게시글 생성 API 엔드포인트
     @PostMapping
@@ -77,6 +83,85 @@ public class BoardRestController {
                 })
                 .collect(Collectors.toList());  // DTO를 반환하도록 변환
     }
+    @GetMapping("/search/byBoardKindMember")
+    public List<BoardDTO> getBoardsByBoardKind(@RequestParam("boardKind") BoardKind boardKind, @RequestParam("memberId") Long memberId) {
+        if (boardKind == BoardKind.ISSUE
+                || boardKind == BoardKind.TIP
+                || boardKind == BoardKind.REPORT
+                || boardKind == BoardKind.QNA)
+        {
+            String userDepartment = getUserDepartment(memberId);
+            if (userDepartment != null){
+                // 먼저 해당 BoardKind에 속한 게시글을 조회하고, 이후 필터링
+                List<Board> boards = boardRepository.findByBoardKind(boardKind);
+                // userDepartment와 동일한 department를 가진 user가 작성한 게시글만 필터링하여 반환
+                List<BoardDTO> filteredBoards = boards.stream()
+                        .filter(board -> {
+                            String boardDepartment = board.getMember() != null ? board.getMember().getDepartment() : null;
+                            // boardDepartment와 userDepartment가 모두 null인 경우는 필터링하지 않음
+                            if (boardDepartment == null && userDepartment == null) {
+                                return true;
+                            }
+                            return userDepartment.equals(boardDepartment);
+                        })
+                        .map(board -> {
+                            BoardDTO dto = ConvertDTO.convertBoard(board);
+
+                            // 해당 게시글에 파일이 있다면 그 URL 리스트도 담아서 반환
+                            List<String> fileUrls = new ArrayList<>();
+                            for (FileEntity fileEntity : board.getFileEntities()) {
+                                String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+                                fileUrls.add(url);
+                            }
+                            dto.setImageURLs(fileUrls);
+
+                            return dto;
+                        })
+                        .collect(Collectors.toList());
+
+                return filteredBoards;
+            } else {
+                // userDepartment가 null인 경우, 해당 BoardKind에 속한 모든 게시글을 반환
+                List<Board> boards = boardRepository.findByBoardKind(boardKind);
+                return boards.stream()
+                        .map(board -> {
+                            BoardDTO dto = ConvertDTO.convertBoard(board);
+
+                            // 해당 게시글에 파일이 있다면 그 URL 리스트도 담아서 반환
+                            List<String> fileUrls = new ArrayList<>();
+                            for (FileEntity fileEntity : board.getFileEntities()) {
+                                String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+                                fileUrls.add(url);
+                            }
+                            dto.setImageURLs(fileUrls);
+
+                            return dto;
+                        })
+                        .collect(Collectors.toList());
+            }
+
+        }
+        else {
+            // 주어진 BoardKind를 가진 모든 게시글을 조회함
+            List<Board> boards = boardRepository.findByBoardKind(boardKind);
+            // 조회된 게시글 목록을 반환함
+            return boards.stream()
+                    .map(board -> {
+                        BoardDTO dto = ConvertDTO.convertBoard(board);
+
+                        // 해당 게시글에 파일이 있다면 그 URL 리스트도 담아서 반환
+                        List<String> fileUrls = new ArrayList<>();
+                        for (FileEntity fileEntity : board.getFileEntities()) {
+                            String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+                            fileUrls.add(url);
+                        }
+                        dto.setImageURLs(fileUrls);
+
+                        return dto;
+                    })
+                    .collect(Collectors.toList());  // DTO를 반환하도록 변환
+        }
+    }
     // 특정 BoardKind 의 최신 게시글 리스트를 필요한 만큼만 반환하는 API 엔드포인트
     @GetMapping("/search/byBoardKindAmount")
     public List<BoardDTO> getLatestBoardsByBoardKind(@RequestParam("boardKind") BoardKind boardKind, @RequestParam("amount") int amount) {
@@ -126,7 +211,7 @@ public class BoardRestController {
                 })
                 .collect(Collectors.toList());
     }
-    // 키워드로 특정 게시판 검색
+//     키워드로 특정 게시판 검색
     @GetMapping("/search/byKeywordKind")
     public List<BoardDTO> getBoardsByKeywordKind(@RequestParam("keyword") String keyword, @RequestParam("boardKind") BoardKind boardKind){
         List<Board> boards = boardRepository.findByKeywordKind(keyword, boardKind);
@@ -146,6 +231,59 @@ public class BoardRestController {
                 })
                 .collect(Collectors.toList());
     }
+
+//    // ===========================  최신 로직 : 학과 특화 게시판을 고려한 엔드포인트  ==============================
+//    @GetMapping("/search/byKeywordKind")
+//    public List<BoardDTO> getBoardsByKeywordKind(
+//            @RequestParam("keyword") String keyword,
+//            @RequestParam("boardKind") BoardKind boardKind,
+//            @RequestParam("memberId") Long memberId) {
+//
+//        String userDepartment = getUserDepartment(memberId); // memberId로 학과 정보를 가져옴
+//
+//        List<Board> boards = boardRepository.findByKeywordKind(keyword, boardKind);
+//
+//        return boards.stream()
+//                .filter(board -> {
+//                    // 만약 userDepartment가 null 또는 비어 있다면 필터링 없이 모든 게시글 반환
+//                    if (userDepartment == null || userDepartment.isEmpty()) {
+//                        return true;
+//                    }
+//                    // board.getMember()가 null이거나 board.getMember().getDepartment()가 null인 경우를 처리
+//                    if (board.getMember() == null) {
+//                        return false; // board.getMember()가 null인 경우는 필터링하지 않음
+//                    } else if(board.getMember().getDepartment() == null){
+//                        return false;
+//                    }
+//
+//                    String boardDepartment = board.getMember().getDepartment();
+//                    return userDepartment.equals(boardDepartment);
+//                })
+//                .map(board -> {
+//                    BoardDTO dto = ConvertDTO.convertBoard(board);
+//
+//                    List<String> fileUrls = new ArrayList<>();
+//                    for (FileEntity fileEntity : board.getFileEntities()) {
+//                        String url = "http://extends.online:5438/api/files/download/" + fileEntity.getId();
+//                        fileUrls.add(url);
+//                    }
+//                    dto.setImageURLs(fileUrls);
+//
+//                    return dto;
+//                })
+//                .collect(Collectors.toList());
+//    }
+//
+    private String getUserDepartment(Long memberId) {
+        // member_id에 해당하는 Member 엔티티를 조회하고, 그 엔티티의 department 값을 가져옵니다.
+        Member member = memberRepository.findOne(memberId);
+        if (member != null) {
+            return member.getDepartment();
+        } else {
+            return null; // 회원 정보가 없을 경우 null 반환
+        }
+    }
+
     // 모든 게시글 조회 API 엔드포인트
     @GetMapping
     public List<BoardDTO> getAllBoards() {
