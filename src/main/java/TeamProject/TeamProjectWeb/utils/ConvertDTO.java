@@ -63,6 +63,8 @@ public class ConvertDTO {
         dto.setLoginId(member.getLoginId());
         dto.setPassword(member.getPassword());
         dto.setEmail(member.getEmail());
+        dto.setDepartment(member.getDepartment());
+
         return dto;
     }
     public static Optional<MemberDTO> convertMember(Optional<Member> optionalMember) {
@@ -77,6 +79,7 @@ public class ConvertDTO {
             dto.setLoginId(member.getLoginId());
             dto.setPassword(member.getPassword());
             dto.setEmail(member.getEmail());
+            dto.setDepartment(member.getDepartment());
             return Optional.of(dto);
         }
         return Optional.empty();
