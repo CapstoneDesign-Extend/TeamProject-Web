@@ -14,46 +14,44 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 public class AndroidScheduleRepository {
+
     @PersistenceContext
     private EntityManager em;
 
     @Transactional
-    public Schedule save(Schedule schedule) {
-        if (schedule.getId() == null) {
-            em.persist(schedule);
-        } else {
-            schedule = em.merge(schedule);
+    public List<Schedule> saveAll(List<Schedule> schedules, Long memberId) {
+        // Remove existing schedules for the member
+        deleteByMemberId(memberId);
+
+        // Save new schedules and return them
+        for (Schedule schedule : schedules) {
+            if (schedule.getId() == null) {
+                em.persist(schedule);
+            } else {
+                schedule = em.merge(schedule);
+            }
         }
-        return schedule;
+        return schedules;
     }
 
     @Transactional
     public Schedule findOne(Long id) {
         return em.find(Schedule.class, id);
     }
-    @Transactional
-    public Schedule findOneByMemberId(Long memberId) {
-        try {
-            return em.createQuery("SELECT s FROM Schedule s WHERE s.member.id = :memberId", Schedule.class)
-                    .setParameter("memberId", memberId)
-                    .setMaxResults(1)  // 한 개의 결과만 가져오기
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            return null;  // 조회된 결과가 없을 경우 null 반환
-        }
-    }
 
     public List<Schedule> findAll() {
         return em.createQuery("select s from Schedule s", Schedule.class)
                 .getResultList();
     }
+
     @Transactional
     public void deleteByMemberId(Long memberId) {
-        Schedule schedule = findOneByMemberId(memberId);
-        if (schedule != null) {
+        List<Schedule> schedules = findByMemberId(memberId);
+        for (Schedule schedule : schedules) {
             em.remove(schedule);
         }
     }
+
     @Transactional
     public void delete(Schedule schedule) {
         em.remove(schedule);

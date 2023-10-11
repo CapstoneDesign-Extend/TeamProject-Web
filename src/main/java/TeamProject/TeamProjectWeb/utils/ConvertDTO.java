@@ -144,4 +144,11 @@ public class ConvertDTO {
 
         return dto;
     }
+    public static List<AndroidScheduleDTO> convertSchedules(List<Schedule> schedules) {
+        List<AndroidScheduleDTO> dtoList = new ArrayList<>();
+        for (Schedule schedule : schedules) {
+            dtoList.add(convertSchedule(schedule));
+        }
+        return dtoList;
+    }
 }
