@@ -1,5 +1,7 @@
 package TeamProject.TeamProjectWeb.utils;
 
+import TeamProject.TeamProjectWeb.domain.Time;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -21,5 +23,12 @@ public class TimeUtils {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
             return dateTime.format(formatter);
         }
+    }
+//    =============  4자리 정수를 Time(h,m)으로 변환해 반환  =============
+    public static Time getTimeFromInt(int time) {
+        int hour = time / 100;  // 앞 두 자리는 시간
+        int minute = time % 100;  // 뒤 두 자리는 분
+
+        return new Time(hour, minute);
     }
 }

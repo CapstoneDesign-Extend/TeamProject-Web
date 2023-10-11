@@ -123,4 +123,25 @@ public class ConvertDTO {
 
         return dto;
     }
+
+    public static AndroidScheduleDTO convertSchedule(Schedule schedule) {
+        AndroidScheduleDTO dto = new AndroidScheduleDTO();
+
+        dto.setId(schedule.getId());
+        dto.setClassTitle(schedule.getClassTitle());
+        dto.setClassPlace(schedule.getClassPlace());
+        dto.setProfessorName(schedule.getProfessorName());
+        dto.setDay(schedule.getDay());
+
+        // startTime과 endTime 변환
+        dto.setStartTime(TimeUtils.getTimeFromInt(schedule.getStartTime()));
+        dto.setEndTime(TimeUtils.getTimeFromInt(schedule.getEndTime()));
+
+        // 연관된 member의 id 설정
+        if(schedule.getMember() != null) {
+            dto.setMemberId(schedule.getMember().getId());
+        }
+
+        return dto;
+    }
 }

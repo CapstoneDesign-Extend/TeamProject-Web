@@ -16,7 +16,7 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 생성 => 시퀀스
     @Column(name = "schedule_id")
-    private Long id;
+    private Long id;  // 시간표 고유 id
 
     private String classTitle="";
 
@@ -25,12 +25,12 @@ public class Schedule {
     private String professorName="";
 
     private int day = 0;
-    private int startTime;
-    private int endTime;
+    private int startTime;  // 13시 20분 -> 1320 으로 저장됨 (4자리 정수)
+    private int endTime;  // (4자리 정수)
 
     @ManyToOne(fetch=FetchType.LAZY) // fetch=FetchType.LAZY : 지연 로딩으로 실시간 업로딩 되는 것을 막음
     @JoinColumn(name = "member_id") // 외래키 => 조인할 속성 이름
-    @JsonBackReference // Board엔티티를 직렬화할 때 연관된 엔티티 클래스의 정보는 직렬화하지 않도록 하여 순환 참조로 인한 무한루프 방지
+    @JsonBackReference // 엔티티를 직렬화할 때 연관된 엔티티 클래스의 정보는 직렬화하지 않도록 하여 순환 참조로 인한 무한루프 방지
     private Member member; // 해당 멤버의 시퀀스 넘버를 사용할 거임
 
     public Schedule() {
