@@ -173,6 +173,11 @@ $(document).ready(function() {
         });
     }
 
+    let initialWeekState = []; // 초기 요일 상태 저장
+    $('#weeks li').each(function(index, li) {
+        initialWeekState.push($(li).hasClass('active'));
+    });
+
 
     function resetForm() {
         $('#customsubjects .title').text("새 수업 추가");
@@ -180,11 +185,31 @@ $(document).ready(function() {
         $('input[name="subject_name"]').val('');
         $('input[name="professor"]').val('');
         $('.classPlace').val('');
-        $('#weeks li').removeClass('active');
-        $('.starthour').val('');
-        $('.startminute').val('');
-        $('.endhour').val('');
-        $('.endminute').val('');
+        // 요일 상태 복원
+        $('#weeks li').each(function(index, li) {
+            if (initialWeekState[index]) {
+                $(li).addClass('active');
+            } else {
+                $(li).removeClass('active');
+            }
+        });
+        // 시작 시간을 첫 번째 값으로 설정
+        $('.starthour').prop('selectedIndex', 0);
+        $('.startminute').prop('selectedIndex', 0);
+
+        // 시작 시간보다 한 시간 뒤로 종료 시간 설정
+        let startHourIndex = $('.starthour').prop('selectedIndex');
+        let endHourIndex = startHourIndex + 1;
+
+        // 만약 endHourIndex가 옵션의 범위를 벗어나면 범위 내로 조정
+        if (endHourIndex >= $('.endhour option').length) {
+            endHourIndex = $('.endhour option').length - 1;
+        }
+
+        $('.endhour').prop('selectedIndex', endHourIndex);
+        $('.endminute').prop('selectedIndex', 0);
+        $('.endhour').prop('selectedIndex', 0);
+        $('.endminute').prop('selectedIndex', 0);
         $('#customsubjects').show();
     }
     $('#custom_button').on('click', function() {
