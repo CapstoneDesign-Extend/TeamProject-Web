@@ -1,5 +1,5 @@
-// const searchEl = document.querySelector('.search');
-// const searchInputEl = searchEl.querySelector('input');
+const searchEl = document.querySelector('.search');
+const searchInputEl = searchEl.querySelector('input');
 
 
 searchEl.addEventListener('click', function(){
@@ -18,10 +18,13 @@ searchInputEl.addEventListener('blur', function(){
 
 const maincategory = document.getElementsByClassName('main_category_mypage')[0];
 const maincategory_community = document.getElementsByClassName('main_category_community')[0];
+const maincategory_department = document.getElementsByClassName('main_category_department')[0];
 const subcategory = document.querySelector('.sub_category_mypage');
-const subcategory_community = document.querySelector('.sub_category_community')
+const subcategory_community = document.querySelector('.sub_category_community');
+const subcategory_department = document.querySelector('.sub_category_department');
 const wrapsubcategory = document.querySelector('.wrap_sub_category_mypage');
 const wrapsubcategory_community = document.querySelector('.wrap_sub_category_community');
+const wrapsubcategory_department = document.querySelector('.wrap_sub_category_department');
 const mainframe = document.querySelector('.mainframe');
 
 //마이페이지 버튼 호버링
@@ -50,6 +53,21 @@ maincategory_community.addEventListener('mouseover', function(){
 maincategory_community.addEventListener('mouseout', function(){
   subcategory_community.classList.add('hide');
   wrapsubcategory_community.style.display = "none";
+  mainframe.style.marginTop = "40px";
+  mainframe.style.transition = "margin .4s";
+});
+
+//학과 버튼 호버링
+maincategory_department.addEventListener('mouseover', function(){
+  console.log("호버링");
+  subcategory_department.classList.remove('hide');
+  wrapsubcategory_department.style.display = "flex";
+  mainframe.style.marginTop = "99px";
+  mainframe.style.transition = "margin .4s";
+})
+maincategory_department.addEventListener('mouseout', function(){
+  subcategory_department.classList.add('hide');
+  wrapsubcategory_department.style.display = "none";
   mainframe.style.marginTop = "40px";
   mainframe.style.transition = "margin .4s";
 });
@@ -103,7 +121,7 @@ function generateCalendar() {
         tr.appendChild(td);
       } else if (dateCount > lastDay) {
         break;
-        } else {
+      } else {
         var td = document.createElement("td");
         td.classList.add("cal-body");
 

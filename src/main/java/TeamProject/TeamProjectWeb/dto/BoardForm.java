@@ -18,7 +18,7 @@ public class BoardForm {
     private String content;
 
     //@NotEmpty
-    private int price;
+    private Integer price;
 
     private BoardKind boardKind;
 

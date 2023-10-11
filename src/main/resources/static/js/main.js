@@ -1,5 +1,5 @@
-// const searchEl = document.querySelector('.search');
-// const searchInputEl = searchEl.querySelector('input');
+const searchEl = document.querySelector('.search');
+const searchInputEl = searchEl.querySelector('input');
 
 
 searchEl.addEventListener('click', function(){
@@ -121,7 +121,7 @@ function generateCalendar() {
         tr.appendChild(td);
       } else if (dateCount > lastDay) {
         break;
-        } else {
+      } else {
         var td = document.createElement("td");
         td.classList.add("cal-body");
 
