@@ -128,6 +128,29 @@ a:active{
     width: 218px; /* 너비를 명시적으로 설정 */
 }
 
+.btn-edit, .btn-delete {
+    position: absolute;
+    top: 5px;  /* 원하는 간격으로 조정 */
+    right: 5px;  /* 원하는 간격으로 조정 */
+    width: 15px;  /* 이미지 사이즈에 맞춰 조정 */
+    height: 15px;  /* 이미지 사이즈에 맞춰 조정 */
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-indent: -9999px;  /* 텍스트 숨기기 */
+}
+
+.btn-edit {
+    background-image: url('/img_source/edit.png');  /* 수정 이미지 경로 */
+    background-size: contain;
+    right: 30px;  /* 원하는 간격으로 조정, 두 버튼 사이의 간격 */
+}
+
+.btn-delete {
+    background-image: url('/img_source/del.png');  /* 삭제 이미지 경로 */
+    background-size: contain;
+}
+
 /*     */
 .sidediv {
     width:325px;
