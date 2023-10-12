@@ -65,7 +65,7 @@
                                 <div class="main_title">
                                     <p th:text="${board.title}">진짜로 이제 뭐하냐</p>
                                 </div>
-                                <div class="wrap_price_div" th:if="${board.boardKind == 'MARKET'}">
+                                <div class="wrap_price_div" th:if="${board.boardKind.name() == 'MARKET'}">
                                     <div class="price_main" th:text="${board.price}">
                                         68000원
                                     </div>
