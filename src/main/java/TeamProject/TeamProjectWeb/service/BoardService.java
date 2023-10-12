@@ -1,37 +1,36 @@
 package TeamProject.TeamProjectWeb.service;
 
 
-import TeamProject.TeamProjectWeb.HeaderAspect;
-import TeamProject.TeamProjectWeb.domain.Board;
-import TeamProject.TeamProjectWeb.domain.BoardKind;
-import TeamProject.TeamProjectWeb.domain.Member;
+import TeamProject.TeamProjectWeb.domain.*;
 import TeamProject.TeamProjectWeb.dto.BoardForm;
 import TeamProject.TeamProjectWeb.dto.BoardSummaryDTO;
+import TeamProject.TeamProjectWeb.dto.FileDTO;
 import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
 import TeamProject.TeamProjectWeb.repository.BoardRepository;
 import TeamProject.TeamProjectWeb.repository.MemberRepository;
+import TeamProject.TeamProjectWeb.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Duration;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static TeamProject.TeamProjectWeb.utils.TimeUtils.timeFriendly;
 
 @Service
+@Slf4j
 @Transactional
 //@AllArgsConstructor // 현재 클래스가 가지고 있는 필드를 가지고 생성자를 만들어줌
 @RequiredArgsConstructor // 현재 클래스가 가지고 있는 필드 중 private final 필드만을 가지고 생성자를 만들어줌
 public class BoardService {
-
+    private final FileRepository fileRepository;
+    private final FileUtil2 fileUtil;
     private final BoardRepository boardRepository; // 게시판 저장소 의존성 주입
 
     private final MemberRepository memberRepository;
@@ -43,8 +42,19 @@ public class BoardService {
     }
 
     @Transactional
-    public Board createBoardWithAuthor(BoardForm form, Member loggedInMember) { // 여기다 이미지 관련 내용 추가
+    public Board createBoardWithAuthor(BoardForm form, Member loggedInMember, FileDTO fileDTO) throws IOException { // 여기다 이미지 관련 내용 추가
         Board board = form.toBoard();
+
+        // html 에 여러 장 올린 사진을 fileDTO 객체 안에 getter를 이용해 저장 후 가져옴
+        List<UploadFile> storeImageFiles = fileUtil.uploadFiles(fileDTO.getImageFiles(), board.getId());
+
+        Images images = new Images();
+        images.setBoard(board); // Board 엔티티와의 관계 설정
+        images.setItemName(fileDTO.getFileName());
+        images.setImageFiles(storeImageFiles);
+        fileRepository.save(images); // DB 저장
+
+        log.info("images = {}", images);
 
         if (form.isAnonymous()) {
             board.setAuthor("익명"); // 익명으로 표시

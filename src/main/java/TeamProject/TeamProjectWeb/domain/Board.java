@@ -42,6 +42,7 @@ public class Board { // 게시판 클래스
     private int chatCnt;  // 댓글수
     private Integer price;  // null을 허용하기 위해 Wrapper클래스 사용
 
+
     public void incrementLikeCount() {
         this.likeCnt++;
     }

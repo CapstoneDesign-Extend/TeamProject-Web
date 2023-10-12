@@ -2,18 +2,18 @@ package TeamProject.TeamProjectWeb.controller.board;
 
 import TeamProject.TeamProjectWeb.constants.BoardConstants;
 import TeamProject.TeamProjectWeb.controller.login.SessionConst;
-import TeamProject.TeamProjectWeb.domain.Board;
-import TeamProject.TeamProjectWeb.domain.BoardKind;
-import TeamProject.TeamProjectWeb.domain.Comment;
-import TeamProject.TeamProjectWeb.domain.Member;
-import TeamProject.TeamProjectWeb.dto.BoardForm;
-import TeamProject.TeamProjectWeb.dto.BoardSummaryDTO;
-import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
+import TeamProject.TeamProjectWeb.domain.*;
+import TeamProject.TeamProjectWeb.domain.UploadFile;
+import TeamProject.TeamProjectWeb.dto.*;
+import TeamProject.TeamProjectWeb.repository.FileRepository;
 import TeamProject.TeamProjectWeb.service.BoardService;
+import TeamProject.TeamProjectWeb.service.FileUtil;
+import TeamProject.TeamProjectWeb.service.FileUtil2;
 import TeamProject.TeamProjectWeb.service.LikeService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,10 +33,12 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/board")
+@Slf4j
 public class BoardController {
 
     private final BoardService boardService;
     private final LikeService likeService;
+    private final FileRepository fileRepository;
 
     // 게시글 작성 폼 페이지를 보여줍니다.
     @GetMapping("/writing/write")
@@ -50,7 +53,8 @@ public class BoardController {
     @PostMapping("/writing/write")
     public String write(@Valid @ModelAttribute BoardForm form,  // 게시글 작성 폼 데이터 바인딩
                         BindingResult bindingResult, // 폼 검증 결과
-                        HttpServletRequest request) {  // 현재의 요청 객체
+                        HttpServletRequest request, // 현재의 요청 객체
+                        @ModelAttribute("imageFiles") FileDTO fileDTO) throws IOException { // html에서 넘어옴
         // 만약 폼 검증에서 오류가 발생했다면
         if (bindingResult.hasErrors()) {
             // 다시 게시글 작성 페이지로 돌아간다.
@@ -63,8 +67,9 @@ public class BoardController {
         if (session != null) {
             loggedInMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         }
+        log.info("fileDTO = {}", fileDTO);
+        boardService.createBoardWithAuthor(form, loggedInMember, fileDTO); // 저장한 파일도 같이 보냄
 
-        boardService.createBoardWithAuthor(form, loggedInMember);
         // 게시글 작성이 완료되면 홈페이지로 리다이렉트한다.
         return "redirect:/board/board_collection";
     }
@@ -73,6 +78,9 @@ public class BoardController {
     @GetMapping("/reading/{boardId}")
     public String view(@PathVariable Long boardId, Model model, HttpSession session) {
         Board board = boardService.findBoardById(boardId);
+        Images images = fileRepository.findImagesByBoardId(boardId);
+        log.info("images = {}",images);
+
         if (board == null) {
             return "redirect:/";
         }
@@ -107,6 +115,7 @@ public class BoardController {
             formattedCommentDates.add(boardService.formatCommentDate(comment.getFinalDate()));
         }
         model.addAttribute("formattedCommentDates", formattedCommentDates);
+        model.addAttribute("images", images); // 저장된 이미지 보냄
 
         String formattedDate = boardService.formatFinalDate(board.getFinalDate());
         model.addAttribute("formattedDate", formattedDate);

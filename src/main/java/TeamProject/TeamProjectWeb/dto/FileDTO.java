@@ -1,9 +1,13 @@
 package TeamProject.TeamProjectWeb.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
-@Getter @Setter
+import java.util.List;
+
+@Data
 public class FileDTO {
     private Long id;  // 파일 id
     private String fileName; // 파일 이름
@@ -11,6 +15,6 @@ public class FileDTO {
     private String contentType;  // 파일 타입
     private Long size;  // 파일 크기
     private long boardId;  // 연관된 게시글의 id
-
+    private List<MultipartFile> imageFiles; // html 처리용
 
 }

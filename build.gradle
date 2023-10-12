@@ -41,6 +41,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'junit:junit:4.13.1'
 
+	// jsoup -> 크롤링을 위한 라이브러리
+	implementation 'org.jsoup:jsoup:1.15.3'
+
+
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
 

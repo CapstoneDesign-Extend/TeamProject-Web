@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "member")
 public class Member { // 회원 클래스
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // @GeneratedValue : 자동 생성 => 시퀀스 값 같은
+    @GeneratedValue//(strategy = GenerationType.IDENTITY) // @GeneratedValue : 자동 생성 => 시퀀스 값 같은
     @Column(name = "member_id")
     private Long id; // 임의로 사용할 키값
     @Column(name = "student_id")
@@ -36,7 +36,7 @@ public class Member { // 회원 클래스
     @Email(message = "유효하지 않은 이메일입니다.")
     @NotNull
     private String email;
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE) // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER) // mappedBy : 연관관계 주인이 누구인지 상태 테이블 속성이름으로 명시해줌
     @JsonManagedReference // Board엔티티를 직렬화할 때 연관된 엔티티 클래스의 정보는 직렬화하지 않도록 하여 순환 참조로 인한 무한루프 방지
     // (현재 DTO 전환 작업중, 작업 끝나면 해당 어노테이션 삭제 가능)
     private List<Board> board = new ArrayList<>();

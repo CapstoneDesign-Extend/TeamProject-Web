@@ -11,7 +11,7 @@ public class FileEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "file_id")
     private Long id;                    // 개별 아이디
-    private String fileName;            // 저장된 파일명
+    private String fileName;            // 저장된 파일명 -> 서버 파일명
     private String originalFileName;    // 원본 파일명
     private String contentType;         // 파일 타입
     private long size; // 파일 크기

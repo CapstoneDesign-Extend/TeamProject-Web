@@ -1,6 +1,7 @@
 package TeamProject.TeamProjectWeb.repository;
 
 import TeamProject.TeamProjectWeb.domain.FileEntity;
+import TeamProject.TeamProjectWeb.domain.Images;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -19,7 +20,18 @@ public class FileRepository {
         em.persist(fileEntity);
         return fileEntity;
     }
-
+    //========================= Images 클래스 관련 리파지토리
+    @Transactional
+    public Images save(Images images){
+        em.persist(images);
+        return images;
+    }
+    public Images findImagesByBoardId(Long boardId) {
+        return em.createQuery("SELECT i FROM Images i WHERE i.board.id = :boardId", Images.class)
+                .setParameter("boardId", boardId)
+                .getSingleResult();
+    }
+    //=========================        END
     public FileEntity findById(Long id){
         return em.find(FileEntity.class, id);
     }

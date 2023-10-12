@@ -5,6 +5,7 @@ import TeamProject.TeamProjectWeb.domain.BoardKind;
 import TeamProject.TeamProjectWeb.domain.Member;
 import TeamProject.TeamProjectWeb.dto.BoardDTO;
 import TeamProject.TeamProjectWeb.dto.BoardSummaryDTO;
+import TeamProject.TeamProjectWeb.dto.FileDTO;
 import TeamProject.TeamProjectWeb.dto.MainBoardDTO;
 import TeamProject.TeamProjectWeb.utils.BoardRepositoryCustom;
 import TeamProject.TeamProjectWeb.utils.ConvertDTO;
@@ -38,12 +39,16 @@ public class BoardRepository implements BoardRepositoryCustom {
         em.persist(board);
         return board;
     }
+
     public void update(Board board) {
         em.merge(board);
     }
 
     public Board findById(Long id){
         return em.find(Board.class, id);
+    }
+    public FileDTO findByFileId(Long id){
+        return em.find(FileDTO.class, id);
     }
 
     // 해당 id를 가진 게시글을 DTO로 반환

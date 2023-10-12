@@ -70,6 +70,8 @@
                                         68000원
                                     </div>
                                 </div>
+                                <!-- 이미지 태그 추가 -->
+                                <img th:each="imageFile : ${images.getImageFiles()}" th:src="|/images/${imageFile.getStoreFileName()}|" width="300" height="300"/>
                                 <div class="bonmoon">
                                     <p th:text="${board.content}">그래서 이제 뭐함</p>
                                     <!-- 추가적인 본문 내용 -->
